@@ -1,12 +1,10 @@
 #!/bin/sh
 
-if test "$POSTGRES_DB" = "django"
+if test "$POSTGRES_DB" = "katemath_backend_core_db"
 then
     echo "Waiting for postgres..."
 
-    while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
-      sleep 0.1
-    done
+    dockerize -wait tcp://$POSTGRES_HOST:$POSTGRES_PORT -timeout 30s
 
     echo "PostgreSQL started"
 

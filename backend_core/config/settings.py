@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
+    'exercises_app.apps.ExercisesAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -96,10 +97,10 @@ DATABASES = {
     }
 }
 
-DATABASE_URL = os.environ.get('DB_CONNECTION_STRING')
-db_config = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=False)
+# DATABASE_URL = os.environ.get('DB_CONNECTION_STRING')
+# db_config = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=False)
 
-DATABASES['default'].update(db_config)
+# DATABASES['default'].update(db_config)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
