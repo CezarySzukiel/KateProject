@@ -8,8 +8,9 @@ class Exercise(models.Model):
     solution_similar means solution for a similar task
     type means the type of task: 1 - open task, 2 - multiple choice, etc.
     advanced_level means whether the task is advanced or basic"""
+    title = models.CharField(max_length=64, unique=True)
     description = models.TextField()
-    subsection = models.ForeignKey('Subsections', on_delete=models.PROTECT, related_name='exercises')
+    subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='exercises')
     difficult = models.IntegerField()
     points = models.IntegerField()
     solution_exactly = models.TextField(null=True, blank=True)
@@ -36,7 +37,7 @@ class Answer(models.Model):
         return self.answer
 
 
-class Sections(models.Model):
+class Section(models.Model):
     """Model representing a section of exercises"""
     name = models.CharField(max_length=128)
 
@@ -44,10 +45,10 @@ class Sections(models.Model):
         return self.name
 
 
-class Subsections(models.Model):
+class Subsection(models.Model):
     """Model representing a subsection of exercises"""
     name = models.CharField(max_length=128)
-    section = models.ForeignKey('Sections', on_delete=models.PROTECT, related_name='subsections')
+    section = models.ForeignKey('Section', on_delete=models.PROTECT, related_name='subsections')
 
     def __str__(self):
         return self.name
@@ -55,5 +56,5 @@ class Subsections(models.Model):
     @staticmethod
     def get_sort_choices():
         """Gets unique values and returns a list of tuples"""
-        sort_values = Subsections.objects.values_list('name', flat=True).distinct().order_by('name')
+        sort_values = Subsection.objects.values_list('name', flat=True).distinct().order_by('name')
         return [(value, value) for value in sort_values]
