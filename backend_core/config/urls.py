@@ -22,7 +22,8 @@ from config import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
+    path('home/', include('home.urls')),
+    path('api/v1/', include('exercises_app.urls')),
 ]
 
 if settings.DEBUG:

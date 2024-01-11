@@ -14,7 +14,7 @@ class Exercise(models.Model):
     difficult = models.IntegerField()
     points = models.IntegerField()
     solution_exactly = models.TextField(null=True, blank=True)
-    solution_similar = models.ManyToManyField('self', blank=True, related_name='exercises')
+    solution_similar = models.ManyToManyField('self', null=True, blank=True)
     type = models.IntegerField()
     advanced_level = models.BooleanField(default=False)
 
@@ -23,7 +23,7 @@ class Exercise(models.Model):
         return reverse('exercise_details', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.description
+        return self.title
 
 
 class Answer(models.Model):
@@ -39,7 +39,7 @@ class Answer(models.Model):
 
 class Section(models.Model):
     """Model representing a section of exercises"""
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, unique=True, )
 
     def __str__(self):
         return self.name
@@ -47,7 +47,7 @@ class Section(models.Model):
 
 class Subsection(models.Model):
     """Model representing a subsection of exercises"""
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, unique=True)
     section = models.ForeignKey('Section', on_delete=models.PROTECT, related_name='subsections')
 
     def __str__(self):
