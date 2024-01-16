@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Exercise(models.Model):
@@ -17,6 +18,7 @@ class Exercise(models.Model):
     solution_similar = models.ManyToManyField('self', null=True, blank=True)
     type = models.IntegerField()
     advanced_level = models.BooleanField(default=False)
+    slug = models.SlugField(max_length=64, unique=True, blank=True)
 
     def get_absolute_url(self):
         """Returns a link to the exercise details"""
@@ -24,6 +26,11 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Answer(models.Model):
@@ -39,19 +46,31 @@ class Answer(models.Model):
 
 class Section(models.Model):
     """Model representing a section of exercises"""
-    name = models.CharField(max_length=128, unique=True, )
+    name = models.CharField(max_length=128, unique=True)
+    slug = models.SlugField(max_length=64, unique=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 
 class Subsection(models.Model):
     """Model representing a subsection of exercises"""
     name = models.CharField(max_length=128, unique=True)
     section = models.ForeignKey('Section', on_delete=models.PROTECT, related_name='subsections')
+    slug = models.SlugField(max_length=64, unique=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def get_sort_choices():
