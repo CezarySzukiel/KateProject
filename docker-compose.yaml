@@ -14,6 +14,7 @@ services:
         - backend_core_db_network
     volumes:
       - ./backend_core:/app
+
   backend_core_db:
     image: postgres:14-alpine
     volumes:
@@ -26,7 +27,7 @@ services:
         - backend_core_db_network
 volumes:
   backend_core_db_volume:
-
+  db_volume:
 networks:
   backend_core_db_network:
     driver: bridge
