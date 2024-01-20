@@ -45,3 +45,8 @@ class SubsectionSerializer(serializers.ModelSerializer):
         model = Subsection
         fields = ('id', 'name', 'section')
         read_only_fields = ('id',)
+
+
+class CompareExerciseSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=200)
+    answer = serializers.CharField(max_length=200)
