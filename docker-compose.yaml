@@ -1,5 +1,5 @@
 services:
-  backend_core:
+  backend_core_tests:
     build:
       context: ./backend_core
     command: python manage.py runserver 0.0.0.0:8000

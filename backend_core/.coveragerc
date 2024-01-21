@@ -4,9 +4,12 @@ omit =
     *migrations/*.py,
     *settings/*.py,
     *tests/*.py,
+    */tests/*
     *urls.py,
     *wsgi.py,
     *asgi.py,
     *test.py,
+    tests.py,
     manage.py,
     *scripts/*.py,
+    *initial*

@@ -11,6 +11,7 @@ psycopg2-binary = "==2.9.9"
 pytest-django = "==4.5.2"
 pytest-cov = "==4.1.0"
 djangorestframework = "==3.14.0"
+mixer = "==7.2.2"
 
 [dev-packages]
 

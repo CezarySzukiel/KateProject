@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -47,7 +46,7 @@ class CompareExerciseView(APIView):
 
 # todo optimalization: 2 asks to the database. Maybe frontend should send the exercise data?
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = CompareExerciseSerializer(data=request.data)
         if serializer.is_valid():
             # Get the data from the form
@@ -63,7 +62,7 @@ class CompareExerciseView(APIView):
                 right_answer = Answer.objects.get(exercise=exercise, correct=True)
             except Answer.DoesNotExist:
                 return Response({"detail": "Exercise does not have a right answer."}, status=status.HTTP_404_NOT_FOUND)
-            # todo check if another user solve this exercise it will work correctly?
+
             # Compare the data
             if form_data['answer'] == right_answer.answer:
                 # Get or create the user settings
