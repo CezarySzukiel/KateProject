@@ -20,10 +20,6 @@ class Exercise(models.Model):
     advanced_level = models.BooleanField(default=False)
     slug = models.SlugField(max_length=64, unique=True, blank=True)
 
-    def get_absolute_url(self):
-        """Returns a link to the exercise details"""
-        return reverse('exercise_details', kwargs={'pk': self.pk})
-
     def __str__(self):
         return self.title
 
