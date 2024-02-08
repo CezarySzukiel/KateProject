@@ -1,2 +1,2 @@
-const API_URL = process.env.REACT_APP_API_URL;
-export { API_URL };
+const EXERCISES_URL = process.env.REACT_APP_EXERCISES_GET_API_URL;
+export { EXERCISES_URL };
