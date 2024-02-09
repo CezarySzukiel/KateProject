@@ -19,7 +19,15 @@
 button {
   width: 20px;
   height: 80px;
-  margin-left: auto
+  margin-left: auto;
+  position: absolute;
+  top: 44%;
+  left: 90%;
+
 }
 
-/*sprawic by navbar byl caly czas na wierzchu, czyli przesuwal sie razem ze strona*/
+.navbar-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

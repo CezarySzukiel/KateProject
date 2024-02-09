@@ -10,8 +10,10 @@ const Navbar = () => {
 
   return (
     <div className={`navbar ${isMenuClicked ? 'menu-open' : ''}`}>
-      <h1>Navbar</h1>
-      <button onClick={toggleMenu}> {isMenuClicked ? '>' : '<'} </button>
+      <div className="navbar-content">
+        <h1>Navbar</h1>
+        <button onClick={toggleMenu}> {isMenuClicked ? '>' : '<'} </button>
+      </div>
     </div>
   );
 };
