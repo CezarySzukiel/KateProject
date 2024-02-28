@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Button from '@mui/material/Button';
 
 
@@ -6,7 +6,7 @@ export function ExercisesComponent() {
     const EXERCISES_URL = 'http://0.0.0.0:8000/api/v1/exercises/'
     const [exercises, setExercises] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);
-
+    
     useEffect(() => {
         const fetchExercises = async () => {
             try {
@@ -15,18 +15,19 @@ export function ExercisesComponent() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setExercises(prevExercises => [...prevExercises, ...data.results]);
-
+                if (exercises.length === 0) {
+                    setExercises(data.results);
+                } else {
+                    setExercises(prevExercises => [...prevExercises, ...data.results]);
+                }
+                
                 setNextPageUrl(data.next);
 
             } catch (error) {
                 console.error('Error fetching exercises:', error);
             }
         };
-
         fetchExercises();
-
-        // Wyczyść efekt, aby uniknąć wycieków pamięci
         return () => setExercises([]);
     }, []);
 
@@ -38,8 +39,8 @@ export function ExercisesComponent() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setExercises(data.results);
-                setNextPageUrl(data.next); // Ustaw adres do kolejnej strony
+                setExercises(prevExercises => [...prevExercises, ...data.results]);
+                setNextPageUrl(data.next);
             } catch (error) {
                 console.error('Error fetching next page of exercises:', error);
             }
@@ -52,7 +53,7 @@ export function ExercisesComponent() {
             <ul>
                 {exercises.map(exercise => (
                     <li key={exercise.id}>
-                        <h3>{exercise.title}</h3>
+                        <h3>id: {exercise.id}, {exercise.title}</h3>
                         <p>{exercise.description}</p>
                     </li>
                 ))}
