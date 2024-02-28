@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { EXERCISES_URL } from '../.././config';
+import CardHeader from '@mui/material/CardHeader';
 
-import './Header.css'
+
+
+// import './Header.css'
 
 function Header() {
     
     return (
     	<div className={'container'}>
-        <h1>Header</h1>
+            <h1>Header</h1>
         </div>
     );
 }

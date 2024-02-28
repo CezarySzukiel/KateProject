@@ -1,2 +1,0 @@
-const EXERCISES_URL = process.env.REACT_APP_EXERCISES_GET_API_URL;
-export { EXERCISES_URL };
