@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Button from '@mui/material/Button';
 
 
 export function ExercisesComponent() {
@@ -49,7 +48,7 @@ export function ExercisesComponent() {
 
     return (
         <div>
-            <h2>Lista ćwiczeń</h2>
+            <h2>Lista zadań</h2>
             <ul>
                 {exercises.map(exercise => (
                     <li key={exercise.id}>
@@ -58,7 +57,7 @@ export function ExercisesComponent() {
                     </li>
                 ))}
             </ul>
-            <Button variant="contained" size="small" onClick={handleNextPage}>Więcej</Button>
+            <button onClick={handleNextPage}>Więcej</button>
         </div>
     );
 }

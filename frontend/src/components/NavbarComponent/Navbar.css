@@ -3,29 +3,39 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 200px; /* Szerokość paska nawigacyjnego */
-  background-color: #333; /* Kolor tła paska nawigacyjnego */
-  color: white; /* Kolor tekstu */
+  width: 200px;
+  background-color: #333;
+  color: white;
   padding: 20px;
   display: flex;
-  flex-direction: column; /* Ustawienie elementów w kolumnie */
-  justify-content: flex-start; /* Rozpoczęcie od góry */
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 1;
+  transition: transform 0.3s ease;
 }
 
 .menu-open {
-  transform: translateX(-200px); /* Schowanie paska nawigacyjnego przy otwartym menu */
+  transform: translateX(-200px);
 }
 
-button {
+.navbar-content button {
   width: 20px;
-  height: 80px;
+  height: 5rem;
+  max-height: 5rem;
   margin-left: auto;
   position: absolute;
   top: 44%;
   left: 90%;
-
+  background-color: grey;
+  border: initial;
+  padding: initial;
 }
 
+.navbar-content button:focus {
+  outline: none;
+}
+}
+ 
 .navbar-content {
   display: flex;
   flex-direction: column;
