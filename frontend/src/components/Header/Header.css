@@ -1,3 +1,71 @@
-.container {
+.headerContainer {
+	max-width: 1248px;
+	height: 100px;
 	background-color: indianred;
+	display: flex;
+}
+
+.logoContainer {
+	height: 100%%;
+	padding: 15 px;
+	margin-left: 15 px;
+}
+
+.logoContainer img {
+    max-height: 70%;
+    margin: 10px;
+}
+
+.dropbtn {
+    position: relative;
+    border: 2px solid lightseagreen;
+    border-radius: 10px;
+    background-color: lightseagreen;
+    color: white;
+    margin-right: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    max-height: 2rem;
+
+}
+
+.dropdown {
+	position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.dropdownOptions {
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+/*    display: none;*/
+    opacity: 0;
+    
+}
+
+.dropdown:hover .dropdownOptions {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+
+.dropdownOptions button {
+	margin-bottom: 10px;
+}
+
+.buttonsContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.buttonsContainer button:first-child {
+    margin-left: rem;
 }

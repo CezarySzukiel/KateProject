@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
-  const [isMenuClicked, setIsMenuClicked] = useState(false);
+  const [isMenuClicked, setIsMenuClicked] = useState(true);
 
   const toggleMenu = () => {
     setIsMenuClicked(prevState => !prevState);
