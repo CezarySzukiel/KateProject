@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+export const Navbar = () => {
   const [isMenuClicked, setIsMenuClicked] = useState(true);
 
   const toggleMenu = () => {
@@ -17,5 +17,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar;

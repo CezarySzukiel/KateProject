@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 
-export function ExercisesComponent() {
+export function Exercises() {
     const EXERCISES_URL = 'http://0.0.0.0:8000/api/v1/exercises/'
     const [exercises, setExercises] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);

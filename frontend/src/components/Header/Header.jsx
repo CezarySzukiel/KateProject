@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import './Header.css'
 
-import Navbar from "../NavbarComponent/NavbarComponent.jsx";
+import { Navbar } from "../Navbar/Navbar";
 
-function Header() {
+export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isNavbar, setIsNavbar] = useState(false);
 
@@ -53,5 +53,3 @@ function Header() {
         </div>
     );
 }
-
-export default Header;
