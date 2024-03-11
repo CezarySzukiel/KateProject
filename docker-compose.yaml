@@ -24,10 +24,26 @@ services:
     ports:
       - 5432:5432
     networks:
-        - backend_core_db_network
+      - backend_core_db_network
+      # - frontend_backend_network
+  # frontend:
+  #   build:
+  #     context: ./frontend 
+  #     dockerfile: dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/app
+  #   depends_on:
+  #     - backend_core
+  #   networks:
+  #     - frontend_backend_network
+
 volumes:
   backend_core_db_volume:
   db_volume:
 networks:
   backend_core_db_network:
     driver: bridge
+  # frontend_backend_network:
+  #   driver: bridge
