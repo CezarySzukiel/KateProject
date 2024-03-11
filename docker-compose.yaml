@@ -38,6 +38,7 @@ services:
   #     - backend_core
   #   networks:
   #     - frontend_backend_network
+
 volumes:
   backend_core_db_volume:
   db_volume:
