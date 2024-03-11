@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
     'exercises_app.apps.ExercisesAppConfig',
+    'api.apps.ApiConfig',
 ]
 
 SITE_ID = 1
@@ -183,8 +184,13 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.AllowAny',
     ],
+    
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 # CORS_ALLOWED_ORIGINS =

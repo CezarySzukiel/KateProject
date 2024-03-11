@@ -22,10 +22,10 @@ from config import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/auth/', include('dj_rest_auth.urls')),
-    path('api/v1/auth/registration/', include('dj_rest_auth.registration.urls')),
+    
     path('home/', include('home.urls')),
-    path('api/v1/', include('exercises_app.urls')),
+    # path('api/v1/', include('exercises_app.urls')),
+    path('api/v1/', include('api.urls')),
 ]
 
 if settings.DEBUG:
