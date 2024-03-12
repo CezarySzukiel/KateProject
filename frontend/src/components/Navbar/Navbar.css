@@ -34,7 +34,6 @@
 .navbar-content button:focus {
   outline: none;
 }
-}
  
 .navbar-content {
   display: flex;
