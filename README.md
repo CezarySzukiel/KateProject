@@ -4,7 +4,7 @@
 ## How to run:
 
   ```
-git clone git@github.com:CezarySzukiel/KateProject.git
+git clone https://github.com/CezarySzukiel/KateProject.git
 cd KateProject/backend_core/env/
 mv .env_demo .env
 docker compose up
