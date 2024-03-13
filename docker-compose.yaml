@@ -13,6 +13,7 @@ services:
       - 8000:8000
     networks:
         - backend_core_db_network
+        - frontend_backend_network 
     volumes:
       - ./backend_core:/app
 
@@ -26,7 +27,6 @@ services:
       - 5432:5432
     networks:
       - backend_core_db_network
-      - frontend_backend_network
   frontend:
     build:
       context: ./frontend 
