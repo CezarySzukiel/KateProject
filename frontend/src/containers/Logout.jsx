@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 
 import { logoutSuccess } from "../actions/authActions.jsx"
 import { Header } from "../components/header/Header.jsx"
+import { Menu } from "../components/menu/Menu.jsx"
 
 const mapStateToProps = (state) => {
     return {
@@ -15,4 +16,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

@@ -33,7 +33,6 @@ export function Login(props) {
             if (response.ok) {
                 console.log("zalogowano");
                 props.loginSuccess();
-                console.log("zalogowano2");
                 navigate("/")    
             } else {
                 setLoginError(true);

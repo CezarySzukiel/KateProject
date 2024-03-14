@@ -12,11 +12,10 @@ import { HomePage } from './components/homePage/HomePage'
 import { Exercises } from './components/exercises/Exercises'
 import { Game } from './components/game/Game'
 import Login from './containers/Login.jsx'
-import Header from './containers/Logout.jsx'
+import { Header } from './components/header/Header.jsx'
 import { Logout } from "./components/logout/Logout"
 import { Register } from './components/register/Register'
 import { UserSettings } from './components/userSettings/UserSettings'
-import Body from './components/body/Body'
 
 const router = createBrowserRouter([
   {
@@ -51,10 +50,6 @@ const router = createBrowserRouter([
       {
         path: "game/",
         element: <Game />,
-      },
-      {
-        path: "body/", // todo remove this path
-        element: <Body />,
       },
     ],
   },
