@@ -6,16 +6,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-// import Root from "./routes/root"; do skasowania razem z folderem routes. tam są niepotrzebne komponenty z tutorialu
 import App from './App.jsx'
 import ErrorPage from "./error-page";
-import { HomePage } from './components/HomePage/HomePage'
-import { Exercises } from './components/Exercises/Exercises'
-import { Game } from './components/Game/Game'
-import { Login } from './components/Login/Login'
-import { Register } from './components/Register/Register'
-import { UserSettings } from './components/UserSettings/UserSettings'
-import Body from './components/Body/Body'
+import { HomePage } from './components/homePage/HomePage'
+import { Exercises } from './components/exercises/Exercises'
+import { Game } from './components/game/Game'
+import Login from './containers/Login.jsx'
+import Header from './containers/Logout.jsx'
+import { Logout } from "./components/logout/Logout"
+import { Register } from './components/register/Register'
+import { UserSettings } from './components/userSettings/UserSettings'
+import Body from './components/body/Body'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "logout/",
+        element: <Logout />,
+      },
+      {
         path: "register/",
         element: <Register />,
       },
@@ -46,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "game/",
         element: <Game />,
+      },
+      {
+        path: "body/", // todo remove this path
+        element: <Body />,
       },
     ],
   },
