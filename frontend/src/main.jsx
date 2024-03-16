@@ -11,7 +11,7 @@ import ErrorPage from "./error-page";
 import { HomePage } from './components/homePage/HomePage'
 import { Exercises } from './components/exercises/Exercises'
 import { Game } from './components/game/Game'
-import Login from './containers/Login.jsx'
+import { ConnectedLogin } from './containers/Auth.jsx'
 import { Header } from './components/header/Header.jsx'
 import { Logout } from "./components/logout/Logout"
 import { Register } from './components/register/Register'
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login/",
-        element: <Login />,
+        element: <ConnectedLogin />,
       },
       {
         path: "logout/",

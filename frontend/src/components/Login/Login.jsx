@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { loginSuccess } from '../../actions/authActions';
+import { loginSuccess, setLoginToken } from '../../actions/authActions';
 import { Error } from "../error/Error.jsx"
 
 export function Login(props) {
@@ -32,11 +32,14 @@ export function Login(props) {
 
             if (response.ok) {
                 console.log("zalogowano");
+                const data = await response.json();
+                const token = data.key;
+                console.log(data);
+                props.setLoginToken(token);
                 props.loginSuccess();
                 navigate("/")    
             } else {
                 setLoginError(true);
-                console.log("błąd logowania");
             }
         } catch (error) {
             console.error('Wystąpił błąd:', error);
