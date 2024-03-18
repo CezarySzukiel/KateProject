@@ -15,7 +15,6 @@ export function Menu(props) {
 
     const handleLogout = async () => {
         try {
-        	console.log('jak przekazać loginToken tutaj?', props)
             const response = await fetch('http://0.0.0.0:8000/api/v1/auth/logout/', {
                 method: 'POST',
                 headers: {
@@ -25,8 +24,7 @@ export function Menu(props) {
                     'key': props.loginToken,
                 }),
             });
-            console.log("login token: ",props.loginToken)
-
+            
             if (response.ok) {
                 console.log("logged out");
                 props.logoutSuccess();

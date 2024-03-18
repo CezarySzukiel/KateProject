@@ -34,7 +34,6 @@ export function Login(props) {
                 console.log("zalogowano");
                 const data = await response.json();
                 const token = data.key;
-                console.log(data);
                 props.setLoginToken(token);
                 props.loginSuccess();
                 navigate("/")    

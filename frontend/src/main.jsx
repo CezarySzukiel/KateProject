@@ -15,7 +15,7 @@ import { ConnectedLogin } from './containers/Auth.jsx'
 import { Header } from './components/header/Header.jsx'
 import { Logout } from "./components/logout/Logout"
 import { Register } from './components/register/Register'
-import { UserSettings } from './components/userSettings/UserSettings'
+import { ConnectedUserData } from './containers/Auth.jsx'
 
 const router = createBrowserRouter([
   {
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user/",
-        element: <UserSettings />,
+        element: <ConnectedUserData />,
       },
       {
         path: "game/",
