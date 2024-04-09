@@ -6,12 +6,12 @@ from .models import UserSettings
 from .serializers import UserSettingsSerializer
 
 
-class UsersList(ListCreateAPIView):
+class UserSettingsListView(ListCreateAPIView):
 	permission_classes = [AllowAny] #todo change it!
 	queryset = UserSettings.objects.all()
 	serializer_class = UserSettingsSerializer
 
-class UserDetail(RetrieveUpdateDestroyAPIView):
+class UserSettingsDetailView(RetrieveUpdateDestroyAPIView):
 	permission_classes = [AllowAny] #todo change it!
 	queryset = UserSettings.objects.all()
-	serializer_class UserSettingsSerializer
+	serializer_class = UserSettingsSerializer
