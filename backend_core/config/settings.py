@@ -75,8 +75,6 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
 ]
 
-SITE_ID = 1
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -195,9 +193,33 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication', #  todo check if authentiation will works with one of them, or there are must be booth
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ],
 }
+
+SITE_ID = 1
+
+REST_USE_JWT = True
+
+REST_AUTH = {
+    'JWT_AUTH_COOKIE': 'my-app-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+}
+
+JWT_AUTH_COOKIE = 'my_JWT_cookie' #  todo change name to some serious (the variable is duplicated)
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+LOGIN_URL = 'http://0.0.0.0:8000/api/v1/auth/login/'
 
 # CORS_ALLOWED_ORIGINS =
 CORS_ALLOW_ALL_ORIGINS = True
