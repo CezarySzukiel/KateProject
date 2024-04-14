@@ -192,23 +192,19 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication', #  todo check if authentiation will works with one of them, or there are must be booth
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    ],
+    ),
 }
 
 SITE_ID = 1
 
-REST_USE_JWT = True
-
 REST_AUTH = {
+    'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'my-app-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
 }
-
-JWT_AUTH_COOKIE = 'my_JWT_cookie' #  todo change name to some serious (the variable is duplicated)
 
 AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
