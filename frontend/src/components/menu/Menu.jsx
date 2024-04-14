@@ -21,7 +21,7 @@ export function Menu(props) {
                 	'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    'key': props.loginToken,
+                    'key': props.loginToken, //todo is it necessary?
                 }),
             });
             

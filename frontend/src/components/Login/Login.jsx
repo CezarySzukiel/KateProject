@@ -6,6 +6,7 @@ import { Error } from "../error/Error.jsx"
 
 export function Login(props) {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(false);
     const navigate = useNavigate();
@@ -13,6 +14,10 @@ export function Login(props) {
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     };
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
@@ -27,18 +32,22 @@ export function Login(props) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, email, password }),
             });
 
             if (response.ok) {
                 console.log("zalogowano");
                 const data = await response.json();
-                const token = data.key;
+                console.log(data)
+                const token = data.access;
+                console.log(token)
                 props.setLoginToken(token);
                 props.loginSuccess();
                 navigate("/")    
             } else {
                 setLoginError(true);
+                const data = await response.json();
+                console.log('nieprawda')
             }
         } catch (error) {
             console.error('Wystąpił błąd:', error);
@@ -52,6 +61,11 @@ export function Login(props) {
                 <label>
                     Login: 
                     <input type="text" value={username} onChange={handleUsernameChange} />
+                </label>
+                <br />
+                <label>
+                    Email: 
+                    <input type="email" value={email} onChange={handleEmailChange} />
                 </label>
                 <br />
                 <label>
