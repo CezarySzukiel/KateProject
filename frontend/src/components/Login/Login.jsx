@@ -38,17 +38,13 @@ export function Login(props) {
             });
 
             if (response.ok) {
-                console.log("zalogowano");
                 const data = await response.json();
                 const token = data.access;
-                console.log(token)
                 dispatch(setLoginToken(token));
                 dispatch(loginSuccess());
                 navigate("/")    
             } else {
                 setLoginError(true);
-                const data = await response.json();
-                console.log('nieprawda')
             }
         } catch (error) {
             console.error('Wystąpił błąd:', error);

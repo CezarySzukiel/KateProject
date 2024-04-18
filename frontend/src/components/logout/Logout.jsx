@@ -13,7 +13,6 @@ export function Logout(props) {
     const loginToken = useSelector(state => state.loginToken)
 
 	useEffect(() => {
-        console.log("use logged in", props.isLoggedIn ,props.loginToken);
 		handleLogout()
 	}, [])
 
@@ -25,17 +24,13 @@ export function Logout(props) {
                 	'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    // 'key': props.loginToken, //todo it isn't necessary
                 }),
             });
             
             if (response.ok) {
-            	console.log("1 logged in", isLoggedIn ,loginToken);
                 dispatch(logoutSuccess());
                 setLoggedOut(true);
-                dispatch(deleteLoginToken());
-                console.log("logged in", props.isLoggedIn ,props.loginToken);
-                // navigate("/")    
+                dispatch(deleteLoginToken());       
             } else {
     	        console.error("logout error");
             }
@@ -47,7 +42,6 @@ export function Logout(props) {
 	return (
 		<>
 			{!props.isLoggedIn && <h1>Wylogowano</h1>}
-            {props.isLoggedIn && <h3>wciąż zalogowany</h3>}
 		</>
 	)
 }

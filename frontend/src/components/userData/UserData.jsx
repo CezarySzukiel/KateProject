@@ -33,9 +33,9 @@ export function UserData(props) {
 
 	return (
     	<div className={'userDataContainer'}>
-        	<h1>UserSettings</h1>
             {userData && 
                 <>
+                <h1>{userData.username}</h1>
                 <h3>username: {userData.username}</h3>
                 <h3>email: {userData.email}</h3>
                 {userData.first_name && <h3>imię: {userData.first_name}</h3>}
