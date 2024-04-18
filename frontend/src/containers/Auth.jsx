@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 
 import { loginSuccess, setLoginToken, logoutSuccess, deleteLoginToken } from "../actions/authActions"
 import { Login } from "../components/Login/Login"
+import { Logout } from "../components/logout/Logout"
 import { Menu } from "../components/menu/Menu"
 import { UserData } from "../components/userData/UserData"
 
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export const ConnectedLogin = connect(mapStateToProps, mapDispatchToProps)(Login);
-export const ConnectedMenu = connect(mapStateToProps, mapDispatchToProps)(Menu);
-export const ConnectedUserData = connect(mapStateToProps)(UserData);
+export const ConLogin = connect(mapStateToProps, mapDispatchToProps)(Login);
+export const ConMenu = connect(mapStateToProps, mapDispatchToProps)(Menu);
+export const ConUserData = connect(mapStateToProps)(UserData);
+export const ConLogout = connect(mapStateToProps)(Logout); 

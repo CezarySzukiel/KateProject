@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import './header.css'
 // import { logoutSuccess } from '../../actions/authActions';
-import { ConnectedMenu } from "../../containers/Auth"
+import { ConMenu } from "../../containers/Auth"
 import { Navbar } from "../navbar/Navbar";
 
 export function Header() {
@@ -25,7 +25,7 @@ export function Header() {
                 <Link to={`exercises`}><button onClick={handleExercisesClick}>Zadania</button></Link>
                 <Link to={`game`}><button>Gra</button></Link>
             </div>    
-            <ConnectedMenu />
+            <ConMenu />
             {isNavbar &&
             <Navbar />
             }

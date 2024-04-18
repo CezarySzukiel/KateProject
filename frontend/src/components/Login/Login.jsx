@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { loginSuccess, setLoginToken } from '../../actions/authActions';
 import { Error } from "../error/Error.jsx"
@@ -10,6 +11,7 @@ export function Login(props) {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -38,11 +40,10 @@ export function Login(props) {
             if (response.ok) {
                 console.log("zalogowano");
                 const data = await response.json();
-                console.log(data)
                 const token = data.access;
                 console.log(token)
-                props.setLoginToken(token);
-                props.loginSuccess();
+                dispatch(setLoginToken(token));
+                dispatch(loginSuccess());
                 navigate("/")    
             } else {
                 setLoginError(true);
@@ -58,19 +59,19 @@ export function Login(props) {
         <div className={'LoginContainer'}>
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
-                <label>
+                <label htmlFor="username">
                     Login: 
-                    <input type="text" value={username} onChange={handleUsernameChange} />
+                    <input type="text" id="username" value={username} onChange={handleUsernameChange} />
                 </label>
                 <br />
-                <label>
+                <label htmlFor="email">
                     Email: 
-                    <input type="email" value={email} onChange={handleEmailChange} />
+                    <input type="email" id="email" value={email} onChange={handleEmailChange} />
                 </label>
                 <br />
-                <label>
+                <label htmlFor="password">
                     Hasło: 
-                    <input type="password" value={password} onChange={handlePasswordChange} />
+                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                 </label>
                 <br />
                 <br />

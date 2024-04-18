@@ -11,11 +11,11 @@ import ErrorPage from "./error-page";
 import { HomePage } from './components/homePage/HomePage'
 import { Exercises } from './components/exercises/Exercises'
 import { Game } from './components/game/Game'
-import { ConnectedLogin } from './containers/Auth.jsx'
+import { ConLogin } from './containers/Auth.jsx'
 import { Header } from './components/header/Header.jsx'
-import { Logout } from "./components/logout/Logout"
+import { ConLogout } from "./containers/Auth"
 import { Register } from './components/register/Register'
-import { ConnectedUserData } from './containers/Auth.jsx'
+import { ConUserData } from './containers/Auth.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,11 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login/",
-        element: <ConnectedLogin />,
+        element: <ConLogin />,
       },
       {
         path: "logout/",
-        element: <Logout />,
+        element: <ConLogout />,
       },
       {
         path: "register/",
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user/",
-        element: <ConnectedUserData />,
+        element: <ConUserData />,
       },
       {
         path: "game/",

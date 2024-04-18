@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 export function UserData(props) {
     const [userData, setUserData] = useState(null);
+    const [serverErr, setServerErr] = useState(null);
     
     useEffect(() => {
         getuserData()
@@ -10,7 +11,6 @@ export function UserData(props) {
 
     const getuserData = async () => {
         try {
-            console.log("token: ",props.loginToken)
             const response = await fetch('http://0.0.0.0:8000/api/v1/auth/user/', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json',
@@ -21,7 +21,8 @@ export function UserData(props) {
                 const data = await response.json();
                 setUserData(data) 
             } else {
-                console.log('something is no yes')
+                setServerErr(`${response.status} ${response.statusText}`)
+                console.log('server error', response.status, response.statusText)
             }
         } catch (error) {
             console.error('Wystąpił błąd:', error);
@@ -41,6 +42,7 @@ export function UserData(props) {
                 {userData.last_name && <h3>nazwisko: {userData.last_name}</h3>}
                 </>
             }
+            {serverErr && <h3>{serverErr}</h3>}
         </div>
     );
 }
