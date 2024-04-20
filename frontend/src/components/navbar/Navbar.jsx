@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Navbar.css';
+import './navbar.css';
 
 export const Navbar = () => {
   const [isMenuClicked, setIsMenuClicked] = useState(true);

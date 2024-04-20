@@ -6,16 +6,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-// import Root from "./routes/root"; do skasowania razem z folderem routes. tam są niepotrzebne komponenty z tutorialu
 import App from './App.jsx'
 import ErrorPage from "./error-page";
-import { HomePage } from './components/HomePage/HomePage'
-import { Exercises } from './components/Exercises/Exercises'
-import { Game } from './components/Game/Game'
-import { Login } from './components/Login/Login'
-import { Register } from './components/Register/Register'
-import { UserSettings } from './components/UserSettings/UserSettings'
-import Body from './components/Body/Body'
+import { HomePage } from './components/homePage/HomePage'
+import { Exercises } from './components/exercises/Exercises'
+import { Game } from './components/game/Game'
+import { ConLogin } from './containers/Auth.jsx'
+import { Header } from './components/header/Header.jsx'
+import { ConLogout } from "./containers/Auth"
+import { Register } from './components/register/Register'
+import { ConUserData } from './containers/Auth.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login/",
-        element: <Login />,
+        element: <ConLogin />,
+      },
+      {
+        path: "logout/",
+        element: <ConLogout />,
       },
       {
         path: "register/",
@@ -41,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user/",
-        element: <UserSettings />,
+        element: <ConUserData />,
       },
       {
         path: "game/",
