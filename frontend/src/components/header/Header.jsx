@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
 import './header.css'
-// import { logoutSuccess } from '../../actions/authActions';
 import { ConMenu } from "../../containers/Auth"
 import { Navbar } from "../navbar/Navbar";
 
@@ -10,7 +9,6 @@ export function Header() {
     const [isNavbar, setIsNavbar] = useState(false);
 
     const handleExercisesClick = () => {
-        console.log('wyszukaj');
         setIsNavbar(true)
     }
 

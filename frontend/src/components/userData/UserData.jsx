@@ -1,36 +1,43 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
+import { refreshToken } from '../../helpers'
 
 export function UserData(props) {
     const [userData, setUserData] = useState(null);
     const [serverErr, setServerErr] = useState(null);
     
     useEffect(() => {
-        getuserData()
-    }, [])
+        getUserData()
+    }, [props.accessToken])
 
-    const getuserData = async () => {
+    const getUserData = async () => {
         try {
-            const response = await fetch('http://0.0.0.0:8000/api/v1/auth/user/', {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${props.loginToken}`,
-                },            
+            const response = await axios.get('http://0.0.0.0:8000/api/v1/auth/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.accessToken}`,
+            },
             });
-            if (response.ok) {
-                const data = await response.json();
-                setUserData(data) 
-            } else {
-                setServerErr(`${response.status} ${response.statusText}`)
-                console.log('server error', response.status, response.statusText)
-            }
+            if (response.status === 200) {
+                const data = response.data;
+                setUserData(data);
+            } 
         } catch (error) {
-            console.error('Wystąpił błąd:', error);
+            if (error.response.status == 401) {
+                try {
+                    const newTokens = await refreshToken(props.refreshToken)
+                    props.setAccessToken(newTokens.access);
+                    props.setRefreshToken(newTokens.refresh);
+                } catch (error) {
+                    console.error('error:', error.response.status, error.response.statusText);
+                }
+            } else {
+                console.error('error:', error.response.status, error.response.statusText);
+            }
         }
-    }
+    };
     
-    
-
 	return (
     	<div className={'userDataContainer'}>
             {userData && 

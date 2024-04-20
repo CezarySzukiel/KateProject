@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { logoutSuccess, deleteLoginToken } from '../../actions/authActions';
+import axios from 'axios';
 
 
 export function Logout(props) {
@@ -18,21 +17,18 @@ export function Logout(props) {
 
 	const handleLogout = async () => {
         try {
-            const response = await fetch('http://0.0.0.0:8000/api/v1/auth/logout/', {
-                method: 'POST',
-                headers: {
-                	'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                }),
+            const response = await axios.post('http://0.0.0.0:8000/api/v1/auth/logout/', {}, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
             });
-            
-            if (response.ok) {
-                dispatch(logoutSuccess());
+
+            if (response.status === 200) {
+                props.logoutSuccess();
                 setLoggedOut(true);
-                dispatch(deleteLoginToken());       
+                props.deleteAccessToken();
             } else {
-    	        console.error("logout error");
+                console.error("logout error");
             }
         } catch (error) {
             console.error('error:', error);

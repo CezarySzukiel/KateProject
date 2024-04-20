@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 
 import { Error } from './../error/Error'
 
 export function Register() {
-	const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
         username: '',
         email: '',
         password1: '',
@@ -12,7 +11,6 @@ export function Register() {
     });
     const [error, setError] = useState('');
     const [info, setInfo] = useState(null)
-    // const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -44,7 +42,7 @@ export function Register() {
                 }
             }
         } catch (error) {
-            console.error('Wystąpił błąd:', error);
+            console.error('error:', error);
             setError('Wystąpił błąd podczas rejestracji.');
         }
     };

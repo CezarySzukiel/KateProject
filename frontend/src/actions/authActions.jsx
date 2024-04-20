@@ -1,7 +1,8 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const SET_LOGIN_TOKEN = 'SET_LOGIN_TOKEN';
-export const DELETE_LOGIN_TOKEN = 'DELETE_LOGIN_TOKEN';
+export const SET_ACCESS_TOKEN = 'SET_LOGIN_TOKEN';
+export const DELETE_ACCESS_TOKEN = 'DELETE_ACCESS_TOKEN';
+export const SET_REFRESH_TOKEN = 'SET_REFRESH_TOKEN'; 
 
 export const loginSuccess = () => {
   return {
@@ -15,15 +16,22 @@ export const logoutSuccess = () => {
   };
 };
 
-export const setLoginToken = (token) => {
+export const setAccessToken = (token) => {
   return {
-    type: SET_LOGIN_TOKEN,
+    type: SET_ACCESS_TOKEN,
     token: token,
   };
 };
 
-export const deleteLoginToken = () => {
+export const deleteAccessToken = () => {
   return {
-    type: DELETE_LOGIN_TOKEN,
+    type: DELETE_ACCESS_TOKEN,
   };
 };
+
+export const setRefreshToken = (token) => {
+  return {
+    type: SET_REFRESH_TOKEN,
+    token: token,
+  }
+}

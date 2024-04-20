@@ -15,6 +15,7 @@ import os
 
 import environ
 import dj_database_url
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -206,12 +207,12 @@ REST_AUTH = {
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
 }
 
-# SIMPLE_JWT = {
-#      'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
-#      'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-#      'ROTATE_REFRESH_TOKENS': True,
-#      'BLACKLIST_AFTER_ROTATION': True
-# }
+SIMPLE_JWT = {
+     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=5),
+     'REFRESH_TOKEN_LIFETIME': timedelta(days=60),
+     'ROTATE_REFRESH_TOKENS': True,
+     'BLACKLIST_AFTER_ROTATION': True
+}
 
 AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',

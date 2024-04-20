@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import axios from 'axios';  
 
-import { loginSuccess, setLoginToken } from '../../actions/authActions';
 import { Error } from "../error/Error.jsx"
 
 export function Login(props) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loginError, setLoginError] = useState(false);
+    const [loginError, setLoginError] = useState(null);
     const navigate = useNavigate();
-    const dispatch = useDispatch()
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -29,25 +27,57 @@ export function Login(props) {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://0.0.0.0:8000/api/v1/auth/login/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, email, password }),
+            const response = await axios.post('http://0.0.0.0:8000/api/v1/auth/login/', {
+            username,
+            email,
+            password,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
             });
 
-            if (response.ok) {
-                const data = await response.json();
+            if (response.status === 200) {
+                const data = response.data;
                 const token = data.access;
-                dispatch(setLoginToken(token));
-                dispatch(loginSuccess());
-                navigate("/")    
-            } else {
-                setLoginError(true);
+                props.setAccessToken(token);
+                props.loginSuccess();
+                getRefreshToken();
+                setPassword('')                
+                navigate("/");
             }
         } catch (error) {
-            console.error('Wystąpił błąd:', error);
+            if (error.response.status == 500) {
+                setLoginError("Nie ma takiego użytkownika")
+            } else {
+                setLoginError("Nieprawidłowy login lub hasło");
+                console.error('error:', error.response.status);
+            }
+        }
+    };
+
+    const getRefreshToken = async () => {
+        try {
+            const response = await axios.post('http://0.0.0.0:8000/api/v1/token/', {
+            username,
+            password,
+            }, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            });
+
+            if (response.status === 200) {
+                const data = response.data;
+                const accessToken = data.access;
+                const refreshToken = data.refresh;
+                props.setAccessToken(accessToken);
+                props.setRefreshToken(refreshToken);
+            } else {
+                console.error("refresh token getting error");
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -73,8 +103,7 @@ export function Login(props) {
                 <br />
                 <button type="submit">Log in</button>
             </form>
-            {loginError && <Error message={"Nieprawidłowy login lub hasło"}/>}
+            {loginError && <Error message={loginError}/>}
         </div>
     );
 }
-
