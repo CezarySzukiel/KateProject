@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Error } from './../error/Error'
+import { Error, Info } from './../helpersComponents/Messages'
 
 export function Register() {
     const [formData, setFormData] = useState({
@@ -69,7 +69,7 @@ export function Register() {
                 </form>
                 {error && <Error message={error}/>}
             </>}
-            {info && `wysłano email weryfikacyjny na adres ${formData.email}`}
+            {info && <Info message={`wysłano email weryfikacyjny na adres ${formData.email}`} />}
         </div>
     );
 }

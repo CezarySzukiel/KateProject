@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';  
 
-import { Error } from "../error/Error.jsx"
+import { Error, Info } from "../helpersComponents/Messages"
 
 export function Login(props) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
+    const [passwordResetInfo, setPasswordResetInfo] = useState(null);
     const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
@@ -37,7 +38,7 @@ export function Login(props) {
             },
             });
 
-            if (response.status === 200) {
+            if (response.status == 200) {
                 const data = response.data;
                 const token = data.access;
                 props.setAccessToken(token);
@@ -49,8 +50,10 @@ export function Login(props) {
         } catch (error) {
             if (error.response.status == 500) {
                 setLoginError("Nie ma takiego użytkownika")
+                setPasswordResetInfo(null)
             } else {
                 setLoginError("Nieprawidłowy login lub hasło");
+
                 console.error('error:', error.response.status);
             }
         }
@@ -67,7 +70,7 @@ export function Login(props) {
             },
             });
 
-            if (response.status === 200) {
+            if (response.status == 200) {
                 const data = response.data;
                 const accessToken = data.access;
                 const refreshToken = data.refresh;
@@ -80,6 +83,28 @@ export function Login(props) {
             console.error(error);
         }
     };
+
+    const handlePasswordReset = async () => {
+        try {
+            const response = await axios.post('http://0.0.0.0:8000/api/v1/auth/password/reset/', {
+                email,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.status == 200) {
+                setPasswordResetInfo(`Wysłano email weryfikacyjny na adres ${email}`)
+                setLoginError(null)
+            }
+        } catch (error) {
+            setLoginError('Wprowadzony numer telefonu lub adres e-mail nie pasuje do żadnego konta. Spróbuj ponownie lub utwórz konto.')
+            setPasswordResetInfo(null)
+            console.error(error);
+        }
+
+    }
 
     return (
         <div className={'LoginContainer'}>
@@ -101,9 +126,14 @@ export function Login(props) {
                 </label>
                 <br />
                 <br />
-                <button type="submit">Log in</button>
+                <button type="submit">Zaloguj</button>
             </form>
             {loginError && <Error message={loginError}/>}
+            {passwordResetInfo && <Info message={passwordResetInfo}/>}
+            <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
+            <p>lub</p>
+            <Link to={`/register`}><button>utwórz nowe konto</button></Link>
+
         </div>
     );
 }

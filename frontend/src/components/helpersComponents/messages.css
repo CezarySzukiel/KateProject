@@ -1,0 +1,15 @@
+.err {
+display: inline-block;
+border: 1px solid red;
+padding: 10px; 
+color: red;
+margin: 1rem;
+}
+
+.info {
+display: inline-block;
+border: 1px solid green;
+padding: 10px; 
+color: green;
+margin: 1rem;
+}
