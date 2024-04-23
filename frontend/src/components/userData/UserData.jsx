@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import { refreshToken } from '../../helpers'
 
@@ -47,6 +48,7 @@ export function UserData(props) {
                 <h3>email: {userData.email}</h3>
                 {userData.first_name && <h3>imię: {userData.first_name}</h3>}
                 {userData.last_name && <h3>nazwisko: {userData.last_name}</h3>}
+                <Link to={`/password-change/`}><button>Zmień hasło</button></Link>
                 </>
             }
             {serverErr && <h3>{serverErr}</h3>}

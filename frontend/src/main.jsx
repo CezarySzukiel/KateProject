@@ -17,6 +17,7 @@ import { ConLogout } from "./containers/Auth"
 import { Register } from './components/register/Register'
 import { ConUserData } from './containers/Auth.jsx'
 import { ConPasswordReset } from './containers/Auth.jsx'
+import { ConPasswordChange } from './containers/Auth.jsx'
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "password-reset/:uid/:token",
         element: <ConPasswordReset />,
+      },
+      {
+        path: "password-change/",
+        element: <ConPasswordChange />,
       },
       {
         path: "game/",

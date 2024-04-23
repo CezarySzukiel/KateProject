@@ -27,10 +27,11 @@ export function PasswordReset(props) {
 	        	new_password1: newPassword1,
 	        	new_password2: newPassword2
 	      	});
-	      	setSuccess("Hasło zmienione pomyślnie");
 	      	setError(null);
+	      	setSuccess("Hasło zmienione pomyślnie");
 	    } catch (error) {
 	    		console.error(error)
+	    		setSuccess(null)
 	      	setError('Wystąpił błąd podczas zmiany hasła');
 	    }
 	 };    

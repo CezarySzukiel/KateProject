@@ -6,6 +6,7 @@ import { Logout } from "../components/logout/Logout"
 import { Menu } from "../components/menu/Menu"
 import { UserData } from "../components/userData/UserData"
 import { PasswordReset } from "../components/passwordReset/PasswordReset"
+import { PasswordChange } from "../components/passwordChange/PasswordChange"
 
 const mapStateToProps = (state) => {
     return {
@@ -30,3 +31,4 @@ export const ConMenu = connect(mapStateToProps, mapDispatchToProps)(Menu);
 export const ConUserData = connect(mapStateToProps, mapDispatchToProps)(UserData);
 export const ConLogout = connect(mapStateToProps, mapDispatchToProps)(Logout);
 export const ConPasswordReset = connect(mapDispatchToProps)(PasswordReset);
+export const ConPasswordChange = connect(mapStateToProps, mapDispatchToProps)(PasswordChange);
