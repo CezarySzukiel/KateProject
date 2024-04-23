@@ -5,11 +5,8 @@ from django.db import migrations
 def create_users(apps, schema_editor):
     CustomUser = apps.get_model('users', 'CustomUser')
 
-    user1 = CustomUser(username='user1', email="c.szukiel@gmail.com", first_name='jan', last_name='kowalski', password=make_password('tajne'))
-    user1.save()
-
-    user2 = CustomUser(username='user2', email="c.szukiel@gmail.com", first_name='jan', last_name='kowalski', password=make_password('tajne'))
-    user2.save()
+    # user1 = CustomUser(username='user1', email="c.szukiel@gmail.com", first_name='jan', last_name='kowalski', password=make_password('tajne'))
+    # user1.save()
 
 
 class Migration(migrations.Migration):

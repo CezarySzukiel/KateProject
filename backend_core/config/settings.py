@@ -205,10 +205,11 @@ REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'my-app-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
 }
 
 SIMPLE_JWT = {
-     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=5),
+     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
      'REFRESH_TOKEN_LIFETIME': timedelta(days=60),
      'ROTATE_REFRESH_TOKENS': True,
      'BLACKLIST_AFTER_ROTATION': True
@@ -223,7 +224,10 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+# redirect after success confirm email link
 LOGIN_URL = 'http://localhost:8080/login'
+PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = 'http://localhost:8080/password-reset/'
 
 # CORS_ALLOWED_ORIGINS =
 CORS_ALLOW_ALL_ORIGINS = True

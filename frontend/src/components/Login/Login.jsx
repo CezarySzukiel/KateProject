@@ -93,13 +93,14 @@ export function Login(props) {
                     'Content-Type': 'application/json',
                 },
             });
+            console.log('wysłałem maila')
 
             if (response.status == 200) {
                 setPasswordResetInfo(`Wysłano email weryfikacyjny na adres ${email}`)
                 setLoginError(null)
             }
         } catch (error) {
-            setLoginError('Wprowadzony numer telefonu lub adres e-mail nie pasuje do żadnego konta. Spróbuj ponownie lub utwórz konto.')
+            setLoginError('Wprowadzony adres e-mail nie pasuje do żadnego konta. Spróbuj ponownie lub utwórz konto.')
             setPasswordResetInfo(null)
             console.error(error);
         }
@@ -137,3 +138,5 @@ export function Login(props) {
         </div>
     );
 }
+
+// todo poprawić efekty klikania w 'nie pamietasz hasła?'
