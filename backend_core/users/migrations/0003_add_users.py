@@ -4,10 +4,23 @@ from django.db import migrations
 
 def create_users(apps, schema_editor):
     CustomUser = apps.get_model('users', 'CustomUser')
+    EmailAddress = apps.get_model('account', 'EmailAddress')
 
-    # user1 = CustomUser(username='user1', email="c.szukiel@gmail.com", first_name='jan', last_name='kowalski', password=make_password('tajne'))
-    # user1.save()
+    user1 = CustomUser(
+        username='user1', 
+        email="c.szukiel@gmail.com", 
+        first_name='jan', 
+        last_name='kowalski', 
+        password=make_password('tajne'))
+    user1.save()
 
+    user1_verify = EmailAddress(
+        user=user1,
+        email=user1.email,
+        verified=True,
+        user_id=2
+        )
+    user1_verify.save()
 
 class Migration(migrations.Migration):
 
