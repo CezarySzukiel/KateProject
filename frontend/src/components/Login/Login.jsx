@@ -1,3 +1,4 @@
+import './login.css'
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';  
@@ -93,7 +94,6 @@ export function Login(props) {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log('wysłałem maila')
 
             if (response.status == 200) {
                 setPasswordResetInfo(`Wysłano email weryfikacyjny na adres ${email}`)
@@ -134,9 +134,6 @@ export function Login(props) {
             <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
             <p>lub</p>
             <Link to={`/register`}><button>utwórz nowe konto</button></Link>
-
-        </div>
+            </div>
     );
 }
-
-// todo poprawić efekty klikania w 'nie pamietasz hasła?'

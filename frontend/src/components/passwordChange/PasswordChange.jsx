@@ -38,8 +38,6 @@ export function PasswordChange(props) {
 	          }
 	        }
 	      );
-	      console.log('response: ',response)
-	      console.log('oldPassword: ', oldPassword, 'newPassword1: ', newPassword1)
 	      setError(null);
 	      setSuccess('Hasło zostało pomyślnie zmienione!');
 	    } catch (error) {
