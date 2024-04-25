@@ -34,4 +34,3 @@ export const ConUserData = connect(mapStateToProps, mapDispatchToProps)(UserData
 export const ConLogout = connect(mapStateToProps, mapDispatchToProps)(Logout);
 export const ConPasswordReset = connect(mapDispatchToProps)(PasswordReset);
 export const ConPasswordChange = connect(mapStateToProps, mapDispatchToProps)(PasswordChange);
-// export const conRefreshToken = connect(mapStateToProps, mapDispatchToProps)(refreshToken);

@@ -23,6 +23,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -31,6 +32,7 @@ class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 class SubsectionViewSet(viewsets.ModelViewSet):
@@ -39,6 +41,8 @@ class SubsectionViewSet(viewsets.ModelViewSet):
     queryset = Subsection.objects.all()
     serializer_class = SubsectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+
 
 class CompareExerciseView(APIView):
     """

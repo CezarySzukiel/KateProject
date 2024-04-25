@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Link } from "react-router-dom";
 
 
-export function Exercises() {
-    const EXERCISES_URL = 'http://0.0.0.0:8000/api/v1/exercises/'
+export function ExercisesList(props) {
+    const EXERCISES_URL = 'http://0.0.0.0:8000/api/v1/exercises/list/'
     const [exercises, setExercises] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);
     
     useEffect(() => {
+        console.log("useEffect")
+        console.log(props)
+
         const fetchExercises = async () => {
             try {
                 const response = await fetch(EXERCISES_URL);
@@ -46,14 +50,21 @@ export function Exercises() {
         }
     };
 
+    const handleLinkClick = (exercise) => {
+        console.log("navi")
+        props.setActualExercise(exercise)
+    }
+
     return (
         <div>
             <h2>Lista zadań</h2>
             <ul>
                 {exercises.map(exercise => (
                     <li key={exercise.id}>
-                        <h3>id: {exercise.id}, {exercise.title}</h3>
-                        <p>{exercise.description}</p>
+                        <Link to={`/exercise-details/`} >
+                            <h3 onClick={() => handleLinkClick(exercise)}>id: {exercise.id}, {exercise.title}</h3>
+                            <p>{exercise.description}</p>
+                        </Link>
                     </li>
                 ))}
             </ul>
@@ -61,3 +72,4 @@ export function Exercises() {
         </div>
     );
 }
+

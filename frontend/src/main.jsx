@@ -9,15 +9,11 @@ import {
 import App from './App.jsx'
 import ErrorPage from "./error-page";
 import { HomePage } from './components/homePage/HomePage'
-import { Exercises } from './components/exercises/Exercises'
 import { Game } from './components/game/Game'
-import { ConLogin } from './containers/Auth.jsx'
 import { Header } from './components/header/Header.jsx'
-import { ConLogout } from "./containers/Auth"
 import { Register } from './components/register/Register'
-import { ConUserData } from './containers/Auth.jsx'
-import { ConPasswordReset } from './containers/Auth.jsx'
-import { ConPasswordChange } from './containers/Auth.jsx'
+import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange } from './containers/Auth'
+import { ConExercisesList } from './containers/Ex'
 
 const router = createBrowserRouter([
   {
@@ -31,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "exercises/",
-        element: <Exercises />,
+        element: <ConExercisesList />,
       },
       {
         path: "login/",

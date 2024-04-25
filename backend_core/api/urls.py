@@ -15,7 +15,7 @@ urlpatterns = [
     path('exercises/', include('exercises_app.urls')),
     # path('custom_user/', include('users.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()),
     path('verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
