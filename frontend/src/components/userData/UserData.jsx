@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import { refreshToken } from '../../helpers'
 import { Error, Info } from "../helpersComponents/Messages"
 
 export function UserData(props) {
@@ -16,6 +15,7 @@ export function UserData(props) {
     useEffect(() => {
         getUserData()
     }, [props.accessToken, formVisibility])
+
     const getUserData = async () => {
         try {
             const response = await axios.get('http://0.0.0.0:8000/api/v1/auth/user/', {
@@ -30,13 +30,9 @@ export function UserData(props) {
             } 
         } catch (error) {
             if (error.response.status == 401) {
-                try {
-                    const newTokens = await refreshToken(props.refreshToken)
-                    props.setAccessToken(newTokens.access);
-                    props.setRefreshToken(newTokens.refresh);
-                } catch (error) {
-                    console.error('error:', error.response.status, error.response.statusText);
-                }
+                const tokens = await props.getTokens(props.refreshToken)
+                props.setAccessToken(tokens.access);
+                props.setRefreshToken(tokens.refresh);
             } else {
                 console.error('error:', error.response.status, error.response.statusText);
             }
@@ -70,7 +66,12 @@ export function UserData(props) {
                     setFormVisibility(false)
                     setError(false)
                     setSuccess('Dane użytkownika zostały zaktualizowane.')
-
+                } 
+                else if (error.response.status == 401) {
+                    console.log("błąd 401")
+                    const tokens = await props.getTokens(props.refreshToken)
+                    props.setAccessToken(tokens.access);
+                    props.setRefreshToken(tokens.refresh);
                 }
             } catch (error) {
                 console.error(error);

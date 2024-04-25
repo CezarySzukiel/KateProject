@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import { Error, Info } from "../helpersComponents/Messages" 
-import { refreshToken } from '../../helpers'
 
 
 export function PasswordChange(props) {
@@ -42,16 +41,12 @@ export function PasswordChange(props) {
 	      setSuccess('Hasło zostało pomyślnie zmienione!');
 	    } catch (error) {
 	    	if (error.response.status == 401) {
-	                try {
-	                    const newTokens = await refreshToken(props.refreshToken)
-	                    props.setAccessToken(newTokens.access);
-	                    props.setRefreshToken(newTokens.refresh);
-	                } catch (error) {
-	                    console.error('error:', error.response.status, error.response.statusText);
-	                }
-	            } else {
-	                console.error('error:', error.response.status, error.response.statusText);
-	            }
+	        const tokens = await props.getTokens(props.refreshToken)
+          props.setAccessToken(tokens.access);
+          props.setRefreshToken(tokens.refresh);
+	      } else {
+	        console.error('error:', error.response.status, error.response.statusText);
+	      }
 	      console.error(error)
 	      setSuccess(null)
 	      setError('Wystąpił błąd podczas zmiany hasła');
