@@ -1,19 +1,20 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from exercises_app.models import Exercise, Answer, Section, Subsection
-from exercises_app.serializers import ExerciseSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
+from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
     CompareExerciseSerializer
 from users.models import UserSettings
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
     """ViewSet for the Exercise class"""
+    # todo optimalization: change serializer class, because list don't need all the details.
 
     queryset = Exercise.objects.all()
-    serializer_class = ExerciseSerializer
+    serializer_class = ExercisesListSerializer
     permission_classes = [permissions.AllowAny]
 
 
@@ -42,6 +43,14 @@ class SubsectionViewSet(viewsets.ModelViewSet):
     serializer_class = SubsectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
     permission_classes = [permissions.AllowAny]
+
+
+
+class ExerciseDetailsView(generics.ListAPIView):
+    """View for details of the  exercise"""
+    permission_classes = [permissions.AllowAny]
+    queryset = None
+    serializer_class = None
 
 
 class CompareExerciseView(APIView):

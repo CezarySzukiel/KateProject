@@ -40,20 +40,6 @@ class Answer(models.Model):
         return self.answer
 
 
-class Section(models.Model):
-    """Model representing a section of exercises"""
-    name = models.CharField(max_length=128, unique=True)
-    slug = models.SlugField(max_length=64, unique=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-
 class Subsection(models.Model):
     """Model representing a subsection of exercises"""
     name = models.CharField(max_length=128, unique=True)
@@ -73,3 +59,17 @@ class Subsection(models.Model):
         """Gets unique values and returns a list of tuples"""
         sort_values = Subsection.objects.values_list('name', flat=True).distinct().order_by('name')
         return [(value, value) for value in sort_values]
+
+
+class Section(models.Model):
+    """Model representing a section of exercises"""
+    name = models.CharField(max_length=128, unique=True)
+    slug = models.SlugField(max_length=64, unique=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)

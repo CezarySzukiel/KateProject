@@ -68,7 +68,7 @@ export function ExercisesList(props) {
                     </li>
                 ))}
             </ul>
-            <button onClick={handleNextPage}>Więcej</button>
+            {nextPageUrl && <button onClick={handleNextPage}>Więcej</button>}
         </div>
     );
 }

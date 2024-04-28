@@ -3,12 +3,25 @@ from rest_framework import serializers
 from .models import Exercise, Section, Subsection, Answer
 
 
-class ExerciseSerializer(serializers.ModelSerializer):
-    """Serializer for Exercise model."""
+class ExercisesListSerializer(serializers.ModelSerializer):
+    """Serializer for exercises list."""
     subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
     solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
     # subsection = serializers.PrimaryKeyRelatedField(read_only=True)
     # solution_similar = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Exercise
+        fields = (
+            'id', 'title', 'description', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
+            'type', 'advanced_level',)
+        read_only_fields = ('id',)
+
+class ExerciseDetailsSerializer(serializers.ModelSerializer):
+    """Serializer for single exercise details"""
+
+    subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
+    solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
 
     class Meta:
         model = Exercise

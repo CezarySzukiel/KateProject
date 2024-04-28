@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setActualExercise } from "../actions/exActions"
 
 import { ExercisesList } from "../components/exercises/ExercisesList"
+import { ExerciseDetails } from "../components/exercises/ExerciseDetails"
 
 
 const mapStateToProps = (state) => {
@@ -18,3 +19,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(ExercisesList);
+export const ConExerciseDetails = connect(mapStateToProps )(ExerciseDetails);
