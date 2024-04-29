@@ -5,30 +5,31 @@ from .models import Exercise, Section, Subsection, Answer
 
 class ExercisesListSerializer(serializers.ModelSerializer):
     """Serializer for exercises list."""
-    subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
-    solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
-    # subsection = serializers.PrimaryKeyRelatedField(read_only=True)
-    # solution_similar = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Exercise
         fields = (
-            'id', 'title', 'description', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
-            'type', 'advanced_level',)
+            'id', 'title', 'description')
         read_only_fields = ('id',)
 
-class ExerciseDetailsSerializer(serializers.ModelSerializer):
+class ExerciseDetailSerializer(serializers.ModelSerializer):
     """Serializer for single exercise details"""
 
     subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
     solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
+    correct_answer = serializers.SerializerMethodField()
 
     class Meta:
         model = Exercise
         fields = (
             'id', 'title', 'description', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
-            'type', 'advanced_level',)
+            'type', 'advanced_level', 'correct_answer', )
         read_only_fields = ('id',)
+
+    def get_correct_answer(self, obj):
+        if hasattr(obj, 'correct_answer'):
+            return obj.correct_answer.answer
+        return None
 
 
 class AnswerSerializer(serializers.ModelSerializer):

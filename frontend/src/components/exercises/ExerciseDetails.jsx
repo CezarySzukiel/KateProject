@@ -1,6 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+
 export function ExerciseDetails(props) {
-	const exercise = props.actualExercise
-  console.log(props)
+  const [exercise, setExercise] = useState(null);
+
+  useEffect(() => {
+    console.log('props.actualExercise.id', exercise)
+      fetchExerciseData();
+         console.log('props.actualExercise.id', exercise)
+    }, [props.actualExercise]);
+
+    const fetchExerciseData = async () => {
+      try {
+        const response = await axios.get(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${props.actualExercise.id}/`);
+        setExercise(response.data);
+      } catch (error) {
+        console.error('Error fetching exercise data:', error);
+      }
+    };
+
+    if (!exercise) {
+        return <div>Loading...</div>;
+    }
 	 return (
     <div>
       <p>section: {props.actualSection.name}</p>
@@ -12,7 +34,7 @@ export function ExerciseDetails(props) {
       
       {exercise.advanced_level && <h3>Poziom rozszerzony</h3>}
       
-      <h3><strong>description:</strong> {exercise.description}</h3>
+      <h3>{exercise.description}</h3>
       
       <p><strong>Punkty:</strong> {exercise.points}</p>
       
@@ -24,9 +46,9 @@ export function ExerciseDetails(props) {
       
       <p><strong>type:</strong> {exercise.type}</p>
       
-      <p><strong>id:</strong> {exercise.id}</p>
+      {/*<p><strong>id:</strong> {exercise.id}</p>*/}
 
-      <p><strong>odpowiedź: </strong> dodać odpowiedź</p>
+      <p><strong>odpowiedź: </strong>{exercise.correct_answer}</p>
 
     </div>
   );

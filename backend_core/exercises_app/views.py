@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from exercises_app.models import Exercise, Answer, Section, Subsection
 from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
-    CompareExerciseSerializer
+    CompareExerciseSerializer, ExerciseDetailSerializer
 from users.models import UserSettings
 
 
@@ -15,7 +15,7 @@ class ExerciseViewSet(viewsets.ModelViewSet):
 
     queryset = Exercise.objects.all()
     serializer_class = ExercisesListSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
@@ -24,7 +24,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -33,7 +33,7 @@ class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
 
 
 class SubsectionViewSet(viewsets.ModelViewSet):
@@ -48,7 +48,7 @@ class SubsectionViewSet(viewsets.ModelViewSet):
 class SubsectionListView(generics.ListAPIView):
     """View to list all subsections for a specific section"""
     serializer_class = SubsectionSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
 
     def get_queryset(self):
         section_id = self.kwargs['section_id']
@@ -59,21 +59,29 @@ class SubsectionListView(generics.ListAPIView):
 class ExerciseListView(generics.ListAPIView):
     """View to list all exercises for a specific subsection"""
     serializer_class = ExercisesListSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
 
     def get_queryset(self):
         subsection_id = self.kwargs['subsection_id']
         subsection = get_object_or_404(Subsection, pk=subsection_id)
-        return Exercise.objects.filter(subsection=subsection)
+        return Exercise.objects.filter(subsection=subsection).values('id', 'title', 'description')
 
 
-class ExerciseDetailsView(generics.ListAPIView):
-    """View for details of the  exercise"""
-    #  maybe start searching from sections, then subsec > exercise
-    permission_classes = [permissions.AllowAny]
-    queryset = None
-    serializer_class = None
+class ExerciseDetailView(generics.RetrieveAPIView):
+    """View to retrieve details of an exercise along with its correct answer"""
+    # todo optimalization: check database logs how many querries is, in that view
+    serializer_class = ExerciseDetailSerializer
+    queryset = Exercise.objects.all()
+    permission_classes = (permissions.AllowAny, )
 
+    def get_object(self):
+        exercise_id = self.kwargs['exercise_id']
+        exercise = get_object_or_404(Exercise, pk=exercise_id)
+        
+        answer = get_object_or_404(Answer, exercise=exercise, correct=True)
+        exercise.correct_answer = answer
+
+        return exercise
 
 class CompareExerciseView(APIView):
     """
