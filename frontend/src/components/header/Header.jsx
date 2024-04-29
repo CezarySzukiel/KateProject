@@ -20,7 +20,7 @@ export function Header() {
                 </a>
             </div>
             <div className="buttonsContainer">
-                <Link to={`exercises`}><button onClick={handleExercisesClick}>Zadania</button></Link>
+                <Link to={`sections`}><button onClick={handleExercisesClick}>Zadania</button></Link>
                 <Link to={`game`}><button>Gra</button></Link>
             </div>    
             <ConMenu />

@@ -17,4 +17,6 @@ urlpatterns = router.urls
 
 urlpatterns += [
     path('compare/', views.CompareExerciseView.as_view(), name='compare_answer'),
+    path('s-subsections/<int:section_id>/', views.SubsectionListView.as_view(), name='subsection-list'),
+    path('s-exercises/<int:subsection_id>/', views.ExerciseListView.as_view(), name='exercises-list'),
 ]

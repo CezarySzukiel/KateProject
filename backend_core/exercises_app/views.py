@@ -45,9 +45,31 @@ class SubsectionViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
+class SubsectionListView(generics.ListAPIView):
+    """View to list all subsections for a specific section"""
+    serializer_class = SubsectionSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        section_id = self.kwargs['section_id']
+        section = get_object_or_404(Section, pk=section_id)
+        return Subsection.objects.filter(section=section)
+
+
+class ExerciseListView(generics.ListAPIView):
+    """View to list all exercises for a specific subsection"""
+    serializer_class = ExercisesListSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        subsection_id = self.kwargs['subsection_id']
+        subsection = get_object_or_404(Subsection, pk=subsection_id)
+        return Exercise.objects.filter(subsection=subsection)
+
 
 class ExerciseDetailsView(generics.ListAPIView):
     """View for details of the  exercise"""
+    #  maybe start searching from sections, then subsec > exercise
     permission_classes = [permissions.AllowAny]
     queryset = None
     serializer_class = None

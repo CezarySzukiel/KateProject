@@ -60,7 +60,6 @@ class Subsection(models.Model):
         sort_values = Subsection.objects.values_list('name', flat=True).distinct().order_by('name')
         return [(value, value) for value in sort_values]
 
-
 class Section(models.Model):
     """Model representing a section of exercises"""
     name = models.CharField(max_length=128, unique=True)

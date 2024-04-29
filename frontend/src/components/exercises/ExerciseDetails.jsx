@@ -1,12 +1,12 @@
 export function ExerciseDetails(props) {
-	console.log(props)
 	const exercise = props.actualExercise
+  console.log(props)
 	 return (
     <div>
-      <p>section: dodać sekcję</p>
+      <p>section: {props.actualSection.name}</p>
       
 
-      <p>subsection:{exercise.subsection}</p>
+      <p>subsection: {props.actualSubsection.name}</p>
       
       <h1><strong> {exercise.title}</strong> </h1>
       

@@ -13,7 +13,7 @@ import { Game } from './components/game/Game'
 import { Header } from './components/header/Header.jsx'
 import { Register } from './components/register/Register'
 import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange } from './containers/Auth'
-import { ConExercisesList, ConExerciseDetails } from './containers/Ex'
+import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList } from './containers/Ex'
 
 const router = createBrowserRouter([
   {
@@ -54,11 +54,19 @@ const router = createBrowserRouter([
         element: <Game />,
       },
       {
-        path: "exercises/",
+        path: "sections/",
+        element: <ConSectionsList />,
+      },
+      {
+        path: "sections/subsections/",
+        element: <ConSubsectionsList />,
+      },
+      {
+        path: "sections/subsections/exercises",
         element: <ConExercisesList />,
       },
       {
-        path: "exercise-details/",
+        path: "sections/subsections/exercises/details/",
         element: <ConExerciseDetails />,
       },
     ],

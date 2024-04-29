@@ -2,34 +2,33 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 
 
-export function ExercisesList(props) {
-    const subsec = props.actualSubsection.id
-    const EXERCISES_URL = `http://0.0.0.0:8000/api/v1/exercises/s-exercises/${subsec}/`
-    const [exercises, setExercises] = useState([]);
+export function SectionsList(props) {
+    const SECTIONS_URL = 'http://0.0.0.0:8000/api/v1/exercises/sections/'
+    const [sections, setSections] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);
     
     useEffect(() => {
-        fetchExercises();
-        return () => setExercises([]);
+        getSections();
+        return () => setSections([]);
     }, []);
 
-    const fetchExercises = async () => {
+    const getSections = async () => {
             try {
-                const response = await fetch(EXERCISES_URL);
+                const response = await fetch(SECTIONS_URL);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                if (exercises.length === 0) {
-                    setExercises(data.results);
+                if (sections.length === 0) {
+                    setSections(data.results);
                 } else {
-                    setExercises(prevExercises => [...prevExercises, ...data.results]);
+                    setSections(prevSetcions => [...prevSetcions, ...data.results]);
                 }
                 
                 setNextPageUrl(data.next);
 
             } catch (error) {
-                console.error('Error fetching exercises:', error);
+                console.error(error);
             }
         };
 
@@ -41,7 +40,7 @@ export function ExercisesList(props) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setExercises(prevExercises => [...prevExercises, ...data.results]);
+                setSections(prevSetcions => [...prevSetcions, ...data.results]);
                 setNextPageUrl(data.next);
             } catch (error) {
                 console.error('Error fetching next page of exercises:', error);
@@ -49,19 +48,18 @@ export function ExercisesList(props) {
         }
     };
 
-    const handleLinkClick = (exercise) => {
-        props.setActualExercise(exercise)
+    const handleLinkClick = (section) => {
+        props.setActualSection(section)
     }
 
     return (
         <div>
-            <h2>Lista zadań</h2>
+            <h2>Lista Działów</h2>
             <ul>
-                {exercises.map(exercise => (
-                    <li key={exercise.id}>
-                        <Link to={`details/`} >
-                            <h3 onClick={() => handleLinkClick(exercise)}>id: {exercise.id}, {exercise.title}</h3>
-                            <p>{exercise.description}</p>
+                {sections.map(section => (
+                    <li key={section.id}>
+                        <Link to={`subsections/`}>
+                            <h3 onClick={() => handleLinkClick(section)}>{section.name}</h3>
                         </Link>
                     </li>
                 ))}
