@@ -22,7 +22,6 @@ export function ExercisesList(props) {
                 const data = await response.json();
                 if (exercises.length === 0) {
                     setExercises(data.results);
-                    console.log(data.results)
                 } else {
                     setExercises(prevExercises => [...prevExercises, ...data.results]);
                 }

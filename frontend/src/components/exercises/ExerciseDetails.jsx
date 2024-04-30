@@ -6,9 +6,7 @@ export function ExerciseDetails(props) {
   const [exercise, setExercise] = useState(null);
 
   useEffect(() => {
-    console.log('props.actualExercise.id', exercise)
       fetchExerciseData();
-         console.log('props.actualExercise.id', exercise)
     }, [props.actualExercise]);
 
     const fetchExerciseData = async () => {

@@ -1,0 +1,12 @@
+.searchbar-div {
+  display: flex; /* Przykładowa stylizacja */
+  flex-direction: column; /* Przykładowa stylizacja */
+}
+
+.searchbar-div button {
+  position: static;
+  width: 6rem;
+  height: 2rem;
+  background-color: lightseagreen;
+
+}

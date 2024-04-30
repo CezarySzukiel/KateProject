@@ -24,9 +24,9 @@ export function SectionsList(props) {
                 } else {
                     setSections(prevSetcions => [...prevSetcions, ...data.results]);
                 }
-                
+                props.setSections
                 setNextPageUrl(data.next);
-
+                props.setAllSections(data.results);
             } catch (error) {
                 console.error(error);
             }
