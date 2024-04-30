@@ -15,7 +15,7 @@ export function Header() {
     return (
         <div className="headerContainer">
             <div className="logoContainer">
-                <a href="/">
+                <a href="/home/">
                     <img src="/images/logos/logo.jpg" alt="Logo" />
                 </a>
             </div>

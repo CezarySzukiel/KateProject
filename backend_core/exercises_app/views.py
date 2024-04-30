@@ -56,6 +56,15 @@ class SubsectionListView(generics.ListAPIView):
         return Subsection.objects.filter(section=section)
 
 
+class AllSectionsAndSubsectionsView(APIView):
+    permission_classes = (permissions.AllowAny, )
+
+    def get(self, request):
+        sections = Section.objects.prefetch_related('subsections').all()
+        section_serializer = SectionSerializer(sections, many=True)
+        return Response(section_serializer.data)
+
+
 class ExerciseListView(generics.ListAPIView):
     """View to list all exercises for a specific subsection"""
     serializer_class = ExercisesListSerializer

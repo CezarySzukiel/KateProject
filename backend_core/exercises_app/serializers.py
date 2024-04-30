@@ -42,15 +42,6 @@ class AnswerSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
-class SectionSerializer(serializers.ModelSerializer):
-    """Serializer for Sections model."""
-
-    class Meta:
-        model = Section
-        fields = ('id', 'name')
-        read_only_fields = ('id',)
-
-
 class SubsectionSerializer(serializers.ModelSerializer):
     """Serializer for Subsections."""
     section = serializers.PrimaryKeyRelatedField(queryset=Section.objects.all())
@@ -59,6 +50,16 @@ class SubsectionSerializer(serializers.ModelSerializer):
         model = Subsection
         fields = ('id', 'name', 'section')
         read_only_fields = ('id',)
+
+
+class SectionSerializer(serializers.ModelSerializer):
+    """Serializer for Sections model."""
+    subsections = SubsectionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Section
+        fields = ('id', 'name', 'subsections',)
+        read_only_fields = fields
 
 
 class CompareExerciseSerializer(serializers.Serializer):

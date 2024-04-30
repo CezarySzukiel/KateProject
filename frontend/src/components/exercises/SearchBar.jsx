@@ -23,7 +23,9 @@ export function SearchBar(props) {
         console.log('działa', selectedSections, 'oraz', props)
     }
 
-    const getExercises
+    const getExercises = () => {
+        
+    }
 
     const handleCheckbox2Change = () => {
         setIsChecked2(!isChecked2);
