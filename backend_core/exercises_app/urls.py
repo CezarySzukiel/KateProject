@@ -19,5 +19,5 @@ urlpatterns += [
     path('s-subsections/<int:section_id>/', views.SubsectionListView.as_view(), name='subsection-list'),
     path('s-exercises/<int:subsection_id>/', views.ExerciseListView.as_view(), name='exercises-list'),
     path('exercise/detail/<int:exercise_id>/', views.ExerciseDetailView.as_view(), name='exercises-detail'),
-    path('all-sections-and-subsections/', views.AllSectionsAndSubsectionsView.as_view(), name='all-sections-and-subsections'),
+    path('all-sections-and-subsections/', views.SectionsAndSubsectionsView.as_view(), name='all-sections-and-subsections'),
 ]

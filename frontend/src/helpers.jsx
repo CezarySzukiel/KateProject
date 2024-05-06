@@ -18,3 +18,30 @@ export const getTokens = (refreshToken) => {
     }
   };
 };
+  
+export const getSectionsAndSubsections = async () => {
+      try {
+        const response = await axios.get('http://0.0.0.0:8000/api/v1/exercises/all-sections-and-subsections/')
+        return response
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
+
+export const extractSections = (response) => (response.data.map(item => ({
+        id: item.id,
+        name: item.name
+      })));
+
+export const extractSubsections = (response) => {
+    return response.data.reduce((acc, item) => {
+        if (item.subsections) {
+            // Iteracja po każdym elemencie z item.subsections i dodanie go do akumulatora
+            item.subsections.forEach(subsection => {
+                acc.push(subsection);
+            });
+        }
+        return acc;
+    }, []);
+};

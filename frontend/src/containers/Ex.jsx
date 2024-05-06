@@ -13,7 +13,6 @@ import { SectionsList } from "../components/exercises/SectionsList";
 import { SubsectionsList } from "../components/exercises/SubsectionsList";
 import { SearchBar } from "../components/exercises/SearchBar";
 
-
 const mapStateToProps = (state) => {
     return {
         actualSection: state.ex.actualSection,

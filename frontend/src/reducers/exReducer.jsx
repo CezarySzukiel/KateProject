@@ -40,12 +40,12 @@ const exReducer = (state = initialState, action) => {
     case SET_ALL_SUBSECTIONS:
       return {
         ...state,
-        allSubsections: actions.subsections
+        allSubsections: action.subsections
       };
     case SET_ALL_EXERCISES:
       return {
         ...state,
-        allExercises: actions.exercises
+        allExercises: action.exercises
       }
     default:
       return state;

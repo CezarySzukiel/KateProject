@@ -56,7 +56,7 @@ class SubsectionListView(generics.ListAPIView):
         return Subsection.objects.filter(section=section)
 
 
-class AllSectionsAndSubsectionsView(APIView):
+class SectionsAndSubsectionsView(APIView):
     permission_classes = (permissions.AllowAny, )
 
     def get(self, request):
