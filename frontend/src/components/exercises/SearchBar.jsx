@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-import { getSectionsAndSubsections } from "../../helpers"
+import { getSectionsAndSubsections, extractSections, extractSubsections  } from "../../helpers"
 
 
 export function SearchBar(props) {
     const [isChecked1, setIsChecked1] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
     const [checkedSections, setCheckedSections] = useState([]);
-    const [checkedSubSections, setCheckedSubSections] = useState([]);
+    const [checkedSubsections, setCheckedSubsections] = useState([]);
     const [displayedSubsections, setDisplayedSubsections] = useState(null)
     const [selectedSections, setSelectedSections] = useState(null)
     const [selectedSubsections, setSelectedSubsections] = useState(null)
@@ -30,11 +30,11 @@ export function SearchBar(props) {
         if (!props.allSections || !props.allSubsections) {
             getData()
         }
-        if (checkedSections.length == 0) {
+        setDisplayedSubsections(filterSubsectionsBySections(props.allSubsections, checkedSections));
+        setSelectedSections(checkedSections);
+        setSelectedSubsections(checkedSubsections);
 
-        }
-
-    }, [props.allSections, props.allSubsections])
+    }, [props.allSections, props.allSubsections, checkedSections])
 
     const handleCheckboxChange = (sectionId) => {
         // w przypadku kliknięcia w okienko: jeśli było zaznaczone to usuń z zaznaczonych, w przeciwnym przypadku dodaj
@@ -43,8 +43,19 @@ export function SearchBar(props) {
         } else {
             setCheckedSections([...checkedSections, sectionId]);
         }
+        // subsections filtering:
+        
     };
     
+    const filterSubsectionsBySections = (subsections, selectedSections) => {
+    if (!selectedSections.length) {
+        // console.log("selectedSections.length = false, więc zwracam: ", subsections)
+        return subsections;
+    }
+    return subsections.filter(subsection =>
+        selectedSections.includes(subsection.section)
+    );
+};
     // problem: filtrowanie poddziałów tak, aby wyświetlały się tylko te,
     // dla których sekcje są zaznaczone.
 
@@ -52,20 +63,11 @@ export function SearchBar(props) {
     // które są zaznaczone. 
     // Jeśli żadne sections nie są zaznaczone, zapytaj o wszystkie displayedSections
 
-    // algorytm: po kliknięciu w jakąś sec dodaje się ona do checkedSections.
-    // displayedSubsections to maja byc odfiltrowane props.AllSubsections, w tym celu:
-    // przeiteruj wszystkie props.allSubsections, jeśli props.AllSubsections.section 
-    // znajduje się w checkedSections dodaj go (cały obiekt z props.allSubsections) 
-    // do displayedSubsections.
-    // jeśli checkedSections.length == 0 dodaj wszystkie props.AllSubsections 
-    // do displayedSubsections
-    // w komponencie wyświetl displayedSubsections, zamiast props.allSubsections
-
      const handleSubCheckboxChange = (subSectionId) => {
-        if (checkedSubSections.includes(subSectionId)) {
-            setCheckedSubSections(checkedSubSections.filter(id => id !== subSectionId));
+        if (checkedSubsections.includes(subSectionId)) {
+            setCheckedSubsections(checkedSubsections.filter(id => id !== subSectionId));
         } else {
-            setCheckedSubSections([...checkedSubSections, subSectionId]);
+            setCheckedSubsections([...checkedSubsections, subSectionId]);
         }
     };
 
@@ -73,13 +75,14 @@ export function SearchBar(props) {
         event.preventDefault()
         if (checkedSections.length === 0 && props.allSections) {
             const allSectionIds = props.allSections.map(section => section.id);
-            setCheckedSections(allSectionIds);
+            // setCheckedSections(allSectionIds);
         }
-        if (checkedSubSections.length === 0 && props.allSubsections) {
-            const allSubSectionIds = props.allSubsections.map(subsection => subsection.id);
-            setCheckedSubSections(allSubSectionIds);
+        if (checkedSubsections.length === 0 && props.allSubsections) {
+            const allSubsectionIds = props.allSubsections.map(subsection => subsection.id);
+            // setCheckedSubsections(allSubsectionIds);
         }
-            console.log(props)
+        console.log('props: ', props, 'checkedSections: ', checkedSections, 'displayedSubsections: ', displayedSubsections)
+        console.log('checkedSubsections: ', checkedSubsections)
     }    
 
     return (
@@ -102,13 +105,13 @@ export function SearchBar(props) {
                 ))}
                 <br />
                 <p>Poddziały:</p>
-                {props.allSubsections && props.allSubsections.map(subsection => (
+                {displayedSubsections && displayedSubsections.map(subsection => (
                     <div key={subsection.id}>
                         <label>
                             {subsection.name}:
                             <input
                                 type="checkbox"
-                                checked={checkedSubSections.includes(subsection.id)}
+                                checked={checkedSubsections.includes(subsection.id)}
                                 onChange={() => handleSubCheckboxChange(subsection.id)}
                             />
                         </label>
