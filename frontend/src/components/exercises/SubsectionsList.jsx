@@ -47,7 +47,7 @@ export function SubsectionsList(props) {
     };
 
     const handleLinkClick = (subsection) => {
-        props.setActualSubsection(subsection)
+        props.setSelectedSubsectionIds([subsection.id])
     }
 
     return (

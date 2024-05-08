@@ -8,9 +8,8 @@ class ExercisesListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exercise
-        fields = (
-            'id', 'title', 'description')
-        read_only_fields = ('id',)
+        fields = ('id', 'title', 'description')
+        read_only_fields = fields
 
 class ExerciseDetailSerializer(serializers.ModelSerializer):
     """Serializer for single exercise details"""

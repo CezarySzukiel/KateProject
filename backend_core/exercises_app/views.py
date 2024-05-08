@@ -3,6 +3,7 @@ from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
 from exercises_app.models import Exercise, Answer, Section, Subsection
 from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
     CompareExerciseSerializer, ExerciseDetailSerializer
@@ -65,15 +66,17 @@ class SectionsAndSubsectionsView(APIView):
         return Response(section_serializer.data)
 
 
-class ExerciseListView(generics.ListAPIView):
-    """View to list all exercises for a specific subsection"""
-    serializer_class = ExercisesListSerializer
+class ExercisesFilterBySubsectionView(APIView):
     permission_classes = (permissions.AllowAny, )
+    serializer_class = ExercisesListSerializer
 
-    def get_queryset(self):
-        subsection_id = self.kwargs['subsection_id']
-        subsection = get_object_or_404(Subsection, pk=subsection_id)
-        return Exercise.objects.filter(subsection=subsection).values('id', 'title', 'description')
+    def post(self, request, format=None):
+        subsection_ids = request.data.get('subsection_ids', [])
+        if subsection_ids is None:
+            return Response([], status=status.HTTP_200_OK)
+        exercises = Exercise.objects.filter(subsection__id__in=subsection_ids)
+        serialized_exercises = self.serializer_class(exercises, many=True)
+        return Response(serialized_exercises.data, status=status.HTTP_200_OK) 
 
 
 class ExerciseDetailView(generics.RetrieveAPIView):
@@ -86,11 +89,10 @@ class ExerciseDetailView(generics.RetrieveAPIView):
     def get_object(self):
         exercise_id = self.kwargs['exercise_id']
         exercise = get_object_or_404(Exercise, pk=exercise_id)
-        
         answer = get_object_or_404(Answer, exercise=exercise, correct=True)
         exercise.correct_answer = answer
-
         return exercise
+
 
 class CompareExerciseView(APIView):
     """

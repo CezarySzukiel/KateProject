@@ -3,7 +3,8 @@ SET_ACTUAL_SECTION,
 SET_ACTUAL_SUBSECTION, 
 SET_ALL_SECTIONS,
 SET_ALL_SUBSECTIONS,
-SET_ALL_EXERCISES, } 
+SET_ALL_EXERCISES, 
+SET_SELECTED_SUBSECTION_IDS, } 
 from '../actions/exActions';
 
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
   allSections: null,
   allSubsections: null,
   allExercises: null,
+  selectedSubsectionIds: null,
+
 }
 
 const exReducer = (state = initialState, action) => {
@@ -46,6 +49,11 @@ const exReducer = (state = initialState, action) => {
       return {
         ...state,
         allExercises: action.exercises
+      };
+    case SET_SELECTED_SUBSECTION_IDS:
+      return {
+        ...state,
+        selectedSubsectionIds: action.ids
       }
     default:
       return state;

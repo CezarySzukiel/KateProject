@@ -1,47 +1,60 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 
 export function ExercisesList(props) {
-    const subsec = props.actualSubsection.id
-    const EXERCISES_URL = `http://0.0.0.0:8000/api/v1/exercises/s-exercises/${subsec}/`
-    const [exercises, setExercises] = useState([]);
+    const { selectedSubsectionIds, allExercises, setAllExercises, setActualExercise } = props;
+    const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
+    const isInitialMount = useRef(true)
     const [nextPageUrl, setNextPageUrl] = useState(null);
-    
+
     useEffect(() => {
-        fetchExercises();
-        return () => setExercises([]);
-    }, []);
+        console.log("useEffect")
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            setExercises();
+        }
+        console.log('props.allExercises', allExercises)
+    }, [selectedSubsectionIds]);
 
-    const fetchExercises = async () => {
-            try {
-                const response = await fetch(EXERCISES_URL);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                if (exercises.length === 0) {
-                    setExercises(data.results);
-                } else {
-                    setExercises(prevExercises => [...prevExercises, ...data.results]);
-                }
-                
-                setNextPageUrl(data.next);
+    const getExercises = async () => {
+        console.log("getExercises")
+        console.log('selectedSubsectionIds: ', selectedSubsectionIds)
+        try {
+            const response = await axios.post(SEARCH_URL, {
+                subsection_ids: selectedSubsectionIds,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            console.log('response: ', response.data)
+            return response.data
+          } catch (error) {
+            console.error(error);
+            throw error;
+          }
+        }
 
-            } catch (error) {
-                console.error('Error fetching exercises:', error);
-            }
-        };
+    const setExercises = async () => { 
+        console.log("setExercises")
+        const data = await getExercises()
+        setAllExercises(data)
+    }
 
     const handleNextPage = async () => {
+        console.log("handleNextPage")
         if (nextPageUrl) {
+            console.log("I jest nextpage")
+
             try {
                 const response = await fetch(nextPageUrl);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setExercises(prevExercises => [...prevExercises, ...data.results]);
+                setAllExercises(prevExercises => [...prevExercises, ...data.results]);
                 setNextPageUrl(data.next);
             } catch (error) {
                 console.error('Error fetching next page of exercises:', error);
@@ -50,14 +63,14 @@ export function ExercisesList(props) {
     };
 
     const handleLinkClick = (exercise) => {
-        props.setActualExercise(exercise)
+        setActualExercise(exercise)
     }
 
     return (
         <div>
             <h2>Lista zadań</h2>
             <ul>
-                {exercises.map(exercise => (
+                {allExercises && allExercises.map(exercise => (
                     <li key={exercise.id}>
                         <Link to={`details/`} >
                             <h3 onClick={() => handleLinkClick(exercise)}>id: {exercise.id}, {exercise.title}</h3>
@@ -71,3 +84,13 @@ export function ExercisesList(props) {
     );
 }
 
+// todo paginacja i obsługa dodawania nextpage {"subsection_ids":null}
+// todo na backendzie obsłuzyć przypadek, gdy wyśle się w zapytaniu pustą listę lub coś innego
+// todo posprzątać: wywalić widok listyzadań z backendu (s-exercises), wywalić actual subsection stan
+// todo podwójne zapytania przy sections
+// todo podwójne zapytanie przy subsectons
+// todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje
+// todo case gdy użytkownik jest już na stronie z zadaniami i chce wyszukać jeszcze raz
+// todo poprawić obsługę pojedynczego zadania
+
+// todo sprawdzić dlaczego są 2 zapytania done

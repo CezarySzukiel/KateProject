@@ -5,7 +5,8 @@ setActualSection,
 setActualSubsection, 
 setAllSections,
 setAllSubsections,
-setAllExercises, } from "../actions/exActions";
+setAllExercises, 
+setSelectedSubsectionIds, } from "../actions/exActions";
 
 import { ExercisesList } from "../components/exercises/ExercisesList";
 import { ExerciseDetails } from "../components/exercises/ExerciseDetails";
@@ -21,6 +22,7 @@ const mapStateToProps = (state) => {
         allSections: state.ex.allSections,
         allSubsections: state.ex.allSubsections,
         allExercises: state.ex.allExercises, 
+        selectedSubsectionIds: state.ex.selectedSubsectionIds,
     };
 };
 
@@ -32,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
         setAllSections: (sections) => dispatch(setAllSections(sections)),
         setAllSubsections: (subsections) => dispatch(setAllSubsections(subsections)),
         setAllExercises: (exercises) => dispatch(setAllExercises(exercises)),
+        setSelectedSubsectionIds: (ids) => dispatch(setSelectedSubsectionIds(ids)),
     }
 }
 

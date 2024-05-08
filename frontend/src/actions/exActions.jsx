@@ -4,7 +4,7 @@ export const SET_ACTUAL_SUBSECTION = 'SET_ACTUAL_SUBSECTION'
 export const SET_ALL_SECTIONS = 'SET_ALL_SECTIONS'
 export const SET_ALL_SUBSECTIONS = 'SET_ALL_SUBSECTIONS'
 export const SET_ALL_EXERCISES = 'SET_ALL_EXERCISES'
-
+export const SET_SELECTED_SUBSECTION_IDS = 'SET_SELECTED_SUBSECTION_IDS';
 
 export const setActualExercise = (exercise) => {
 	return {
@@ -46,4 +46,11 @@ export const setAllExercises = (exercises)  => {
 		type: SET_ALL_EXERCISES,
 		exercises: exercises 
 	}
+}
+
+export const setSelectedSubsectionIds = (ids) => {
+  return {
+    type: SET_SELECTED_SUBSECTION_IDS,
+    ids: ids,
+  }
 }

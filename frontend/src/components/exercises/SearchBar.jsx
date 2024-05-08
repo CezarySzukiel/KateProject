@@ -1,12 +1,15 @@
 import './searchBar.css'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+
 
 
 import { getSectionsAndSubsections, extractSections, extractSubsections  } from "../../helpers"
 
 
 export function SearchBar(props) {
+    // const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
     const [isChecked1, setIsChecked1] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
     const [checkedSections, setCheckedSections] = useState([]);
@@ -14,7 +17,8 @@ export function SearchBar(props) {
     const [displayedSubsections, setDisplayedSubsections] = useState(null)
     const [selectedSections, setSelectedSections] = useState(null)
     const [selectedSubsections, setSelectedSubsections] = useState(null)
-
+    const subsection_ids = checkedSubsections
+    const navigate = useNavigate()
     useEffect(() => {
         const getData = async () => {
             try {
@@ -43,7 +47,7 @@ export function SearchBar(props) {
         } else {
             setCheckedSections([...checkedSections, sectionId]);
         }
-        // subsections filtering:
+        props.set
         
     };
     
@@ -56,23 +60,42 @@ export function SearchBar(props) {
         selectedSections.includes(subsection.section)
     );
 };
-    // problem: filtrowanie poddziałów tak, aby wyświetlały się tylko te,
-    // dla których sekcje są zaznaczone.
+    // todo: pobieranie zadań należących do zaznaczonych subsections.
 
-    // następnie w handle submit ma wysłać zapytanie o zadania tylko dla tych subsections, 
+    // handle submit ma wysłać zapytanie o zadania tylko dla tych subsections, 
     // które są zaznaczone. 
     // Jeśli żadne sections nie są zaznaczone, zapytaj o wszystkie displayedSections
-
-     const handleSubCheckboxChange = (subSectionId) => {
+    
+    const handleSubCheckboxChange = (subSectionId) => {
         if (checkedSubsections.includes(subSectionId)) {
             setCheckedSubsections(checkedSubsections.filter(id => id !== subSectionId));
         } else {
             setCheckedSubsections([...checkedSubsections, subSectionId]);
         }
+
+        
     };
+
+    // const getExercises = async () => {
+    //     try {
+    //         const response = await axios.post(SEARCH_URL, {
+    //             subsection_ids,
+    //         }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         })
+    //         console.log('response: ', response.data)
+    //         return response.data
+    //       } catch (error) {
+    //         console.error(error);
+    //         throw error;
+    //       }
+    //     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        
         if (checkedSections.length === 0 && props.allSections) {
             const allSectionIds = props.allSections.map(section => section.id);
             // setCheckedSections(allSectionIds);
@@ -81,8 +104,12 @@ export function SearchBar(props) {
             const allSubsectionIds = props.allSubsections.map(subsection => subsection.id);
             // setCheckedSubsections(allSubsectionIds);
         }
-        console.log('props: ', props, 'checkedSections: ', checkedSections, 'displayedSubsections: ', displayedSubsections)
-        console.log('checkedSubsections: ', checkedSubsections)
+        console.log("checkedSubsections: ", checkedSubsections)
+        props.setSelectedSubsectionIds(checkedSubsections)
+        navigate('/sections/subsections/exercises/') // if user is allready on that page it doesn't work, pagination don't work too
+        // console.log('props: ', props, 'checkedSections: ', checkedSections, 'displayedSubsections: ', displayedSubsections)
+        // console.log('checkedSubsections: ', checkedSubsections, 'subsection_ids: ', subsection_ids, )
+
     }    
 
     return (
