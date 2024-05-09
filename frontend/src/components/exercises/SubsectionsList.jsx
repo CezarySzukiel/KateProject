@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 
 export function SubsectionsList(props) {
@@ -6,14 +6,19 @@ export function SubsectionsList(props) {
     const SUBSECTIONS_URL = `http://0.0.0.0:8000/api/v1/exercises/s-subsections/${Sec}`;
     const [subsections, setSubsections] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);
+    const isInitialMount = useRef(true)
     
     useEffect(() => {
-        getSubsections();
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            getSubsections();
+        }
         return () => setSubsections([]);
     }, []);
 
     const getSubsections = async () => {
-        try {
+        try {          
+            console.log("ma być jeden raz")
             const response = await fetch(SUBSECTIONS_URL);
             if (!response.ok) {
                 throw new Error('Network response was not ok');

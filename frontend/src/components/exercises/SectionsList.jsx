@@ -10,6 +10,7 @@ export function SectionsList(props) {
     const [sections, setSections] = useState([]);
     const [subsections, setSubsections] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);
+    const isInitialMount = useRef(true)
     
     useEffect(() => {
         const getData = async () => {
@@ -26,7 +27,10 @@ export function SectionsList(props) {
         } 
 
         if (!props.allSections || !props.allSubsections) {
-            getData()
+            if (isInitialMount.current) {
+                isInitialMount.current = false;
+                getData()
+            }
         }
         
         return () => setSections([]);
@@ -69,3 +73,4 @@ export function SectionsList(props) {
     );
 }
 
+// todo is next page working? never checked
