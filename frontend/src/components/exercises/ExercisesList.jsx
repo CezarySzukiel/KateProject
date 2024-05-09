@@ -18,19 +18,24 @@ export function ExercisesList(props) {
         console.log('props.allExercises', allExercises)
     }, [selectedSubsectionIds]);
 
+    useEffect(() => {
+    console.log('allExercises:', allExercises);
+}, [allExercises]);
+
     const getExercises = async () => {
         console.log("getExercises")
         console.log('selectedSubsectionIds: ', selectedSubsectionIds)
+        const searchUrl = `${SEARCH_URL}?subsection_ids=${selectedSubsectionIds.join(',')}`
         try {
-            const response = await axios.post(SEARCH_URL, {
+            const response = await axios.get(searchUrl, {
                 subsection_ids: selectedSubsectionIds,
             }, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
-            console.log('response: ', response.data)
-            return response.data
+            console.log('response: ', response)
+            return {'data': response.data.results, 'next': response.data.next}
           } catch (error) {
             console.error(error);
             throw error;
@@ -40,22 +45,30 @@ export function ExercisesList(props) {
     const setExercises = async () => { 
         console.log("setExercises")
         const data = await getExercises()
-        setAllExercises(data)
+        setAllExercises(data.data)
+        setNextPageUrl(data.next)
     }
 
     const handleNextPage = async () => {
         console.log("handleNextPage")
+        console.log('nextPageUrl: ', nextPageUrl)
         if (nextPageUrl) {
+            const nextPageUrl_ = `${nextPageUrl}&subsection_ids=${selectedSubsectionIds.join(',')}`
             console.log("I jest nextpage")
-
             try {
-                const response = await fetch(nextPageUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setAllExercises(prevExercises => [...prevExercises, ...data.results]);
+                const response = await axios.get(nextPageUrl_, {
+                subsection_ids: selectedSubsectionIds,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+                console.log("response: ", response.data.results)
+                const data = response.data;
+                console.log(data)
+                setAllExercises([...allExercises, ...data.results]);
                 setNextPageUrl(data.next);
+                console.log('allExercises: ', allExercises)
             } catch (error) {
                 console.error('Error fetching next page of exercises:', error);
             }
@@ -84,9 +97,6 @@ export function ExercisesList(props) {
     );
 }
 
-// todo paginacja i obsługa dodawania nextpage {"subsection_ids":null}
-// todo na backendzie obsłuzyć przypadek, gdy wyśle się w zapytaniu pustą listę lub coś innego
-// todo posprzątać: wywalić widok listyzadań z backendu (s-exercises), wywalić actual subsection stan
 // todo podwójne zapytania przy sections
 // todo podwójne zapytanie przy subsectons
 // todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje
@@ -94,3 +104,6 @@ export function ExercisesList(props) {
 // todo poprawić obsługę pojedynczego zadania
 
 // todo sprawdzić dlaczego są 2 zapytania done
+// todo paginacja i obsługa dodawania nextpage {"subsection_ids":null} done
+// todo na backendzie obsłuzyć przypadek, gdy wyśle się w zapytaniu pustą listę lub coś innego done
+// todo posprzątać: wywalić widok listyzadań z backendu (s-exercises), wywalić actual subsection stan done

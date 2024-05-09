@@ -20,6 +20,6 @@ urlpatterns += [
     # path('s-exercises/<int:subsection_id>/', views.ExerciseListView.as_view(), name='exercises-list'),
     path('exercise/detail/<int:exercise_id>/', views.ExerciseDetailView.as_view(), name='exercises-detail'),
     path('all-sections-and-subsections/', views.SectionsAndSubsectionsView.as_view(), name='all-sections-and-subsections'),
-    path('search-by-subsections/', views.ExercisesFilterBySubsectionView.as_view(), name='exercises-filtered-by-subsections'),
+    path('search-by-subsections/', views.ExercisesFilterBySubsectionsView.as_view(), name='exercises-filtered-by-subsections'),
 
 ]

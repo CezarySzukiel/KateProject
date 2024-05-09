@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.settings import api_settings
 
 from exercises_app.models import Exercise, Answer, Section, Subsection
 from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
@@ -66,17 +67,33 @@ class SectionsAndSubsectionsView(APIView):
         return Response(section_serializer.data)
 
 
-class ExercisesFilterBySubsectionView(APIView):
+class ExercisesFilterBySubsectionsView(APIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = ExercisesListSerializer
+    pagination_class = PageNumberPagination
 
-    def post(self, request, format=None):
-        subsection_ids = request.data.get('subsection_ids', [])
-        if subsection_ids is None:
-            return Response([], status=status.HTTP_200_OK)
+    def get(self, request, format=None):
+        subsection_ids = request.query_params.getlist('subsection_ids', [])
+        subsection_ids = [int(sub_id) for sub_id in subsection_ids[0].split(',') if sub_id]
         exercises = Exercise.objects.filter(subsection__id__in=subsection_ids)
-        serialized_exercises = self.serializer_class(exercises, many=True)
-        return Response(serialized_exercises.data, status=status.HTTP_200_OK) 
+
+        paginator = self.pagination_class()
+        paginated_exercises = paginator.paginate_queryset(exercises, request)
+        serialized_exercises = self.serializer_class(paginated_exercises, many=True)
+        return paginator.get_paginated_response(serialized_exercises.data)
+
+    # def post(self, request, format=None):
+    #     subsection_ids = request.data.get('subsection_ids', [])
+    #     if subsection_ids is None:
+    #         return Response([], status=status.HTTP_200_OK)
+    #     exercises = Exercise.objects.filter(subsection__id__in=subsection_ids)
+        
+    #     paginator = self.pagination_class()
+    #     paginated_exercises = paginator.paginate_queryset(exercises, request)
+    #     serialized_exercises = self.serializer_class(paginated_exercises, many=True)
+    #     return paginator.get_paginated_response(serialized_exercises.data)
+    #     # serialized_exercises = self.serializer_class(exercises, many=True)
+    #     # return Response(serialized_exercises.data, status=status.HTTP_200_OK) 
 
 
 class ExerciseDetailView(generics.RetrieveAPIView):
