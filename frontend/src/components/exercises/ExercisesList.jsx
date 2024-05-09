@@ -6,25 +6,22 @@ import axios from 'axios';
 export function ExercisesList(props) {
     const { selectedSubsectionIds, allExercises, setAllExercises, setActualExercise } = props;
     const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
-    const isInitialMount = useRef(true)
+    const isInitialMount = useRef(false)
     const [nextPageUrl, setNextPageUrl] = useState(null);
 
     useEffect(() => {
-        console.log("useEffect")
         if (isInitialMount.current) {
-            isInitialMount.current = false;
             setExercises();
         }
-        console.log('props.allExercises', allExercises)
+        else {
+            isInitialMount.current = true;
+        }
+        // console.log('props.allExercises', allExercises)
     }, [selectedSubsectionIds]);
 
-    useEffect(() => {
-    console.log('allExercises:', allExercises);
-}, [allExercises]);
-
     const getExercises = async () => {
-        console.log("getExercises")
-        console.log('selectedSubsectionIds: ', selectedSubsectionIds)
+        // console.log("getExercises")
+        // console.log('selectedSubsectionIds: ', selectedSubsectionIds)
         const searchUrl = `${SEARCH_URL}?subsection_ids=${selectedSubsectionIds.join(',')}`
         try {
             const response = await axios.get(searchUrl, {
@@ -34,7 +31,7 @@ export function ExercisesList(props) {
                     'Content-Type': 'application/json',
                 },
             })
-            console.log('response: ', response)
+            // console.log('response: ', response)
             return {'data': response.data.results, 'next': response.data.next}
           } catch (error) {
             console.error(error);
@@ -43,15 +40,15 @@ export function ExercisesList(props) {
         }
 
     const setExercises = async () => { 
-        console.log("setExercises")
+        // console.log("setExercises")
         const data = await getExercises()
         setAllExercises(data.data)
         setNextPageUrl(data.next)
     }
 
     const handleNextPage = async () => {
-        console.log("handleNextPage")
-        console.log('nextPageUrl: ', nextPageUrl)
+        // console.log("handleNextPage")
+        // console.log('nextPageUrl: ', nextPageUrl)
         if (nextPageUrl) {
             const nextPageUrl_ = `${nextPageUrl}&subsection_ids=${selectedSubsectionIds.join(',')}`
             console.log("I jest nextpage")
@@ -63,12 +60,12 @@ export function ExercisesList(props) {
                     'Content-Type': 'application/json',
                 },
             });
-                console.log("response: ", response.data.results)
+                // console.log("response: ", response.data.results)
                 const data = response.data;
-                console.log(data)
+                // console.log(data)
                 setAllExercises([...allExercises, ...data.results]);
                 setNextPageUrl(data.next);
-                console.log('allExercises: ', allExercises)
+                // console.log('allExercises: ', allExercises)
             } catch (error) {
                 console.error('Error fetching next page of exercises:', error);
             }
@@ -97,13 +94,15 @@ export function ExercisesList(props) {
     );
 }
 
-// todo podwójne zapytania przy sections
-// todo podwójne zapytanie przy subsectons
 // todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje
 // todo case gdy użytkownik jest już na stronie z zadaniami i chce wyszukać jeszcze raz
 // todo poprawić obsługę pojedynczego zadania
+// todo sprawdzić czy działa paginacja na sections i subsections
+//  todo usunąć wszystkie consolelogi
 
 // todo sprawdzić dlaczego są 2 zapytania done
 // todo paginacja i obsługa dodawania nextpage {"subsection_ids":null} done
 // todo na backendzie obsłuzyć przypadek, gdy wyśle się w zapytaniu pustą listę lub coś innego done
 // todo posprzątać: wywalić widok listyzadań z backendu (s-exercises), wywalić actual subsection stan done
+// todo podwójne zapytania przy sections done
+// todo podwójne zapytanie przy subsectons done

@@ -60,11 +60,6 @@ export function SearchBar(props) {
         selectedSections.includes(subsection.section)
     );
 };
-    // todo: pobieranie zadań należących do zaznaczonych subsections.
-
-    // handle submit ma wysłać zapytanie o zadania tylko dla tych subsections, 
-    // które są zaznaczone. 
-    // Jeśli żadne sections nie są zaznaczone, zapytaj o wszystkie displayedSections
     
     const handleSubCheckboxChange = (subSectionId) => {
         if (checkedSubsections.includes(subSectionId)) {
@@ -75,23 +70,6 @@ export function SearchBar(props) {
 
         
     };
-
-    // const getExercises = async () => {
-    //     try {
-    //         const response = await axios.post(SEARCH_URL, {
-    //             subsection_ids,
-    //         }, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         })
-    //         console.log('response: ', response.data)
-    //         return response.data
-    //       } catch (error) {
-    //         console.error(error);
-    //         throw error;
-    //       }
-    //     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
