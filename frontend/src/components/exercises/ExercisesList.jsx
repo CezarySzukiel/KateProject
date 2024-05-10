@@ -16,12 +16,9 @@ export function ExercisesList(props) {
         else {
             isInitialMount.current = true;
         }
-        // console.log('props.allExercises', allExercises)
     }, [selectedSubsectionIds]);
 
     const getExercises = async () => {
-        // console.log("getExercises")
-        // console.log('selectedSubsectionIds: ', selectedSubsectionIds) 
         const searchUrl = `${SEARCH_URL}?subsection_ids=${selectedSubsectionIds.join(',')}`
         try {
             const response = await axios.get(searchUrl, {
@@ -31,7 +28,6 @@ export function ExercisesList(props) {
                     'Content-Type': 'application/json',
                 },
             })
-            // console.log('response: ', response)
             return {'data': response.data.results, 'next': response.data.next}
           } catch (error) {
             console.error(error);
@@ -40,18 +36,14 @@ export function ExercisesList(props) {
         }
 
     const setExercises = async () => { 
-        // console.log("setExercises")
         const data = await getExercises()
         setAllExercises(data.data)
         setNextPageUrl(data.next)
     }
 
     const handleNextPage = async () => {
-        // console.log("handleNextPage")
-        // console.log('nextPageUrl: ', nextPageUrl)
         if (nextPageUrl) {
             const nextPageUrl_ = `${nextPageUrl}&subsection_ids=${selectedSubsectionIds.join(',')}`
-            console.log("I jest nextpage")
             try {
                 const response = await axios.get(nextPageUrl_, {
                 subsection_ids: selectedSubsectionIds,
@@ -60,12 +52,9 @@ export function ExercisesList(props) {
                     'Content-Type': 'application/json',
                 },
             });
-                // console.log("response: ", response.data.results)
                 const data = response.data;
-                // console.log(data)
                 setAllExercises([...allExercises, ...data.results]);
                 setNextPageUrl(data.next);
-                // console.log('allExercises: ', allExercises)
             } catch (error) {
                 console.error('Error fetching next page of exercises:', error);
             }
@@ -93,18 +82,3 @@ export function ExercisesList(props) {
         </div>
     );
 }
-
-// todo usunąć wszystkie consolelogi
-
-// todo case gdy user zaznaczy subsekcję w searchbar, następnie zaznaczy sekcję która nie zawiera klikniętej wcześniej subsekcji => wyszuka klikniętą wcześniej subsekcję. done
-// todo sprawdzić czy działa paginacja na sections i subsections done (paginacja na sekcjach i subsekcjach usunięta)
-// todo dlaczego po wejściu w "zadania na dzień dobry są trzy zapytania do db" done
-// todo poprawić obsługę pojedynczego zadania done
-// todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje done
-// todo sprawdzić dlaczego są 2 zapytania done
-// todo paginacja i obsługa dodawania nextpage {"subsection_ids":null} done
-// todo na backendzie obsłuzyć przypadek, gdy wyśle się w zapytaniu pustą listę lub coś innego done
-// todo posprzątać: wywalić widok listyzadań z backendu (s-exercises), wywalić actual subsection stan done
-// todo podwójne zapytania przy sections done
-// todo podwójne zapytanie przy subsectons done
-// todo case gdy użytkownik jest już na stronie z zadaniami i chce wyszukać jeszcze raz done

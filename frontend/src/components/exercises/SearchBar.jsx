@@ -9,9 +9,6 @@ import { getSectionsAndSubsections, extractSections, extractSubsections  } from 
 
 
 export function SearchBar(props) {
-    // const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
-    // const [isChecked1, setIsChecked1] = useState(false);
-    // const [isChecked2, setIsChecked2] = useState(false);
     const [checkedSections, setCheckedSections] = useState([]);
     const [checkedSubsections, setCheckedSubsections] = useState([]);
     const [displayedSubsections, setDisplayedSubsections] = useState(null)
@@ -40,21 +37,14 @@ export function SearchBar(props) {
     
     const filterSubsectionsBySections = (subsections, selectedSections) => {
         if (!selectedSections.length) {
-            // console.log("selectedSections.length = false, więc zwracam: ", subsections)
             return subsections;
-            // return getArrIdsFromArrObjects(s)
         }
         return subsections.filter(subsection =>
             selectedSections.includes(subsection.section)
         );
     };
 
-    // const getArrIdsFromArrObjects = (arrObjects) => {
-    //     return arrObjects.map(obj => obj.id)
-    // }
-
     const handleCheckboxChange = (sectionId) => {
-        // w przypadku kliknięcia w okienko: jeśli było zaznaczone to usuń z zaznaczonych, w przeciwnym przypadku dodaj
         if (checkedSections.includes(sectionId)) {
             setCheckedSections(checkedSections.filter(id => id !== sectionId));
         } else {
@@ -73,7 +63,6 @@ export function SearchBar(props) {
     const handleSubmit = (event) => {
         event.preventDefault()
         const displayedSubsectionsIds = displayedSubsections.map(obj => obj.id)
-        console.log('displayedSubsectionsIds; ', displayedSubsectionsIds)
         if (checkedSubsections.length > 0) {
             const filteredSubsec = checkedSubsections.filter(subsec => displayedSubsectionsIds.includes(subsec))
             if (filteredSubsec.length) {
@@ -81,15 +70,11 @@ export function SearchBar(props) {
             } else {
                 props.setSelectedSubsectionIds(displayedSubsectionsIds)
             }
-            console.log("filtered subsec: ", filteredSubsec)
         } else {
             props.setSelectedSubsectionIds(displayedSubsectionsIds)
         }
 
         navigate('/sections/subsections/exercises/')
-        // console.log('props: ', props, 'checkedSections: ', checkedSections, 'displayedSubsections: ', displayedSubsections)
-        // console.log('checkedSubsections: ', checkedSubsections, 'subsection_ids: ', subsection_ids, )
-
     }    
 
     return (

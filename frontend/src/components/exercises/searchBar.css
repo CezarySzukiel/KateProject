@@ -1,6 +1,7 @@
 .searchbar-div {
-  display: flex; /* Przykładowa stylizacja */
-  flex-direction: column; /* Przykładowa stylizacja */
+  display: flex;
+  flex-direction: column; 
+  margin-top: 50px;
 }
 
 .searchbar-div button {

@@ -6,7 +6,6 @@ export function SubsectionsList(props) {
     const SUBSECTIONS_URL = actualSection
         ? `http://0.0.0.0:8000/api/v1/exercises/s-subsections/${actualSection.id}`
         : `http://0.0.0.0:8000/api/v1/exercises/subsections/`;
-    // const SUBSECTIONS_URL = `http://0.0.0.0:8000/api/v1/exercises/s-subsections/${actualSection.id}`;
     const [subsections, setSubsections] = useState(null);
     
     useEffect(() => {
@@ -19,7 +18,7 @@ export function SubsectionsList(props) {
     }, [actualSection]);
 
     const getSubsections = async () => {
-        try { console.log('pobieram dane')         
+        try {      
             const response = await fetch(SUBSECTIONS_URL);
             if (!response.ok) {
                 throw new Error('Network response was not ok');

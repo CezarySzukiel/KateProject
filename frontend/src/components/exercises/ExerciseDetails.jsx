@@ -21,7 +21,6 @@ export function ExerciseDetails(props) {
 
   useEffect(() => {
     if (props.actualSubsection) {
-      console.log('czy to zwraca listę?  tak', props.allSections.filter((section) => section.id == 1))
       props.setActualSection(props.allSections.filter((section) => section.id == props.actualSubsection[0].section)[0]) // zahardkodowane 1
     }
   }, [props.actualSubsection])

@@ -9,7 +9,6 @@ export function SectionsList(props) {
     const SECTIONS_URL = 'http://0.0.0.0:8000/api/v1/exercises/sections/'
     const [sections, setSections] = useState([]);
     const [subsections, setSubsections] = useState([]);
-    const [nextPageUrl, setNextPageUrl] = useState(null);
     const isInitialMount = useRef(true)
     
     useEffect(() => {
@@ -25,32 +24,14 @@ export function SectionsList(props) {
     const getData = async () => {
             try {
                 const response = await getSectionsAndSubsections();
-                console.log(response)
                 const sections = extractSections(response);
                 const subsections = extractSubsections(response);
-                // console.log(response, sections, subsections)
                 props.setAllSections(sections);
                 props.setAllSubsections(subsections);
             } catch (error) {
                 console.error(error);
             }
         } 
-
-    const handleNextPage = async () => {
-        if (nextPageUrl) {
-            try {
-                const response = await fetch(nextPageUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setSections(prevSetcions => [...prevSetcions, ...data.results]);
-                setNextPageUrl(data.next);
-            } catch (error) {
-                console.error('Error fetching next page of exercises:', error);
-            }
-        }
-    };
 
     const handleLinkClick = (section) => {
         props.setActualSection(section)
@@ -68,9 +49,6 @@ export function SectionsList(props) {
                     </li>
                 ))}
             </ul>
-            {nextPageUrl && <button onClick={handleNextPage}>Więcej</button>}
         </div>
     );
 }
-
-// todo is next page working? never checked

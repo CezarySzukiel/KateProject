@@ -12,7 +12,6 @@ export const Navbar = () => {
   return (
     <div className={`navbar ${isMenuClicked ? 'menu-open' : ''}`}>
       <div className="navbar-content">
-        <h1>Navbar</h1>
         <div>
           <ConSearchBar />
         </div>

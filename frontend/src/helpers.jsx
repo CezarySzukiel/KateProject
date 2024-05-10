@@ -37,7 +37,6 @@ export const extractSections = (response) => (response.data.map(item => ({
 export const extractSubsections = (response) => {
     return response.data.reduce((acc, item) => {
         if (item.subsections) {
-            // Iteracja po każdym elemencie z item.subsections i dodanie go do akumulatora
             item.subsections.forEach(subsection => {
                 acc.push(subsection);
             });

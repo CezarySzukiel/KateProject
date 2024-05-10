@@ -13,7 +13,7 @@ def add_exercise_data(apps, schema_editor):
     for subsection in subsections:
         for y in range (1, 15):
             title = f'ex{y} for subsection {subsection.name}'
-            description = f'descriptoin for exercise {title}'
+            description = f'description for exercise {title}'
             subsection = subsection
             difficult = y
             points = difficult * 2
