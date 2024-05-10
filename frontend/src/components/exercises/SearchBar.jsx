@@ -10,8 +10,8 @@ import { getSectionsAndSubsections, extractSections, extractSubsections  } from 
 
 export function SearchBar(props) {
     // const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
-    const [isChecked1, setIsChecked1] = useState(false);
-    const [isChecked2, setIsChecked2] = useState(false);
+    // const [isChecked1, setIsChecked1] = useState(false);
+    // const [isChecked2, setIsChecked2] = useState(false);
     const [checkedSections, setCheckedSections] = useState([]);
     const [checkedSubsections, setCheckedSubsections] = useState([]);
     const [displayedSubsections, setDisplayedSubsections] = useState(null)
@@ -21,9 +21,6 @@ export function SearchBar(props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!props.allSections || !props.allSubsections) {
-            getData()
-        }
         setDisplayedSubsections(filterSubsectionsBySections(props.allSubsections, checkedSections));
         setSelectedSections(checkedSections);
         setSelectedSubsections(checkedSubsections);
@@ -45,11 +42,16 @@ export function SearchBar(props) {
         if (!selectedSections.length) {
             // console.log("selectedSections.length = false, więc zwracam: ", subsections)
             return subsections;
+            // return getArrIdsFromArrObjects(s)
         }
         return subsections.filter(subsection =>
             selectedSections.includes(subsection.section)
         );
     };
+
+    // const getArrIdsFromArrObjects = (arrObjects) => {
+    //     return arrObjects.map(obj => obj.id)
+    // }
 
     const handleCheckboxChange = (sectionId) => {
         // w przypadku kliknięcia w okienko: jeśli było zaznaczone to usuń z zaznaczonych, w przeciwnym przypadku dodaj
@@ -70,23 +72,21 @@ export function SearchBar(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        // 
-        if (checkedSections.length === 0 && props.allSections) {
-            const allSectionIds = props.allSections.map(section => section.id);
-            // setCheckedSections(allSectionIds);
-        }
-        if (checkedSubsections.length === 0 && props.allSubsections) {
-            const allSubsectionIds = props.allSubsections.map(subsection => subsection.id);
-            // setCheckedSubsections(allSubsectionIds);
-        }
-
+        const displayedSubsectionsIds = displayedSubsections.map(obj => obj.id)
+        console.log('displayedSubsectionsIds; ', displayedSubsectionsIds)
         if (checkedSubsections.length > 0) {
-            props.setSelectedSubsectionIds(checkedSubsections)
+            const filteredSubsec = checkedSubsections.filter(subsec => displayedSubsectionsIds.includes(subsec))
+            if (filteredSubsec.length) {
+                props.setSelectedSubsectionIds(filteredSubsec)
+            } else {
+                props.setSelectedSubsectionIds(displayedSubsectionsIds)
+            }
+            console.log("filtered subsec: ", filteredSubsec)
         } else {
-            props.setSelectedSubsectionIds(displayedSubsections.map(subsec => subsec.id))
+            props.setSelectedSubsectionIds(displayedSubsectionsIds)
         }
 
-        navigate('/sections/subsections/exercises/') // if user is allready on that page it doesn't work, pagination don't work too
+        navigate('/sections/subsections/exercises/')
         // console.log('props: ', props, 'checkedSections: ', checkedSections, 'displayedSubsections: ', displayedSubsections)
         // console.log('checkedSubsections: ', checkedSubsections, 'subsection_ids: ', subsection_ids, )
 

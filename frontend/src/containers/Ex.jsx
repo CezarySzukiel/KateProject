@@ -41,5 +41,5 @@ const mapDispatchToProps = (dispatch) => {
 export const ConSectionsList = connect(mapStateToProps, mapDispatchToProps)(SectionsList);
 export const ConSubsectionsList = connect(mapStateToProps, mapDispatchToProps)(SubsectionsList);
 export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(ExercisesList);
-export const ConExerciseDetails = connect(mapStateToProps )(ExerciseDetails);
+export const ConExerciseDetails = connect(mapStateToProps, mapDispatchToProps)(ExerciseDetails);
 export const ConSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);

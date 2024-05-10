@@ -81,9 +81,9 @@ export function ExercisesList(props) {
             <h2>Lista zadań</h2>
             <ul>
                 {allExercises && allExercises.map(exercise => (
-                    <li key={exercise.id}>
+                    <li onClick={() => handleLinkClick(exercise)} key={exercise.id}>
                         <Link to={`details/`} >
-                            <h3 onClick={() => handleLinkClick(exercise)}>id: {exercise.id}, {exercise.title}</h3>
+                            <h3>id: {exercise.id}, {exercise.title}</h3>
                             <p>{exercise.description}</p>
                         </Link>
                     </li>
@@ -94,11 +94,13 @@ export function ExercisesList(props) {
     );
 }
 
-// todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje
-// todo poprawić obsługę pojedynczego zadania
-// todo sprawdzić czy działa paginacja na sections i subsections
-//  todo usunąć wszystkie consolelogi
+// todo usunąć wszystkie consolelogi
 
+// todo case gdy user zaznaczy subsekcję w searchbar, następnie zaznaczy sekcję która nie zawiera klikniętej wcześniej subsekcji => wyszuka klikniętą wcześniej subsekcję. done
+// todo sprawdzić czy działa paginacja na sections i subsections done (paginacja na sekcjach i subsekcjach usunięta)
+// todo dlaczego po wejściu w "zadania na dzień dobry są trzy zapytania do db" done
+// todo poprawić obsługę pojedynczego zadania done
+// todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje done
 // todo sprawdzić dlaczego są 2 zapytania done
 // todo paginacja i obsługa dodawania nextpage {"subsection_ids":null} done
 // todo na backendzie obsłuzyć przypadek, gdy wyśle się w zapytaniu pustą listę lub coś innego done

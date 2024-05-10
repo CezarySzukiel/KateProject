@@ -10,7 +10,7 @@ router = SimpleRouter()
 # router.register('list', views.ExerciseViewSet, basename='exercises')
 # router.register('answers', views.AnswerViewSet, basename='answers')
 router.register('sections', views.SectionViewSet, basename='sections')
-# router.register('subsections', views.SubsectionViewSet, basename='subsections')
+router.register('subsections', views.SubsectionViewSet, basename='subsections')
 
 urlpatterns = router.urls
 

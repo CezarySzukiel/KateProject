@@ -25,6 +25,7 @@ export function SectionsList(props) {
     const getData = async () => {
             try {
                 const response = await getSectionsAndSubsections();
+                console.log(response)
                 const sections = extractSections(response);
                 const subsections = extractSubsections(response);
                 // console.log(response, sections, subsections)

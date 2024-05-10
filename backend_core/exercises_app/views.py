@@ -36,6 +36,7 @@ class SectionViewSet(viewsets.ModelViewSet):
     serializer_class = SectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
     permission_classes = (permissions.AllowAny, )
+    pagination_class = None
 
 
 class SubsectionViewSet(viewsets.ModelViewSet):
@@ -45,12 +46,16 @@ class SubsectionViewSet(viewsets.ModelViewSet):
     serializer_class = SubsectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
     permission_classes = [permissions.AllowAny]
+    pagination_class = None
 
 
 class SubsectionListView(generics.ListAPIView):
     """View to list all subsections for a specific section"""
+
     serializer_class = SubsectionSerializer
     permission_classes = (permissions.AllowAny, )
+    pagination_class = None
+
 
     def get_queryset(self):
         section_id = self.kwargs['section_id']
