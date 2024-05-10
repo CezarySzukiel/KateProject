@@ -13,7 +13,16 @@ export function SectionsList(props) {
     const isInitialMount = useRef(true)
     
     useEffect(() => {
-        const getData = async () => {
+        if (!props.allSections || !props.allSubsections) {
+            if (isInitialMount.current) {
+                isInitialMount.current = false;
+                getData()
+            }
+        }
+        return () => setSections([]);
+    }, []);
+
+    const getData = async () => {
             try {
                 const response = await getSectionsAndSubsections();
                 const sections = extractSections(response);
@@ -25,16 +34,6 @@ export function SectionsList(props) {
                 console.error(error);
             }
         } 
-
-        if (!props.allSections || !props.allSubsections) {
-            if (isInitialMount.current) {
-                isInitialMount.current = false;
-                getData()
-            }
-        }
-        
-        return () => setSections([]);
-    }, []);
 
     const handleNextPage = async () => {
         if (nextPageUrl) {

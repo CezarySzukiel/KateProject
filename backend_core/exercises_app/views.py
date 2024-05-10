@@ -82,19 +82,6 @@ class ExercisesFilterBySubsectionsView(APIView):
         serialized_exercises = self.serializer_class(paginated_exercises, many=True)
         return paginator.get_paginated_response(serialized_exercises.data)
 
-    # def post(self, request, format=None):
-    #     subsection_ids = request.data.get('subsection_ids', [])
-    #     if subsection_ids is None:
-    #         return Response([], status=status.HTTP_200_OK)
-    #     exercises = Exercise.objects.filter(subsection__id__in=subsection_ids)
-        
-    #     paginator = self.pagination_class()
-    #     paginated_exercises = paginator.paginate_queryset(exercises, request)
-    #     serialized_exercises = self.serializer_class(paginated_exercises, many=True)
-    #     return paginator.get_paginated_response(serialized_exercises.data)
-    #     # serialized_exercises = self.serializer_class(exercises, many=True)
-    #     # return Response(serialized_exercises.data, status=status.HTTP_200_OK) 
-
 
 class ExerciseDetailView(generics.RetrieveAPIView):
     """View to retrieve details of an exercise along with its correct answer"""

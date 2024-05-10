@@ -21,7 +21,7 @@ export function ExercisesList(props) {
 
     const getExercises = async () => {
         // console.log("getExercises")
-        // console.log('selectedSubsectionIds: ', selectedSubsectionIds)
+        // console.log('selectedSubsectionIds: ', selectedSubsectionIds) 
         const searchUrl = `${SEARCH_URL}?subsection_ids=${selectedSubsectionIds.join(',')}`
         try {
             const response = await axios.get(searchUrl, {
@@ -95,7 +95,6 @@ export function ExercisesList(props) {
 }
 
 // todo case gdy user zaznaczy sekcję ma wyszukać wszystkie wyświetlone subsekcje
-// todo case gdy użytkownik jest już na stronie z zadaniami i chce wyszukać jeszcze raz
 // todo poprawić obsługę pojedynczego zadania
 // todo sprawdzić czy działa paginacja na sections i subsections
 //  todo usunąć wszystkie consolelogi
@@ -106,3 +105,4 @@ export function ExercisesList(props) {
 // todo posprzątać: wywalić widok listyzadań z backendu (s-exercises), wywalić actual subsection stan done
 // todo podwójne zapytania przy sections done
 // todo podwójne zapytanie przy subsectons done
+// todo case gdy użytkownik jest już na stronie z zadaniami i chce wyszukać jeszcze raz done
