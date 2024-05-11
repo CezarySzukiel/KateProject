@@ -1,20 +1,23 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.settings import api_settings
 
 from exercises_app.models import Exercise, Answer, Section, Subsection
-from exercises_app.serializers import ExerciseSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
-    CompareExerciseSerializer
+from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
+    CompareExerciseSerializer, ExerciseDetailSerializer
 from users.models import UserSettings
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
     """ViewSet for the Exercise class"""
+    # todo optimalization: change serializer class, because list don't need all the details.
 
     queryset = Exercise.objects.all()
-    serializer_class = ExerciseSerializer
-    permission_classes = [permissions.AllowAny]
+    serializer_class = ExercisesListSerializer
+    permission_classes = (permissions.AllowAny, )
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
@@ -23,7 +26,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -32,7 +35,8 @@ class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.AllowAny, )
+    pagination_class = None
 
 
 class SubsectionViewSet(viewsets.ModelViewSet):
@@ -42,6 +46,61 @@ class SubsectionViewSet(viewsets.ModelViewSet):
     serializer_class = SubsectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
     permission_classes = [permissions.AllowAny]
+    pagination_class = None
+
+
+class SubsectionListView(generics.ListAPIView):
+    """View to list all subsections for a specific section"""
+
+    serializer_class = SubsectionSerializer
+    permission_classes = (permissions.AllowAny, )
+    pagination_class = None
+
+
+    def get_queryset(self):
+        section_id = self.kwargs['section_id']
+        section = get_object_or_404(Section, pk=section_id)
+        return Subsection.objects.filter(section=section)
+
+
+class SectionsAndSubsectionsView(APIView):
+    permission_classes = (permissions.AllowAny, )
+
+    def get(self, request):
+        sections = Section.objects.prefetch_related('subsections').all()
+        section_serializer = SectionSerializer(sections, many=True)
+        return Response(section_serializer.data)
+
+
+class ExercisesFilterBySubsectionsView(APIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = ExercisesListSerializer
+    pagination_class = PageNumberPagination
+
+    def get(self, request, format=None):
+        subsection_ids = request.query_params.getlist('subsection_ids', [])
+        subsection_ids = [int(sub_id) for sub_id in subsection_ids[0].split(',') if sub_id]
+        exercises = Exercise.objects.filter(subsection__id__in=subsection_ids)
+
+        paginator = self.pagination_class()
+        paginated_exercises = paginator.paginate_queryset(exercises, request)
+        serialized_exercises = self.serializer_class(paginated_exercises, many=True)
+        return paginator.get_paginated_response(serialized_exercises.data)
+
+
+class ExerciseDetailView(generics.RetrieveAPIView):
+    """View to retrieve details of an exercise along with its correct answer"""
+    # todo optimalization: check database logs how many querries is, in that view
+    serializer_class = ExerciseDetailSerializer
+    queryset = Exercise.objects.all()
+    permission_classes = (permissions.AllowAny, )
+
+    def get_object(self):
+        exercise_id = self.kwargs['exercise_id']
+        exercise = get_object_or_404(Exercise, pk=exercise_id)
+        answer = get_object_or_404(Answer, exercise=exercise, correct=True)
+        exercise.correct_answer = answer
+        return exercise
 
 
 class CompareExerciseView(APIView):

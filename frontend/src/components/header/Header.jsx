@@ -15,12 +15,12 @@ export function Header() {
     return (
         <div className="headerContainer">
             <div className="logoContainer">
-                <a href="/">
+                <a href="/home/">
                     <img src="/images/logos/logo.jpg" alt="Logo" />
                 </a>
             </div>
             <div className="buttonsContainer">
-                <Link to={`exercises`}><button onClick={handleExercisesClick}>Zadania</button></Link>
+                <Link to={`sections`}><button onClick={handleExercisesClick}>Zadania</button></Link>
                 <Link to={`game`}><button>Gra</button></Link>
             </div>    
             <ConMenu />

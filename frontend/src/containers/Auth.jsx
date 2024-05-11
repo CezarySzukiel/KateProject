@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
         setAccessToken: (token) => dispatch(setAccessToken(token)),
         deleteAccessToken: () => dispatch(deleteAccessToken()),
         setRefreshToken: (token) => dispatch(setRefreshToken(token)),
-        getTokens: (refreshToken) => dispatch(getTokens(refreshToken)),
+        getTokens: (refreshToken) => dispatch(getTokens(refreshToken)), // todo improper use of dispatch and getTokens
     };
 };
 

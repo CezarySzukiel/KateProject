@@ -1,20 +1,45 @@
 import { connect } from "react-redux";
 
-import { setActualExercise } from "../actions/exActions"
+import { setActualExercise, 
+setActualSection, 
+setActualSubsection, 
+setAllSections,
+setAllSubsections,
+setAllExercises, 
+setSelectedSubsectionIds, } from "../actions/exActions";
 
-import { ExercisesList } from "../components/exercises/ExercisesList"
-
+import { ExercisesList } from "../components/exercises/ExercisesList";
+import { ExerciseDetails } from "../components/exercises/ExerciseDetails";
+import { SectionsList } from "../components/exercises/SectionsList";
+import { SubsectionsList } from "../components/exercises/SubsectionsList";
+import { SearchBar } from "../components/exercises/SearchBar";
 
 const mapStateToProps = (state) => {
     return {
+        actualSection: state.ex.actualSection,
+        actualSubsection: state.ex.actualSubsection,
         actualExercise: state.ex.actualExercise,
+        allSections: state.ex.allSections,
+        allSubsections: state.ex.allSubsections,
+        allExercises: state.ex.allExercises, 
+        selectedSubsectionIds: state.ex.selectedSubsectionIds,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setActualSection: (section) => dispatch(setActualSection(section)),
+        setActualSubsection: (subsection) => dispatch(setActualSubsection(subsection)),
         setActualExercise: (exercise) => dispatch(setActualExercise(exercise)),
+        setAllSections: (sections) => dispatch(setAllSections(sections)),
+        setAllSubsections: (subsections) => dispatch(setAllSubsections(subsections)),
+        setAllExercises: (exercises) => dispatch(setAllExercises(exercises)),
+        setSelectedSubsectionIds: (ids) => dispatch(setSelectedSubsectionIds(ids)),
     }
 }
 
+export const ConSectionsList = connect(mapStateToProps, mapDispatchToProps)(SectionsList);
+export const ConSubsectionsList = connect(mapStateToProps, mapDispatchToProps)(SubsectionsList);
 export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(ExercisesList);
+export const ConExerciseDetails = connect(mapStateToProps, mapDispatchToProps)(ExerciseDetails);
+export const ConSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);

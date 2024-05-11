@@ -1,0 +1,13 @@
+.searchbar-div {
+  display: flex;
+  flex-direction: column; 
+  margin-top: 50px;
+}
+
+.searchbar-div button {
+  position: static;
+  width: 6rem;
+  height: 2rem;
+  background-color: lightseagreen;
+
+}
