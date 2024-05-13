@@ -38,7 +38,7 @@ export const AnswerInput = (props) => {
           setCorrectAnswerMessage(
             "poprawna odpowiedź! \n Zadanie zostalo już wcześniej przez Ciebie rozwiązane."
           )
-        } else if ( response.status == 209) {
+        } else if (response.status == 209) {
           setCorrectAnswerMessage(null)
           setWrongAnswer("Spróbuj jeszcze raz!")
         } 
