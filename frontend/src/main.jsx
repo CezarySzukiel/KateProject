@@ -11,7 +11,7 @@ import ErrorPage from "./error-page";
 import { HomePage } from './components/homePage/HomePage'
 import { Game } from './components/game/Game'
 import { Header } from './components/header/Header.jsx'
-import { Register } from './components/register/Register'
+import { Register } from './components/auth/Register'
 import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange } from './containers/Auth'
 import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList } from './containers/Ex'
 

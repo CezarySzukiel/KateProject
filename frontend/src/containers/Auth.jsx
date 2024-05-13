@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 
 import { loginSuccess, setAccessToken, logoutSuccess, deleteAccessToken, setRefreshToken, } from "../actions/authActions"
-import { Login } from "../components/Login/Login"
-import { Logout } from "../components/logout/Logout"
+import { Login } from "../components/auth/Login"
+import { Logout } from "../components/auth/Logout"
 import { Menu } from "../components/menu/Menu"
-import { UserData } from "../components/userData/UserData"
-import { PasswordReset } from "../components/passwordReset/PasswordReset"
-import { PasswordChange } from "../components/passwordChange/PasswordChange"
+import { UserData } from "../components/auth/UserData"
+import { PasswordReset } from "../components/auth/PasswordReset"
+import { PasswordChange } from "../components/auth/PasswordChange"
 import { getTokens } from "../helpers"
 import { AnswerInput } from "../components/exercises/AnswerInput"
 
