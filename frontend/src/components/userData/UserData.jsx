@@ -25,8 +25,9 @@ export function UserData(props) {
             },
             });
             if (response.status === 200) {
-                const data = response.data;
-                setUserData(data);
+                console.log('user data response: ',response)
+                setUserData(response.data);
+                return response.data
             } 
         } catch (error) {
             if (error.response.status == 401) {

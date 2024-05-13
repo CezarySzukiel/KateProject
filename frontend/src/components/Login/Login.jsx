@@ -66,6 +66,7 @@ export function Login(props) {
                 console.error('error:', error.response.status);
             }
         }
+        navigate('/home')
     };
 
     const getUserData = async () => {

@@ -10,6 +10,7 @@ from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer,
     CompareExerciseSerializer, ExerciseDetailSerializer
 from users.models import UserSettings
 
+HTTP_209_WRONG_ANSWER = 209
 
 class ExerciseViewSet(viewsets.ModelViewSet):
     """ViewSet for the Exercise class"""
@@ -107,18 +108,19 @@ class CompareExerciseView(APIView):
     """
     View to compare exercise data from the frontend form with the database.
     """
-
-# todo optimalization: 2 asks to the database. Maybe frontend should send the exercise data?
+    # todo optimalization: 2 asks to the database. Maybe frontend should send the exercise data or use lookup?
 
     def post(self, request, format=None):
         serializer = CompareExerciseSerializer(data=request.data)
+        print(request)
         if serializer.is_valid():
             # Get the data from the form
             form_data = serializer.validated_data
-
+            print("*************************************")
+            print(form_data)
             # Get the exercise from the database
             try:
-                exercise = Exercise.objects.get(title=form_data['title'])
+                exercise = Exercise.objects.get(pk=form_data['id'])
             except Exercise.DoesNotExist:
                 return Response({"detail": "Exercise does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -129,16 +131,18 @@ class CompareExerciseView(APIView):
             # todo check if another user solve this exercise it will work correctly?
             # Compare the data
             if form_data['answer'] == right_answer.answer:
+                print('tutaj wchodzi')
                 # Get or create the user settings
                 user_settings, created = UserSettings.objects.get_or_create(user=request.user)
                 # check if exercise is already in user settings & update the user settings
                 if exercise in user_settings.exercises.all():
-                    return Response({"detail": "You have already solved this exercise."}, status=status.HTTP_400_BAD_REQUEST)
+                    print('juz jest to zad')
+                    return Response({"detail": "Already solved."}, status=status.HTTP_208_ALREADY_REPORTED)
                 user_settings.points += exercise.points
                 user_settings.exercises.add(exercise)
                 user_settings.save()
-                return Response({"detail": "The correct answer!"}, status=status.HTTP_200_OK)
+                return Response({"detail": "The correct answer."}, status=status.HTTP_200_OK)
             else:
-                return Response({"detail": "Try again!"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"detail": "Wrong answer."}, status=HTTP_209_WRONG_ANSWER)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

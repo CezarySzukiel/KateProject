@@ -8,6 +8,7 @@ import { UserData } from "../components/userData/UserData"
 import { PasswordReset } from "../components/passwordReset/PasswordReset"
 import { PasswordChange } from "../components/passwordChange/PasswordChange"
 import { getTokens } from "../helpers"
+import { AnswerInput } from "../components/exercises/AnswerInput"
 
 const mapStateToProps = (state) => {
     return {
@@ -24,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
         setAccessToken: (token) => dispatch(setAccessToken(token)),
         deleteAccessToken: () => dispatch(deleteAccessToken()),
         setRefreshToken: (token) => dispatch(setRefreshToken(token)),
-        getTokens: (refreshToken) => dispatch(getTokens(refreshToken)), // todo improper use of dispatch and getTokens
+        getTokens: (refreshToken) => dispatch(getTokens(refreshToken)),
     };
 };
 
@@ -34,3 +35,4 @@ export const ConUserData = connect(mapStateToProps, mapDispatchToProps)(UserData
 export const ConLogout = connect(mapStateToProps, mapDispatchToProps)(Logout);
 export const ConPasswordReset = connect(mapDispatchToProps)(PasswordReset);
 export const ConPasswordChange = connect(mapStateToProps, mapDispatchToProps)(PasswordChange);
+export const ConAnswerInput = connect(mapStateToProps, )(AnswerInput);

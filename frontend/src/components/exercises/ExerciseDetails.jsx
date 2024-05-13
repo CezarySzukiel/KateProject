@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { ConAnswerInput } from '../../containers/Auth'
+
 
 export function ExerciseDetails(props) {
   const [exercise, setExercise] = useState(null);
@@ -65,6 +67,7 @@ export function ExerciseDetails(props) {
         <p><strong>odpowiedź: </strong>{exercise.correct_answer}</p>
       </>
     )}
+    <ConAnswerInput id={exercise.id}/>
   </div>
 );
 }
