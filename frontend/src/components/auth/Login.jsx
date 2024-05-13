@@ -55,6 +55,7 @@ export function Login(props) {
                 const token = data.access;
                 props.setAccessToken(token);
                 props.loginSuccess();
+                navigate('/home')
             }
         } catch (error) {
             if (error.response.status == 500) {
@@ -66,7 +67,6 @@ export function Login(props) {
                 console.error('error:', error.response.status);
             }
         }
-        navigate('/home')
     };
 
     const getUserData = async () => {
