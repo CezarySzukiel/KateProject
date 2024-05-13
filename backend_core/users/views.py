@@ -7,11 +7,12 @@ from .serializers import UserSettingsSerializer
 
 
 class UserSettingsListView(ListCreateAPIView):
-	permission_classes = [IsAuthenticated]
+	# permission_classes = [IsAuthenticated]
+	permission_classes = [AllowAny]
 	queryset = UserSettings.objects.all()
 	serializer_class = UserSettingsSerializer
 
 class UserSettingsDetailView(RetrieveUpdateDestroyAPIView):
-	permission_classes = [IsAuthenticated]
+	permission_classes = [AllowAny]
 	queryset = UserSettings.objects.all()
 	serializer_class = UserSettingsSerializer

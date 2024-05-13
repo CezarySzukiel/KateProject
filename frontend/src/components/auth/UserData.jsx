@@ -32,6 +32,7 @@ export function UserData(props) {
         } catch (error) {
             if (error.response.status == 401) {
                 const tokens = await props.getTokens(props.refreshToken)
+                console.log(tokens)
                 props.setAccessToken(tokens.access);
                 props.setRefreshToken(tokens.refresh);
             } else {
@@ -67,17 +68,21 @@ export function UserData(props) {
                     setFormVisibility(false)
                     setError(false)
                     setSuccess('Dane użytkownika zostały zaktualizowane.')
-                } 
-                else if (error.response.status == 401) {
+                }
+            } catch (error) {
+                console.error(error);
+                if (error.response.status === 400) {
+                    setSuccess(null)
+                    setError('użytkownik z taką nazwą już istnieje.')
+                } else if (error.response.status === 401) {
                     console.log("błąd 401")
                     const tokens = await props.getTokens(props.refreshToken)
                     props.setAccessToken(tokens.access);
                     props.setRefreshToken(tokens.refresh);
+                } else {
+                    setSuccess(false)
+                    setError('Wystąpił błąd podczas aktualizacji danych użytkownika.');
                 }
-            } catch (error) {
-                console.error(error);
-                setSuccess(false)
-                setError('Wystąpił błąd podczas aktualizacji danych użytkownika.');
             }
         } else {
             setSuccess(false)
@@ -108,6 +113,9 @@ export function UserData(props) {
                 <h3>email: {userData.email}</h3>
                 {userData.first_name && <h3>imię: {userData.first_name}</h3>}
                 {userData.last_name && <h3>nazwisko: {userData.last_name}</h3>}
+                {userData.level && <h3>Poziom rozszerzony</h3>}
+                {userData.points && <h3>Zebrane punkty: {userData.points}</h3>}
+
                 <Link to={`/password-change/`}><button>Zmień hasło</button></Link>
                 <button onClick={handleChangeDataClick}>Zmień dane</button>
                 </>
@@ -138,3 +146,12 @@ export function UserData(props) {
         </div>
     );
 }
+
+// todo wyświetlanie rozwiązanych zadań: gdy user kliknie w przycisk w ustawieniach, 
+// zostanie przeniesiony do istniejącego już komponentu ExercisesList, 
+// ale wyszukane zadania to te które są w modelu UserSettings > exercises (przyda się reużywalność kodu)
+// po kliknięciu w któreś przenosi do komponentu ExerciseDetails
+
+// w liście wyszukiwanych normalnie zadań oraz w szczegółach zadania 
+// powinien pojawić się zielony znaczek z fajką że zadanie już rozwiązane (w liście)
+// lub info że "to zadanie już zostało przez Ciebie rozwiązane." (w szczegółach)

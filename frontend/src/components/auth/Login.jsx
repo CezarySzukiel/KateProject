@@ -11,6 +11,7 @@ export function Login(props) {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
     const [passwordResetInfo, setPasswordResetInfo] = useState(null);
+    const [loginInfo, setLoginInfo] = useState(null)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -55,7 +56,10 @@ export function Login(props) {
                 const token = data.access;
                 props.setAccessToken(token);
                 props.loginSuccess();
-                navigate('/home')
+                setLoginInfo('Zalogowano')
+                setTimeout(() => {
+                    navigate('/home')
+                }, 1500)
             }
         } catch (error) {
             if (error.response.status == 500) {
@@ -105,7 +109,7 @@ export function Login(props) {
                 setPassword('')                
             } else {
                 setPassword('')                
-                console.error("refresh token getting error");
+                console.error("getting refresh token error");
             }
         } catch (error) {
             console.error(error);
@@ -133,30 +137,32 @@ export function Login(props) {
         }
 
     }
-
     return (
         <div className={'LoginContainer'}>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <label htmlFor="email">
-                    Email: 
-                    <input type="email" id="email" value={email} onChange={handleEmailChange} />
-                </label>
-                <br />
-                <label htmlFor="password">
-                    Hasło: 
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <br />
-                <br />
-                <button type="submit">Zaloguj</button>
-            </form>
-            {loginError && <Error message={loginError}/>}
-            {passwordResetInfo && <Info message={passwordResetInfo}/>}
-            <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
-            <p>lub</p>
-            <Link to={`/register`}><button>utwórz nowe konto</button></Link>
-            </div>
+            {!loginInfo && <>
+                <h1>Login</h1>
+                <form onSubmit={handleLogin}>
+                    <label htmlFor="email">
+                        Email: 
+                        <input type="email" id="email" value={email} onChange={handleEmailChange} />
+                    </label>
+                    <br />
+                    <label htmlFor="password">
+                        Hasło: 
+                        <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+                    </label>
+                    <br />
+                    <br />
+                    <button type="submit">Zaloguj</button>
+                </form>
+                {loginError && <Error message={loginError}/>}
+                {passwordResetInfo && <Info message={passwordResetInfo}/>}
+                <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
+                <p>lub</p>
+                <Link to={`/register`}><button>utwórz nowe konto</button></Link>
+            </>}
+            {loginInfo && <h1>{loginInfo}</h1>}
+        </div>
     );
 }
 

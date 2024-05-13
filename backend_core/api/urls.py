@@ -14,12 +14,8 @@ urlpatterns = [
     path('auth/facebook/', views.FacebookLogin.as_view(), name='fb_login'),
     path('exercises/', include('exercises_app.urls')),
     # path('custom_user/', include('users.urls')),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #  for using cookies maybe use auth/token/refresh?
     path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()),
-    path('verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
-    path('account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
     path("password/reset/confirm/<str:uidb64>/<str:token>/", views.password_reset_confirm_redirect, name="password_reset_confirm", #  potrzebne do redirecta po resecie hasła
     ),

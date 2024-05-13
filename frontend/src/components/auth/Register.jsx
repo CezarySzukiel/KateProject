@@ -11,6 +11,7 @@ export function Register() {
     });
     const [error, setError] = useState('');
     const [info, setInfo] = useState(null)
+    const [working, setWorking] = useState(false)
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -19,7 +20,7 @@ export function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+        setWorking(true)
         try {
             const response = await fetch('http://0.0.0.0:8000/api/v1/auth/registration/', {
                 method: 'POST',
@@ -32,17 +33,21 @@ export function Register() {
             if (response.ok) {
                 const data = await response.json();
                 setInfo(data.detail[0]);
+                setWorking(false);
                 
             } else {
                 const data = await response.json();
                 if (response.status === 400) {
+                    setWorking(false);
                     setError(Object.values(data)[0]);
                 } else {
+                    setWorking(false);
                     setError('Unexpected error occurred.');
                 }
             }
         } catch (error) {
             console.error('error:', error);
+            setWorking(false);
             setError('Wystąpił błąd podczas rejestracji.');
         }
     };
@@ -69,6 +74,7 @@ export function Register() {
                 </form>
                 {error && <Error message={error}/>}
             </>}
+            {working && 'working...'}
             {info && <Info message={`wysłano email weryfikacyjny na adres ${formData.email}`} />}
         </div>
     );
