@@ -1,21 +1,33 @@
 import './login.css'
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';  
 
 import { Error, Info } from "../helpersComponents/Messages"
 
 export function Login(props) {
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
     const [passwordResetInfo, setPasswordResetInfo] = useState(null);
     const navigate = useNavigate();
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
+    useEffect(() => {
+        if (props.isLoggedIn) {
+            getUserData()
+        }
+        if (props.isLoggedIn) {
+            const uData = async () => {await getUserData()}
+        }
+    }, [props.isLoggedIn])
+
+    useEffect(() => {
+        if (username) {
+            getRefreshToken();
+        }
+    }, [username])
+
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -30,7 +42,6 @@ export function Login(props) {
 
         try {
             const response = await axios.post('http://0.0.0.0:8000/api/v1/auth/login/', {
-            username,
             email,
             password,
         }, {
@@ -44,9 +55,6 @@ export function Login(props) {
                 const token = data.access;
                 props.setAccessToken(token);
                 props.loginSuccess();
-                getRefreshToken();
-                setPassword('')                
-                navigate("/");
             }
         } catch (error) {
             if (error.response.status == 500) {
@@ -57,6 +65,23 @@ export function Login(props) {
 
                 console.error('error:', error.response.status);
             }
+        }
+        navigate('/home')
+    };
+
+    const getUserData = async () => {
+        try {
+            const response = await axios.get('http://0.0.0.0:8000/api/v1/auth/user/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.accessToken}`,
+            },
+            });
+            if (response.status === 200) {
+                setUsername(response.data.username);
+            } 
+        } catch (error) {
+            console.error(error)
         }
     };
 
@@ -77,7 +102,9 @@ export function Login(props) {
                 const refreshToken = data.refresh;
                 props.setAccessToken(accessToken);
                 props.setRefreshToken(refreshToken);
+                setPassword('')                
             } else {
+                setPassword('')                
                 console.error("refresh token getting error");
             }
         } catch (error) {
@@ -111,11 +138,6 @@ export function Login(props) {
         <div className={'LoginContainer'}>
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
-                <label htmlFor="username">
-                    Login: 
-                    <input type="text" id="username" value={username} onChange={handleUsernameChange} />
-                </label>
-                <br />
                 <label htmlFor="email">
                     Email: 
                     <input type="email" id="email" value={email} onChange={handleEmailChange} />
@@ -137,3 +159,5 @@ export function Login(props) {
             </div>
     );
 }
+
+// todo optimalization: there is anoter getUserData function (along with UserData component). set it once, set userData as a global state.
