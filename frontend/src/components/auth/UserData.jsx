@@ -152,6 +152,14 @@ export function UserData(props) {
 // ale wyszukane zadania to te które są w modelu UserSettings > exercises (przyda się reużywalność kodu)
 // po kliknięciu w któreś przenosi do komponentu ExerciseDetails
 
+// algorytm: po zalogowaniu, pobierane są razem z userDetails zadania, bo raczej napewno będą potrzebne. 
+// 1. backend: pobieranie zadań” z bazy dodatkowo (tylko potrzebne pola)
+// 2. sprawdzenmie co przychodzi
+// 3. globalny stan z listą zadań
+// 4. istniejący komponent z zadaniami ExercisesList wyświetlany po kliknięciu przycisku w komponencie userDetails
+// 5. na liście zadań exercisesList fajka że zadanie już rozwiązane
+// 6. w szczegółach zadania zielone info że zadanie rozwiązane.
+
 // w liście wyszukiwanych normalnie zadań oraz w szczegółach zadania 
 // powinien pojawić się zielony znaczek z fajką że zadanie już rozwiązane (w liście)
 // lub info że "to zadanie już zostało przez Ciebie rozwiązane." (w szczegółach)
