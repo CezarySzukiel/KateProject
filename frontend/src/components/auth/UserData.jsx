@@ -1,5 +1,5 @@
 import './userData.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ export function UserData(props) {
     
     useEffect(() => {
         getUserData()
+        console.log("propsy z UserData", props)
     }, [props.accessToken, formVisibility])
 
     const getUserData = async () => {
@@ -27,6 +28,7 @@ export function UserData(props) {
             if (response.status === 200) {
                 console.log('user data response: ',response)
                 setUserData(response.data);
+                props.setSolvedExercises(response.data.exercises);
                 return response.data
             } 
         } catch (error) {
@@ -153,9 +155,10 @@ export function UserData(props) {
 // po kliknięciu w któreś przenosi do komponentu ExerciseDetails
 
 // algorytm: po zalogowaniu, pobierane są razem z userDetails zadania, bo raczej napewno będą potrzebne. 
-// 1. backend: pobieranie zadań” z bazy dodatkowo (tylko potrzebne pola)
-// 2. sprawdzenmie co przychodzi
-// 3. globalny stan z listą zadań
+// 1. backend: pobieranie zadań” z bazy dodatkowo (tylko potrzebne pola) done
+// 2. sprawdzenmie co przychodzi done
+// 3. globalny stan z listą zadań jest przekazywany przez zwykłe propsy przez komponent nadrzędny UserDataExProvider done.
+// 3.5 refactor komponentu z zadaniami, aby przyjmował argumenty w postaci zadań które ma wyświetlić.
 // 4. istniejący komponent z zadaniami ExercisesList wyświetlany po kliknięciu przycisku w komponencie userDetails
 // 5. na liście zadań exercisesList fajka że zadanie już rozwiązane
 // 6. w szczegółach zadania zielone info że zadanie rozwiązane.
