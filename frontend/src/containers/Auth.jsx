@@ -1,6 +1,13 @@
 import { connect } from "react-redux";
 
-import { loginSuccess, setAccessToken, logoutSuccess, deleteAccessToken, setRefreshToken, } from "../actions/authActions"
+import { 
+    loginSuccess, 
+    setAccessToken, 
+    logoutSuccess, 
+    deleteAccessToken, 
+    setRefreshToken, 
+    deleteRefreshToken 
+} from "../actions/authActions"
 import { Login } from "../components/auth/Login"
 import { Logout } from "../components/auth/Logout"
 import { Menu } from "../components/menu/Menu"
@@ -25,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
         setAccessToken: (token) => dispatch(setAccessToken(token)),
         deleteAccessToken: () => dispatch(deleteAccessToken()),
         setRefreshToken: (token) => dispatch(setRefreshToken(token)),
+        deleteRefreshToken: () => dispatch(deleteRefreshToken()),
         getTokens: (refreshToken) => dispatch(getTokens(refreshToken)),
     };
 };

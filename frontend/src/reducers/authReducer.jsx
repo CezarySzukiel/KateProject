@@ -1,4 +1,11 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS, SET_ACCESS_TOKEN, DELETE_ACCESS_TOKEN, SET_REFRESH_TOKEN } from '../actions/authActions';
+import { 
+  LOGIN_SUCCESS, 
+  LOGOUT_SUCCESS, 
+  SET_ACCESS_TOKEN, 
+  DELETE_ACCESS_TOKEN, 
+  SET_REFRESH_TOKEN,
+  DELETE_REFRESH_TOKEN, 
+} from '../actions/authActions';
 
 const initialState = {
   isLoggedIn: false,
@@ -32,6 +39,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         refreshToken: action.token
+      }
+    case DELETE_REFRESH_TOKEN:
+      return {
+        ...state,
+        refreshToken: ''
       }
     default:
       return state;
