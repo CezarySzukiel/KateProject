@@ -4,7 +4,7 @@ import { loginSuccess, setAccessToken, logoutSuccess, deleteAccessToken, setRefr
 import { Login } from "../components/auth/Login"
 import { Logout } from "../components/auth/Logout"
 import { Menu } from "../components/menu/Menu"
-import { UserData } from "../components/auth/UserData"
+import { HOC_UserData } from "../components/auth/HOC_UserData"
 import { PasswordReset } from "../components/auth/PasswordReset"
 import { PasswordChange } from "../components/auth/PasswordChange"
 import { getTokens } from "../helpers"
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export const ConLogin = connect(mapStateToProps, mapDispatchToProps)(Login);
 export const ConMenu = connect(mapStateToProps, mapDispatchToProps)(Menu);
-export const ConUserData = connect(mapStateToProps, mapDispatchToProps)(UserData);
+export const ConUserData = connect(mapStateToProps, mapDispatchToProps)(HOC_UserData);
 export const ConLogout = connect(mapStateToProps, mapDispatchToProps)(Logout);
 export const ConPasswordReset = connect(mapDispatchToProps)(PasswordReset);
 export const ConPasswordChange = connect(mapStateToProps, mapDispatchToProps)(PasswordChange);

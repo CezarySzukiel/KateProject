@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 import { ConUserData } from '../../containers/Auth'
 
-export function ExProvider({ children, setSolvedExercises }) {
-
+export function ExProvider(props) {
+	const {solvedExercises, setSolvedExercises} = props
 	const setSolvedExercisesGlobal = (exercises) => {
 		setSolvedExercises(exercises)
 	}
 	return (
-		<ConUserData setSolvedExercises={setSolvedExercisesGlobal} />
+		<ConUserData 
+			setSolvedExercises={setSolvedExercisesGlobal} 
+			solvedExercises={solvedExercises}
+		/>
 	)
 }

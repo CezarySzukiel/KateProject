@@ -9,7 +9,7 @@ setAllExercises,
 setSelectedSubsectionIds,
 setSolvedExercises, } from "../actions/exActions";
 
-import { ExercisesList } from "../components/exercises/ExercisesList";
+import { HOC_ExercisesList } from "../components/exercises/HOC_ExercisesList";
 import { ExerciseDetails } from "../components/exercises/ExerciseDetails";
 import { SectionsList } from "../components/exercises/SectionsList";
 import { SubsectionsList } from "../components/exercises/SubsectionsList";
@@ -50,8 +50,8 @@ const mapSetSolvedExercisesToProps = (dispatch) => {
 
 export const ConSectionsList = connect(mapStateToProps, mapDispatchToProps)(SectionsList);
 export const ConSubsectionsList = connect(mapStateToProps, mapDispatchToProps)(SubsectionsList);
-export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(ExercisesList);
+export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(HOC_ExercisesList);
 export const ConExerciseDetails = connect(mapStateToProps, mapDispatchToProps)(ExerciseDetails);
 export const ConSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
-export const ConUserDataExProvider = connect(null, mapSetSolvedExercisesToProps)(ExProvider);
+export const ConUserDataExProvider = connect(mapStateToProps, mapSetSolvedExercisesToProps)(ExProvider);
