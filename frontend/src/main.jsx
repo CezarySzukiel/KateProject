@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element: <ConExercisesList />,
       },
       {
-        path: "sections/subsections/exercises/details/",
+        path: "exercises/details/",
         element: <ConExerciseDetails />,
       },
     ],

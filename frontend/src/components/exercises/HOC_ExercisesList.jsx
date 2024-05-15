@@ -5,10 +5,11 @@ import axios from 'axios';
 import { ExercisesList } from './ExercisesList'
 
 export function HOC_ExercisesList(props) {
-    const { selectedSubsectionIds, allExercises, setAllExercises, setActualExercise } = props;
+    const { selectedSubsectionIds, allExercises, setAllExercises, setActualExercise, solvedExercises } = props;
     const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
     const isInitialMount = useRef(false)
     const [nextPageUrl, setNextPageUrl] = useState(null);
+    const [solvedExercisesIds, setSolvedExercisesIds] = useState(null)
 
     useEffect(() => {
         if (isInitialMount.current) {
@@ -17,7 +18,11 @@ export function HOC_ExercisesList(props) {
         else {
             isInitialMount.current = true;
         }
-    }, [selectedSubsectionIds]);
+    }, [selectedSubsectionIds,]);
+
+    useEffect(() => {
+        setSolvedExercisesIds(solvedExercises.map(exercise => exercise.id))
+    }, [solvedExercises])
 
     const getExercises = async () => {
         const searchUrl = `${SEARCH_URL}?subsection_ids=${selectedSubsectionIds.join(',')}`
@@ -73,6 +78,7 @@ export function HOC_ExercisesList(props) {
                     nextPageUrl={nextPageUrl}
                     handleNextPage={handleNextPage}
                     handleLinkClick={handleLinkClick}
+                    solvedExercisesIds={solvedExercisesIds}
                 />
             }
         </>   

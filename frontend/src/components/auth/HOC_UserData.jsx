@@ -12,7 +12,7 @@ export function HOC_UserData(props) {
     const [formData, setFormData] = useState({});
     const [exercisesVisibility, setExercisesVisibility] = useState(false);
     const [nextPageUrl, setNextPageUrl] = useState(null);
-    const [areSolvedExercises, setAreSolvedExercises] = useState(false)
+    const [areSolvedExercises, setAreSolvedExercises] = useState(false)    
 
     useEffect(() => {
         getUserData()
