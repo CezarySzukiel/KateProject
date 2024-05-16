@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const getTokens = (refreshToken) => {
   return async () => {
-    console.log("refreshToken: ", refreshToken)
     try {
       const response = await axios.post('http://0.0.0.0:8000/api/v1/auth/token/refresh/', {
         refresh: refreshToken
@@ -12,7 +11,6 @@ export const getTokens = (refreshToken) => {
         },
       });
       if (response.status === 200) {
-        console.log('response; ', response)
         return response.data
       }
     } catch (error) {

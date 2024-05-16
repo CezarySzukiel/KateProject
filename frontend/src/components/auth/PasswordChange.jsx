@@ -76,5 +76,3 @@ export function PasswordChange(props) {
     </div>
   );
 }
-
-// todo hasło jest zmieniane, jednak nie sprawdza w ogóle czy stare hasło jest zgodne z faktycznym. (przesyłam jwt token, ale bez niech jest 401 unauthorized)

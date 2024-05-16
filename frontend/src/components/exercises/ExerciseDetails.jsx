@@ -11,6 +11,7 @@ export function ExerciseDetails(props) {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const [correctAnswerMessage, setCorrectAnswerMessage] = useState(null)
   const [wrongAnswerMessage, setWrongAnswerMessage] = useState(null)
+  const [displayAnswer, setDisplayAnswer] = useState(false)
 
   useEffect(() => {
     if ((props.actualExercise && !exercise) || 
@@ -51,6 +52,10 @@ export function ExerciseDetails(props) {
       props.pushSolvedExercise(exercise)
     }
 
+    const handleShowAnswer = () => {
+      setDisplayAnswer(!displayAnswer)
+    }
+
     if (!exercise) {
         return <div>Loading...</div>;
     }
@@ -77,7 +82,13 @@ export function ExerciseDetails(props) {
         
         <p><strong>type:</strong> {exercise.type}</p>
         
-        <p><strong>odpowiedź: </strong>{exercise.correct_answer}</p>
+        {!displayAnswer && <button onClick={handleShowAnswer}>Pokaż prawidłową odpowiedź.</button>}
+
+        {displayAnswer && <button onClick={handleShowAnswer}>Ukryj prawidłową odpowiedź.</button>}
+
+
+        
+        {displayAnswer && <p><strong>odpowiedź: </strong>{exercise.correct_answer}</p>}
       </>
     )}
     <ConAnswerInput 
@@ -91,6 +102,7 @@ export function ExerciseDetails(props) {
         {!correctAnswerMessage && solvedExercisesIds ? (solvedExercisesIds.includes(exercise.id) ? <Info message={'To zadanie zostało już przez Ciebie rozwiązane.'}/> : null) : null}
       </>
     }
+    {!isLoggedIn && <p>Aby sprawdzić swoją odpowiedź musisz być zalogowany.</p>}
     
     {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
     {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}

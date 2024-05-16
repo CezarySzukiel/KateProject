@@ -56,7 +56,7 @@ const authReducer = (state = initialState, action) => {
     case DELETE_USER_DATA:
       return {
         ...state,
-        userData: ''
+        userData: 0,
       }
     default:
       return state;

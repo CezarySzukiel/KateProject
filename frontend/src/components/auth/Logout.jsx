@@ -28,6 +28,7 @@ export function Logout(props) {
                 setLoggedOut(true);
                 props.deleteAccessToken();
                 props.deleteRefreshToken();
+                props.deleteUserData();
             } else {
                 console.error("logout error");
             }
