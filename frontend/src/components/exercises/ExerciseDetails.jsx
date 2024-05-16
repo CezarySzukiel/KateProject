@@ -48,7 +48,6 @@ export function ExerciseDetails(props) {
     };
 
     const pushExerciseToSolved = ()  => {
-      console.log("zaraz doddam to zadanie!")
       props.pushSolvedExercise(exercise)
     }
 
@@ -77,8 +76,6 @@ export function ExerciseDetails(props) {
         {exercise.solution_similar.length > 0 && <p><strong>solution_similar:</strong> {exercise.solution_similar}</p>}
         
         <p><strong>type:</strong> {exercise.type}</p>
-        
-        {/*<p><strong>id:</strong> {exercise.id}</p>*/}
         
         <p><strong>odpowiedź: </strong>{exercise.correct_answer}</p>
       </>

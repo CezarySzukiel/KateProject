@@ -6,11 +6,8 @@ import { Error, Info } from "../helpersComponents/Messages"
 export const AnswerInput = (props) => {
   const { isLoggedIn, id, pushExerciseToSolved, setCorrectAnswerMessage, setWrongAnswerMessage } = props
   const [answer, setAnswer] = useState('');
-  // const [correctAnswerMessage, setCorrectAnswerMessage] = useState(null)
-  // const [wrongAnswerMessage, setWrongAnswerMessage] = useState(null)
 
   useEffect(() => {
-    // console.log('props; ', props, 'answer: ', answer, )
   }, [answer])
 
   const handleChange = (event) => {
@@ -31,8 +28,6 @@ export const AnswerInput = (props) => {
         });
 
         if (response.status == 200) {
-          console.log('response: ', response)
-          pushExerciseToSolved()
           setWrongAnswerMessage(null)
           setCorrectAnswerMessage("poprawna odpowiedź!")
         } else if (response.status == 208) {
@@ -52,7 +47,6 @@ export const AnswerInput = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(answer)
     compareAnswer()
   };
 
@@ -70,5 +64,3 @@ export const AnswerInput = (props) => {
     </>
   );
 };
-
-// todo show the points in the user page 

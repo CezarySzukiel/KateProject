@@ -86,7 +86,6 @@ export function Login(props) {
             if (response.status === 200) {
                 setUsername(response.data.username);
                 props.setUserData(response.data)
-                console.log('response z loginu: ', response)
                 dispatch(setSolvedExercises(response.data.exercises))
             } 
         } catch (error) {
@@ -171,4 +170,4 @@ export function Login(props) {
     );
 }
 
-// todo optimalization: there is anoter getUserData function (along with UserData component). set it once, set userData as a global state.
+// todo optimalization: there is anoter getUserData function (along with UserData component). set it once?
