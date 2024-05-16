@@ -7,7 +7,8 @@ setAllSections,
 setAllSubsections,
 setAllExercises, 
 setSelectedSubsectionIds,
-setSolvedExercises, } from "../actions/exActions";
+setSolvedExercises, 
+pushSolvedExercise, } from "../actions/exActions";
 
 import { HOC_ExercisesList } from "../components/exercises/HOC_ExercisesList";
 import { ExerciseDetails } from "../components/exercises/ExerciseDetails";
@@ -38,6 +39,7 @@ const mapDispatchToProps = (dispatch) => {
         setAllSubsections: (subsections) => dispatch(setAllSubsections(subsections)),
         setAllExercises: (exercises) => dispatch(setAllExercises(exercises)),
         setSelectedSubsectionIds: (ids) => dispatch(setSelectedSubsectionIds(ids)),
+        pushSolvedExercise: (exercise) => dispatch(pushSolvedExercise(exercise)),
         
     }
 }

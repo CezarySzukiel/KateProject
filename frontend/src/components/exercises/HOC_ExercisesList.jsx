@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 import { ExercisesList } from './ExercisesList'
 
@@ -10,6 +11,7 @@ export function HOC_ExercisesList(props) {
     const isInitialMount = useRef(false)
     const [nextPageUrl, setNextPageUrl] = useState(null);
     const [solvedExercisesIds, setSolvedExercisesIds] = useState(null)
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
     useEffect(() => {
         if (isInitialMount.current) {
@@ -21,7 +23,9 @@ export function HOC_ExercisesList(props) {
     }, [selectedSubsectionIds,]);
 
     useEffect(() => {
-        setSolvedExercisesIds(solvedExercises.map(exercise => exercise.id))
+        if (solvedExercises) {
+            setSolvedExercisesIds(solvedExercises.map(exercise => exercise.id))
+        }
     }, [solvedExercises])
 
     const getExercises = async () => {
@@ -79,8 +83,12 @@ export function HOC_ExercisesList(props) {
                     handleNextPage={handleNextPage}
                     handleLinkClick={handleLinkClick}
                     solvedExercisesIds={solvedExercisesIds}
+                    isLoggedIn={isLoggedIn}
                 />
             }
         </>   
     )
 }
+
+// todo pobieranie info o userze podczas logowania i stan globalny ... w trakcie, stan już istnieje, ustawić, aby korzystały z niego komponenty, w tym userData komponent.
+// todo bez przeładowania informacji o userze rozwiązane zadania nie dodają się do  stanu

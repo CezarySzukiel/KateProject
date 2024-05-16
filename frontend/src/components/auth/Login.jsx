@@ -2,7 +2,8 @@ import './login.css'
 import { useState, useEffect} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';  
-
+import { useDispatch } from 'react-redux';
+import { setSolvedExercises } from '../../actions/exActions'
 import { Error, Info } from "../helpersComponents/Messages"
 
 export function Login(props) {
@@ -13,6 +14,7 @@ export function Login(props) {
     const [passwordResetInfo, setPasswordResetInfo] = useState(null);
     const [loginInfo, setLoginInfo] = useState(null)
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (props.isLoggedIn) {
@@ -24,10 +26,10 @@ export function Login(props) {
     }, [props.isLoggedIn])
 
     useEffect(() => {
-        if (username) {
+        if (props.userData) {
             getRefreshToken();
         }
-    }, [username])
+    }, [props.userData])
 
 
     const handleEmailChange = (event) => {
@@ -83,6 +85,9 @@ export function Login(props) {
             });
             if (response.status === 200) {
                 setUsername(response.data.username);
+                props.setUserData(response.data)
+                console.log('response z loginu: ', response)
+                dispatch(setSolvedExercises(response.data.exercises))
             } 
         } catch (error) {
             console.error(error)
@@ -92,7 +97,7 @@ export function Login(props) {
     const getRefreshToken = async () => {
         try {
             const response = await axios.post('http://0.0.0.0:8000/api/v1/token/', {
-            username,
+            username: props.userData.username,
             password,
             }, {
             headers: {

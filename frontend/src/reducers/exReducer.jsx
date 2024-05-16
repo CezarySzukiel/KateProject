@@ -5,7 +5,8 @@ SET_ALL_SECTIONS,
 SET_ALL_SUBSECTIONS,
 SET_ALL_EXERCISES, 
 SET_SELECTED_SUBSECTION_IDS, 
-SET_SOLVED_EXERCISES, } 
+SET_SOLVED_EXERCISES, 
+PUSH_SOLVED_EXERCISE, } 
 from '../actions/exActions';
 
 const initialState = {
@@ -60,6 +61,11 @@ const exReducer = (state = initialState, action) => {
       return {
         ...state,
         solvedExercises: action.exercises
+      }
+    case PUSH_SOLVED_EXERCISE:
+      return {
+        ...state,
+        solvedExercises: [...state.solvedExercises, action.exercise]
       }
     default:
       return state;

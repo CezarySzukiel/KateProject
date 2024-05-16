@@ -6,7 +6,9 @@ import {
     logoutSuccess, 
     deleteAccessToken, 
     setRefreshToken, 
-    deleteRefreshToken 
+    deleteRefreshToken ,
+    setUserData,
+    deleteUserData,
 } from "../actions/authActions"
 import { Login } from "../components/auth/Login"
 import { Logout } from "../components/auth/Logout"
@@ -22,6 +24,7 @@ const mapStateToProps = (state) => {
         isLoggedIn: state.auth.isLoggedIn,
         accessToken: state.auth.accessToken,
         refreshToken: state.auth.refreshToken,
+        userData: state.auth.userData,
     };
 };
 
@@ -34,6 +37,8 @@ const mapDispatchToProps = (dispatch) => {
         setRefreshToken: (token) => dispatch(setRefreshToken(token)),
         deleteRefreshToken: () => dispatch(deleteRefreshToken()),
         getTokens: (refreshToken) => dispatch(getTokens(refreshToken)),
+        setUserData: (data) => dispatch(setUserData(data)),
+        deleteUserData: () => dispatch(deleteUserData()),
     };
 };
 

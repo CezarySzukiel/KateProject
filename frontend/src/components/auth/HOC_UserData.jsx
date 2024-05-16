@@ -16,7 +16,6 @@ export function HOC_UserData(props) {
 
     useEffect(() => {
         getUserData()
-        console.log("propsy z UserData", props)
     }, [props.accessToken, formVisibility])
 
     useEffect(() => {
@@ -36,13 +35,11 @@ export function HOC_UserData(props) {
             },
             });
             if (response.status === 200) {
-                console.log('user data response: ',response)
                 setUserData(response.data);
                 props.setSolvedExercises(response.data.exercises);
                 return response.data
             } 
         } catch (error) {
-                console.log(error)
             if (error.response.status == 401) {
                 const tokens = await props.getTokens(props.refreshToken)
                 props.setAccessToken(tokens.access);
