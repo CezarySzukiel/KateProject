@@ -90,5 +90,3 @@ export function HOC_ExercisesList(props) {
     )
 }
 
-// todo pobieranie info o userze podczas logowania i stan globalny ... w trakcie, stan już istnieje, ustawić, aby korzystały z niego komponenty, w tym userData komponent.
-// todo bez przeładowania informacji o userze rozwiązane zadania nie dodają się do  stanu
