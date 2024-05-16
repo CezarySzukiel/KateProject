@@ -6,13 +6,16 @@ setActualSubsection,
 setAllSections,
 setAllSubsections,
 setAllExercises, 
-setSelectedSubsectionIds, } from "../actions/exActions";
+setSelectedSubsectionIds,
+setSolvedExercises, 
+pushSolvedExercise, } from "../actions/exActions";
 
-import { ExercisesList } from "../components/exercises/ExercisesList";
+import { HOC_ExercisesList } from "../components/exercises/HOC_ExercisesList";
 import { ExerciseDetails } from "../components/exercises/ExerciseDetails";
 import { SectionsList } from "../components/exercises/SectionsList";
 import { SubsectionsList } from "../components/exercises/SubsectionsList";
 import { SearchBar } from "../components/exercises/SearchBar";
+import { ExProvider } from "../components/auth/UserDataExProvider";
 
 const mapStateToProps = (state) => {
     return {
@@ -23,6 +26,7 @@ const mapStateToProps = (state) => {
         allSubsections: state.ex.allSubsections,
         allExercises: state.ex.allExercises, 
         selectedSubsectionIds: state.ex.selectedSubsectionIds,
+        solvedExercises: state.ex.solvedExercises,
     };
 };
 
@@ -35,11 +39,21 @@ const mapDispatchToProps = (dispatch) => {
         setAllSubsections: (subsections) => dispatch(setAllSubsections(subsections)),
         setAllExercises: (exercises) => dispatch(setAllExercises(exercises)),
         setSelectedSubsectionIds: (ids) => dispatch(setSelectedSubsectionIds(ids)),
+        pushSolvedExercise: (exercise) => dispatch(pushSolvedExercise(exercise)),
+        
+    }
+}
+
+const mapSetSolvedExercisesToProps = (dispatch) => {
+    return {
+        setSolvedExercises: (exercises) => dispatch(setSolvedExercises(exercises)),
     }
 }
 
 export const ConSectionsList = connect(mapStateToProps, mapDispatchToProps)(SectionsList);
 export const ConSubsectionsList = connect(mapStateToProps, mapDispatchToProps)(SubsectionsList);
-export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(ExercisesList);
+export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(HOC_ExercisesList);
 export const ConExerciseDetails = connect(mapStateToProps, mapDispatchToProps)(ExerciseDetails);
 export const ConSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+
+export const ConUserDataExProvider = connect(mapStateToProps, mapSetSolvedExercisesToProps)(ExProvider);

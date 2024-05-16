@@ -1,103 +1,22 @@
 import './userData.css'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { Error, Info } from "../helpersComponents/Messages"
 
 export function UserData(props) {
-    const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
-    const [formVisibility, setFormVisibility] = useState(false);
-    const [formData, setFormData] = useState({});
-    
-    useEffect(() => {
-        getUserData()
-    }, [props.accessToken, formVisibility])
-
-    const getUserData = async () => {
-        try {
-            const response = await axios.get('http://0.0.0.0:8000/api/v1/auth/user/', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${props.accessToken}`,
-            },
-            });
-            if (response.status === 200) {
-                console.log('user data response: ',response)
-                setUserData(response.data);
-                return response.data
-            } 
-        } catch (error) {
-            if (error.response.status == 401) {
-                const tokens = await props.getTokens(props.refreshToken)
-                props.setAccessToken(tokens.access);
-                props.setRefreshToken(tokens.refresh);
-            } else {
-                console.error('error:', error.response.status, error.response.statusText);
-            }
-        }
-    };
-
-    const validator = (data) => {
-        for (const key in data) {
-            if (data[key] === '' || data[key].trim() === '') {
-                delete data[key];
-            }
-        }
-        if (data.hasOwnProperty('username') && data.username === userData.username) {
-            delete data['username'];
-        }
-        return data
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        let data = validator(formData)
-        if (data && Object.keys(data).length > 0) {
-            try {
-                const response = await axios.patch('http://0.0.0.0:8000/api/v1/auth/user/', formData, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${props.accessToken}`,
-                    },
-                });
-                if (response.status === 200) {
-                    setFormVisibility(false)
-                    setError(false)
-                    setSuccess('Dane użytkownika zostały zaktualizowane.')
-                } 
-                else if (error.response.status == 401) {
-                    console.log("błąd 401")
-                    const tokens = await props.getTokens(props.refreshToken)
-                    props.setAccessToken(tokens.access);
-                    props.setRefreshToken(tokens.refresh);
-                }
-            } catch (error) {
-                console.error(error);
-                setSuccess(false)
-                setError('Wystąpił błąd podczas aktualizacji danych użytkownika.');
-            }
-        } else {
-            setSuccess(false)
-            setError('Nie wprowadzono zmian')
-        }
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleChangeDataClick = () => {
-        setFormVisibility(!formVisibility);
-        setError(false);
-        setSuccess(false);
-    }
+    const {
+        userData, 
+        formVisibility, 
+        exercisesVisibility,
+        handleSubmit, 
+        handleChangeDataClick, 
+        handleExercisesDisplay,
+        handleChange, 
+        success, 
+        error, 
+        formData, 
+        areSolvedExercises,
+    } = props
 
 	return (
     	<div className={'userDataContainer'}>
@@ -108,8 +27,13 @@ export function UserData(props) {
                 <h3>email: {userData.email}</h3>
                 {userData.first_name && <h3>imię: {userData.first_name}</h3>}
                 {userData.last_name && <h3>nazwisko: {userData.last_name}</h3>}
+                {userData.level && <h3>Poziom rozszerzony</h3>}
+                {userData.points && <h3>Zebrane punkty: {userData.points}</h3>}
+
                 <Link to={`/password-change/`}><button>Zmień hasło</button></Link>
                 <button onClick={handleChangeDataClick}>Zmień dane</button>
+                {!exercisesVisibility && <button onClick={handleExercisesDisplay}>Pokaż rozwiązane zadania</button>}
+                {exercisesVisibility && <button onClick={handleExercisesDisplay}>Ukryj rozwiązane zadania</button>}
                 </>
             }
             {formVisibility && (
@@ -134,7 +58,27 @@ export function UserData(props) {
             <div>
             {success && <Info message={success} />}
             {error && <Error message={error} />}
+            {exercisesVisibility && !areSolvedExercises && <h3>Nie rozwiązano jeszcze żadnych zadań</h3>}
             </div>
         </div>
     );
 }
+
+// todo wyświetlanie rozwiązanych zadań: gdy user kliknie w przycisk w ustawieniach, 
+// zostanie przeniesiony do istniejącego już komponentu ExercisesList, 
+// ale wyszukane zadania to te które są w modelu UserSettings > exercises (przyda się reużywalność kodu)
+// po kliknięciu w któreś przenosi do komponentu ExerciseDetails
+
+// algorytm: po zalogowaniu, pobierane są razem z userDetails zadania, bo raczej napewno będą potrzebne. 
+// 1. backend: pobieranie zadań” z bazy dodatkowo (tylko potrzebne pola) done
+// 2. sprawdzenmie co przychodzi done
+// 3. globalny stan z listą zadań jest przekazywany przez zwykłe propsy przez komponent nadrzędny UserDataExProvider done.
+// 3.5 refactor komponentu z zadaniami, aby przyjmował argumenty w postaci zadań które ma wyświetlić.done
+// 4. istniejący komponent z zadaniami ExercisesList wyświetlany po kliknięciu przycisku w komponencie userDetails done
+// 
+// 5. na liście zadań exercisesList fajka że zadanie już rozwiązane
+// 6. w szczegółach zadania zielone info że zadanie rozwiązane.
+
+// w liście wyszukiwanych normalnie zadań oraz w szczegółach zadania 
+// powinien pojawić się zielony znaczek z fajką że zadanie już rozwiązane (w liście)
+// lub info że "to zadanie już zostało przez Ciebie rozwiązane." (w szczegółach)

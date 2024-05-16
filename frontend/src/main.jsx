@@ -12,8 +12,8 @@ import { HomePage } from './components/homePage/HomePage'
 import { Game } from './components/game/Game'
 import { Header } from './components/header/Header.jsx'
 import { Register } from './components/auth/Register'
-import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange } from './containers/Auth'
-import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList } from './containers/Ex'
+import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange, } from './containers/Auth'
+import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList, ConUserDataExProvider, } from './containers/Ex'
 
 const router = createBrowserRouter([
   {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user/",
-        element: <ConUserData />,
+        element: <ConUserDataExProvider />,
       },
       {
         path: "password-reset/:uid/:token",
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element: <ConExercisesList />,
       },
       {
-        path: "sections/subsections/exercises/details/",
+        path: "exercises/details/",
         element: <ConExerciseDetails />,
       },
     ],

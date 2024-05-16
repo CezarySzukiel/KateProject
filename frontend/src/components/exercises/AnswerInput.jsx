@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Error, Info } from "../helpersComponents/Messages"
 
 export const AnswerInput = (props) => {
+  const { isLoggedIn, id, pushExerciseToSolved, setCorrectAnswerMessage, setWrongAnswerMessage } = props
   const [answer, setAnswer] = useState('');
-  const [correctAnswerMessage, setCorrectAnswerMessage] = useState(null)
-  const [wrongAnswer, setWrongAnswer] = useState(null)
+  // const [correctAnswerMessage, setCorrectAnswerMessage] = useState(null)
+  // const [wrongAnswerMessage, setWrongAnswerMessage] = useState(null)
 
   useEffect(() => {
     // console.log('props; ', props, 'answer: ', answer, )
@@ -21,26 +22,27 @@ export const AnswerInput = (props) => {
       try {
         const response = await axios.post('http://0.0.0.0:8000/api/v1/exercises/compare/', {
           answer: answer,
-          id: props.id
+          id: id
         }, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${props.accessToken}`,
           }
         });
-        console.log('response: ', response)
 
         if (response.status == 200) {
-          setWrongAnswer(null)
+          console.log('response: ', response)
+          pushExerciseToSolved()
+          setWrongAnswerMessage(null)
           setCorrectAnswerMessage("poprawna odpowiedź!")
         } else if (response.status == 208) {
-          setWrongAnswer(null)
+          setWrongAnswerMessage(null)
           setCorrectAnswerMessage(
             "poprawna odpowiedź! \n Zadanie zostalo już wcześniej przez Ciebie rozwiązane."
           )
         } else if (response.status == 209) {
           setCorrectAnswerMessage(null)
-          setWrongAnswer("Spróbuj jeszcze raz!")
+          setWrongAnswerMessage("Spróbuj jeszcze raz!")
         } 
           
       } catch(error) {
@@ -56,7 +58,7 @@ export const AnswerInput = (props) => {
 
   return (
     <>
-      {props.isLoggedIn && <>
+      {isLoggedIn && <>
         <form onSubmit={handleSubmit}>
           <label>
             Odpowiedź:
@@ -64,8 +66,6 @@ export const AnswerInput = (props) => {
           </label>
           <button type="submit">Wyślij</button>
         </form>
-        {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
-        {wrongAnswer && <Error message={wrongAnswer}/>}
       </>}
     </>
   );

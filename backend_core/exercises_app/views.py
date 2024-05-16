@@ -116,8 +116,6 @@ class CompareExerciseView(APIView):
         if serializer.is_valid():
             # Get the data from the form
             form_data = serializer.validated_data
-            print("*************************************")
-            print(form_data)
             # Get the exercise from the database
             try:
                 exercise = Exercise.objects.get(pk=form_data['id'])
@@ -131,12 +129,10 @@ class CompareExerciseView(APIView):
             # todo check if another user solve this exercise it will work correctly?
             # Compare the data
             if form_data['answer'] == right_answer.answer:
-                print('tutaj wchodzi')
                 # Get or create the user settings
                 user_settings, created = UserSettings.objects.get_or_create(user=request.user)
                 # check if exercise is already in user settings & update the user settings
                 if exercise in user_settings.exercises.all():
-                    print('juz jest to zad')
                     return Response({"detail": "Already solved."}, status=status.HTTP_208_ALREADY_REPORTED)
                 user_settings.points += exercise.points
                 user_settings.exercises.add(exercise)

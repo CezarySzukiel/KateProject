@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
+import { Info, Error } from '../helpersComponents/Messages'
 import { ConAnswerInput } from '../../containers/Auth'
-
 
 export function ExerciseDetails(props) {
   const [exercise, setExercise] = useState(null);
+  const [solvedExercisesIds, setSolvedExercisesIds] = useState(null)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  const [correctAnswerMessage, setCorrectAnswerMessage] = useState(null)
+  const [wrongAnswerMessage, setWrongAnswerMessage] = useState(null)
 
   useEffect(() => {
     if ((props.actualExercise && !exercise) || 
@@ -14,6 +19,12 @@ export function ExerciseDetails(props) {
       fetchExerciseData();
     }
   }, [props.actualExercise]);
+
+  useEffect(() => {
+        if (props.solvedExercises) {
+            setSolvedExercisesIds(props.solvedExercises.map(exercise => exercise.id))
+        }
+    }, [props.solvedExercises])
 
   useEffect(() => {
     if (exercise) {
@@ -35,6 +46,11 @@ export function ExerciseDetails(props) {
         console.error('Error fetching exercise data:', error);
       }
     };
+
+    const pushExerciseToSolved = ()  => {
+      console.log("zaraz doddam to zadanie!")
+      props.pushSolvedExercise(exercise)
+    }
 
     if (!exercise) {
         return <div>Loading...</div>;
@@ -67,7 +83,21 @@ export function ExerciseDetails(props) {
         <p><strong>odpowiedź: </strong>{exercise.correct_answer}</p>
       </>
     )}
-    <ConAnswerInput id={exercise.id}/>
+    <ConAnswerInput 
+      id={exercise.id} 
+      pushExerciseToSolved={pushExerciseToSolved}
+      setCorrectAnswerMessage={setCorrectAnswerMessage}
+      setWrongAnswerMessage={setWrongAnswerMessage}
+    />
+    {isLoggedIn && 
+      <>
+        {!correctAnswerMessage && solvedExercisesIds ? (solvedExercisesIds.includes(exercise.id) ? <Info message={'To zadanie zostało już przez Ciebie rozwiązane.'}/> : null) : null}
+      </>
+    }
+    
+    {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
+    {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
+    
   </div>
 );
 }

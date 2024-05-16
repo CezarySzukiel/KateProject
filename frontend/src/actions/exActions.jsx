@@ -1,10 +1,12 @@
-export const SET_ACTUAL_EXERCISE = 'SET_ACTUAL_EXERCISE'
-export const SET_ACTUAL_SECTION = 'SET_ACTUAL_SECTION'
-export const SET_ACTUAL_SUBSECTION = 'SET_ACTUAL_SUBSECTION'
-export const SET_ALL_SECTIONS = 'SET_ALL_SECTIONS'
-export const SET_ALL_SUBSECTIONS = 'SET_ALL_SUBSECTIONS'
-export const SET_ALL_EXERCISES = 'SET_ALL_EXERCISES'
+export const SET_ACTUAL_EXERCISE = 'SET_ACTUAL_EXERCISE';
+export const SET_ACTUAL_SECTION = 'SET_ACTUAL_SECTION';
+export const SET_ACTUAL_SUBSECTION = 'SET_ACTUAL_SUBSECTION';
+export const SET_ALL_SECTIONS = 'SET_ALL_SECTIONS';
+export const SET_ALL_SUBSECTIONS = 'SET_ALL_SUBSECTIONS';
+export const SET_ALL_EXERCISES = 'SET_ALL_EXERCISES';
 export const SET_SELECTED_SUBSECTION_IDS = 'SET_SELECTED_SUBSECTION_IDS';
+export const SET_SOLVED_EXERCISES = 'SET_SOLVED_EXERCISES';
+export const PUSH_SOLVED_EXERCISE = 'PUSH_SOLVED_EXERCISE';
 
 export const setActualExercise = (exercise) => {
 	return {
@@ -53,4 +55,18 @@ export const setSelectedSubsectionIds = (ids) => {
     type: SET_SELECTED_SUBSECTION_IDS,
     ids: ids,
   }
+}
+
+export const setSolvedExercises = (exercises) => {
+	return {
+		type: SET_SOLVED_EXERCISES,
+		exercises: exercises,
+	}
+}
+
+export const pushSolvedExercise = (exercise) => {
+	return {
+		type: PUSH_SOLVED_EXERCISE,
+		exercise: exercise,
+	}
 }

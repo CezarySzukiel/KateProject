@@ -2,7 +2,8 @@ import './login.css'
 import { useState, useEffect} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';  
-
+import { useDispatch } from 'react-redux';
+import { setSolvedExercises } from '../../actions/exActions'
 import { Error, Info } from "../helpersComponents/Messages"
 
 export function Login(props) {
@@ -11,7 +12,9 @@ export function Login(props) {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
     const [passwordResetInfo, setPasswordResetInfo] = useState(null);
+    const [loginInfo, setLoginInfo] = useState(null)
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (props.isLoggedIn) {
@@ -23,10 +26,10 @@ export function Login(props) {
     }, [props.isLoggedIn])
 
     useEffect(() => {
-        if (username) {
+        if (props.userData) {
             getRefreshToken();
         }
-    }, [username])
+    }, [props.userData])
 
 
     const handleEmailChange = (event) => {
@@ -55,6 +58,10 @@ export function Login(props) {
                 const token = data.access;
                 props.setAccessToken(token);
                 props.loginSuccess();
+                setLoginInfo('Zalogowano')
+                setTimeout(() => {
+                    navigate('/home')
+                }, 1500)
             }
         } catch (error) {
             if (error.response.status == 500) {
@@ -66,7 +73,6 @@ export function Login(props) {
                 console.error('error:', error.response.status);
             }
         }
-        navigate('/home')
     };
 
     const getUserData = async () => {
@@ -79,6 +85,9 @@ export function Login(props) {
             });
             if (response.status === 200) {
                 setUsername(response.data.username);
+                props.setUserData(response.data)
+                console.log('response z loginu: ', response)
+                dispatch(setSolvedExercises(response.data.exercises))
             } 
         } catch (error) {
             console.error(error)
@@ -88,7 +97,7 @@ export function Login(props) {
     const getRefreshToken = async () => {
         try {
             const response = await axios.post('http://0.0.0.0:8000/api/v1/token/', {
-            username,
+            username: props.userData.username,
             password,
             }, {
             headers: {
@@ -105,7 +114,7 @@ export function Login(props) {
                 setPassword('')                
             } else {
                 setPassword('')                
-                console.error("refresh token getting error");
+                console.error("getting refresh token error");
             }
         } catch (error) {
             console.error(error);
@@ -133,30 +142,32 @@ export function Login(props) {
         }
 
     }
-
     return (
         <div className={'LoginContainer'}>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <label htmlFor="email">
-                    Email: 
-                    <input type="email" id="email" value={email} onChange={handleEmailChange} />
-                </label>
-                <br />
-                <label htmlFor="password">
-                    Hasło: 
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <br />
-                <br />
-                <button type="submit">Zaloguj</button>
-            </form>
-            {loginError && <Error message={loginError}/>}
-            {passwordResetInfo && <Info message={passwordResetInfo}/>}
-            <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
-            <p>lub</p>
-            <Link to={`/register`}><button>utwórz nowe konto</button></Link>
-            </div>
+            {!loginInfo && <>
+                <h1>Login</h1>
+                <form onSubmit={handleLogin}>
+                    <label htmlFor="email">
+                        Email: 
+                        <input type="email" id="email" value={email} onChange={handleEmailChange} />
+                    </label>
+                    <br />
+                    <label htmlFor="password">
+                        Hasło: 
+                        <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+                    </label>
+                    <br />
+                    <br />
+                    <button type="submit">Zaloguj</button>
+                </form>
+                {loginError && <Error message={loginError}/>}
+                {passwordResetInfo && <Info message={passwordResetInfo}/>}
+                <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
+                <p>lub</p>
+                <Link to={`/register`}><button>utwórz nowe konto</button></Link>
+            </>}
+            {loginInfo && <h1>{loginInfo}</h1>}
+        </div>
     );
 }
 
