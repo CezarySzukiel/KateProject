@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Info, Error } from '../helpersComponents/Messages'
 import { ConAnswerInput } from '../../containers/Auth'
+import MathProblemDisplay from './latextry'
 
 export function ExerciseDetails(props) {
   const [exercise, setExercise] = useState(null);
@@ -107,6 +108,8 @@ export function ExerciseDetails(props) {
     {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
     {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
     
+
+    <MathProblemDisplay />
   </div>
 );
 }
