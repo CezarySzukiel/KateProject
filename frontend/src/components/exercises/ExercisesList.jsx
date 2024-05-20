@@ -1,5 +1,7 @@
 import './exercisesList.css'
 import checkbox from '../../assets/check.png';
+import Latex from 'react-latex-next';
+import 'katex/dist/katex.min.css';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -15,7 +17,7 @@ export function ExercisesList(props) {
                         <li onClick={() => handleLinkClick(exercise)}>
                             <Link to={`/exercises/details/`} >
                                 <h3>id: {exercise.id}, {exercise.title}</h3>
-                                <p>{exercise.description}</p>
+                                <Latex>{exercise.description}</Latex>
                             </Link>
                         </li>
                         {isLoggedIn && <div className={'img'}>
