@@ -33,7 +33,6 @@ export function ExerciseDetails(props) {
   useEffect(() => {
     if (exercise) {
       props.setActualSubsection(props.allSubsections.filter((subsec) => subsec.id == exercise.subsection))
-      // console.log('exercise;', exercise)
     }
   }, [exercise])
 
@@ -45,12 +44,8 @@ export function ExerciseDetails(props) {
 
     const fetchExerciseData = async () => {
       try {
-        const response = await fetch(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${props.actualExercise.id}/`)
-        const data = await response.json()
-          // .then(response => {
-        console.log('response: ', data)
-        setExercise(data);
-          // return response
+        const response = await axios.get(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${props.actualExercise.id}/`)
+        setExercise(response.data);
       } catch (error) {
         console.error('Error fetching exercise data:', error);
       }
