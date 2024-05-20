@@ -18,32 +18,38 @@ export function ExerciseDetails(props) {
     if ((props.actualExercise && !exercise) || 
       (props.actualExercise && exercise.id !== props.actualExercise.id)
     ) {
-      fetchExerciseData();
+      // setExercise(async () => {await fetchExerciseData})
+      fetchExerciseData()
     }
   }, [props.actualExercise]);
 
-  useEffect(() => {
-        if (props.solvedExercises) {
-            setSolvedExercisesIds(props.solvedExercises.map(exercise => exercise.id))
-        }
-    }, [props.solvedExercises])
+  // useEffect(() => {
+  //       if (props.solvedExercises) {
+  //           setSolvedExercisesIds(props.solvedExercises.map(exercise => exercise.id))
+  //       }
+  //   }, [props.solvedExercises])
 
   useEffect(() => {
     if (exercise) {
       props.setActualSubsection(props.allSubsections.filter((subsec) => subsec.id == exercise.subsection))
+      // console.log('exercise;', exercise)
     }
   }, [exercise])
 
-  useEffect(() => {
-    if (props.actualSubsection) {
-      props.setActualSection(props.allSections.filter((section) => section.id == props.actualSubsection[0].section)[0]) // zahardkodowane 1
-    }
-  }, [props.actualSubsection])
+  // useEffect(() => {
+  //   if (props.actualSubsection) {
+  //     props.setActualSection(props.allSections.filter((section) => section.id == props.actualSubsection[0].section)[0]) // zahardkodowane 1
+  //   }
+  // }, [props.actualSubsection])
 
     const fetchExerciseData = async () => {
       try {
-        const response = await axios.get(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${props.actualExercise.id}/`);
-        setExercise(response.data);
+        const response = await fetch(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${props.actualExercise.id}/`)
+        const data = await response.json()
+          // .then(response => {
+        console.log('response: ', data)
+        setExercise(data);
+          // return response
       } catch (error) {
         console.error('Error fetching exercise data:', error);
       }
