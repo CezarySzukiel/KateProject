@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Latex from 'react-latex-next';
+import 'katex/dist/katex.min.css';
 
 import { Info, Error } from '../helpersComponents/Messages'
 import { ConAnswerInput } from '../../containers/Auth'
@@ -18,16 +20,15 @@ export function ExerciseDetails(props) {
     if ((props.actualExercise && !exercise) || 
       (props.actualExercise && exercise.id !== props.actualExercise.id)
     ) {
-      // setExercise(async () => {await fetchExerciseData})
       fetchExerciseData()
     }
   }, [props.actualExercise]);
 
-  // useEffect(() => {
-  //       if (props.solvedExercises) {
-  //           setSolvedExercisesIds(props.solvedExercises.map(exercise => exercise.id))
-  //       }
-  //   }, [props.solvedExercises])
+  useEffect(() => {
+        if (props.solvedExercises) {
+            setSolvedExercisesIds(props.solvedExercises.map(exercise => exercise.id))
+        }
+    }, [props.solvedExercises])
 
   useEffect(() => {
     if (exercise) {
@@ -36,11 +37,11 @@ export function ExerciseDetails(props) {
     }
   }, [exercise])
 
-  // useEffect(() => {
-  //   if (props.actualSubsection) {
-  //     props.setActualSection(props.allSections.filter((section) => section.id == props.actualSubsection[0].section)[0]) // zahardkodowane 1
-  //   }
-  // }, [props.actualSubsection])
+  useEffect(() => {
+    if (props.actualSubsection) {
+      props.setActualSection(props.allSections.filter((section) => section.id == props.actualSubsection[0].section)[0]) // zahardkodowane 1
+    }
+  }, [props.actualSubsection])
 
     const fetchExerciseData = async () => {
       try {
@@ -77,7 +78,7 @@ export function ExerciseDetails(props) {
         
         {exercise.advanced_level && <h3>Poziom rozszerzony</h3>}
         
-        <h3>{exercise.description}</h3>
+        <Latex>{exercise.description}</Latex>
         
         <p><strong>Punkty:</strong> {exercise.points}</p>
         
