@@ -17,12 +17,13 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
     subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
     solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
     correct_answer = serializers.SerializerMethodField()
+    exam = serializers.DateField(format='%Y-%m', input_formats=('%Y-%m', ), required=False)
 
     class Meta:
         model = Exercise
         fields = (
             'id', 'title', 'description', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
-            'type', 'advanced_level', 'correct_answer', )
+            'type', 'advanced_level', 'correct_answer', 'exam', )
         read_only_fields = ('id',)
 
     def get_correct_answer(self, obj):

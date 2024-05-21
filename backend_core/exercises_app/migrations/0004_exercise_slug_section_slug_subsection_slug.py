@@ -13,16 +13,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='exercise',
             name='slug',
-            field=models.SlugField(blank=True, max_length=64, unique=True),
+            field=models.SlugField(blank=True, max_length=128, unique=True),
         ),
         migrations.AddField(
             model_name='section',
             name='slug',
-            field=models.SlugField(blank=True, max_length=64, unique=True),
+            field=models.SlugField(blank=True, max_length=128, unique=True),
         ),
         migrations.AddField(
             model_name='subsection',
             name='slug',
-            field=models.SlugField(blank=True, max_length=64, unique=True),
+            field=models.SlugField(blank=True, max_length=128, unique=True),
         ),
     ]
