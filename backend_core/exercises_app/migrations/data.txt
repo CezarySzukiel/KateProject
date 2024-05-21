@@ -1,0 +1,415 @@
+[
+    {
+        "Section": "Liczby rzeczywiste",
+        "Subsections": [
+            {
+                "name": "Działania w zbiorze liczb rzeczywistych",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Dowody dotyczące podzielności",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Własności pierwiastków",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Prawa działań na potęgach i pierwiastkach",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Monotoniczność potęgowania",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Przedziały liczbowe",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Wartość bezwzględna",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Potęgi i pierwiastki w praktyce",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Logarytmy",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Section": "Wyrażenia algebraiczne",
+        "Subsections": [
+            {
+                "name": "Wzory skróconego mnożenia",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Działania na wielomianach",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Wyłączanie czynnika przed nawias",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Rozkład wielomianów na czynniki",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Pierwiastki wielomianu",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Dzielenie wielomianów",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            },
+            {
+                "name": "Wyrażenia wymierne",
+                "exercises": [
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    },
+                    {
+                        "title": "tytuł",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+]
+
