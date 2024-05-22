@@ -9,7 +9,7 @@ class Exercise(models.Model):
     solution_similar means solution for a similar task
     type means the type of task: 1 - open task, 2 - multiple choice, etc.
     advanced_level means whether the task is advanced or basic"""
-    title = models.CharField(max_length=128, unique=True)
+    title = models.CharField(max_length=128, unique=False)
     description = models.TextField()
     subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='exercises')
     difficult = models.IntegerField()
@@ -19,7 +19,7 @@ class Exercise(models.Model):
     type = models.IntegerField()
     advanced_level = models.BooleanField(default=False)
     exam = models.DateField(null=True, blank=True)
-    slug = models.SlugField(max_length=128, unique=True, blank=True)
+    slug = models.SlugField(max_length=128, unique=False, blank=True)
 
     def __str__(self):
         return self.title
