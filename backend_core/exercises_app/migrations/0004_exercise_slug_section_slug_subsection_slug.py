@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='exercise',
             name='slug',
-            field=models.SlugField(blank=True, max_length=128, unique=True),
+            field=models.SlugField(blank=True, max_length=128, unique=False),
         ),
         migrations.AddField(
             model_name='section',

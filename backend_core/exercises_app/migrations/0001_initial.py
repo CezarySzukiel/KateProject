@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             name='Exercise',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=128, unique=True)),
+                ('title', models.CharField(max_length=128, unique=False)),
                 ('description', models.TextField()),
                 ('difficult', models.IntegerField()),
                 ('points', models.IntegerField()),
@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
                 ('advanced_level', models.BooleanField(default=False)),
                 ('solution_similar', models.ManyToManyField(blank=True, related_name='exercises', to='exercises_app.exercise')),
                 ('subsection', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='exercises', to='exercises_app.subsection')),
+                ('exam', models.DateField(blank=True, null=True))
             ],
         ),
         migrations.CreateModel(
