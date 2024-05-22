@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Error, Info } from "../helpersComponents/Messages"
 
-export const AnswerInput = (props) => {
+export const HOC_AnswerInput = (props) => {
   const { isLoggedIn, id, pushExerciseToSolved, setCorrectAnswerMessage, setWrongAnswerMessage } = props
   const [answer, setAnswer] = useState('');
 
@@ -52,15 +52,15 @@ export const AnswerInput = (props) => {
 
   return (
     <>
-      {isLoggedIn && <>
         <form onSubmit={handleSubmit}>
           <label>
             Odpowiedź:
             <input type="text" value={answer} onChange={handleChange} />
           </label>
-          <button type="submit">Wyślij</button>
+          {isLoggedIn && <>
+            <button type="submit">Wyślij</button>
+          </>}
         </form>
-      </>}
     </>
   );
 };

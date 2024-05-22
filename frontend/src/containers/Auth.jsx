@@ -17,7 +17,7 @@ import { HOC_UserData } from "../components/auth/HOC_UserData"
 import { PasswordReset } from "../components/auth/PasswordReset"
 import { PasswordChange } from "../components/auth/PasswordChange"
 import { getTokens } from "../helpers"
-import { AnswerInput } from "../components/exercises/AnswerInput"
+// import { AnswerInput } from "../components/exercises/AnswerInput"
 
 const mapStateToProps = (state) => {
     return {
@@ -48,4 +48,4 @@ export const ConUserData = connect(mapStateToProps, mapDispatchToProps)(HOC_User
 export const ConLogout = connect(mapStateToProps, mapDispatchToProps)(Logout);
 export const ConPasswordReset = connect(mapDispatchToProps)(PasswordReset);
 export const ConPasswordChange = connect(mapStateToProps, mapDispatchToProps)(PasswordChange);
-export const ConAnswerInput = connect(mapStateToProps, )(AnswerInput);
+// export const ConAnswerInput = connect(mapStateToProps, )(AnswerInput);
