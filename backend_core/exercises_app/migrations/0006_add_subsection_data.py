@@ -28,7 +28,7 @@ def add_subsection_data(apps, schema_editor):
     i = 0
     for sec in data:
         for y in sec['Subsections']:
-            name = y
+            name = y['name']
             slug = slugify(name)
             Subsection.objects.create(name=name, section=sections[i], slug=slug)
         i += 1
