@@ -28,17 +28,12 @@ def add_answer_data(apps, schema_editor):
     for section in data:
         for subsection in section['Subsections']:
             for exercise in subsection['exercises']:
-                for answers in exercise['answers']:
-                    for answer in answers['correct']:
-                        answer = answer
-                        correct = True
-                        exercise = exercises[ex]
-                        Answer.objects.create(answer=answer, exercise=exercise, correct=correct)
-                    for answer in answers['incorrect']:
-                        answer = answer
-                        correct = False
-                        exercise = exercises[ex]
-                        Answer.objects.create(answer=answer, exercise=exercise, correct=correct)
+                for answer in exercise['answers']:
+                    ans = answer['answer']
+                    correct = answer['correct']
+                    exercise = exercises[ex]
+                    second_set = answer['second_set']
+                    Answer.objects.create(answer=ans, exercise=exercise, correct=correct, second_set=second_set)
                 ex += 1
 
 class Migration(migrations.Migration):

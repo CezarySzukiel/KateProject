@@ -16,7 +16,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     """Serializer for Answer model."""
     class Meta:
         model = Answer
-        fields = ('answer', 'correct',)
+        fields = ('answer', 'correct', 'second_set')
 
 
 class ExerciseDetailSerializer(serializers.ModelSerializer):
@@ -24,14 +24,14 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
 
     subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
     solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
-    correct_answers = AnswerSerializer(many=True)
+    answers = AnswerSerializer(many=True)
     exam = serializers.DateField(format='%Y-%m', input_formats=('%Y-%m', ), required=False)
 
     class Meta:
         model = Exercise
         fields = (
             'id', 'title', 'description', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
-            'type', 'advanced_level', 'correct_answers', 'exam', )
+            'type', 'advanced_level', 'answers', 'exam', )
         read_only_fields = ('id',)
 
     def get_correct_answer(self, obj):

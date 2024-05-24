@@ -18,15 +18,11 @@ export function ExerciseDetailsBottom(props) {
 	        
 	        {props.solution_similar && props.solution_similar.length > 0 && <p><strong>solution_similar:</strong> {props.solution_similar}</p>}
 	        
-	        <p><strong>type:</strong> {props.type}</p>
-	        
 	        {!displayAnswer && <button onClick={handleShowAnswer}>Pokaż prawidłową odpowiedź.</button>}
 
 	        {displayAnswer && <button onClick={handleShowAnswer}>Ukryj prawidłową odpowiedź.</button>}
 
-
-	        
-	        {displayAnswer && <p><strong>odpowiedź: </strong>{props.correct_answer}</p>}
+	        {displayAnswer && <p>Poprawna odpowiedź to: <strong>{props.correctAnswer}</strong></p>}
         </>
 	)
 }

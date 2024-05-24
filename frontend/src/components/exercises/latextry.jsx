@@ -4,7 +4,7 @@ import 'katex/dist/katex.min.css';
 
 const MathProblemDisplay = () => {
 
-    const latexCode = `Liczbę $\\frac{224}{1111}$ można zapisać w postaci nieskończonego ułamka dziewsiętnego okresowego. Dwudziestą cyfrą po przecinku jego rozwinięcia jest`
+    const latexCode = `$a=(\\sqrt{3}-\\sqrt{2})^{2}-2\\sqrt{6}$`
     const latexSymbols = `$
     \\textbf{Operatory binarne:} \\\\
     +, -, \\cdot, \\times, \\div, \\ast, \\pm, \\mp, \\oplus, \\otimes, \\cup, \\cap \\\\ \\\\
@@ -26,7 +26,8 @@ const MathProblemDisplay = () => {
     return (
         <div>
             <h3>Math Problem</h3>
-            <Latex>{latexSymbols}</Latex>
+            {/*<Latex>{latexSymbols}</Latex>*/}
+            
             <h2>szukam:</h2>
             <Latex>{latexCode}</Latex>
 

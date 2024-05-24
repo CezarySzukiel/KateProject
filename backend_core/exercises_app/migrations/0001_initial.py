@@ -50,6 +50,7 @@ class Migration(migrations.Migration):
                 ('answer', models.TextField()),
                 ('correct', models.BooleanField(default=True)),
                 ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='answers', to='exercises_app.exercise')),
+                ('second_set', models.BooleanField(default=False)),
             ],
         ),
     ]

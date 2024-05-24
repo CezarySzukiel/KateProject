@@ -16,6 +16,7 @@ import { SectionsList } from "../components/exercises/SectionsList";
 import { SubsectionsList } from "../components/exercises/SubsectionsList";
 import { SearchBar } from "../components/exercises/SearchBar";
 import { ExProvider } from "../components/auth/UserDataExProvider";
+import { HOC_AnswerInput } from "../components/exercises/HOC_AnswerInput"
 
 const mapStateToProps = (state) => {
     return {
@@ -55,5 +56,6 @@ export const ConSubsectionsList = connect(mapStateToProps, mapDispatchToProps)(S
 export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(HOC_ExercisesList);
 export const ConExerciseDetails = connect(mapStateToProps, mapDispatchToProps)(HOC_ExerciseDetails);
 export const ConSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export const ConAnswerInput = connect(mapStateToProps)(HOC_AnswerInput);
 
 export const ConUserDataExProvider = connect(mapStateToProps, mapSetSolvedExercisesToProps)(ExProvider);

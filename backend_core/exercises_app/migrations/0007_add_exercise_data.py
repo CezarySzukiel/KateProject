@@ -39,6 +39,7 @@ def add_exercise_data(apps, schema_editor):
                 slug = slugify(title)
                 Exercise.objects.create(title=title, description=description, subsection=subsection, difficult=difficult,
                                         points=points, type=type, advanced_level=advanced_level, exam=exam, slug=slug)
+
             subsec += 1
         sec += 1
 

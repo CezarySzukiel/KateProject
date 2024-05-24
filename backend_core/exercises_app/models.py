@@ -32,10 +32,13 @@ class Exercise(models.Model):
 
 class Answer(models.Model):
     """Model representing an answer to an exercise.
-    For multiple choice exercises, correct means whether the answer is one of the correct answers"""
+    For multiple choice exercises, correct means whether the answer is one of the correct answers.
+    second_set concerns the justifications that need to be selected for the answer.
+    """
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='answers')
     answer = models.TextField()
     correct = models.BooleanField(default=True)
+    second_set = models.BooleanField(default=False)
 
     def __str__(self):
         return self.answer
