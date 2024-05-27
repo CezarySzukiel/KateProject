@@ -1,11 +1,14 @@
 import './answerInputs.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Latex from 'react-latex-next';
+
 
 export function Type1(props) {
-	const [selectedAnswer, setSelectedAnswer] = useState(null);
+const [selectedAnswer, setSelectedAnswer] = useState(null);
+
 
 	const handleAnswerClick = (answer) => {
-    	props.handleAnswer(answer);
+    	props.handleAnswer([answer]);
     	setSelectedAnswer(answer);
   	};
 
@@ -26,10 +29,53 @@ export function Type1(props) {
 }
 
 export function Type2(props) {
+	const { answers, handleAnswer } = props
+  	const [firstAnswer, setFirstAnswer] = useState(null)
+  	const [secondAnswer, setSecondAnswer] = useState(null)
+
+	const firstSet = answers.filter(answer => !answer.second_set);
+  	const secondSet = answers.filter(answer => answer.second_set);
+
+  	useEffect(() => {
+  		handleAnswer([firstAnswer, secondAnswer])
+  	}, [firstAnswer, secondAnswer])
+
+  	const handleAnswerClick = (setAnswer, answer) => {
+  		setAnswer(answer)
+  	}
+
 	return (
 		<>
-			<p>Zaznacz jedną odpowiedź spośród A-C oraz jedno uzasadnienie tej odpowiedzi spośród 1.-3.</p>
-		</>
+	        <div>
+		        <h3>Odpowiedzi:</h3>
+		        <ul>
+		          {firstSet.map((answer, index) => (
+		            <li 
+		            	key={index} 
+		            	onClick={() => handleAnswerClick(setFirstAnswer, answer.answer)}
+		            	className={`answer-div ${firstAnswer === answer.answer ? 'selected' : ''}`}
+		            >	
+		            	{String.fromCharCode(65 + index)}. 
+		            	<Latex > {answer.answer}</Latex>
+		            </li>                                                    
+		          ))}
+		        </ul>
+	      	</div>
+     		<div>
+		        <h3>Uzasadnienia:</h3>
+		        <ul>
+		          {secondSet.map((answer, index) => (
+		            <li 
+		            	key={index} 
+		            	onClick={() => handleAnswerClick(setSecondAnswer, answer.answer)}
+		            	className={`answer-div ${secondAnswer === answer.answer ? 'selected' : ''}`}
+		            >
+		            {index + 1}. 
+		            <Latex > {answer.answer}</Latex></li>
+		          ))}
+		        </ul>
+      		</div>
+    	</>
 	)
 }
 

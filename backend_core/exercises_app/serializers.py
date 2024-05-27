@@ -62,4 +62,6 @@ class SectionSerializer(serializers.ModelSerializer):
 
 class CompareExerciseSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    answer = serializers.CharField(max_length=200)
+    answers = serializers.ListField(
+        child=serializers.CharField()
+    )

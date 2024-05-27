@@ -2,12 +2,10 @@
   cursor: pointer;
 }
 
-/* Biała ramka po kliknięciu */
 .answer-div.selected {
   border: 2px solid white;
 }
 
-/* Możesz również dodać stylizację na hover, np. zmieniając tło */
 .answer-div:hover {
-  background-color: #f0f0f0;
+  background-color: gray;
 }

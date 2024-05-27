@@ -63,7 +63,7 @@ export function HOC_ExerciseDetails(props) {
         const response = await axios.get(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${actualExercise.id}/`)
         console.log('response; ', response)
         setActualExercise(response.data);
-        setCorrectAnswer(response.data.answers.find(answer => answer.correct));
+        setCorrectAnswer(response.data.answers.filter(answer => answer.correct));
       } catch (error) {
         console.error('Error fetching exercise data:', error);
       }
@@ -97,7 +97,7 @@ export function HOC_ExerciseDetails(props) {
           points={actualExercise.points}
           difficult={actualExercise.difficult}
           solution_exactly={actualExercise.solution_exactly}
-          correctAnswer={correctAnswer.answer}
+          correctAnswer={correctAnswer}
         />
         
       </>
@@ -105,7 +105,7 @@ export function HOC_ExerciseDetails(props) {
     
     {isLoggedIn && 
       <>
-        {!correctAnswerMessage && solvedExercisesIds ? (solvedExercisesIds.includes(exercise.id) ? <Info message={'To zadanie zostało już przez Ciebie rozwiązane.'}/> : null) : null}
+        {!correctAnswerMessage && solvedExercisesIds ? (solvedExercisesIds.includes(actualExercise.id) ? <Info message={'To zadanie zostało już przez Ciebie rozwiązane.'}/> : null) : null}
       </>
     }    
     {correctAnswerMessage && <Info message={correctAnswerMessage}/>}

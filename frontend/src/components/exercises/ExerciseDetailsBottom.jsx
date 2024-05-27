@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Latex from 'react-latex-next';
 
 
 export function ExerciseDetailsBottom(props) {
@@ -22,7 +23,17 @@ export function ExerciseDetailsBottom(props) {
 
 	        {displayAnswer && <button onClick={handleShowAnswer}>Ukryj prawidłową odpowiedź.</button>}
 
-	        {displayAnswer && <p>Poprawna odpowiedź to: <strong>{props.correctAnswer}</strong></p>}
+	        {displayAnswer && (
+        		<div>
+		          	<p>Poprawne odpowiedzi to:</p>
+		          		{props.correctAnswer.map((answerObj, index) => (
+		            		<p key={index}>
+		              		<strong><Latex>{answerObj.answer}</Latex></strong>
+		            </p>
+		          ))}
+        		</div>
+      		)}
+
         </>
 	)
 }

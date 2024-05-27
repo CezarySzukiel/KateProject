@@ -111,11 +111,13 @@ class CompareExerciseView(APIView):
     # todo optimalization: 2 asks to the database. Maybe frontend should send the exercise data or use lookup?
 
     def post(self, request, format=None):
+        print(request.data)
         serializer = CompareExerciseSerializer(data=request.data)
-        print(request)
+        print(serializer)
         if serializer.is_valid():
             # Get the data from the form
             form_data = serializer.validated_data
+            print('form_data;', form_data)
             # Get the exercise from the database
             try:
                 exercise = Exercise.objects.get(pk=form_data['id'])
@@ -123,12 +125,17 @@ class CompareExerciseView(APIView):
                 return Response({"detail": "Exercise does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
             try:
-                right_answer = Answer.objects.get(exercise=exercise, correct=True)
+                correct_answer = Answer.objects.filter(exercise=exercise, correct=True)
+                print('correct_answer: ', correct_answer)
+                correct_answer_texts = {answer.answer for answer in correct_answer}
+                submitted_answers = set(form_data['answers'])
+                # for i in right_answer:
+                #     print('odpowiedź; ', i)
             except Answer.DoesNotExist:
                 return Response({"detail": "Exercise does not have a right answer."}, status=status.HTTP_404_NOT_FOUND)
             # todo check if another user solve this exercise it will work correctly?
             # Compare the data
-            if form_data['answer'] == right_answer.answer:
+            if submitted_answers == correct_answer_texts:
                 # Get or create the user settings
                 user_settings, created = UserSettings.objects.get_or_create(user=request.user)
                 # check if exercise is already in user settings & update the user settings

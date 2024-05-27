@@ -8,15 +8,16 @@ import { Type1, Type2, Type34, Type5, Type6, Type9 } from './AnswerInputs'
 export const HOC_AnswerInput = (props) => {
   const { setCorrectAnswerMessage, setWrongAnswerMessage, actualExercise } = props
   const [answer, setAnswer] = useState(null);
+  const [error, setError] = useState(null)
   const accessToken = useSelector(state => state.auth.accessToken)
   const exerciseType = actualExercise.type
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   
 
 
-  // useEffect(() => {
-  //   console.log('loginToken;', accessToken)
-  // }, [])
+  useEffect(() => {
+    console.log('answer:', answer)
+  }, [answer])
 
   const handleAnswer = (answer) => {
     setAnswer(answer);
@@ -26,10 +27,22 @@ export const HOC_AnswerInput = (props) => {
       pushSolvedExercise(actualExercise)
     }
 
+  const nullValidator = (answers) => {
+    if (answer === null || answer.includes(null)) {
+      return "Wybierz odpowiedź!"
+    }
+    return null
+  }
+
   const compareAnswer = async () => {
+    const validatorResult = nullValidator(answer)
+    if (validatorResult) {
+      setError(validatorResult)
+    } else {
+      setError(null)
       try {
         const response = await axios.post('http://0.0.0.0:8000/api/v1/exercises/compare/', {
-          answer: answer,
+          answers: answer,
           id: actualExercise.id
         }, {
           headers: {
@@ -54,7 +67,8 @@ export const HOC_AnswerInput = (props) => {
       } catch(error) {
         console.error('Error fetching exercise data:', error);
       }
-    };
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -68,7 +82,10 @@ export const HOC_AnswerInput = (props) => {
         handleAnswer={handleAnswer}
       />}
 
-      {exerciseType === 2 && <Type2 />}
+      {exerciseType === 2 && <Type2 
+        answers={actualExercise.answers}
+        handleAnswer={handleAnswer}
+      />}
 
       {(exerciseType === 3 || exerciseType === 4) && <Type34 />}
 
@@ -84,9 +101,8 @@ export const HOC_AnswerInput = (props) => {
       />}
       {!isLoggedIn && <p>Musisz być zalogowany aby przesłać swoją odpowiedź.</p>}
       {isLoggedIn && <button onClick={handleSubmit}>Wyślij</button>}
+      {error && <Error message={error}/>}
     </>
 
   );
 };
-
-// todo jeśłi zaznaczę odpowiedź niech pojawi się ramka wokół. poza tym jakieś wfekty klikania w c ss
