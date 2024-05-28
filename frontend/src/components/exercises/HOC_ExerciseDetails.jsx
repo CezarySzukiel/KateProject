@@ -29,15 +29,11 @@ export function HOC_ExerciseDetails(props) {
   const isInitialMount = useRef(false);
 
   useEffect(() => {
-    // if ((actualExercise && !exercise) || 
-    //   (actualExercise && exercise.id !== actualExercise.id)
-    // ) { 
       if (isInitialMount.current) {
         fetchExerciseData()
       } else {
         isInitialMount.current = true;
       }
-    // }
   }, []);
 
   useEffect(() => {
@@ -112,7 +108,7 @@ export function HOC_ExerciseDetails(props) {
     {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
     
 
-    <MathProblemDisplay />
+    {/*<MathProblemDisplay />*/}
   </div>
 );
 }

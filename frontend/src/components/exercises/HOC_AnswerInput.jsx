@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Error, Info } from "../helpersComponents/Messages"
-import { Type1, Type2, Type3, Type4, Type5, Type9 } from './AnswerInputs'
+import { Type1, Type2, Type3, Type4, Type9 } from './AnswerInputs'
 
 export const HOC_AnswerInput = (props) => {
   const { setCorrectAnswerMessage, setWrongAnswerMessage, actualExercise } = props
@@ -95,8 +95,6 @@ export const HOC_AnswerInput = (props) => {
         ask2={actualExercise.ask2}
 
       />}
-
-      {exerciseType === 5 && <Type5 />}
 
       {exerciseType === 9 && <Type9 
         handleSubmit={handleSubmit} 

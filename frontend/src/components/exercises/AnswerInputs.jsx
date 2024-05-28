@@ -124,7 +124,7 @@ export function Type3(props) {
 }
 
 export function Type4(props) {
-	// jedna odpowiedź spośród A-C i jedna  D-F
+	
 	const { answers, handleAnswer, ask1, ask2 } = props
   	const [firstAnswer, setFirstAnswer] = useState(null)
   	const [secondAnswer, setSecondAnswer] = useState(null)
@@ -143,7 +143,7 @@ export function Type4(props) {
 	return (
 		<>
 	        <div>
-		        <h3><Latex>{ask1}</Latex></h3>
+		        <p><Latex>{ask1}</Latex></p>
 		        <ul>
 		          {firstSet.map((answer, index) => (
 		            <li 
@@ -158,7 +158,7 @@ export function Type4(props) {
 		        </ul>
 	      	</div>
      		<div>
-		        <h3><Latex>{ask2}</Latex></h3>
+		        <p><Latex>{ask2}</Latex></p>
 		        <ul>
 		          {secondSet.map((answer, index) => (
 		            <li 
@@ -172,14 +172,6 @@ export function Type4(props) {
 		        </ul>
       		</div>
     	</>
-	)
-}
-
-export function Type5(props) {
-	return (
-		<>
-			<p>Zaznacz jedną odpowiedź spośród A-D oraz jedną odpowiedź spośród E-H.</p>
-		</>
 	)
 }
 

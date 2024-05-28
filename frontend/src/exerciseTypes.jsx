@@ -13,15 +13,15 @@ const exerciseTypes = [
 },
 {
 	type: 4,
-	description: "Jedna odpowiedź spośród A-C oraz jedna odpowiedź spośród D-F."
+	description: "Jedna odpowiedź spośród A-X oraz jedna odpowiedź spośród X-X."
 },
-{
-	type: 5,
-	description: "Jedna odpowiedź spośród A-D oraz jedna odpowiedź spośród E-H."
-},
+// {
+// 	type: 5,
+// 	description: "Jedna odpowiedź spośród A-D oraz jedna odpowiedź spośród E-H."
+// },
 {
 	type: 6,
-	description: "Ocena prawdziwości zdań (lub dokończenie zdań)."
+	description: "Ocena prawdziwości zdań (lub dokończeń zdań)."
 },
 {
 	type: 7,
