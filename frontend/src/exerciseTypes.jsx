@@ -9,26 +9,22 @@ const exerciseTypes = [
 },
 {
 	type: 3,
-	description: "Dwie odpowiedzi spośród A-F."
+	description: "Dwie odpowiedzi."
 },
 {
 	type: 4,
-	description: "Dwie odpowiedzi spośród A-G."
+	description: "Jedna odpowiedź spośród A-X oraz jedna odpowiedź spośród X-X."
 },
-{
-	type: 5,
-	description: "Jedna odpowiedź spośród A-C oraz jedna odpowiedź spośród D-F."
-},
+// {
+// 	type: 5,
+// 	description: "Jedna odpowiedź spośród A-D oraz jedna odpowiedź spośród E-H."
+// },
 {
 	type: 6,
-	description: "Jedna odpowiedź spośród A-D oraz jedna odpowiedź spośród E-H."
+	description: "Ocena prawdziwości zdań (lub dokończeń zdań)."
 },
 {
 	type: 7,
-	description: "Ocena prawdziwości zdań (lub dokończenie zdań)."
-},
-{
-	type: 8,
 	description: "Dobieranie/przyporządkowanie/zestawienie odpowiedzi (spośród podanych) do określonych sytuacji/obiektów/elementów."
 },
 {

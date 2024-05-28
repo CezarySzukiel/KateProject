@@ -9,7 +9,6 @@ export function Logout(props) {
 	const navigate = useNavigate();
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.isLoggedIn);
-    const loginToken = useSelector(state => state.loginToken)
 
 	useEffect(() => {
 		handleLogout()

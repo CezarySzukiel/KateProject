@@ -99,8 +99,8 @@ class ExerciseDetailView(generics.RetrieveAPIView):
     def get_object(self):
         exercise_id = self.kwargs['exercise_id']
         exercise = get_object_or_404(Exercise, pk=exercise_id)
-        answer = get_object_or_404(Answer, exercise=exercise, correct=True)
-        exercise.correct_answer = answer
+        answers = Answer.objects.filter(exercise=exercise)
+        exercise.correct_answers = answers
         return exercise
 
 
@@ -112,7 +112,6 @@ class CompareExerciseView(APIView):
 
     def post(self, request, format=None):
         serializer = CompareExerciseSerializer(data=request.data)
-        print(request)
         if serializer.is_valid():
             # Get the data from the form
             form_data = serializer.validated_data
@@ -123,12 +122,16 @@ class CompareExerciseView(APIView):
                 return Response({"detail": "Exercise does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
             try:
-                right_answer = Answer.objects.get(exercise=exercise, correct=True)
+                correct_answer = Answer.objects.filter(exercise=exercise, correct=True)
+                correct_answer_texts = {answer.answer for answer in correct_answer}
+                submitted_answers = set(form_data['answers'])
+                # for i in right_answer:
+                #     print('odpowiedź; ', i)
             except Answer.DoesNotExist:
                 return Response({"detail": "Exercise does not have a right answer."}, status=status.HTTP_404_NOT_FOUND)
             # todo check if another user solve this exercise it will work correctly?
             # Compare the data
-            if form_data['answer'] == right_answer.answer:
+            if submitted_answers == correct_answer_texts:
                 # Get or create the user settings
                 user_settings, created = UserSettings.objects.get_or_create(user=request.user)
                 # check if exercise is already in user settings & update the user settings

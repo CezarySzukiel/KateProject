@@ -33,6 +33,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=128, unique=False)),
                 ('description', models.TextField()),
+                ('ask1', models.TextField(blank=True, null=True)),
+                ('ask2', models.TextField(blank=True, null=True)),
                 ('difficult', models.IntegerField()),
                 ('points', models.IntegerField()),
                 ('solution_exactly', models.TextField(blank=True, null=True)),
@@ -50,6 +52,7 @@ class Migration(migrations.Migration):
                 ('answer', models.TextField()),
                 ('correct', models.BooleanField(default=True)),
                 ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='answers', to='exercises_app.exercise')),
+                ('second_set', models.BooleanField(default=False)),
             ],
         ),
     ]

@@ -16,7 +16,7 @@ export function ExercisesList(props) {
                     <div className={'li'} key={exercise.id}>
                         <li onClick={() => handleLinkClick(exercise)}>
                             <Link to={`/exercises/details/`} >
-                                <h3>id: {exercise.id}, {exercise.title}</h3>
+                                <h3>{exercise.title}</h3>
                                 <Latex>{exercise.description}</Latex>
                             </Link>
                         </li>

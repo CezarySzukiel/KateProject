@@ -1,0 +1,11 @@
+.answer-div {
+  cursor: pointer;
+}
+
+.answer-div.selected {
+  border: 2px solid white;
+}
+
+.answer-div:hover {
+  background-color: gray;
+}

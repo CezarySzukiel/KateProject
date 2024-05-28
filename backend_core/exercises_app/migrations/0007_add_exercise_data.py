@@ -30,6 +30,8 @@ def add_exercise_data(apps, schema_editor):
             for exercise in subsection['exercises']:
                 title = exercise['title']
                 description = exercise['description']
+                ask1 = exercise.get('ask1', None)
+                ask2 = exercise.get('ask2', None)
                 subsection = subsections[subsec]
                 difficult = exercise['difficult']
                 points = exercise['points']
@@ -37,8 +39,20 @@ def add_exercise_data(apps, schema_editor):
                 advanced_level = exercise['advanced_level']
                 exam = exercise['exam']
                 slug = slugify(title)
-                Exercise.objects.create(title=title, description=description, subsection=subsection, difficult=difficult,
-                                        points=points, type=type, advanced_level=advanced_level, exam=exam, slug=slug)
+
+                Exercise.objects.create(
+                    title=title, 
+                    description=description, 
+                    subsection=subsection,
+                    ask1=ask1,
+                    ask2=ask2, 
+                    difficult=difficult,
+                    points=points, 
+                    type=type, 
+                    advanced_level=advanced_level, 
+                    exam=exam, 
+                    slug=slug)
+
             subsec += 1
         sec += 1
 
