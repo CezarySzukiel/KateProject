@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Error, Info } from "../helpersComponents/Messages"
-import { Type1, Type2, Type34, Type5, Type6, Type9 } from './AnswerInputs'
+import { Type1, Type2, Type3, Type4, Type5, Type9 } from './AnswerInputs'
 
 export const HOC_AnswerInput = (props) => {
   const { setCorrectAnswerMessage, setWrongAnswerMessage, actualExercise } = props
@@ -13,11 +13,6 @@ export const HOC_AnswerInput = (props) => {
   const exerciseType = actualExercise.type
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   
-
-
-  useEffect(() => {
-    console.log('answer:', answer)
-  }, [answer])
 
   const handleAnswer = (answer) => {
     setAnswer(answer);
@@ -87,11 +82,21 @@ export const HOC_AnswerInput = (props) => {
         handleAnswer={handleAnswer}
       />}
 
-      {(exerciseType === 3 || exerciseType === 4) && <Type34 />}
+      {exerciseType === 3 && <Type3 
+        answers={actualExercise.answers}
+        handleAnswer={handleAnswer}
+        setError={setError}
+      />}
+
+      {exerciseType === 4 && <Type4 
+        answers={actualExercise.answers}
+        handleAnswer={handleAnswer}
+        ask1={actualExercise.ask1}
+        ask2={actualExercise.ask2}
+
+      />}
 
       {exerciseType === 5 && <Type5 />}
-
-      {exerciseType === 6 && <Type6 />}
 
       {exerciseType === 9 && <Type9 
         handleSubmit={handleSubmit} 

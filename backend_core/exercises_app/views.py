@@ -111,13 +111,10 @@ class CompareExerciseView(APIView):
     # todo optimalization: 2 asks to the database. Maybe frontend should send the exercise data or use lookup?
 
     def post(self, request, format=None):
-        print(request.data)
         serializer = CompareExerciseSerializer(data=request.data)
-        print(serializer)
         if serializer.is_valid():
             # Get the data from the form
             form_data = serializer.validated_data
-            print('form_data;', form_data)
             # Get the exercise from the database
             try:
                 exercise = Exercise.objects.get(pk=form_data['id'])
@@ -126,7 +123,6 @@ class CompareExerciseView(APIView):
 
             try:
                 correct_answer = Answer.objects.filter(exercise=exercise, correct=True)
-                print('correct_answer: ', correct_answer)
                 correct_answer_texts = {answer.answer for answer in correct_answer}
                 submitted_answers = set(form_data['answers'])
                 # for i in right_answer:

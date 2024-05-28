@@ -4,7 +4,7 @@ import 'katex/dist/katex.min.css';
 
 const MathProblemDisplay = () => {
 
-    const latexCode = `$a=(\\sqrt{3}-\\sqrt{2})^{2}-2\\sqrt{6}$`
+    const latexCode = "$\\frac{1}{2}$"
     const latexSymbols = `$
     \\textbf{Operatory binarne:} \\\\
     +, -, \\cdot, \\times, \\div, \\ast, \\pm, \\mp, \\oplus, \\otimes, \\cup, \\cap \\\\ \\\\

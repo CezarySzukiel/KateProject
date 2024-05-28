@@ -112,7 +112,7 @@ export function HOC_ExerciseDetails(props) {
     {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
     
 
-    {/*<Mat hProblemDisplay />*/}
+    <MathProblemDisplay />
   </div>
 );
 }

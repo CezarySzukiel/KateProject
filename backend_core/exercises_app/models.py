@@ -11,6 +11,8 @@ class Exercise(models.Model):
     advanced_level means whether the task is advanced or basic"""
     title = models.CharField(max_length=128, unique=False)
     description = models.TextField()
+    ask1 = models.TextField(null=True, blank=True)
+    ask2 = models.TextField(null=True, blank=True)
     subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='exercises')
     difficult = models.IntegerField()
     points = models.IntegerField()

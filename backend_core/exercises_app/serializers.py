@@ -30,7 +30,7 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
         fields = (
-            'id', 'title', 'description', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
+            'id', 'title', 'description', 'ask1', 'ask2', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
             'type', 'advanced_level', 'answers', 'exam', )
         read_only_fields = ('id',)
 
