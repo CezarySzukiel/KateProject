@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from blog.models import Post
+
 
 class Exercise(models.Model):
     """Model representing an exercise.
