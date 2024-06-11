@@ -21,6 +21,7 @@ export function Header() {
             </div>
             <div className="buttonsContainer">
                 <Link to={`sections`}><button onClick={handleExercisesClick}>Zadania</button></Link>
+                <Link to={`blog`}><button>Blog</button></Link>
                 <Link to={`game`}><button>Gra</button></Link>
             </div>    
             <ConMenu />

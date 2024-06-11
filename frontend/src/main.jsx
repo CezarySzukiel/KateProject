@@ -6,14 +6,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import App from './App.jsx'
+import App from './App'
 import ErrorPage from "./error-page";
 import { HomePage } from './components/homePage/HomePage'
 import { Game } from './components/game/Game'
-import { Header } from './components/header/Header.jsx'
+import { Header } from './components/header/Header'
 import { Register } from './components/auth/Register'
 import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange, } from './containers/Auth'
 import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList, ConUserDataExProvider, } from './containers/Ex'
+import { PostList } from './components/blog/PostList'
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,11 @@ const router = createBrowserRouter([
         path: "exercises/details/",
         element: <ConExerciseDetails />,
       },
+      {
+        path: "/blog/",
+        element: <PostList />,
+      },
+
     ],
   },
 
