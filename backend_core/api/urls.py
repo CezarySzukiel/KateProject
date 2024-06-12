@@ -13,7 +13,7 @@ urlpatterns = [
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path('auth/facebook/', views.FacebookLogin.as_view(), name='fb_login'),
     path('exercises/', include('exercises_app.urls')),
-    # path('custom_user/', include('users.urls')),
+    path('blog/', include('blog.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #  for using cookies maybe use auth/token/refresh?
     path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()),
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),

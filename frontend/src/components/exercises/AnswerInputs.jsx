@@ -143,7 +143,7 @@ export function Type4(props) {
 	return (
 		<>
 	        <div>
-		        <p><Latex>{ask1}</Latex></p>
+		        {ask1 && <p><Latex>{ask1}</Latex></p>}
 		        <ul>
 		          {firstSet.map((answer, index) => (
 		            <li 
@@ -158,7 +158,7 @@ export function Type4(props) {
 		        </ul>
 	      	</div>
      		<div>
-		        <p><Latex>{ask2}</Latex></p>
+		        {ask2 && <p><Latex>{ask2}</Latex></p>}
 		        <ul>
 		          {secondSet.map((answer, index) => (
 		            <li 
@@ -166,8 +166,9 @@ export function Type4(props) {
 		            	onClick={() => handleAnswerClick(setSecondAnswer, answer.answer)}
 		            	className={`answer-div ${secondAnswer === answer.answer ? 'selected' : ''}`}
 		            >
-		            {String.fromCharCode(65 + firstSet.length + index)}. 
-		            <Latex > {answer.answer}</Latex></li>
+			            {String.fromCharCode(65 + firstSet.length + index)}. 
+			            {answer.answer && <Latex > {answer.answer}</Latex>}
+		            </li>
 		          ))}
 		        </ul>
       		</div>
