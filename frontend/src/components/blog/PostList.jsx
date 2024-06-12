@@ -27,7 +27,7 @@ export function PostList() {
 
 	return (
 		<>	
-			{posts.length > 0 ? posts.map((post) => (
+			{posts && posts.length > 0 ? posts.map((post) => (
 				<>
 					<h1>{post.title}</h1>
 					<p>{post.post}</p>
