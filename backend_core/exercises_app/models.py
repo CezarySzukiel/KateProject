@@ -68,6 +68,7 @@ class Subsection(models.Model):
         sort_values = Subsection.objects.values_list('name', flat=True).distinct().order_by('name')
         return [(value, value) for value in sort_values]
 
+
 class Section(models.Model):
     """Model representing a section of exercises"""
     name = models.CharField(max_length=128, unique=True)
@@ -80,3 +81,32 @@ class Section(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+
+class Function(models.Model):
+    FUNCTION_CHOICES = [
+        ('linear', 'Linear'),
+        ('quadratic', 'Quadratic'),
+        ('inverse', 'Inverse'),
+        ('sinusoidal', 'Sinusoidal'),
+        ('logarithmic', 'Logarithmic'),
+        ('exponential', 'Exponential'),
+        ('square_root', 'Square Root'),
+        ('polynomial', 'Polynomial'),
+        ('absolute', 'Absolute'),
+        ('step', 'Step'),
+    ]
+    function_type = models.CharField(max_length=20, choices=FUNCTION_CHOICES)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='functions')
+    a = models.FloatField()
+    b = models.FloatField(null=True, blank=True)
+    c = models.FloatField(null=True, blank=True)
+    coefficients = models.JSONField(null=True, blank=True)
+    x_start = models.FloatField(default=-10)
+    x_end = models.FloatField(default=10)
+    x_step = models.FloatField(default=1)
+    x_offset = models.FloatField(default=0)
+    y_offset = models.FloatField(default=0)
+
+    def __str__(self):
+        return f"{self.get_function_type_display()} function"
