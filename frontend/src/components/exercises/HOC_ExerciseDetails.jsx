@@ -10,6 +10,7 @@ import { Info, Error } from '../helpersComponents/Messages';
 import { ExerciseDetailsTop } from './ExerciseDetailsTop';
 import { ExerciseDetailsBottom } from './ExerciseDetailsBottom';
 import MathProblemDisplay from './latextry'
+import { Chart } from './Chart'
 
 export function HOC_ExerciseDetails(props) {
   const {
@@ -109,6 +110,16 @@ export function HOC_ExerciseDetails(props) {
     
 
     {/*<MathProblemDisplay />*/}
+    <Chart 
+      a={9900}
+      b={0}
+      c={0}
+      xStart={-10}
+      xEnd={10}
+      xStep={1}
+      xOffset={0}
+      yOffset={0}
+    />
   </div>
 );
 }
