@@ -23,7 +23,8 @@ class FunctionSerializer(serializers.ModelSerializer):
     """Serializer for Function model."""
     class Meta:
         model = Function
-        fields = ('function_type', 'a', 'b', 'c', 'coefficients', 'x_start', 'x_end', 'x_step', 'x_offset', 'y_offset')
+        fields = ('id','function_type', 'a', 'b', 'c', 'coefficients', 'x_start', 'x_end', 'x_step', 'x_offset', 'y_offset')
+        read_only_fields = ('id',)
 
 
 class ExerciseDetailSerializer(serializers.ModelSerializer):
