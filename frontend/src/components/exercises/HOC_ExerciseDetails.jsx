@@ -6,11 +6,10 @@ import 'katex/dist/katex.min.css';
 
 import { ConAnswerInput } from '../../containers/Ex'
 import { Info, Error } from '../helpersComponents/Messages';
-// import { HOC_AnswerInput } from './HOC_AnswerInput';
 import { ExerciseDetailsTop } from './ExerciseDetailsTop';
 import { ExerciseDetailsBottom } from './ExerciseDetailsBottom';
-import MathProblemDisplay from './latextry'
 import { Chart } from './Chart'
+import MathProblemDisplay from './latextry'
 
 export function HOC_ExerciseDetails(props) {
   const {
@@ -85,6 +84,15 @@ export function HOC_ExerciseDetails(props) {
                 
         <Latex>{actualExercise.description}</Latex>
 
+        {actualExercise.functions.length > 0 && 
+          actualExercise.functions.map((func) => (
+            <Chart 
+              key={func.id}
+              data={func}
+            />
+          ))
+        }
+
         <ConAnswerInput 
           setCorrectAnswerMessage={setCorrectAnswerMessage}
           setWrongAnswerMessage={setWrongAnswerMessage}
@@ -110,16 +118,6 @@ export function HOC_ExerciseDetails(props) {
     
 
     {/*<MathProblemDisplay />*/}
-    <Chart 
-      a={9900}
-      b={0}
-      c={0}
-      xStart={-10}
-      xEnd={10}
-      xStep={1}
-      xOffset={0}
-      yOffset={0}
-    />
   </div>
 );
 }

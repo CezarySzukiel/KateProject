@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
 
 from blog.models import Post
 
@@ -93,7 +94,6 @@ class Function(models.Model):
         ('exponential', 'Exponential'),
         ('square_root', 'Square Root'),
         ('polynomial', 'Polynomial'),
-        ('absolute', 'Absolute'),
         ('step', 'Step'),
     ]
     function_type = models.CharField(max_length=20, choices=FUNCTION_CHOICES)
@@ -109,4 +109,37 @@ class Function(models.Model):
     y_offset = models.FloatField(default=0)
 
     def __str__(self):
-        return f"{self.get_function_type_display()} function"
+        return self.exercise.title
+
+    def clean(self):
+        required_fields = []
+        optional_fields = ['a', 'b', 'c']
+
+        if self.function_type == 'linear':
+            required_fields = ['a', 'b']
+        elif self.function_type == 'quadratic':
+            required_fields = ['a', 'b', 'c']
+        elif self.function_type == 'inverse':
+            required_fields = ['a']
+        elif self.function_type == 'sinusoidal':
+            required_fields = ['a', 'b', 'c']
+        elif self.function_type == 'logarithmic':
+            required_fields = ['a']
+        elif self.function_type == 'exponential':
+            required_fields = ['a']
+        elif self.function_type == 'square_root':
+            required_fields = ['a']
+        elif self.function_type == 'step':
+            required_fields = ['a']
+
+        for field in required_fields:
+            if getattr(self, field) is None:
+                raise ValidationError(f'{field} is required for {self.function_type} function.')
+
+        for field in optional_fields:
+            if field not in required_fields and getattr(self, field) is not None:
+                raise ValidationError(f'{field} should not be provided for {self.function_type} function.')
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)

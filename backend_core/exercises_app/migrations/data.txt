@@ -149,7 +149,7 @@
                         ]
                     },
                     {
-                        "title": "1.2.2",
+                        "title": "Zadanie 1.2.2",
                         "description": "opis",
                         "difficult": 1,
                         "points": 1,
