@@ -92,35 +92,45 @@ const generateStepData = (a, xStart, xEnd, xStep, xOffset, yOffset) => {
 export const Chart = (props) => {
   const {a, b, c, coefficients, function_type, x_end, x_offset, x_start, x_step, y_offset } = props.data
   const [data, setData] = useState(null)
+  const [lineType, setLineType] = useState('natural')
 
   useEffect(() => {
     switch (function_type) {
       case 'linear':
         setData(generateLinearData(a, b, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'quadratic':
         setData(generateQuadraticData(a, b, c, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'inverse':
         setData(generateInverseData(a, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'sinusoidal':
         setData(generateSinusoidalData(a, b, c, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'logarithmic':
         setData(generateLogarithmicData(a, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'exponential':
         setData(generateExponentialData(a, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'square Root':
         setData(generateSquareRootData(a, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'polynomial':
         setData(generatePolynomialData(coefficients, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('natural')
         break;
       case 'step':
         setData(generateStepData(a, x_start, x_end, x_step, x_offset, y_offset));
+        setLineType('step')
         break;
       default:
         break;
@@ -140,7 +150,7 @@ export const Chart = (props) => {
       <YAxis />
       <Tooltip />
       <ReferenceLine />
-      <Line type="natural" dataKey="y" stroke="#8884d8"  dot={false} />
+      <Line type={lineType} dataKey="y" stroke="#8884d8"  dot={false} />
     </LineChart>
   );
 }
