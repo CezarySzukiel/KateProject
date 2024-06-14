@@ -6,9 +6,9 @@ import 'katex/dist/katex.min.css';
 
 import { ConAnswerInput } from '../../containers/Ex'
 import { Info, Error } from '../helpersComponents/Messages';
-// import { HOC_AnswerInput } from './HOC_AnswerInput';
 import { ExerciseDetailsTop } from './ExerciseDetailsTop';
 import { ExerciseDetailsBottom } from './ExerciseDetailsBottom';
+import { Chart } from './Chart'
 import MathProblemDisplay from './latextry'
 
 export function HOC_ExerciseDetails(props) {
@@ -83,6 +83,15 @@ export function HOC_ExerciseDetails(props) {
         />
                 
         <Latex>{actualExercise.description}</Latex>
+
+        {actualExercise.functions.length > 0 && 
+          actualExercise.functions.map((func) => (
+            <Chart 
+              key={func.id}
+              data={func}
+            />
+          ))
+        }
 
         <ConAnswerInput 
           setCorrectAnswerMessage={setCorrectAnswerMessage}

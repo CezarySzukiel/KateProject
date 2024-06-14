@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Exercise, Section, Subsection, Answer
+from .models import Exercise, Section, Subsection, Answer, Function
 
 
 class ExercisesListSerializer(serializers.ModelSerializer):
@@ -19,19 +19,28 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ('answer', 'correct', 'second_set')
 
 
+class FunctionSerializer(serializers.ModelSerializer):
+    """Serializer for Function model."""
+    class Meta:
+        model = Function
+        fields = ('id','function_type', 'a', 'b', 'c', 'coefficients', 'x_start', 'x_end', 'x_step', 'x_offset', 'y_offset')
+        read_only_fields = ('id',)
+
+
 class ExerciseDetailSerializer(serializers.ModelSerializer):
     """Serializer for single exercise details"""
 
     subsection = serializers.PrimaryKeyRelatedField(queryset=Subsection.objects.all())
     solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
     answers = AnswerSerializer(many=True)
+    functions = FunctionSerializer(many=True)
     exam = serializers.DateField(format='%Y-%m', input_formats=('%Y-%m', ), required=False)
 
     class Meta:
         model = Exercise
         fields = (
             'id', 'title', 'description', 'ask1', 'ask2', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
-            'type', 'advanced_level', 'answers', 'exam', )
+            'type', 'advanced_level', 'answers', 'functions', 'exam', )
         read_only_fields = ('id',)
 
     def get_correct_answer(self, obj):

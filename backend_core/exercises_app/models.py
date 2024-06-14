@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
 
 from blog.models import Post
 
@@ -68,6 +69,7 @@ class Subsection(models.Model):
         sort_values = Subsection.objects.values_list('name', flat=True).distinct().order_by('name')
         return [(value, value) for value in sort_values]
 
+
 class Section(models.Model):
     """Model representing a section of exercises"""
     name = models.CharField(max_length=128, unique=True)
@@ -79,4 +81,65 @@ class Section(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+
+class Function(models.Model):
+    FUNCTION_CHOICES = [
+        ('linear', 'Linear'),
+        ('quadratic', 'Quadratic'),
+        ('inverse', 'Inverse'),
+        ('sinusoidal', 'Sinusoidal'),
+        ('logarithmic', 'Logarithmic'),
+        ('exponential', 'Exponential'),
+        ('square_root', 'Square Root'),
+        ('polynomial', 'Polynomial'),
+        ('step', 'Step'),
+    ]
+    function_type = models.CharField(max_length=20, choices=FUNCTION_CHOICES)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='functions')
+    a = models.FloatField()
+    b = models.FloatField(null=True, blank=True)
+    c = models.FloatField(null=True, blank=True)
+    coefficients = models.JSONField(null=True, blank=True)
+    x_start = models.FloatField(default=-10)
+    x_end = models.FloatField(default=10)
+    x_step = models.FloatField(default=1)
+    x_offset = models.FloatField(default=0)
+    y_offset = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.exercise.title
+
+    def clean(self):
+        required_fields = []
+        optional_fields = ['a', 'b', 'c']
+
+        if self.function_type == 'linear':
+            required_fields = ['a', 'b']
+        elif self.function_type == 'quadratic':
+            required_fields = ['a', 'b', 'c']
+        elif self.function_type == 'inverse':
+            required_fields = ['a']
+        elif self.function_type == 'sinusoidal':
+            required_fields = ['a', 'b', 'c']
+        elif self.function_type == 'logarithmic':
+            required_fields = ['a']
+        elif self.function_type == 'exponential':
+            required_fields = ['a']
+        elif self.function_type == 'square_root':
+            required_fields = ['a']
+        elif self.function_type == 'step':
+            required_fields = ['a']
+
+        for field in required_fields:
+            if getattr(self, field) is None:
+                raise ValidationError(f'{field} is required for {self.function_type} function.')
+
+        for field in optional_fields:
+            if field not in required_fields and getattr(self, field) is not None:
+                raise ValidationError(f'{field} should not be provided for {self.function_type} function.')
+
+    def save(self, *args, **kwargs):
+        self.clean()
         super().save(*args, **kwargs)
