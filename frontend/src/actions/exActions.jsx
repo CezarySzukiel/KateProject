@@ -7,6 +7,8 @@ export const SET_ALL_EXERCISES = 'SET_ALL_EXERCISES';
 export const SET_SELECTED_SUBSECTION_IDS = 'SET_SELECTED_SUBSECTION_IDS';
 export const SET_SOLVED_EXERCISES = 'SET_SOLVED_EXERCISES';
 export const PUSH_SOLVED_EXERCISE = 'PUSH_SOLVED_EXERCISE';
+export const SET_ACTIVE_INPUT = 'SET_ACTIVE_INPUT';
+export const SET_USER_ANSWER = 'SET_USER_ANSWER';
 
 export const setActualExercise = (exercise) => {
 	return {
@@ -68,5 +70,19 @@ export const pushSolvedExercise = (exercise) => {
 	return {
 		type: PUSH_SOLVED_EXERCISE,
 		exercise: exercise,
+	}
+}
+
+export const setActiveInput = (inputRef) => {
+	return {
+  	type: SET_ACTIVE_INPUT,
+  	payload: inputRef,
+  }
+};
+
+export const setUserAnswer = (answer) => {
+	return {
+		type: SET_USER_ANSWER,
+		payload: answer,
 	}
 }

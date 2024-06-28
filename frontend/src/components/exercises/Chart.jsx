@@ -45,7 +45,6 @@ const generateLogarithmicData = (a, xStart, xEnd, xStep, xOffset, yOffset) => {
     const y = Math.log(x) / Math.log(a) + yOffset;
     data.push({ x: x + xOffset, y });
   }
-  console.log('Logarythmic data: ', data)
   return data;
 };
 
@@ -120,7 +119,7 @@ export const Chart = (props) => {
         setData(generateExponentialData(a, x_start, x_end, x_step, x_offset, y_offset));
         setLineType('natural')
         break;
-      case 'square Root':
+      case 'square_root':
         setData(generateSquareRootData(a, x_start, x_end, x_step, x_offset, y_offset));
         setLineType('natural')
         break;
@@ -137,7 +136,7 @@ export const Chart = (props) => {
     }
   }, [])
 
-
+ 
   return (
     <LineChart
       width={600}

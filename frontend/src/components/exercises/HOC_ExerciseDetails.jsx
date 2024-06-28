@@ -1,3 +1,4 @@
+import './hocExerciseDetails.css'
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import { Info, Error } from '../helpersComponents/Messages';
 import { ExerciseDetailsTop } from './ExerciseDetailsTop';
 import { ExerciseDetailsBottom } from './ExerciseDetailsBottom';
 import { Chart } from './Chart'
+import { LatexTable } from './LatexTable'
 import MathProblemDisplay from './latextry'
 
 export function HOC_ExerciseDetails(props) {
@@ -18,7 +20,9 @@ export function HOC_ExerciseDetails(props) {
     actualSubsection, setActualSubsection, 
     solvedExercises, pushSolvedExercise,
     allSubsections, 
-    allSections } = props
+    allSections,
+    setActiveInput, activeInputRef, 
+    setUserAnswer, } = props
 
   const [exercise, setExercise] = useState(null);
   const [solvedExercisesIds, setSolvedExercisesIds] = useState(null);
@@ -71,7 +75,7 @@ export function HOC_ExerciseDetails(props) {
         return <div>Loading...</div>;
     }
 	return (
-  <div>
+  <div className={"exercise-details-container"}>
     {actualExercise && correctAnswer && (
       <>
         <ExerciseDetailsTop 
@@ -104,7 +108,6 @@ export function HOC_ExerciseDetails(props) {
           solution_exactly={actualExercise.solution_exactly}
           correctAnswer={correctAnswer}
         />
-        
       </>
     )}
     
@@ -115,7 +118,11 @@ export function HOC_ExerciseDetails(props) {
     }    
     {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
     {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
-    
+    <LatexTable 
+      setActiveInput={setActiveInput}
+      activeInputRef={activeInputRef}
+      setUserAnswer={setUserAnswer}
+    />
 
     {/*<MathProblemDisplay />*/}
   </div>
