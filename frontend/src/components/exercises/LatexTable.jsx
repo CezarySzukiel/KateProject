@@ -3,8 +3,6 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Latex from 'react-latex-next';
 import DynamicModal from './DynamicModal';
 import latexSymbols from '../../latexSymbols';
-// import handleChange from './AnswerInputs';
-// import { insertAtCaret } from './helpers';
 import { reformatAnswer } from './AnswerInputs';
 
 import { connect } from 'react-redux';
@@ -19,46 +17,44 @@ const chunkArray = (array, chunkSize) => {
 };
 
 export function LatexTable(props) {
-	// console.log('props', props)
 	const { activeInputRef } = props
-  // const { setRef, insertAtCaret } = useCaret();
   const columns = 10;
   const symbolChunks = chunkArray(latexSymbols, columns);
 
-  const inputRef = useRef(null); //wywalić
+  const inputRef = useRef(null);
 
   const [modals, setModals] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  // useEffect(() => { //wywalić
-	// 	console.log('activeInputRef: ', activeInputRef)
-	// 	// inputRef = activeInputRef
-  // }, [activeInputRef])
-
   const handleSymbolClick = (symbol) => {
-    console.log('activeInputRef: ', activeInputRef)
-    // todo usuwać modale po zakończonej akcji
+    // console.log('activeInputRef: ', activeInputRef)
     const variables = symbol.match(/[{[][^}\]]+[}\]]/g) || [];
     const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
-    setModals((prevModals) => [
-      ...prevModals,
-      { symbol, variables: cleanedVariables, isOpen: true },
-    ]);
+    console.log('cleanedVariables', cleanedVariables)
+    if (cleanedVariables.length > 0) {
+	    setModals((prevModals) => [
+	      ...prevModals,
+	      { symbol, variables: cleanedVariables, isOpen: true },
+	    ]);
+  	} else { 
+  		props.setUserAnswer(updateInputValue(symbol, activeInputRef))
+  	}
+
   };
 
   const handleModalClose = (index) => {
     setModals((prevModals) => {
       const newModals = [...prevModals];
-      newModals[index].isOpen = false;
+      newModals.splice(index, 1);
       return newModals;
     });
   };
 
-  const handleModalSubmit = (index, values) => {
-    const { symbol } = modals[index];
-    let updatedSymbol = symbol;
+  const formatSymbol = (symbol, values) => {
+    let updatedSymbol = symbol.symbol;
     Object.keys(values).forEach((variable) => {
       const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
+      console.log(updatedSymbol)
       updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
         if (values[p1] !== undefined) {
           return `{${values[p1]}}`;
@@ -66,39 +62,37 @@ export function LatexTable(props) {
         return match;
       });
     });
-    // todo dodać obsługę wstawiania znaków do wyskakującego okienka
-    // todo dodać warunki, aby tablica znaków wyświetlała się tylko w type9
-    // todo dodać aktualizację stanu, tak aby odrazu po dodaniu znaku wyświetlał się pod spodem
-    if (activeInputRef) {
-      // console.log("no tu jest", activeInputRef, updatedSymbol);
-      // console.log('insertAtCaret', activeInputRef);
-      // console.log('inputRef.value: ', activeInputRef.value)
-      const start = activeInputRef.selectionStart;
-      const end = activeInputRef.selectionEnd;
-      let text = activeInputRef.value;
-      // text = text.replace(/\$/g, '');
-      text = text.slice(0, start) + updatedSymbol + text.slice(end);
-  		// text = `$${text}$`;
-      console.log('activeInputRef: ', activeInputRef.value, 'oraz text: ', text)
-      text = reformatAnswer(text)
-      activeInputRef.value = text;
-      setTimeout(() => {
-        activeInputRef.setSelectionRange(start + updatedSymbol.length, start + updatedSymbol.length);
-        activeInputRef.focus();
-      }, 0);
+    return updatedSymbol;
+	};
 
-      props.setUserAnswer([text])
-    }
+	const updateInputValue = (symbol, activeInputRef) => {
+	  if (activeInputRef) {
+	    const start = activeInputRef.selectionStart;
+	    const end = activeInputRef.selectionEnd;
+	    let text = activeInputRef.value;
+	    text = text.slice(0, start) + symbol + text.slice(end);
+	    text = reformatAnswer(text);
+	    activeInputRef.value = text;
+	    setTimeout(() => {
+	      activeInputRef.setSelectionRange(start + symbol.length, start + symbol.length);
+	      activeInputRef.focus();
+	    }, 0);
+	    return [text]
+	  }
+	};
 
+  const handleModalSubmit = (index, values) => {
+  	const symbol = formatSymbol(modals[index], values)
+  	props.setUserAnswer(updateInputValue(symbol, activeInputRef))
   };
 
-  const handleFocus = () => { // todo wywalić?
+  const handleFocus = () => {
   	props.setActiveInput(inputRef.current);
   }
 
   return (
     <div>
-      <textarea
+      <input
         ref={inputRef}
         onFocus={handleFocus}
         value={inputValue}
@@ -127,6 +121,7 @@ export function LatexTable(props) {
           onClose={() => handleModalClose(index)}
           onSubmit={(values) => handleModalSubmit(index, values)}
           variables={modal.variables}
+          setActiveInput={props.setActiveInput}
         />
       ))}
     </div>

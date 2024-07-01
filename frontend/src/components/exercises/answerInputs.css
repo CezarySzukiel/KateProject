@@ -9,3 +9,21 @@
 .answer-div:hover {
   background-color: gray;
 }
+
+.answer-input {
+  width: 100%;
+}
+
+.answer-input div.user-answer-field {
+  width: 100%;
+  max-width: 800px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.answer-input div.user-answer-field h1 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal; 
+  margin: 0; 
+}

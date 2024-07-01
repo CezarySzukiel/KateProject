@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-const DynamicModal = ({ isOpen, onClose, onSubmit, variables }) => {
+const DynamicModal = ({ isOpen, onClose, onSubmit, variables, setActiveInput }) => {
   const [values, setValues] = useState(() => {
     return variables.reduce((acc, variable) => {
       acc[variable] = '';
       return acc;
     }, {});
   });
+  const inputRef = useRef(null);
+
   const handleChange = (e, variable) => {
     setValues({
       ...values,
@@ -19,6 +21,10 @@ const DynamicModal = ({ isOpen, onClose, onSubmit, variables }) => {
     onSubmit(values);
     onClose();
   };
+  
+  // const handleFocus = () => {
+  //   setActiveInput(inputRef.current);
+  // }
 
   if (!isOpen) return null;
 
@@ -30,6 +36,8 @@ const DynamicModal = ({ isOpen, onClose, onSubmit, variables }) => {
           <label>
             {variable}:
             <input
+              ref={inputRef}
+              // onFocus={handleFocus}
               type="text"
               value={values[variable]}
               onChange={(e) => handleChange(e, variable)}
@@ -39,7 +47,6 @@ const DynamicModal = ({ isOpen, onClose, onSubmit, variables }) => {
       ))}
       <button onClick={handleSubmit}>Zatwierdź</button>
       <button onClick={onClose}>Anuluj</button>
-      {/*dodać przycisk X w prawym górnym roku okienka onClick={onClose}*/}
     </div>,
     document.getElementById('modal-root')
   );

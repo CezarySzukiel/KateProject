@@ -179,6 +179,10 @@ export function Type4(props) {
 
 export const reformatAnswer = (value) => {
 	let data = value.replace(/\$/g, '');
+	// console.log(data.length)
+	if (data.length < 1) {
+		return ''
+	}
  	return `$${data}$`;
 }
 
@@ -196,7 +200,6 @@ export function Type9(props) {
  		props.handleChange([value])
  	}
 
- 	// w handleChange dodać obsługę, aby caret był zawsze pomiędzy $ a nie za $ którego nie możę usunąć
 	return (
 		<div className={"answer-input"}>
 			<p>Wpisz poprawną odpowiedź</p>
@@ -208,13 +211,12 @@ export function Type9(props) {
 		      		      	ref={inputRef}
 		           			onFocus={handleFocus}
 		           			type="text" 
-		           			// value={props.answer} 
+		           			value={props.answer} 
 		           			onChange={handleChange} 
 		           		>
-		           		{/*<Latex>${props.answer}$</Latex>*/}
 		           		</textarea>
 	           		</div>
-	           		<div>
+	           		<div  className={'user-answer-field'}>
 	           		<h1><Latex>{answer}</Latex></h1>
 	           		</div>
 	          	</label>
