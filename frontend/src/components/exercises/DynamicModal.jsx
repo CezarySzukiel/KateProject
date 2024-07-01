@@ -22,10 +22,6 @@ const DynamicModal = ({ isOpen, onClose, onSubmit, variables, setActiveInput }) 
     onClose();
   };
   
-  // const handleFocus = () => {
-  //   setActiveInput(inputRef.current);
-  // }
-
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -37,7 +33,6 @@ const DynamicModal = ({ isOpen, onClose, onSubmit, variables, setActiveInput }) 
             {variable}:
             <input
               ref={inputRef}
-              // onFocus={handleFocus}
               type="text"
               value={values[variable]}
               onChange={(e) => handleChange(e, variable)}

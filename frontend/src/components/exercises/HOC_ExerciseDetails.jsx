@@ -61,7 +61,6 @@ export function HOC_ExerciseDetails(props) {
     const fetchExerciseData = async () => {
       try {
         const response = await axios.get(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${actualExercise.id}/`)
-        console.log('response; ', response)
         setActualExercise(response.data);
         setCorrectAnswer(response.data.answers.filter(answer => answer.correct));
       } catch (error) {

@@ -179,7 +179,6 @@ export function Type4(props) {
 
 export const reformatAnswer = (value) => {
 	let data = value.replace(/\$/g, '');
-	// console.log(data.length)
 	if (data.length < 1) {
 		return ''
 	}
@@ -198,7 +197,6 @@ export function Type9(props) {
  		let value = event.target.value;
  		value = reformatAnswer(value)
  		props.handleChange([value])
- 		console.log('answer: ', answer.length)
  	}
 
 	return (
