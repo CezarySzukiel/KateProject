@@ -95,7 +95,12 @@
                                 "second_set": false
                             },
                             { 
-                                "answer": "$a=6$`, `$a=5$",
+                                "answer": "$a=6$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=5$",
                                 "correct": false,
                                 "second_set": false
                             },
