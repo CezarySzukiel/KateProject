@@ -8,7 +8,9 @@ setAllSubsections,
 setAllExercises, 
 setSelectedSubsectionIds,
 setSolvedExercises, 
-pushSolvedExercise, } from "../actions/exActions";
+pushSolvedExercise, 
+setActiveInput,
+setUserAnswer, } from "../actions/exActions";
 
 import { HOC_ExercisesList } from "../components/exercises/HOC_ExercisesList";
 import { HOC_ExerciseDetails } from "../components/exercises/HOC_ExerciseDetails";
@@ -28,6 +30,9 @@ const mapStateToProps = (state) => {
         allExercises: state.ex.allExercises, 
         selectedSubsectionIds: state.ex.selectedSubsectionIds,
         solvedExercises: state.ex.solvedExercises,
+        activeInputRef: state.ex.activeInputRef,
+        userAnswer: state.ex.userAnswer,
+
     };
 };
 
@@ -41,7 +46,8 @@ const mapDispatchToProps = (dispatch) => {
         setAllExercises: (exercises) => dispatch(setAllExercises(exercises)),
         setSelectedSubsectionIds: (ids) => dispatch(setSelectedSubsectionIds(ids)),
         pushSolvedExercise: (exercise) => dispatch(pushSolvedExercise(exercise)),
-        
+        setActiveInput: (payload) => dispatch(setActiveInput(payload)),
+        setUserAnswer: (payload) => dispatch(setUserAnswer(payload)),
     }
 }
 
@@ -56,6 +62,6 @@ export const ConSubsectionsList = connect(mapStateToProps, mapDispatchToProps)(S
 export const ConExercisesList = connect(mapStateToProps, mapDispatchToProps)(HOC_ExercisesList);
 export const ConExerciseDetails = connect(mapStateToProps, mapDispatchToProps)(HOC_ExerciseDetails);
 export const ConSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
-export const ConAnswerInput = connect(mapStateToProps)(HOC_AnswerInput);
+export const ConAnswerInput = connect(mapStateToProps, mapDispatchToProps)(HOC_AnswerInput);
 
 export const ConUserDataExProvider = connect(mapStateToProps, mapSetSolvedExercisesToProps)(ExProvider);

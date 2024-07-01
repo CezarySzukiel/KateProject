@@ -6,7 +6,9 @@ SET_ALL_SUBSECTIONS,
 SET_ALL_EXERCISES, 
 SET_SELECTED_SUBSECTION_IDS, 
 SET_SOLVED_EXERCISES, 
-PUSH_SOLVED_EXERCISE, } 
+PUSH_SOLVED_EXERCISE,
+SET_ACTIVE_INPUT,
+SET_USER_ANSWER, } 
 from '../actions/exActions';
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
   allExercises: null,
   selectedSubsectionIds: null,
   solvedExercises: null,
+  activeInputRef: null,
+  userAnswer: [],
 }
 
 const exReducer = (state = initialState, action) => {
@@ -66,6 +70,16 @@ const exReducer = (state = initialState, action) => {
       return {
         ...state,
         solvedExercises: [...state.solvedExercises, action.exercise]
+      }
+    case SET_ACTIVE_INPUT:
+      return {
+        ...state,
+        activeInputRef: action.payload
+      };
+    case SET_USER_ANSWER:
+      return {
+        ...state,
+        userAnswer: action.payload
       }
     default:
       return state;

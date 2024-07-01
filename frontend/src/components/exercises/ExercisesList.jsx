@@ -13,8 +13,8 @@ export function ExercisesList(props) {
             <h2>Lista zadań</h2>
             <ul>
                 {exercises.map(exercise => (
-                    <div className={'li'} key={exercise.id}>
-                        <li onClick={() => handleLinkClick(exercise)}>
+                    <div onClick={() => handleLinkClick(exercise)} className={'li'} key={exercise.id}>
+                        <li>
                             <Link to={`/exercises/details/`} >
                                 <h3>{exercise.title}</h3>
                                 <Latex>{exercise.description}</Latex>

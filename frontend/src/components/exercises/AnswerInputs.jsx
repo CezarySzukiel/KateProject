@@ -1,6 +1,7 @@
 import './answerInputs.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Latex from 'react-latex-next';
+import { useSelector } from 'react-redux';
 import { Error } from  '../helpersComponents/Messages';
 
 export function Type1(props) {
@@ -176,20 +177,55 @@ export function Type4(props) {
 	)
 }
 
+export const reformatAnswer = (value) => {
+	let data = value.replace(/\$/g, '');
+	if (data.length < 1) {
+		return ''
+	}
+ 	return data;
+}
+
 export function Type9(props) {
+	const inputRef = useRef(null);
+	const answer = useSelector(state => state.ex.userAnswer)
+
+ 	const handleFocus = () => {
+ 		props.setActiveInput(inputRef.current)
+ 	}
+ 	
+ 	const handleChange = () => {
+ 		let value = event.target.value;
+ 		value = reformatAnswer(value)
+ 		props.handleChange([value])
+ 	}
+
 	return (
-		<>
+		<div className={"answer-input"}>
 			<p>Wpisz poprawną odpowiedź</p>
 	        <form onSubmit={props.handleSubmit}>
 	          	<label>
 	            	Odpowiedź:
-	            	<input type="text" value={props.answer} onChange={props.handleChange} />
+	          		<div>
+		            	<textarea
+		      		      	ref={inputRef}
+		           			onFocus={handleFocus}
+		           			type="text" 
+		           			value={props.answer} 
+		           			onChange={handleChange} 
+		           		>
+		           		</textarea>
+	           		</div>
+	           		<div  className={'user-answer-field'}>
+	           		{answer[0].length > 0 && 
+	           		<h1><Latex>${answer}$</Latex></h1>}
+	           		{answer[0].length == 0 && <h1><Latex>{answer}</Latex></h1>}
+	           		</div>
 	          	</label>
+
 	          	{props.isLoggedIn && <>
-	            	<button type="submit">Wyślij</button>
 	          	</>}
 	        	{!props.isLoggedIn && <p>Aby sprawdzić swoją odpowiedź musisz być zalogowany.</p>}
 	        </form>
-    	</>
+    	</div>
 	)
 }
