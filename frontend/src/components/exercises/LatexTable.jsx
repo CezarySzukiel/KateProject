@@ -27,10 +27,8 @@ export function LatexTable(props) {
   const [inputValue, setInputValue] = useState('');
 
   const handleSymbolClick = (symbol) => {
-    // console.log('activeInputRef: ', activeInputRef)
     const variables = symbol.match(/[{[][^}\]]+[}\]]/g) || [];
     const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
-    console.log('cleanedVariables', cleanedVariables)
     if (cleanedVariables.length > 0) {
 	    setModals((prevModals) => [
 	      ...prevModals,
@@ -54,7 +52,6 @@ export function LatexTable(props) {
     let updatedSymbol = symbol.symbol;
     Object.keys(values).forEach((variable) => {
       const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
-      console.log(updatedSymbol)
       updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
         if (values[p1] !== undefined) {
           return `{${values[p1]}}`;
@@ -92,15 +89,6 @@ export function LatexTable(props) {
 
   return (
     <div>
-      <input
-        ref={inputRef}
-        onFocus={handleFocus}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        rows="4"
-        cols="50"
-        placeholder="Type your LaTeX here..."
-      />
       <table>
         <tbody>
           {symbolChunks.map((row, rowIndex) => (

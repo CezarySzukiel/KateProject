@@ -183,7 +183,7 @@ export const reformatAnswer = (value) => {
 	if (data.length < 1) {
 		return ''
 	}
- 	return `$${data}$`;
+ 	return data;
 }
 
 export function Type9(props) {
@@ -198,6 +198,7 @@ export function Type9(props) {
  		let value = event.target.value;
  		value = reformatAnswer(value)
  		props.handleChange([value])
+ 		console.log('answer: ', answer.length)
  	}
 
 	return (
@@ -217,7 +218,9 @@ export function Type9(props) {
 		           		</textarea>
 	           		</div>
 	           		<div  className={'user-answer-field'}>
-	           		<h1><Latex>{answer}</Latex></h1>
+	           		{answer[0].length > 0 && 
+	           		<h1><Latex>${answer}$</Latex></h1>}
+	           		{answer[0].length == 0 && <h1><Latex>{answer}</Latex></h1>}
 	           		</div>
 	          	</label>
 

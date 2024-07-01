@@ -118,11 +118,11 @@ export function HOC_ExerciseDetails(props) {
     }    
     {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
     {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
-    <LatexTable 
+    {actualExercise.type == 9 && <LatexTable 
       setActiveInput={setActiveInput}
       activeInputRef={activeInputRef}
       setUserAnswer={setUserAnswer}
-    />
+    />}
 
     {/*<MathProblemDisplay />*/}
   </div>
