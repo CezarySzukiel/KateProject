@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
             name='Function',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('function_type', models.CharField(choices=[('linear', 'Linear'), ('quadratic', 'Quadratic'), ('inverse', 'Inverse'), ('sinusoidal', 'Sinusoidal'), ('logarithmic', 'Logarithmic'), ('exponential', 'Exponential'), ('square_root', 'Square Root'), ('polynomial', 'Polynomial'), ('absolute', 'Absolute'), ('step', 'Step')], max_length=20)),
+                ('function_type', models.CharField(choices=[('linear', 'Linear'), ('quadratic', 'Quadratic'), ('inverse', 'Inverse'), ('sinusoidal', 'Sinusoidal'), ('logarithmic', 'Logarithmic'), ('exponential', 'Exponential'), ('square_root', 'Square Root'), ('polynomial', 'Polynomial'), ('step', 'Step')], max_length=20)),
                 ('a', models.FloatField()),
                 ('b', models.FloatField(blank=True, null=True)),
                 ('c', models.FloatField(blank=True, null=True)),
