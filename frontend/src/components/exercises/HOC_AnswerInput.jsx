@@ -9,7 +9,6 @@ import { Type1, Type2, Type3, Type4, Type9 } from './AnswerInputs'
 
 export const HOC_AnswerInput = (props) => {
   const { setCorrectAnswerMessage, setWrongAnswerMessage, actualExercise, setActiveInput, userAnswer, setUserAnswer } = props
-  // const [answer, setAnswer] = useState([]);
   const [error, setError] = useState(null)
   const accessToken = useSelector(state => state.auth.accessToken)
   const exerciseType = actualExercise.type
@@ -20,23 +19,23 @@ export const HOC_AnswerInput = (props) => {
     setUserAnswer(answer);
   };
 
-  // const handleChange = (answer) => {
-  //   setUserAnswer(answer);
-  // };
-
   const pushExerciseToSolved = ()  => {
       pushSolvedExercise(actualExercise)
     }
 
-  const nullValidator = (answers) => {
-    if (answer === null || answer.includes(null)) {
+  const nullValidator = (answer) => {
+    if (
+      answer === null || 
+      answer === "" ||
+      answer.includes(null) ||
+      answer.includes("")
+    ) {
       return "Wybierz odpowiedź!"
     }
     return null
   }
 
-  const compareAnswer = async () => {
-    console.log('answer: ', answer)
+  const compareAnswer = async (answer) => {
     const validatorResult = nullValidator(answer)
     if (validatorResult) {
       setError(validatorResult)
@@ -44,7 +43,7 @@ export const HOC_AnswerInput = (props) => {
       setError(null)
       try {
         const response = await axios.post('http://0.0.0.0:8000/api/v1/exercises/compare/', {
-          answers: uswerAnswer,
+          answers: answer,
           id: actualExercise.id
         }, {
           headers: {
@@ -74,7 +73,7 @@ export const HOC_AnswerInput = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    compareAnswer()
+    compareAnswer(userAnswer)
   };
 
   return (

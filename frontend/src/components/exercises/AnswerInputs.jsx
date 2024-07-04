@@ -33,8 +33,8 @@ const [selectedAnswer, setSelectedAnswer] = useState(null);
 
 export function Type2(props) {
 	const { answers, handleAnswer } = props
-  	const [firstAnswer, setFirstAnswer] = useState(null)
-  	const [secondAnswer, setSecondAnswer] = useState(null)
+  	const [firstAnswer, setFirstAnswer] = useState("")
+  	const [secondAnswer, setSecondAnswer] = useState("")
 
 	const firstSet = answers.filter(answer => !answer.second_set);
   	const secondSet = answers.filter(answer => answer.second_set);
@@ -127,8 +127,8 @@ export function Type3(props) {
 export function Type4(props) {
 	
 	const { answers, handleAnswer, ask1, ask2 } = props
-  	const [firstAnswer, setFirstAnswer] = useState(null)
-  	const [secondAnswer, setSecondAnswer] = useState(null)
+  	const [firstAnswer, setFirstAnswer] = useState("")
+  	const [secondAnswer, setSecondAnswer] = useState("")
 
 	const firstSet = answers.filter(answer => !answer.second_set);
   	const secondSet = answers.filter(answer => answer.second_set);
@@ -215,11 +215,11 @@ export function Type9(props) {
 		           		>
 		           		</textarea>
 	           		</div>
-	           		<div  className={'user-answer-field'}>
+	           		{answer.length > 0 && <div  className={'user-answer-field'}>
 	           		{answer[0].length > 0 && 
 	           		<h1><Latex>${answer}$</Latex></h1>}
 	           		{answer[0].length == 0 && <h1><Latex>{answer}</Latex></h1>}
-	           		</div>
+	           		</div>}
 	          	</label>
 
 	          	{props.isLoggedIn && <>
