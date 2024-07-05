@@ -4,7 +4,7 @@ import { Route, Routes, Outlet} from 'react-router-dom';
 import { Provider } from "react-redux";
 
 import { store } from "./store/store"
-import { Header } from './components/header/Header'
+import { Header } from './components/layout/Header'
 
 function App() {
   return (

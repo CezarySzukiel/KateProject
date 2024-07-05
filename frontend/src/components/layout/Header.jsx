@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import './header.css'
 import { ConMenu } from "../../containers/Auth"
-import { Navbar } from "../navbar/Navbar";
+import { Navbar } from "./Navbar";
 
 export function Header() {
     const [isNavbar, setIsNavbar] = useState(false);

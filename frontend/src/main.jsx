@@ -8,9 +8,9 @@ import {
 
 import App from './App'
 import ErrorPage from "./error-page";
-import { HomePage } from './components/homePage/HomePage'
+import { HomePage } from './components/layout/HomePage'
 import { Game } from './components/game/Game'
-import { Header } from './components/header/Header'
+import { Header } from './components/layout/Header'
 import { Register } from './components/auth/Register'
 import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange, } from './containers/Auth'
 import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList, ConUserDataExProvider, } from './containers/Ex'

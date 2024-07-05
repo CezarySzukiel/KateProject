@@ -12,7 +12,7 @@ import {
 } from "../actions/authActions"
 import { Login } from "../components/auth/Login"
 import { Logout } from "../components/auth/Logout"
-import { Menu } from "../components/menu/Menu"
+import { Menu } from "../components/layout/Menu"
 import { HOC_UserData } from "../components/auth/HOC_UserData"
 import { PasswordReset } from "../components/auth/PasswordReset"
 import { PasswordChange } from "../components/auth/PasswordChange"
