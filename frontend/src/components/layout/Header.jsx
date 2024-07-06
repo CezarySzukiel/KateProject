@@ -1,15 +1,18 @@
+import './header.css'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-
-import './header.css'
+import { useSelector, useDispatch } from 'react-redux';
 import { ConMenu } from "../../containers/Auth"
 import { Navbar } from "./Navbar";
+import { setNavbarDisplay } from '../../actions/layoutActions'
+
 
 export function Header() {
-    const [isNavbar, setIsNavbar] = useState(false);
+    const isNavbar = useSelector(state => state.layout.isNavbar)
+    const dispatch = useDispatch()
 
     const handleExercisesClick = () => {
-        setIsNavbar(true)
+        dispatch(setNavbarDisplay(true))
     }
 
     return (
