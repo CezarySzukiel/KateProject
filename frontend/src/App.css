@@ -6,6 +6,16 @@
   text-align: center;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.Content {
+  flex: 1;
+}
+
 .logo {
   height: 30px;
   padding: 5px;
@@ -43,7 +53,7 @@
 }
 .App {
 /*  width: 100%;*/
-  background-color: darkgray;
+/*  background-color: darkgray;*/
 }
 .App-navbar {
 /*  width: 200px;*/
