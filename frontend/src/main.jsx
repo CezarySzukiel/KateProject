@@ -16,6 +16,7 @@ import { ConLogin, ConLogout, ConUserData, ConPasswordReset, ConPasswordChange, 
 import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsList, ConUserDataExProvider, } from './containers/Ex'
 import { PostList } from './components/blog/PostList'
 import Privacy from './components/other/Privacy'
+import { PostDetails } from './components/blog/PostDetails'
 
 const router = createBrowserRouter([
   {
@@ -79,7 +80,10 @@ const router = createBrowserRouter([
         path: "/privacy-policy/",
         element: <Privacy />,
       },
-
+      {
+        path: "/post/",
+        element: <PostDetails />,
+      },
 
     ],
   },

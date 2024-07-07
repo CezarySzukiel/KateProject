@@ -12,5 +12,4 @@ router.register('list', views.PostViewSet, basename='posts')
 urlpatterns = router.urls
 
 urlpatterns += [    
-
 ]
