@@ -45,12 +45,12 @@ export function PostList() {
 	return (
 		<>	
 			{posts && posts.length > 0 ? posts.map((post) => (
+				<div onClick={() => (handleClick(post))} key={post.id}>
 				<Link to={`/post/`} >
-				<div onClick={() => (handleClick(post))}>
 					<h3>{post.title}</h3>
 					{post.author && <p>Autor: {post.author}</p>}
-				</div>
 				</Link>
+				</div>
 			)) : <p>Brak postów</p>}
 		</>
 	)

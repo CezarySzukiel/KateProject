@@ -43,7 +43,6 @@ export function PostDetails() {
                     page: currentPage,
                 },
 			});
-			console.log("postDetail", response)
 			return response.data.results
 		} catch (error) {
 			console.error(error);
