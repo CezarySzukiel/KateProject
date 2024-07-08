@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setActualPost } from '../../actions/blogActions'
+import { getFilteredPosts } from '../../helpers'
 
 export function PostDetails() {
 	const actualPost = useSelector(state => state.blog.actualPost)
@@ -21,34 +22,17 @@ export function PostDetails() {
 
 	useEffect(() => {
         if (actualPost.id && !isInitialMount.current) {
-            setFilters(prevFilters => ({ ...prevFilters, id: actualPost.id }));
+            setFilters(prevFilters => ({ ...prevFilters, id: actualPost.id, page_size: 1}));
             isInitialMount.current = false;
         }
     }, [actualPost.id]);
 
     useEffect(() => {
         if (filters.id) {
-            getData().then(data => dispatch(setActualPost(data[0])));
+            getFilteredPosts(SEARCH_URL, filters, currentPage).then(data => dispatch(setActualPost(data[0])));
         }
     }, [filters, currentPage]);
 
-	const getData = async () => {
-		try {
-			const response = await axios.get(SEARCH_URL, {
-				headers: {
-	                    'Content-Type': 'application/json',
-	            },
-	            params: {
-                    ...filters,
-                    page: currentPage,
-                },
-			});
-			return response.data.results
-		} catch (error) {
-			console.error(error);
-			throw error;
-		}
-	}
 	return (
 		<>
 		<h1>{actualPost.title}</h1>

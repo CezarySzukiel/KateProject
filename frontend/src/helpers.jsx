@@ -44,3 +44,21 @@ export const extractSubsections = (response) => {
         return acc;
     }, []);
 };
+
+export const getFilteredPosts = async (SEARCH_URL, filters, currentPage) => {
+    try {
+      const response = await axios.get(SEARCH_URL, {
+        headers: {
+                      'Content-Type': 'application/json',
+              },
+              params: {
+                    ...filters,
+                    page: currentPage,
+                },
+      });
+      return response.data.results
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }

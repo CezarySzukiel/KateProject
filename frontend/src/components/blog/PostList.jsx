@@ -29,7 +29,6 @@ export function PostList() {
 	                    'Content-Type': 'application/json',
 	            },
 			})
-			console.log(response)
 			setPosts(response.data.results)
 			return response.data.results
 		} catch (error) {
