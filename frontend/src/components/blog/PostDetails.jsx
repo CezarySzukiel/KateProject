@@ -52,7 +52,6 @@ export function PostDetails() {
 	}
 	return (
 		<>
-		<h1>{actualPost.id}</h1>
 		<h1>{actualPost.title}</h1>
 		<p>{actualPost.post}</p>
 		<p>{actualPost.author}</p>
