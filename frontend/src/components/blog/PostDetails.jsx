@@ -35,10 +35,10 @@ export function PostDetails() {
 
 	return (
 		<>
-		<h1>{actualPost.title}</h1>
-		<p>{actualPost.post}</p>
-		<p>{actualPost.author}</p>
-		<p>{new Date(actualPost.created_at).toLocaleString()}</p>
+			<h1>{actualPost.title}</h1>
+			<p>{actualPost.post}</p>
+			<p>{actualPost.author}</p>
+			<p>{new Date(actualPost.created_at).toLocaleString()}</p>
 		</>
 	)
 }
