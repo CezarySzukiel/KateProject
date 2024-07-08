@@ -8,5 +8,11 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'author', 'post',)
-        read_only_fields = fields
+        fields = ('id', 'title', 'author', 'created_at', 'subsection')
+        read_only_fields = (fields)
+
+
+class PostFilterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'author', 'post', 'created_at', 'subsection']

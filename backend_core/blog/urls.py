@@ -12,4 +12,5 @@ router.register('list', views.PostViewSet, basename='posts')
 urlpatterns = router.urls
 
 urlpatterns += [    
+	path('post/', views.PostFilterView.as_view(), name='post-filter'),
 ]
