@@ -44,7 +44,9 @@ class PostFilterView(APIView):
         if not filterset.is_valid():
             return Response(filterset.errors, status=400)
 
-        queryset = filterset.qs.order_by('-created_at') #  hardcoded order_by
+        ordering = request.GET.get('ordering', '-created_at')
+
+        queryset = filterset.qs.order_by(ordering)
         paginator = self.pagination_class()
         page = paginator.paginate_queryset(queryset, request)
         if page is not None:
