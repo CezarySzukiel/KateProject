@@ -19,7 +19,7 @@ export function Header() {
         <div className="headerContainer">
             <div className="logoContainer">
                 <a href="/home/">
-                    <img src="/images/logos/logo2.png" alt="Logo" />
+                    <img src="/images/logos/logo.png" alt="Logo" />
                 </a>
             </div>
             <div className="buttonsContainer">
