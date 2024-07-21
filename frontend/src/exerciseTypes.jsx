@@ -5,7 +5,7 @@ const exerciseTypes = [
 },
 {
 	type: 2,
-	description: "Jedna odpowiedź spośród A-C oraz jedno uzasadnienie tej odpowiedzi spośród 1.-3. (ale tabelka może mieć różne rozmiary, np 2x2, 2x3)."
+	description: "Jedna odpowiedź spośród A-C oraz jedno uzasadnienie tej odpowiedzi spośród 1  -3. (ale tabelka może mieć różne rozmiary, np 2x2, 2x3)."
 },
 {
 	type: 3,

@@ -1,0 +1,3 @@
+{
+  "Sections": ['Liczby rzeczywiste', 'Wyrażenia algebraiczne', 'Równania i nierówności', 'Układy równań', 'Funkcje', 'Ciągi', 'Trygonometria', 'Planimetria', 'Geometria analityczna na płaszczyżnie kartezjańskiej', 'Stereometria', 'Kombinatoryka', 'Rachunek prawdopodobieństwa i statystyka', 'Optymalizacja i rachunek różniczkowy']
+}

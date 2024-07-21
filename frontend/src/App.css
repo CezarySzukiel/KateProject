@@ -10,11 +10,33 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: 
+    url('../../../public/images/backgrounds/mainBackground2.jpg'),
+    url('../../../public/images/backgrounds/mainBackground3.jpg');
+  background-size: cover, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+/*  background: linear-gradient(to bottom, #313745, #555a65, #313745);*/
 }
 
 .Content {
   flex: 1;
+/*  background: linear-gradient(to bottom, #313745, #555a65, #313745);*/
 }
+
+/*.Content: :after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; 
+  background-image: url('../../../public/images/backgrounds/mainBackground.jpg');
+  opacity: 0.1;
+  z-index: 2;
+}*/
 
 .logo {
   height: 30px;

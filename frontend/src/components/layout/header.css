@@ -1,19 +1,21 @@
 .headerContainer {
 	max-width: 1248px;
 	height: 100px;
-	background-color: #313745;
 	display: flex;
 }
 
 .logoContainer {
 	height: 100%%;
-	padding: 15 px;
+	padding: 0 px;
 	margin-left: 15 px;
+	margin-right: 4rem;
+	background-color: none;
 }
 
 .logoContainer img {
     max-height: 70%;
     margin: 10px;
+    background-color: none;
 }
 
 .buttonsContainer {

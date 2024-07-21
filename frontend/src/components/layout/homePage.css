@@ -1,0 +1,49 @@
+.HeroSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+/*    background-color: #f4f4f4;*/
+    color: #333;
+}
+
+.HeroContent {
+    max-width: 600px;
+    margin-right: 20px;
+    text-align: left;
+}
+
+.HeroContent h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.HeroContent p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.BenefitsList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.BenefitsList li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.CTAButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.CTAButton:hover {
+    background-color: #45a049;
+}

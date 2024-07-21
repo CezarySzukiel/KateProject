@@ -125,6 +125,38 @@
                                 "second_set": false
                             }
                         ]
+                    },
+                    {
+                        "title": "Zadanie 1.1.4",
+                        "description": "Liczbę $\\frac{351}{990}$ można zapisać w postaci nieskończonego ułamka dziesiętnego okresowego. Piętnastą cyfrą po przecinku jego rozwinięcia jest",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 4,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 3,
+                                "correct": false,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 7,
+                                "correct": false,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 9,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
                     }
                 ]
             },
@@ -145,11 +177,6 @@
                                 "answer": "$\frac{1}{2}$",
                                 "correct": true,
                                 "second_set": false
-                            },
-                            { 
-                                "answer": 2,
-                                "correct": false,
-                                "second_set": false
                             }
                         ]
                     },
@@ -166,11 +193,6 @@
                             { 
                                 "answer": 1,
                                 "correct": true,
-                                "second_set": false
-                            },
-                            { 
-                                "answer": 2,
-                                "correct": false,
                                 "second_set": false
                             }
                         ]

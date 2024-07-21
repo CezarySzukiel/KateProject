@@ -1,0 +1,79 @@
+[
+  {
+    'Section': 'Liczby rzeczywiste',
+    'Subsections': [
+      {
+        'name': 'Liczby',
+        'Subsubsections': [
+          'Budowa liczb', 'Liczby naturalne', 'Liczby całkowite', 'Liczby wymierne', 'Liczby niewymierne', 'Liczby rzeczywiste'
+        ]
+      },
+      {
+        'name': 'Działania na liczbach',
+        'Subsubsections': ['Dodawanie', 'Odejmowanie', 'Mnożenie', 'Dzielenie']
+      },
+      {'name': 'Koleność wykonywania działań'},
+      {'name': 'Zbiory i przedziały'},
+      {'name': 'Procenty'},
+      {'name': 'Potęgi i pierwiastki'},
+      {'name': 'Notacja wykładnicza'},
+      {'name': 'Ułamki okresowe'},
+      {
+        'name': 'Logarytmy',
+        'Subsubsections': ['Definicja', 'Obliczanie Wartości', 'Obliczanie sumy i różnicy logarytmów']
+      },
+      {
+        'name': 'Wartość bezwzględna',
+        'Subsubsections': ['Definicja', 'Równania', 'Nierówności']
+      }
+    ]
+  },
+  {
+    'Section': "Wyrażenia algebraiczne",
+    'Subsections': []
+  },
+  {
+    'Section': "Równania i nierówności",
+    'Subsections': []
+  },
+  {
+    'Section': "Układy równań",
+    'Subsections': []
+  },
+  {
+    'Section': "Funkcje",
+    'Subsections': []
+  },
+  {
+    'Section': "Ciągi",
+    'Subsections': []
+  },
+  {
+    'Section': "Trygonometria",
+    'Subsections': []
+  },
+  {
+    'Section': "Planimetria",
+    'Subsections': []
+  },
+  {
+    'Section': "Geometria analityczna na płaszczyźnie kartezjańskiej",
+    'Subsections': []
+  },
+  {
+    'Section': "Stereometria",
+    'Subsections': []
+  },
+  {
+    'Section': "Kombinatoryka",
+    'Subsections': []
+  },
+  {
+    'Section': "Rachunek prawdopodobieństwa i statystyka",
+    'Subsections': []
+  },
+  {
+    'Section': "Optymalizacja i rachunek różniczkowy",
+    'Subsections': []
+  }
+

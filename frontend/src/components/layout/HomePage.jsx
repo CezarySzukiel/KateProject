@@ -1,3 +1,4 @@
+// import './homePage.css'
 import React, { useState, useEffect, useRef } from 'react';
 import { getFilteredPosts } from '../../helpers'
 
@@ -29,10 +30,16 @@ export function HomePage() {
 
 
     return (
-        <div className={'HomePageContainer'}>
-            <div className='HeroSection'>
-                <h1>Poznaj matematykę w nowy sposób</h1>
+        <div className='HeroSection'>
+            <div className='HeroContent'>
+                <h1>Poznaj matematykę w wyjątkowy sposób</h1>
                 <p>Ucz się matematyki krok po kroku, od podstaw do zaawansowanych zagadnień</p>
+                <ul className='BenefitsList'>
+                    <li>Interaktywne lekcje dostosowane do Twojego poziomu</li>
+                    <li>Setki zadań matematycznych do rozwiązania</li>
+                    <li>Zdobywaj punkty i rywalizuj z innymi użytkownikami</li>
+                    <li>Otrzymuj natychmiastowe odpowiedzi i wskazówki</li>
+                </ul>
                 <button className='CTAButton'>Zacznij teraz</button>
             </div>
             {lastPost && <div>
