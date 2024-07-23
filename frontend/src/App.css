@@ -1,42 +1,32 @@
-#root {
-  max-width: 1248px;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: 
-    url('../../../public/images/backgrounds/mainBackground2.jpg'),
-    url('../../../public/images/backgrounds/mainBackground3.jpg');
+
   background-size: cover, cover;
   background-repeat: repeat, no-repeat;
   background-position: center, center;
   background-blend-mode: multiply;
-/*  background: linear-gradient(to bottom, #313745, #555a65, #313745);*/
+  background: linear-gradient(to bottom, #5b616f, #7f808e, #868794, #868794, #7f808e, #5b616f);
+/*  background: linear-gradient(to bottom, #394c5b, #394c5b, #868794, #868794, #868794, #868794, #868794, #868794, #868794, #868794, #868794, #868794, #7f808e, #5b616f);*/
+
+  text-decoration: none;
+  color: inherit;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.22);
 }
 
 .Content {
   flex: 1;
-/*  background: linear-gradient(to bottom, #313745, #555a65, #313745);*/
+  margin-top: 7rem;
+  
 }
 
-/*.Content: :after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none; 
-  background-image: url('../../../public/images/backgrounds/mainBackground.jpg');
-  opacity: 0.1;
-  z-index: 2;
-}*/
+.Content h1 {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 
+               -2px -2px 
+               5px rgba(255, 255, 255, 0.1);
+}
+
 
 .logo {
   height: 30px;
@@ -73,12 +63,68 @@
 .read-the-docs {
   color: #888;
 }
-.App {
-/*  width: 100%;*/
-/*  background-color: darkgray;*/
-}
+
 .App-navbar {
 /*  width: 200px;*/
   width: 100%;
   max-width: 1248px;
+}
+
+a {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.87);
+  text-decoration: inherit;
+}
+a:hover {
+  color: lightskyblue;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  all: initial;
+  position: initial;
+  display: inline-block;
+  margin: 0;
+  font: inherit;
+  text-align: inherit;
+/*  border: 2px solid lightseagreen;*/
+  border-radius: 10px;
+  background-color: rgba(192,182,128,255);
+  color: white;
+  margin-right: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  max-height: 2rem;
+/*  transition: box-shadow 0.1s ease-in-out;*/
+}
+
+button:hover {
+  box-shadow: 0 0 11px 0px beige;
+}
+
+
+button:focus,
+button:active,
+button:focus-visible {
+  outline: none;
+}
+
+button:active {
+  animation: button-blink 0.2s;
+}
+
+@keyframes button-blink {
+  0% {
+    box-shadow: 0 0 11px 0px beige;
+  }
+  50% {
+    box-shadow: 0 0 15px 1px beige;
+  }
+  100% {
+    box-shadow: 0 0 11px 0px beige;
+  }
 }

@@ -1,7 +1,13 @@
 .headerContainer {
-	max-width: 1248px;
-	height: 100px;
+  	position: fixed;
+
+	max-width: 100%;
+	width: 100%;
+	height: 5rem;
 	display: flex;
+	background-color: #606777;
+
+	box-shadow: 0 1rem 1rem 1rem #606777;
 }
 
 .logoContainer {

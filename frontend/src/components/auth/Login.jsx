@@ -144,7 +144,7 @@ export function Login(props) {
     return (
         <div className={'LoginContainer'}>
             {!loginInfo && <>
-                <h1>Login</h1>
+                <h1>Logowanie</h1>
                 <form onSubmit={handleLogin}>
                     <label htmlFor="email">
                         Email: 
