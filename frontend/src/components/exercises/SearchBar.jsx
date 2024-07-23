@@ -81,32 +81,35 @@ export function SearchBar(props) {
         <div className={'searchbar-div'}>
             <form onSubmit={handleSubmit}>
                 <button type="submit">Wyszukaj</button>
-                <p>działy</p>
-                {props.allSections && props.allSections.map(section => (
-                    <div key={section.id}>
-                        <label >
-                            {section.name}:
-                            <input
-                                type="checkbox"
-                                checked={checkedSections.includes(section.id)}
-                                onChange={() => handleCheckboxChange(section.id)}
-                            />
-                        </label>
-
+                <h3>działy:</h3>
+                {props.allSections && props.allSections.map((section, index) => (
+                    <div key={section.id} className={`section ${section.id % 2 === 0 ? 'even' : 'odd'}`} onClick={() => handleCheckboxChange(section.id)}>
+                        <div className={'section-text'}>
+                            <label htmlFor={section.id}>
+                                {section.name}
+                            </label>
+                        </div>
+                        <input
+                            name={section.id}
+                            type="checkbox"
+                            checked={checkedSections.includes(section.id)}
+                        />
                     </div>
                 ))}
                 <br />
-                <p>Poddziały:</p>
+                <h3>Poddziały:</h3>
                 {displayedSubsections && displayedSubsections.map(subsection => (
-                    <div key={subsection.id}>
-                        <label>
-                            {subsection.name}:
-                            <input
-                                type="checkbox"
-                                checked={checkedSubsections.includes(subsection.id)}
-                                onChange={() => handleSubCheckboxChange(subsection.id)}
-                            />
-                        </label>
+                    <div key={subsection.id} className={`section ${subsection.id % 2 === 0 ? 'even' : 'odd'}`} onClick={() => handleSubCheckboxChange(subsection.id)}>
+                        <div className={'section-text'}>
+                            <label htmlFor={subsection.id}>
+                                {subsection.name}
+                            </label>
+                        </div>
+                        <input
+                            name={subsection.id}
+                            type="checkbox"
+                            checked={checkedSubsections.includes(subsection.id)}                         
+                        />
                     </div>
                 ))}
             </form>

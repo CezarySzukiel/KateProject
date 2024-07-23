@@ -1,24 +1,26 @@
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Route, Routes, Outlet} from 'react-router-dom';
-import { Provider } from "react-redux";
+import { Outlet} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { store } from "./store/store"
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
+import { Navbar } from "./components/layout/Navbar";
 
 function App() {
+  const isNavbar = useSelector(state => state.layout.isNavbar)
+
   return (
     <>
-      <Provider store={store}>
         <div className="App">
           <Header />
           <div className="Content">
             <Outlet />
+            {isNavbar &&
+              <Navbar />
+            }
           </div>
           <Footer />
         </div>
-      </Provider>
     </>
   )
 } 

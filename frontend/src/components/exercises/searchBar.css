@@ -2,12 +2,36 @@
   display: flex;
   flex-direction: column; 
   margin-top: 50px;
+  max-height: 100%;
+  
 }
 
 .searchbar-div button {
   position: static;
   width: 6rem;
   height: 2rem;
-  background-color: lightseagreen;
+  background-color: rgba(192,182,128,255);
 
+}
+
+.searchbar-div form {
+  max-height: 100%;
+/*  overflow-y: scroll;*/
+}
+
+.section{
+  display: flex;
+  justify-content: space-between;
+}
+
+.section.even {
+    background-color: #767f8e;
+}
+
+.section.odd {
+    background-color: #7b879d;
+}
+
+.section-text {
+  padding: 1rem;
 }

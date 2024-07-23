@@ -10,7 +10,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className={`navbar ${isMenuClicked ? 'menu-open' : ''}`}>
+    <div className={`navbar ${isMenuClicked ? 'closed' : 'open'}`}>
       <div className="navbar-content">
         <div>
           {!isMenuClicked && <ConSearchBar />}
