@@ -15,8 +15,8 @@ export const Navbar = () => {
         <div>
           {!isMenuClicked && <ConSearchBar />}
         </div>
-        <button onClick={toggleMenu}> {isMenuClicked ? '>' : '<'} </button>
       </div>
+      <button onClick={toggleMenu}> {isMenuClicked ? '>' : '<'} </button>
     </div>
   );
 };
