@@ -16,12 +16,13 @@
 
 .searchbar-div form {
   max-height: 100%;
-/*  overflow-y: scroll;*/
 }
 
 .section{
   display: flex;
   justify-content: space-between;
+  padding-left: 1rem;
+
 }
 
 .section.even {
@@ -33,5 +34,5 @@
 }
 
 .section-text {
-  padding: 1rem;
+  padding: 0.5rem;
 }

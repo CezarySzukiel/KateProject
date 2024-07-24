@@ -1,61 +1,60 @@
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100%;
+  max-height: 88.3%;
   width: 300px;
   color: white;
-  padding: 1rem;
   padding-top: 5rem;
+  padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   z-index: 1;
   transition: transform 0.3s ease;
-
-/*  background-color: #333;*/
-
 }
 
 .closed {
-/*  transform: translateX(-300px);*/
+  transform: translateX(-280px);
 }
 
 .open {
-/*box-shadow: 0 0 11px 0px beige;*/
-background-color: #7f808e;
-/*box-shadow: 0 0 11px 0px beige;*/
-margin-left: 0;
-padding-left: 0;
-z-index: 1;
+  background-color: #7f808e;
+}
 
-
-/*zmienić klasę buttona na navbar-visibility-btn i ustawić jego param wg klasy aby nie wpłýwało to na wszystkie button tutaj*/
-.navbar button {
+.navbar-visibility-btn {
   width: 20px;
   height: 5rem;
   max-height: 5rem;
   margin-left: auto;
   position: absolute;
   top: 44%;
-  left: 96%;
-/*right: -20px;*/
-  border: initial;
-  padding: initial;
+  transform: translateY(-50%);
+  right: -18px;
+  border: none;
+  padding: 0;
+  z-index: 2;
+  color: white;
 }
 
 .navbar-content button:focus {
   outline: none;
 }
- 
+
 .navbar-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  max-height: 100%;
-  overflow-/*y: scroll;
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #9196a2 #7b869300; /* Firefox */*/
+  height: auto;
+  flex-grow: 1;
+  overflow-y: scroll;
+  scrollbar-width: thin;  
+  scrollbar-color: #9196a2 #7b869300;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.open .navbar-content {
+  opacity: 1;
 }

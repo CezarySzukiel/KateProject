@@ -16,7 +16,7 @@ export const Navbar = () => {
           {!isMenuClicked && <ConSearchBar />}
         </div>
       </div>
-      <button onClick={toggleMenu}> {isMenuClicked ? '>' : '<'} </button>
+      <button className={'navbar-visibility-btn'} onClick={toggleMenu}> {isMenuClicked ? '>' : '<'} </button>
     </div>
   );
 };
