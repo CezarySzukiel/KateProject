@@ -14,7 +14,9 @@ function App() {
         <div className="App">
           <Header />
           <div className="Content">
-            <Outlet />
+            <div className={"Outlet"}>
+              <Outlet />
+            </div>
             {isNavbar &&
               <Navbar />
             }

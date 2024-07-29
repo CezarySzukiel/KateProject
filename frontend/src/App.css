@@ -128,3 +128,7 @@ button:active {
     box-shadow: 0 0 11px 0px beige;
   }
 }
+
+.Outlet {
+  padding: 0 20px 0 30px;
+}
