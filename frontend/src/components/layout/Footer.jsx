@@ -10,7 +10,7 @@ export function Footer() {
             {/*<p>Polityka Cookies</p>*/}
             {/*<p>Ustawienia plików cookie</p>*/}
             {/*<p>Regulamin</p>*/}
-            <p>kontakt</p>
+            <Link to={'/contact/'}><p>kontakt</p></Link>
             {/*<p>linki do mediów</p>*/}
             <p>App v 1.0.0</p>
         </footer>

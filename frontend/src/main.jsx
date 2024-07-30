@@ -16,6 +16,7 @@ import { ConExercisesList, ConExerciseDetails, ConSectionsList, ConSubsectionsLi
 import { PostList } from './components/blog/PostList'
 import Privacy from './components/other/Privacy'
 import { PostDetails } from './components/blog/PostDetails'
+import { Contact } from './components/layout/Contact'
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/privacy-policy/",
         element: <Privacy />,
+      },
+      {
+        path: "/contact/",
+        element: <Contact />,
       },
       {
         path: "/post/",
