@@ -36,3 +36,53 @@
 .section-text {
   padding: 0.5rem;
 }
+/* start of checkbox design*/
+.custom-checkbox {
+    display: none;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 5px;
+    padding-right: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
+/* Stylizacja niestandardowego prostokąta dla checkboxa */
+.checkbox-label::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    border: 2px solid #ccc;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tworzenie fajki w zaznaczonym checkboxie */
+.custom-checkbox:checked + .checkbox-label::before {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.custom-checkbox:checked + .checkbox-label::before {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.custom-checkbox:checked + .checkbox-label::before {
+    content: '✔';
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* end of checkbox design*/

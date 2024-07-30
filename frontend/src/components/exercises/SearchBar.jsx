@@ -1,11 +1,10 @@
 import './searchBar.css'
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
-
-import { getSectionsAndSubsections, extractSections, extractSubsections  } from "../../helpers"
+import {getSectionsAndSubsections, extractSections, extractSubsections} from "../../helpers"
 
 
 export function SearchBar(props) {
@@ -24,17 +23,17 @@ export function SearchBar(props) {
     }, [props.allSections, props.allSubsections, checkedSections])
 
     const getData = async () => {
-            try {
-                const response = await getSectionsAndSubsections();
-                const sections = extractSections(response);
-                const subsections = extractSubsections(response);
-                props.setAllSections(sections);
-                props.setAllSubsections(subsections);
-            } catch (error) {
-                console.error(error);
-            }
+        try {
+            const response = await getSectionsAndSubsections();
+            const sections = extractSections(response);
+            const subsections = extractSubsections(response);
+            props.setAllSections(sections);
+            props.setAllSubsections(subsections);
+        } catch (error) {
+            console.error(error);
         }
-    
+    }
+
     const filterSubsectionsBySections = (subsections, selectedSections) => {
         if (!selectedSections.length) {
             return subsections;
@@ -49,9 +48,9 @@ export function SearchBar(props) {
             setCheckedSections(checkedSections.filter(id => id !== sectionId));
         } else {
             setCheckedSections([...checkedSections, sectionId]);
-        }        
+        }
     };
-    
+
     const handleSubCheckboxChange = (subSectionId) => {
         if (checkedSubsections.includes(subSectionId)) {
             setCheckedSubsections(checkedSubsections.filter(id => id !== subSectionId));
@@ -75,7 +74,7 @@ export function SearchBar(props) {
         }
 
         navigate('/sections/subsections/exercises/')
-    }    
+    }
 
     return (
         <div className={'searchbar-div'}>
@@ -83,33 +82,41 @@ export function SearchBar(props) {
                 <button type="submit">Wyszukaj</button>
                 <h3>działy:</h3>
                 {props.allSections && props.allSections.map((section, index) => (
-                    <div key={section.id} className={`section ${section.id % 2 === 0 ? 'even' : 'odd'}`} onClick={() => handleCheckboxChange(section.id)}>
-                        <div className={'section-text'}>
-                            <label htmlFor={section.id}>
-                                {section.name}
-                            </label>
-                        </div>
+                    <div key={section.id} className={`section ${section.id % 2 === 0 ? 'even' : 'odd'} section-text`}>
                         <input
-                            name={section.id}
+                            className='custom-checkbox'
+                            name={`sec ${section.id}`}
+                            id={`sec ${section.id}`}
                             type="checkbox"
                             checked={checkedSections.includes(section.id)}
+                            onChange={() => handleCheckboxChange(section.id)}
                         />
+                        <label
+                            htmlFor={`sec ${section.id}`}
+                            className='checkbox-label'
+                        >
+                            {section.name}
+                        </label>
                     </div>
                 ))}
-                <br />
+                <br/>
                 <h3>Poddziały:</h3>
                 {displayedSubsections && displayedSubsections.map(subsection => (
-                    <div key={subsection.id} className={`section ${subsection.id % 2 === 0 ? 'even' : 'odd'}`} onClick={() => handleSubCheckboxChange(subsection.id)}>
-                        <div className={'section-text'}>
-                            <label htmlFor={subsection.id}>
-                                {subsection.name}
-                            </label>
-                        </div>
+                    <div key={subsection.id} className={`section ${subsection.id % 2 === 0 ? 'even' : 'odd'} section-text`}>
                         <input
-                            name={subsection.id}
+                            className='custom-checkbox'
+                            name={`subsec ${subsection.id}`}
+                            id={`subsec ${subsection.id}`}
                             type="checkbox"
-                            checked={checkedSubsections.includes(subsection.id)}                         
+                            checked={checkedSubsections.includes(subsection.id)}
+                            onChange={() => handleSubCheckboxChange(subsection.id)}
                         />
+                        <label
+                            htmlFor={`subsec ${subsection.id}`}
+                            className='checkbox-label'
+                        >
+                            {subsection.name}
+                        </label>
                     </div>
                 ))}
             </form>
