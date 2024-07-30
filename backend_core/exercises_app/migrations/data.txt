@@ -85,7 +85,7 @@
                         "difficult": 2,
                         "points": 2,
                         "solution_exactly": null,
-                        "type": 4,
+                        "type": 3,
                         "advanced_level": false,
                         "exam": null,
                         "answers": [
