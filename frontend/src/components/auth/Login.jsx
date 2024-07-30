@@ -142,7 +142,7 @@ export function Login(props) {
 
     }
     return (
-        <div className={'login-container'}>
+        <div className='login-container'>
             {!loginInfo && <>
                 <h1>Logowanie</h1>
                 <form onSubmit={handleLogin}>

@@ -40,7 +40,7 @@ export function PasswordChange(props) {
 	      setError(null);
 	      setSuccess('Hasło zostało pomyślnie zmienione!');
 	    } catch (error) {
-	    	if (error.response.status == 401) {
+	    	if (error.response.status === 401) {
 	        const tokens = await props.getTokens(props.refreshToken)
           props.setAccessToken(tokens.access);
           props.setRefreshToken(tokens.refresh);
@@ -54,7 +54,7 @@ export function PasswordChange(props) {
   };
 
   return (
-    <div>
+    <div className='login-container'>
       <h1>Zmiana hasła</h1>
       <form onSubmit={handleSubmit}>
         <div>

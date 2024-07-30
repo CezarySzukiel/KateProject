@@ -37,7 +37,7 @@ export function PasswordReset(props) {
 	 };    
 
 	return (
-    <div>
+    <div className={'login-container'}>
       <h1>Resetowanie hasła</h1>
       <form onSubmit={handleSubmit}>
         <div>
