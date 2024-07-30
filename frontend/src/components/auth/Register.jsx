@@ -1,5 +1,5 @@
+import './login.css'
 import React, { useState } from 'react';
-
 import { Error, Info } from './../helpersComponents/Messages'
 
 export function Register() {
@@ -53,24 +53,20 @@ export function Register() {
     };
 
     return (
-        <div className={'registerFormContainer'}>
+        <div className={'login-container'}>
             {!info && 
             <>
-                <h1>Zarejestruj</h1>
+                <h1>Rejestracja</h1>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Nazwa użytkownika</label>
                     <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
-                    <br />
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">Email</label>
                     <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-                    <br />
-                    <label htmlFor="password1">Password:</label>
+                    <label htmlFor="password1">Hasło</label>
                     <input type="password" id="password1" name="password1" value={formData.password1} onChange={handleChange} required />
-                    <br />
-                    <label htmlFor="password2">Confirm Password:</label>
+                    <label htmlFor="password2">Powtórz hasło</label>
                     <input type="password" id="password2" name="password2" value={formData.password2} onChange={handleChange} required />
-                    <br />
-                    <button type="submit">Register</button>
+                    <button type="submit">Zarejestruj</button>
                 </form>
                 {error && <Error message={error}/>}
             </>}

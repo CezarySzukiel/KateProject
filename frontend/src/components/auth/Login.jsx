@@ -53,7 +53,7 @@ export function Login(props) {
             },
             });
 
-            if (response.status == 200) {
+            if (response.status === 200) {
                 const data = response.data;
                 const token = data.access;
                 props.setAccessToken(token);
@@ -64,7 +64,7 @@ export function Login(props) {
                 }, 1500)
             }
         } catch (error) {
-            if (error.response.status == 500) {
+            if (error.response.status === 500) {
                 setLoginError("Nie ma takiego użytkownika")
                 setPasswordResetInfo(null)
             } else {
@@ -104,7 +104,7 @@ export function Login(props) {
             },
             });
 
-            if (response.status == 200) {
+            if (response.status === 200) {
                 const data = response.data;
                 const accessToken = data.access;
                 const refreshToken = data.refresh;
@@ -130,7 +130,7 @@ export function Login(props) {
                 },
             });
 
-            if (response.status == 200) {
+            if (response.status === 200) {
                 setPasswordResetInfo(`Wysłano email weryfikacyjny na adres ${email}`)
                 setLoginError(null)
             }
@@ -142,28 +142,25 @@ export function Login(props) {
 
     }
     return (
-        <div className={'LoginContainer'}>
+        <div className={'login-container'}>
             {!loginInfo && <>
                 <h1>Logowanie</h1>
                 <form onSubmit={handleLogin}>
                     <label htmlFor="email">
-                        Email: 
-                        <input type="email" id="email" value={email} onChange={handleEmailChange} />
+                        Email
                     </label>
-                    <br />
+                    <input type="email" id="email" value={email} onChange={handleEmailChange} />
                     <label htmlFor="password">
-                        Hasło: 
-                        <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+                        Hasło
                     </label>
-                    <br />
-                    <br />
+                    <input type="password" id="password" value={password} onChange={handlePasswordChange} />
                     <button type="submit">Zaloguj</button>
                 </form>
                 {loginError && <Error message={loginError}/>}
                 {passwordResetInfo && <Info message={passwordResetInfo}/>}
                 <p className={'link'} onClick={handlePasswordReset}> Nie pamiętasz hasła?</p>
                 <p>lub</p>
-                <Link to={`/register`}><button>utwórz nowe konto</button></Link>
+                <Link to={`/register`}><button className='register-button'>utwórz nowe konto</button></Link>
             </>}
             {loginInfo && <h1>{loginInfo}</h1>}
         </div>
