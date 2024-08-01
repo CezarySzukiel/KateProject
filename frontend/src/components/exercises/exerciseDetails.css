@@ -1,0 +1,48 @@
+.title {
+    margin: 1rem 0 1rem 0;
+    display: flex;
+    align-items: center
+}
+
+.title h1 {
+    font-size: xx-large;
+    margin: 0 1rem 0 0;
+
+}
+
+.title p {
+    margin: 0;
+    font-size: small;
+}
+
+.adv-level {
+    background-color: rgba(223, 156, 0, 0.44);
+    padding: 3px;
+    margin-bottom: 2px;
+}
+
+.std-level {
+    background-color: rgba(76, 175, 80, 0.44);
+    padding: 3px;
+    margin-bottom: 2px;
+}
+
+.exam {
+    background-color: rgba(116, 123, 255, 0.44);
+    margin-bottom: 2px;
+    padding: 3px;
+
+}
+
+.points {
+    background-color: cornflowerblue;
+    padding: 3px;
+    margin-bottom: 2px;
+}
+
+.difficult {
+    background-color: #55809c;
+    margin-bottom: 2px;
+    padding: 3px;
+
+}

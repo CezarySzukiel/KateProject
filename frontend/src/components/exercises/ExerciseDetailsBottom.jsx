@@ -1,3 +1,4 @@
+import './exerciseDetails.css'
 import React, { useState } from 'react';
 import Latex from 'react-latex-next';
 
@@ -11,9 +12,9 @@ export function ExerciseDetailsBottom(props) {
 
 	return (
 		<>
-			<p><strong>Punkty:</strong> {props.points}</p>
+
 	        
-	        <p><strong>Poziom trudności:</strong> {props.difficult}</p>
+
 	        
 	        {props.solution_exactly && <p><strong>solution_exactly:</strong> {props.solution_exactly}</p>}
 	        

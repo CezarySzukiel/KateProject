@@ -83,6 +83,8 @@ export function HOC_ExerciseDetails(props) {
           actualSection={actualSection.name}
           actualSubsection={actualSubsection}
           exam={actualExercise.exam}
+          points={actualExercise.points}
+          difficult={actualExercise.difficult}
         />
                 
         <Latex>{actualExercise.description}</Latex>
@@ -102,8 +104,6 @@ export function HOC_ExerciseDetails(props) {
         />
 
         <ExerciseDetailsBottom 
-          points={actualExercise.points}
-          difficult={actualExercise.difficult}
           solution_exactly={actualExercise.solution_exactly}
           correctAnswer={correctAnswer}
         />

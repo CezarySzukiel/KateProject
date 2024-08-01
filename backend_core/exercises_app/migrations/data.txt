@@ -174,7 +174,7 @@
                         "exam": null,
                         "answers": [
                             { 
-                                "answer": "$\frac{1}{2}$",
+                                "answer": "$\\frac{1}{2}$",
                                 "correct": true,
                                 "second_set": false
                             }
