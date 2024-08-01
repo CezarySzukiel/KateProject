@@ -7,6 +7,7 @@
     box-shadow: 0 0 10px 0 red ;
     font-weight: bold;
     max-width: 100%;
+    background-color: rgba(255, 0, 0, 0.44);
 }
 
 .info {
@@ -17,5 +18,5 @@
     margin: 1rem;
     box-shadow: 0 0 10px 0 green ;
     max-width: 100%;
-
+    background-color: rgba(0, 128, 0, 0.44);
 }

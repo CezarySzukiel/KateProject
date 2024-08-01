@@ -1,3 +1,9 @@
 .dataForm {
 	margin-top: 2rem;
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.buttons-container {
+	margin-top: 2rem;
 }

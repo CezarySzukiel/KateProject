@@ -23,17 +23,18 @@ export function UserData(props) {
             {userData && 
                 <>
                 <h1>{userData.username}</h1>
-                <h3>username: {userData.username}</h3>
+                <h3>Nazwa użytkownika: {userData.username}</h3>
                 <h3>email: {userData.email}</h3>
                 {userData.first_name && <h3>imię: {userData.first_name}</h3>}
                 {userData.last_name && <h3>nazwisko: {userData.last_name}</h3>}
                 {userData.level && <h3>Poziom rozszerzony</h3>}
                 {userData.points && <h3>Zebrane punkty: {userData.points}</h3>}
-
-                <Link to={`/password-change/`}><button>Zmień hasło</button></Link>
-                <button onClick={handleChangeDataClick}>Zmień dane</button>
-                {!exercisesVisibility && <button onClick={handleExercisesDisplay}>Pokaż rozwiązane zadania</button>}
-                {exercisesVisibility && <button onClick={handleExercisesDisplay}>Ukryj rozwiązane zadania</button>}
+                <div className='buttons-container'>
+                    <Link to={`/password-change/`}><button>Zmień hasło</button></Link>
+                    <button onClick={handleChangeDataClick}>Zmień dane</button>
+                    {!exercisesVisibility && <button onClick={handleExercisesDisplay}>Pokaż rozwiązane zadania</button>}
+                    {exercisesVisibility && <button onClick={handleExercisesDisplay}>Ukryj rozwiązane zadania</button>}
+                </div>
                 </>
             }
             {formVisibility && (
