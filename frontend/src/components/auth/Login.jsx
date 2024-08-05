@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setSolvedExercises } from '../../actions/exActions'
 import { Error, Info } from "../helpersComponents/Messages"
+import {setNavbarDisplay} from "../../actions/layoutActions.jsx";
 
 export function Login(props) {
     const [username, setUsername] = useState(null);
@@ -17,6 +18,7 @@ export function Login(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(setNavbarDisplay(false))
         if (props.isLoggedIn) {
             getUserData()
         }

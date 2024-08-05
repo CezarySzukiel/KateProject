@@ -1,6 +1,8 @@
 import './login.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Error, Info } from './../helpersComponents/Messages'
+import {setNavbarDisplay} from "../../actions/layoutActions.jsx";
 
 export function Register() {
     const [formData, setFormData] = useState({
@@ -12,6 +14,11 @@ export function Register() {
     const [error, setError] = useState('');
     const [info, setInfo] = useState(null)
     const [working, setWorking] = useState(false)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(setNavbarDisplay(false))
+    }, [])
 
     const handleChange = (event) => {
         const { name, value } = event.target;
