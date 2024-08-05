@@ -2,7 +2,6 @@ import './answerInputs.css'
 import React, { useState, useEffect, useRef } from 'react';
 import Latex from 'react-latex-next';
 import { useSelector } from 'react-redux';
-import { Error } from  '../helpersComponents/Messages';
 
 export function Type1(props) {
 const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -14,20 +13,20 @@ const [selectedAnswer, setSelectedAnswer] = useState(null);
   	};
 
 	return (
-		<>
-			<ul>
+		<div className={'answer-input'}>
+			<ul className={'answers-list'}>
 				{props.answers.map((answer, index) => (
 					<li 
 						key={index}
 						className={`answer-div ${selectedAnswer === answer.answer ? 'selected' : ''}`} 
 						onClick={() => handleAnswerClick(answer.answer)}
 					>
-						{String.fromCharCode(65 + index)}. 
-						<Latex>{answer.answer}</Latex>
+						{String.fromCharCode(65 + index)}.
+						<Latex> {answer.answer}</Latex>
 					</li>
 				))}
 			</ul>
-		</>
+		</div>
 	)
 }
 
@@ -48,10 +47,10 @@ export function Type2(props) {
   	}
 
 	return (
-		<>
+		<div className={'answer-input'}>
 	        <div>
 		        <h3>Odpowiedzi:</h3>
-		        <ul>
+		        <ul className={'answers-list'}>
 		          {firstSet.map((answer, index) => (
 		            <li 
 		            	key={index} 
@@ -66,7 +65,7 @@ export function Type2(props) {
 	      	</div>
      		<div>
 		        <h3>Uzasadnienia:</h3>
-		        <ul>
+		        <ul className={'answers-list'}>
 		          {secondSet.map((answer, index) => (
 		            <li 
 		            	key={index} 
@@ -78,7 +77,7 @@ export function Type2(props) {
 		          ))}
 		        </ul>
       		</div>
-    	</>
+    	</div>
 	)
 }
 
@@ -107,8 +106,8 @@ export function Type3(props) {
   	}
 
 	return (
-		<>
-			<ul>
+		<div className={'answer-input'}>
+			<ul className={'answers-list'}>
 				{answers.map((answer, index) => (
 					<li
 						key={index}
@@ -120,7 +119,7 @@ export function Type3(props) {
 					</li>
 				))}
 			</ul>
-		</>
+		</div>
 	)
 }
 
@@ -142,10 +141,10 @@ export function Type4(props) {
   	}
 
 	return (
-		<>
+		<div className={'answer-input'}>
 	        <div>
 		        {ask1 && <p><Latex>{ask1}</Latex></p>}
-		        <ul>
+		        <ul className={'answers-list'}>
 		          {firstSet.map((answer, index) => (
 		            <li 
 		            	key={index} 
@@ -160,7 +159,7 @@ export function Type4(props) {
 	      	</div>
      		<div>
 		        {ask2 && <p><Latex>{ask2}</Latex></p>}
-		        <ul>
+		        <ul className={'answers-list'}>
 		          {secondSet.map((answer, index) => (
 		            <li 
 		            	key={index} 
@@ -173,7 +172,7 @@ export function Type4(props) {
 		          ))}
 		        </ul>
       		</div>
-    	</>
+    	</div>
 	)
 }
 
@@ -218,7 +217,7 @@ export function Type9(props) {
 	           		{answer.length > 0 && <div  className={'user-answer-field'}>
 	           		{answer[0].length > 0 && 
 	           		<h1><Latex>${answer}$</Latex></h1>}
-	           		{answer[0].length == 0 && <h1><Latex>{answer}</Latex></h1>}
+	           		{answer[0].length === 0 && <h1><Latex>{answer}</Latex></h1>}
 	           		</div>}
 	          	</label>
 

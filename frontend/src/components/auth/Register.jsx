@@ -40,6 +40,7 @@ export function Register() {
             if (response.ok) {
                 const data = await response.json();
                 setInfo(data.detail[0]);
+                setError('')
                 setWorking(false);
                 
             } else {

@@ -12,17 +12,17 @@
 }
 
 .logoContainer {
-	height: 100%%;
-	padding: 0 px;
-	margin-left: 15 px;
+	height: 100%;
+	padding: 0;
+	margin-left: 15px;
 	margin-right: 4rem;
-	background-color: none;
+	background-color: transparent;
 }
 
 .logoContainer img {
     max-height: 70%;
     margin: 10px;
-    background-color: none;
+    background-color: transparent;
 }
 
 .buttonsContainer {
@@ -33,5 +33,4 @@
 }
 
 .buttonsContainer button:first-child {
-    margin-left: rem;
 }
