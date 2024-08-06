@@ -1,4 +1,11 @@
-.hoc-type9 {
+/*.hoc-type9 {*/
+/*	display: flex;*/
+/*	flex-direction: column;*/
+/*}*/
+
+.hoc-answer-input {
 	display: flex;
 	flex-direction: column;
+    align-items: flex-start;
+	max-width: 100%;
 }

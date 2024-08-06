@@ -25,13 +25,6 @@
   width: 100%;
 }
 
-.answer-input div.user-answer-field {
-  width: 100%;
-  max-width: 800px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
 .answer-input div.user-answer-field h1 {
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -44,4 +37,28 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+}
+
+.user-answer-field {
+  width: 100%;
+  max-width: 100vh;
+  padding: 2rem 0;
+  box-sizing: border-box;
+}
+
+.user-answer-field p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #9196a2 #7b869300;
+}
+
+#type9-textarea {
+  background-color: transparent;
+  border: 1px solid white;
 }

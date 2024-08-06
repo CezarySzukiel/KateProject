@@ -191,7 +191,7 @@ export function Type9(props) {
  	const handleFocus = () => {
  		props.setActiveInput(inputRef.current)
  	}
- 	
+
  	const handleChange = () => {
  		let value = event.target.value;
  		value = reformatAnswer(value)
@@ -200,27 +200,22 @@ export function Type9(props) {
 
 	return (
 		<div className={"answer-input"}>
-			<p>Wpisz poprawną odpowiedź</p>
 	        <form onSubmit={props.handleSubmit}>
-	          	<label>
-	            	Odpowiedź:
-	          		<div>
-		            	<textarea
-		      		      	ref={inputRef}
-		           			onFocus={handleFocus}
-		           			type="text" 
-		           			value={props.answer} 
-		           			onChange={handleChange} 
-		           		>
-		           		</textarea>
-	           		</div>
-	           		{answer.length > 0 && <div  className={'user-answer-field'}>
-	           		{answer[0].length > 0 && 
-	           		<h1><Latex>${answer}$</Latex></h1>}
-	           		{answer[0].length === 0 && <h1><Latex>{answer}</Latex></h1>}
-	           		</div>}
-	          	</label>
-
+	          	<label htmlFor={'type9-textarea'}>
+					Wpisz poprawną odpowiedź
+				</label>
+				<textarea
+					id={'type9-textarea'}
+					ref={inputRef}
+					onFocus={handleFocus}
+					value={props.answer}
+					onChange={handleChange}
+				>
+				</textarea>
+				<div  className={'user-answer-field'}>
+					{answer[0].length > 0 && <p><Latex>${answer}$</Latex></p>}
+					{answer[0].length === 0 && <p><Latex>{answer}</Latex></p>}
+				</div>
 	          	{props.isLoggedIn && <>
 	          	</>}
 	        	{!props.isLoggedIn && <p>Aby sprawdzić swoją odpowiedź musisz być zalogowany.</p>}

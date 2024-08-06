@@ -54,7 +54,7 @@ export function LatexTable(props) {
       const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
       updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
         if (values[p1] !== undefined) {
-          return `{${values[p1]}}`;
+          return `{${values[p1]}$}`;
         }
         return match;
       });
@@ -88,7 +88,7 @@ export function LatexTable(props) {
   }
 
   return (
-    <div>
+    <div className={'latex-table'}>
       <table>
         <tbody>
           {symbolChunks.map((row, rowIndex) => (

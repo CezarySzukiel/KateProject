@@ -1,3 +1,6 @@
+.latex-table {
+  margin-top: 1rem;
+}
 .modal {
   position: fixed;
   top: 50%;
