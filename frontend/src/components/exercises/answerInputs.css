@@ -53,9 +53,23 @@
   margin: 0;
   max-width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #9196a2 #7b869300;
+}
+
+.user-answer-field p::-webkit-scrollbar {
+  width: 12px;
+}
+
+.user-answer-field p::-webkit-scrollbar-track {
+  background: #7b869300;
+}
+
+.user-answer-field p::-webkit-scrollbar-thumb {
+  background-color: #9196a2;
+  border-radius: 10px;
+  border: 3px solid #7b869300;
 }
 
 #type9-textarea {
@@ -63,4 +77,22 @@
   border: 1px solid white;
   width: 20rem;
   height: 2rem;
+  overflow-x: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9196a2 #7b869300;
+}
+
+#type9-textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+#type9-textarea::-webkit-scrollbar-track {
+  background: #7b869300;
+}
+
+#type9-textarea::-webkit-scrollbar-thumb {
+  background-color: #9196a2;
+  border-radius: 10px;
+  border: 3px solid #7b869300;
 }
