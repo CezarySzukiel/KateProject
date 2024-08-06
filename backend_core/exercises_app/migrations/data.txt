@@ -586,7 +586,7 @@
                                 "second_set": true
                             },
                             { 
-                                "answer": "$\\frac{1-+2\\sqrt{2}}{2}$",
+                                "answer": "$\\frac{-1+2\\sqrt{2}}{2}$",
                                 "correct": true,
                                 "second_set": true
                             }
