@@ -61,4 +61,6 @@
 #type9-textarea {
   background-color: transparent;
   border: 1px solid white;
+  width: 20rem;
+  height: 2rem;
 }
