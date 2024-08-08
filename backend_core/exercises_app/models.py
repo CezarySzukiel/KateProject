@@ -16,7 +16,9 @@ class Exercise(models.Model):
     description = models.TextField()
     ask1 = models.TextField(null=True, blank=True)
     ask2 = models.TextField(null=True, blank=True)
-    subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='exercises')
+    section = models.ForeignKey('Section', on_delete=models.PROTECT, related_name='exercises')
+    subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='exercises', null=True, blank=True)
+    subsubsection = models.ForeignKey('Subsubsection', on_delete=models.PROTECT, related_name='exercises', null=True, blank=True)
     difficult = models.IntegerField()
     points = models.IntegerField()
     solution_exactly = models.ForeignKey(Post, on_delete=models.PROTECT, null=True, blank=True, related_name='exercises_exactly')
@@ -24,15 +26,9 @@ class Exercise(models.Model):
     type = models.IntegerField()
     advanced_level = models.BooleanField(default=False)
     exam = models.DateField(null=True, blank=True)
-    slug = models.SlugField(max_length=128, unique=False, blank=True)
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
 
 
 class Answer(models.Model):
@@ -49,19 +45,22 @@ class Answer(models.Model):
         return self.answer
 
 
-class Subsection(models.Model):
-    """Model representing a subsection of exercises"""
+class Subsubsection(models.Model):
+    """Model representing a subsubsection of exercises"""
     name = models.CharField(max_length=128, unique=True)
-    section = models.ForeignKey('Section', on_delete=models.PROTECT, related_name='subsections')
-    slug = models.SlugField(max_length=128, unique=True, blank=True)
+    subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='subsubsections')
 
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+
+class Subsection(models.Model):
+    """Model representing a subsection of exercises"""
+    name = models.CharField(max_length=128, unique=True)
+    section = models.ForeignKey('Section', on_delete=models.PROTECT, related_name='subsections')
+
+    def __str__(self):
+        return self.name
 
     @staticmethod
     def get_sort_choices():
@@ -73,15 +72,9 @@ class Subsection(models.Model):
 class Section(models.Model):
     """Model representing a section of exercises"""
     name = models.CharField(max_length=128, unique=True)
-    slug = models.SlugField(max_length=128, unique=True, blank=True)
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
 
 
 class Function(models.Model):
