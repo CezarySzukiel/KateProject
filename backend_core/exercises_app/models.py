@@ -47,7 +47,7 @@ class Answer(models.Model):
 
 class Subsubsection(models.Model):
     """Model representing a subsubsection of exercises"""
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128)
     subsection = models.ForeignKey('Subsection', on_delete=models.PROTECT, related_name='subsubsections')
 
     def __str__(self):
