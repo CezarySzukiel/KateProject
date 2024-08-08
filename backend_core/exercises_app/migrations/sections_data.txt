@@ -1,0 +1,161 @@
+[
+  {
+    "Section": "Liczby rzeczywiste",
+    "Subsections": [
+      {
+        "name": "Liczby",
+        "Subsubsections": [
+          {"name": "Budowa liczb"},
+          {"name": "Liczby naturalne"},
+          {"name": "Liczby całkowite"},
+          {"name": "Liczby wymierne"},
+          {"name": "Liczby niewymierne"},
+          {"name": "Liczby rzeczywiste"}
+        ]
+      },
+      {
+        "name": "Działania na liczbach",
+        "Subsubsections": [
+          {"name": "Dodawanie"},
+          {"name": "Odejmowanie"},
+          {"name": "Mnożenie"},
+          {"name": "Dzielenie"}
+        ]
+      },
+      {"name": "Koleność wykonywania działań"},
+      {"name": "Zbiory i przedziały"},
+      {"name": "Procenty"},
+      {"name": "Potęgi i pierwiastki"},
+      {"name": "Notacja wykładnicza"},
+      {"name": "Ułamki okresowe"},
+      {
+        "name": "Logarytmy",
+        "Subsubsections": [
+          {"name": "Definicja"},
+          {"name": "Obliczanie Wartości"},
+          {"name": "Obliczanie sumy i różnicy logarytmów"}
+        ]
+      },
+      {
+        "name": "Wartość bezwzględna",
+        "Subsubsections": [
+          {"name": "Definicja"},
+          {"name": "Równania"},
+          {"name": "Nierówności"}
+        ]
+      }
+    ]
+  },
+  {
+    "Section": "Wyrażenia algebraiczne",
+    "Subsections": [
+      {"name": "Wzory skróconego mnożenia"},
+      {"name": "usuwanie niewymierności z mianownika"},
+      {"name": "Działania na wyrażeniach algebraicznych"},
+      {"name": "Wyciąganie czynnika przed nawias"},
+      {"name": "Wielomiany"},
+      {"name": "Rozkład wielomianów na czynniki"},
+      {"name": "Wyrażenia wymierne"}
+    ]
+  },
+  {
+    "Section": "Równania i nierówności",
+    "Subsections": [
+      {"name": "Równania i nierówności liniowe"},
+      {"name": "Równania i nierówności kwadratowe"},
+      {"name": "Równania wielomianowe"},
+      {"name": "równania wymierne"}
+    ]
+  },
+  {
+    "Section": "Układy równań",
+    "Subsections": []
+  },
+  {
+    "Section": "Funkcje",
+    "Subsections": [
+      {"name": "Podstawowe wiadomości o funkcjach i ich własności"},
+      {"name": "Przekształcenia wykresów funkcji"},
+      {"name": "Funkcja liniowa"},
+      {"name": "Funkcja kwadratowa"},
+      {"name": "Funkcja wykładnicza"},
+      {"name": "Funkcja logarytmiczna"}
+    ]
+  },
+  {
+    "Section": "Ciągi",
+    "Subsections": [
+      {"name": "Podstawowe wiadomości o ciągach"},
+      {"name": "Ciąg arytmetyczny"},
+      {"name": "Ciąg geometryczny"}
+    ]
+  },
+  {
+    "Section": "Trygonometria",
+    "Subsections": []
+  },
+  {
+    "Section": "Planimetria",
+    "Subsections": [
+      {"name": "Koło"},
+      {"name": "Wielokąty"},
+      {"name": "Trójkąty"},
+      {"name": "Czworokąty"},
+      {"name": "wielokąty foremne"}
+    ]
+  },
+  {
+    "Section": "Geometria analityczna na płaszczyźnie kartezjańskiej",
+    "Subsections": [
+      {"name": "Długości"},
+      {"name": "Proste"}
+    ]
+  },
+  {
+    "Section": "Stereometria",
+    "Subsections": [
+      {
+        "name": "Graniastosłupy",
+        "Subsubsections": [
+          {"name": "Ogólne"},
+          {"name": "Prostopadłościan"},
+          {"name": "Sześcian"}
+        ]
+      },
+      {"name": "Ostrosłupy"},
+      {"name": "Figury obrotowe"}
+    ]
+  },
+  {
+    "Section": "Kombinatoryka",
+    "Subsections": []
+  },
+  {
+    "Section": "Rachunek prawdopodobieństwa i statystyka",
+    "Subsections": [
+      {"name": "Rachunek Prawdopodobieństwa"},
+      {
+        "name": "Statystyka",
+        "Subsubsections": [
+          {"name": "Średnia"},
+          {"name": "Mediana"},
+          {"name": "Dominanta"}
+        ]
+      }
+    ]
+  },
+  {
+    "Section": "Optymalizacja i rachunek różniczkowy",
+    "Subsections": [
+      {"name": "Optymalizacja"},
+      {
+        "name": "Rachunek różniczkowy",
+        "Subsubsections": [
+          {"name": "Granice funkcji"},
+          {"name": "Pochodna"},
+          {"name": "Monotoniczność funkcji"}
+        ]
+      }
+    ]
+  }
+]
