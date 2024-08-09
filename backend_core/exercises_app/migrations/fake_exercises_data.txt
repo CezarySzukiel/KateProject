@@ -1,0 +1,972 @@
+[
+    {
+        "Section": "Liczby rzeczywiste",
+        "Subsections": [
+            {
+                "name": "Działania w zbiorze liczb rzeczywistych",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.1.1",
+                        "description": "Liczbę $\\frac{224}{1111}$ można zapisać w postaci nieskończonego ułamka dziesiętnego okresowego. Dwudziestą cyfrą po przecinku jego rozwinięcia jest",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": "2018-06-01",
+                        "answers": [
+                            { 
+                                "answer": 0,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 1,
+                                "correct": false,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 6,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.1.2",
+                        "description": "Wybierz zdanie prawdziwe A, B lub C oraz zdanie 1, 2 lub 3 uzasadniające takie stwierdzenie",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 2,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": "Liczba $\\frac{1}{1-\\sqrt{2}} - \\frac{1}{1+\\sqrt{2}}$ jest ujemna.",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "Liczba $\\frac{1}{1-\\sqrt{2}}$ jest ujemna oraz liczba $\\frac{1}{1+\\sqrt{2}}=$ jest dodatnia.",
+                                "correct": true,
+                                "second_set": true
+                            },
+                            { 
+                                "answer": "Liczba $\\frac{1   1+\\sqrt{2}}+\\frac{1}{1-\\sqrt{2}}$ jest dodatnia.",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "Liczba $\\frac{1}{1-\\sqrt{2}} - \\frac{1}{1+\\sqrt{2}}$ jest liczbą wymierną.",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\frac{1}{1-\\sqrt{2}}-\\frac{1}{1+\\sqrt{2}}=1+\\sqrt{2}-1-\\sqrt{2}=2$.",
+                                "correct": false,
+                                "second_set": true
+                            },
+                            { 
+                                "answer": "Liczby $\\frac{1}{1+\\sqrt{2}},\\frac{1}{1-\\sqrt{2}}=$ są dodatnie.",
+                                "correct": false,
+                                "second_set": true
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.1.3",
+                        "description": "Dana jest liczba $x = a-(\\sqrt{3}-\\sqrt{2})^{2}$, gdzie $a$ należy do zbioru R liczb rzeczywistych. W rozwiązaniu zadania uwzględnij fakt, że liczby $\\sqrt{3}$ oraz $\\sqrt{2}\\cdot\\sqrt{3}$ są niewymierne. Dokończ zdanie. Zaznacz dwie odpowiedzi, tak aby dla każdej z nich dokończenie zdania było prawdziwe. liczba $x$ jest wymierna dla",
+                        "difficult": 2,
+                        "points": 2,
+                        "solution_exactly": null,
+                        "type": 3,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": "$a=(\\sqrt{3}-\\sqrt{2})^{2}+0,3$",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=6$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=5$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=-\\sqrt{6}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=-2\\sqrt{6}+12,5$",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=-\\sqrt{3}+\\sqrt{2}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$a=(\\sqrt{3}-\\sqrt{2})^{2}-2\\sqrt{6}$",
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.1.4",
+                        "description": "Liczbę $\\frac{351}{990}$ można zapisać w postaci nieskończonego ułamka dziesiętnego okresowego. Piętnastą cyfrą po przecinku jego rozwinięcia jest",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 4,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 3,
+                                "correct": false,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 7,
+                                "correct": false,
+                                "second_set": false
+                            },
+                            {
+                                "answer": 9,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Dowody dotyczące podzielności",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.2.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 9,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": "$\\frac{1}{2}$",
+                                "correct": true,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.2.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 9,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Własności pierwiastków",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.3.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.3.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Prawa działań na potęgach i pierwiastkach",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.4.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.4.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Monotoniczność potęgowania",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.5.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.5.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Przedziały liczbowe",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.6.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.6.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Wartość bezwzględna",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.7.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.7.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Potęgi i pierwiastki w praktyce",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.8.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.8.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Logarytmy",
+                "exercises": [
+                    {
+                        "title": "Zadanie 1.9.1",
+                        "description": "Dana jest liczba $a=\\log_{3}{216}-\\log_{3}{8}$. Dokończ zadanie. Zaznacz dwie odpowiedzi, tak aby dla każdej z nich dokończenie zdania było prawdziwe.",
+                        "difficult": 2,
+                        "points": 2,
+                        "solution_exactly": null,
+                        "type": 3,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": "$\\log_{3}{27}$",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 3,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\frac{\\log_{3}{216}}{\\log_{3}{8}}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$log_{3}{\\frac{1}{27}}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\log_{2}{208}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "-3",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\frac{1}{3}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$-\\frac{1}{3}$",
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 1.9.2",
+                        "description": "Dokończ zdania. Zaznacz odpowiedź spośród A-C oraz odpowieź spośród D-F.",
+                        "ask1": "Liczbą odwrotną do liczby $2\\sqrt{3}$ jest",
+                        "ask2": "Liczbą przeciwną do liczby $\\frac{1}{2}-\\sqrt{2}$ jest",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 4,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": "$\\frac{2}{\\sqrt{3}}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\frac{\\sqrt{3}}{6}$",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\frac{\\sqrt{3}}{3}$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$\\frac{1}{2}+\\sqrt{2}$",
+                                "correct": false,
+                                "second_set": true
+                            },
+                            { 
+                                "answer": "$-\\frac{1}{2}-\\sqrt{2}$",
+                                "correct": false,
+                                "second_set": true
+                            },
+                            { 
+                                "answer": "$\\frac{-1+2\\sqrt{2}}{2}$",
+                                "correct": true,
+                                "second_set": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Section": "Wyrażenia algebraiczne",
+        "Subsections": [
+            {
+                "name": "Wzory skróconego mnożenia",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.1.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.1.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Działania na wielomianach",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.2.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.2.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Wyłączanie czynnika przed nawias",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.3.1",
+                        "description": "Dane jest wyrażenie algebraiczne $W$, gdzie $W=(x+1)^{3}-(x+1)^{2}+x+1$. Dokończ zdanie. Zaznacz dwie odpowiedzi, tak aby dla każdej z nich dokończenie zdania było prawdziwe. Wyrażenie $W$ po przekształceniu jest równoważne wyrażeniu",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 3,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": "$(x+1)((x+1)^{2}-(x+1)+1)$",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$x^{3}+2x^{2}+2x+1$",
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$(x+1)(x^{2}-x+1)$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$(x+1)((x-1)^{2}-(x+1)-1)$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$(x-1)(x^{2}-x+1)$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$x^{3}-2x^{2}+2x-1$",
+                                "correct": false,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": "$x^{3}-x+1$",
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.3.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Rozkład wielomianów na czynniki",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.4.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.4.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Pierwiastki wielomianu",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.5.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.5.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Dzielenie wielomianów",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.6.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.6.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Wyrażenia wymierne",
+                "exercises": [
+                    {
+                        "title": "Zadanie 2.7.1",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Zadanie 2.7.2",
+                        "description": "opis",
+                        "difficult": 1,
+                        "points": 1,
+                        "solution_exactly": null,
+                        "type": 1,
+                        "advanced_level": false,
+                        "exam": null,
+                        "answers": [
+                            { 
+                                "answer": 1,
+                                "correct": true,
+                                "second_set": false
+                            },
+                            { 
+                                "answer": 2,
+                                "correct": false,
+                                "second_set": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

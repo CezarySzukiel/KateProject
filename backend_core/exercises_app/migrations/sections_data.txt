@@ -43,6 +43,10 @@
           {"name": "Równania"},
           {"name": "Nierówności"}
         ]
+      },
+      {
+      "name": "Dowody",
+      "Subsubsections": []
       }
     ]
   },

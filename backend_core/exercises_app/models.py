@@ -12,7 +12,7 @@ class Exercise(models.Model):
     solution_similar means solution for a similar task
     type means the type of task: 1 - open task, 2 - multiple choice, etc.
     advanced_level means whether the task is advanced or basic"""
-    title = models.CharField(max_length=128, unique=False)
+    title = models.CharField(max_length=128, unique=True)
     description = models.TextField()
     ask1 = models.TextField(null=True, blank=True)
     ask2 = models.TextField(null=True, blank=True)
