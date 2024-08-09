@@ -86,9 +86,9 @@ export function HOC_ExerciseDetails(props) {
           points={actualExercise.points}
           difficult={actualExercise.difficult}
         />
-                
-        <Latex>{actualExercise.description}</Latex>
-
+        <div className={'description'}>
+          <Latex>{actualExercise.description}</Latex>
+        </div>
         {actualExercise.functions.length > 0 && 
           actualExercise.functions.map((func) => (
             <Chart 

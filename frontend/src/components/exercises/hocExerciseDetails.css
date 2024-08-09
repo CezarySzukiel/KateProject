@@ -6,3 +6,17 @@
 	width: auto;
 }
 
+.description {
+	display: flex;
+}
+.description > * {
+	/*white-space: nowrap;*/
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	text-align: start;
+}
+
+.katex-display {
+	margin: 0 0.5rem;
+}
