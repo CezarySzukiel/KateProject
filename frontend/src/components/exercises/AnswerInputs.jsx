@@ -212,10 +212,10 @@ export function Type9(props) {
 					onChange={handleChange}
 				>
 				</textarea>
-				<div  className={'user-answer-field'}>
+				{answer[0] && <div  className={'user-answer-field'}>
 					{answer[0].length > 0 && <p><Latex>${answer}$</Latex></p>}
 					{answer[0].length === 0 && <p><Latex>{answer}</Latex></p>}
-				</div>
+				</div>}
 	          	{props.isLoggedIn && <>
 	          	</>}
 	        	{!props.isLoggedIn && <p>Aby sprawdzić swoją odpowiedź musisz być zalogowany.</p>}

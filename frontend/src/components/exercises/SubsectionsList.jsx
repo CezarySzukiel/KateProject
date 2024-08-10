@@ -36,7 +36,7 @@ export function SubsectionsList(props) {
 
     return (
         <div>
-            <h2>Lista poddziałów</h2>
+            <h2>{actualSection.name}:</h2>
             <ul>
                 {subsections && subsections.map(subsection => (
                     <li key={subsection.id}>

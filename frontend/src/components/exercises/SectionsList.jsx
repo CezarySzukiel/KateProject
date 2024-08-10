@@ -39,7 +39,7 @@ export function SectionsList(props) {
 
     return (
         <div>
-            <h2>Lista Działów</h2>
+            <h2>Działy:</h2>
             <ul>
                 {props.allSections && props.allSections.map(section => (
                     <li key={section.id}>

@@ -7,10 +7,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export function ExercisesList(props) {
-    const {exercises, handleLinkClick, nextPageUrl, handleNextPage, solvedExercisesIds, isLoggedIn, } = props
+    const {exercises, handleLinkClick, nextPageUrl, handleNextPage, solvedExercisesIds, isLoggedIn, actualSection, actualSubsection } = props
     return (
         <div>
-            <h2>Lista zadań</h2>
+            {actualSection && actualSubsection && <h2>{actualSection.name} - {actualSubsection[0].name}</h2>}
+            {exercises.length === 0 && <h3>Brak zadań</h3>}
             <ul>
                 {exercises.map(exercise => (
                     <div onClick={() => handleLinkClick(exercise)} className={'li'} key={exercise.id}>

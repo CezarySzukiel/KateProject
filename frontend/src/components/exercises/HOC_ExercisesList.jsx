@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { ExercisesList } from './ExercisesList'
 
 export function HOC_ExercisesList(props) {
-    const { selectedSubsectionIds, allExercises, setAllExercises, setActualExercise, solvedExercises } = props;
+    const { selectedSubsectionIds, allExercises, setAllExercises, setActualExercise, solvedExercises, actualSection, actualSubsection } = props;
     const SEARCH_URL = 'http://0.0.0.0:8000/api/v1/exercises/search-by-subsections/'
     const isInitialMount = useRef(false)
     const [nextPageUrl, setNextPageUrl] = useState(null);
@@ -84,6 +84,8 @@ export function HOC_ExercisesList(props) {
                     handleLinkClick={handleLinkClick}
                     solvedExercisesIds={solvedExercisesIds}
                     isLoggedIn={isLoggedIn}
+                    actualSection={actualSection}
+                    actualSubsection={actualSubsection}
                 />
             }
         </>   
