@@ -7,14 +7,13 @@
 }
 
 .description {
-	display: flex;
+	display: inline;
 }
 .description > * {
 	/*white-space: nowrap;*/
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	text-align: start;
 }
 
 .katex-display {

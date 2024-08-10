@@ -52,15 +52,15 @@ export const HOC_AnswerInput = (props) => {
           }
         });
 
-        if (response.status == 200) {
+        if (response.status === 200) {
           setWrongAnswerMessage(null)
           setCorrectAnswerMessage("poprawna odpowiedź!")
-        } else if (response.status == 208) {
+        } else if (response.status === 208) {
           setWrongAnswerMessage(null)
           setCorrectAnswerMessage(
             "poprawna odpowiedź! Zadanie zostalo już wcześniej przez Ciebie rozwiązane."
           )
-        } else if (response.status == 209) {
+        } else if (response.status === 209) {
           setCorrectAnswerMessage(null)
           setWrongAnswerMessage("Spróbuj jeszcze raz!")
         } 
@@ -102,7 +102,7 @@ export const HOC_AnswerInput = (props) => {
 
       />}
 
-      {exerciseType === 9 && userAnswer.length > 0 && 
+      {exerciseType === 9 && userAnswer && userAnswer.length > 0 &&
       <div className={"hoc-type9"}>
         <Type9 
           handleSubmit={handleSubmit} 
@@ -114,7 +114,7 @@ export const HOC_AnswerInput = (props) => {
       </div>
       }
 
-      {exerciseType === 9 && userAnswer.length == 0 && 
+      {exerciseType === 9 && userAnswer && userAnswer.length === 0 &&
       <div className={"hoc-type9"}>
         <Type9 
           handleSubmit={handleSubmit} 
@@ -125,6 +125,7 @@ export const HOC_AnswerInput = (props) => {
         />
       </div>
       }
+
       {!isLoggedIn && <p>Musisz być zalogowany aby przesłać swoją odpowiedź.</p>}
       {isLoggedIn && <button onClick={handleSubmit}>Wyślij</button>}
       {error && <Error message={error}/>}
