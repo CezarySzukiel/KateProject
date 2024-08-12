@@ -1,7 +1,7 @@
-// import './homePage.css'
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from "react-router-dom";
-import { getFilteredPosts } from '../../helpers'
+import './homePage.css'
+import React, {useState, useEffect, useRef} from 'react';
+import {Link} from "react-router-dom";
+import {getFilteredPosts} from '../../helpers'
 
 
 export function HomePage() {
@@ -41,7 +41,11 @@ export function HomePage() {
                     <li>Zdobywaj punkty i rywalizuj z innymi użytkownikami</li>
                     <li>Otrzymuj natychmiastowe odpowiedzi i wskazówki</li>
                 </ul>
-                <Link to={`/blog/`}><button className='CTAButton'>Zacznij teraz</button></Link>
+                <div className='cta'>
+                    <Link to={`/blog/`}>
+                        <button className='CTAButton'>Zacznij teraz</button>
+                    </Link>
+                </div>
             </div>
             {lastPost && <div>
                 <h2>Ostatnio na blogu</h2>

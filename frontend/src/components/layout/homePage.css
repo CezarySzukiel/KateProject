@@ -3,14 +3,14 @@
     align-items: center;
     justify-content: center;
     padding: 50px 20px;
-/*    background-color: #f4f4f4;*/
-    color: #333;
+    width: 100%;
 }
 
 .HeroContent {
-    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-right: 20px;
-    text-align: left;
 }
 
 .HeroContent h1 {
@@ -24,16 +24,23 @@
 }
 
 .BenefitsList {
+    display: flex;
     list-style: none;
     padding: 0;
     margin-bottom: 30px;
+    align-items: flex-start;
 }
 
 .BenefitsList li {
     margin-bottom: 10px;
     font-size: 1rem;
 }
-
+.cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 .CTAButton {
     padding: 10px 20px;
     font-size: 1rem;
