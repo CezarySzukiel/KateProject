@@ -4,6 +4,7 @@
   margin: 5px 0;
   border-radius: 0.6rem;
   transition: box-shadow 0.2s ease;
+  display: flex;
 }
 
 .answer-div.selected {
@@ -39,6 +40,15 @@
   width: 100%;
 }
 
+.answer-index {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.answer-text > * {
+display: flex;
+}
+
 .user-answer-field {
   width: 100%;
   max-width: 100vh;
@@ -47,13 +57,12 @@
 }
 
 .user-answer-field p {
-  word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
   margin: 0;
   max-width: 100%;
+  overflow-y: hidden;
   overflow-x: auto;
-  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #9196a2 #7b869300;
 }

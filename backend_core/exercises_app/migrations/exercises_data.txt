@@ -46,22 +46,22 @@
         "subsection": "Potęgi i pierwiastki",
         "answers": [
             {
-                "answer": "$2^24$",
+                "answer": "$2^{24}$",
                 "correct": false,
                 "second_set": false
             },
             {
-                "answer": "$2^16$",
+                "answer": "$2^{16}$",
                 "correct": false,
                 "second_set": false
             },
             {
-                "answer": "$2^12$",
+                "answer": "$2^{12}$",
                 "correct": false,
                 "second_set": false
             },
             {
-                "answer": "$2^8$",
+                "answer": "$2^{8}$",
                 "correct": false,
                 "second_set": false
             }
@@ -222,7 +222,7 @@
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
-        "type": 3,
+        "type": 6,
         "advanced_level": false,
         "exam": "2024-05-08",
         "section": "Wyrażenia algebraiczne",

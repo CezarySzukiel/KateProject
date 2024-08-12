@@ -21,10 +21,14 @@ export function Type1(props) {
                         className={`answer-div ${selectedAnswer === answer.answer ? 'selected' : ''}`}
                         onClick={() => handleAnswerClick(answer.answer)}
                     >
-                        {String.fromCharCode(65 + index)}.
-                        <Latex> {answer.answer}</Latex>
+                        <div className={'answer-index'}>
+                            {String.fromCharCode(65 + index)}.
+                        </div>
+                        <div className={'answer-text'}>
+                            <Latex> {answer.answer}</Latex>
+                        </div>
                     </li>
-                ))}
+                    ))}
             </ul>
         </div>
     )
@@ -57,10 +61,14 @@ export function Type2(props) {
                             onClick={() => handleAnswerClick(setFirstAnswer, answer.answer)}
                             className={`answer-div ${firstAnswer === answer.answer ? 'selected' : ''}`}
                         >
-                            {String.fromCharCode(65 + index)}.
-                            <Latex> {answer.answer}</Latex>
+                            <div className={'answer-index'}>
+                                {String.fromCharCode(65 + index)}.
+                            </div>
+                            <div className={'answer-text'}>
+                                <Latex> {answer.answer}</Latex>
+                            </div>
                         </li>
-                    ))}
+                        ))}
                 </ul>
             </div>
             <div>
@@ -72,9 +80,14 @@ export function Type2(props) {
                             onClick={() => handleAnswerClick(setSecondAnswer, answer.answer)}
                             className={`answer-div ${secondAnswer === answer.answer ? 'selected' : ''}`}
                         >
-                            {index + 1}.
-                            <Latex> {answer.answer}</Latex></li>
-                    ))}
+                            <div className={'answer-index'}>
+                                {index + 1}.
+                            </div>
+                            <div className={'answer-text'}>
+                                <Latex> {answer.answer}</Latex>
+                            </div>
+                        </li>
+                        ))}
                 </ul>
             </div>
         </div>
@@ -114,10 +127,14 @@ export function Type3(props) {
                         className={`answer-div ${selectedAnswers && selectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
                         onClick={() => handleAnswerClick(answer.answer)}
                     >
-                        {String.fromCharCode(65 + index)}.
-                        <Latex>{answer.answer}</Latex>
+                        <div className={'answer-index'}>
+                            {String.fromCharCode(65 + index)}.
+                        </div>
+                        <div className={'answer-text'}>
+                            <Latex>{answer.answer}</Latex>
+                        </div>
                     </li>
-                ))}
+                    ))}
             </ul>
         </div>
     )
@@ -166,10 +183,14 @@ export function Type4(props) {
                             onClick={() => handleAnswerClick(setSecondAnswer, answer.answer)}
                             className={`answer-div ${secondAnswer === answer.answer ? 'selected' : ''}`}
                         >
-                            {String.fromCharCode(65 + firstSet.length + index)}.
-                            {answer.answer && <Latex> {answer.answer}</Latex>}
+                            <div className={'answer-index'}>
+                                {String.fromCharCode(65 + firstSet.length + index)}.
+                            </div>
+                            <div className={'answer-text'}>
+                                {answer.answer && <Latex> {answer.answer}</Latex>}
+                            </div>
                         </li>
-                    ))}
+                        ))}
                 </ul>
             </div>
         </div>
@@ -182,6 +203,50 @@ export const reformatAnswer = (value) => {
         return ''
     }
     return data;
+}
+
+export function Type6(props) {
+    const {answers, handleAnswer} = props
+    const [selectedAnswers, setSelectedAnswers] = useState([])
+
+    const handleAnswerClick = (answer) => {
+        if (selectedAnswers.includes(answer)) {
+            setSelectedAnswers(selectedAnswers.filter(selectedAnswer => selectedAnswer !== answer))
+        } else {
+            setSelectedAnswers([...selectedAnswers, answer])
+        }
+    }
+
+    useEffect(() => {
+        handleAnswer(selectedAnswers)
+    }, [selectedAnswers])
+
+    return (
+        <div className={'answer-input'}>
+            <ul className={'answers-list'}>
+                {answers.map((answer, index) => (
+                    <li
+                        key={index}
+                        className={`answer-div ${selectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
+                        onClick={() => handleAnswerClick(answer.answer)}
+                    >
+                        <div className={'answer-index'}>
+                            {String.fromCharCode(65 + index)}.
+                        </div>
+                        <div className={'answer-text'}>
+                            <Latex> {answer.answer}</Latex>
+                        </div>
+                        <div className={'answer-buttons'}>
+                            <button className={'answer-button'} onClick={() => handleAnswerClick(answer.answer)}>P
+                            </button>
+                            <button className={'answer-button'} onClick={() => handleAnswerClick(answer.answer)}>F
+                            </button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
 }
 
 export function Type9(props) {
