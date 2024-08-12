@@ -41,9 +41,11 @@ class ExerciseDataLoader:
             print(f'File not found: {file_path}')
             print("*-" * 50)
 
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
             print("*-" * 50)
             print(f'Error decoding JSON from the file: {file_path}')
+            print(f'Error: {e.msg}')
+            print(f'Line: {e.lineno}, Column: {e.colno}')
             print("*-" * 50)
 
     def add_exercise_data(self, apps, schema_editor):
@@ -66,6 +68,7 @@ class ExerciseDataLoader:
             if 'subsubsection' in exercise:
                 self.subsubsection = self.Subsubsection.objects.get(name=exercise['subsubsection'])
             if 'subsection' in exercise:
+                print(exercise['subsection'])
                 self.subsection = self.Subsection.objects.get(name=exercise['subsection'])
 
             self.Exercise.objects.create(

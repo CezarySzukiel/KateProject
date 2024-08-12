@@ -147,5 +147,852 @@
                 "second_set": false
             }
         ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.6",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nZbiorem wszystkich rozwiązań nierówności $$1 - \\frac{3}{2}x < \\frac{2}{3} - x$$ jest przedział",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Równania i nierówności",
+        "subsection": "Równania i nierówności liniowe",
+        "answers": [
+            {
+                "answer": "$(-\\infty, -\\frac{2}{3})$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$(-\\infty, \\frac{2}{3})$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$(-\\frac{2}{3}, +\\infty)$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$(\\frac{2}{3}, +\\infty)$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.7",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nRównanie $$\\frac{x+1}{(x+2)(x-3)} = 0$$ w zbiorze liczb rzeczywistych",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Równania i nierówności",
+        "subsection": "Równania i nierówności liniowe",
+        "answers": [
+            {
+                "answer": "nie ma rozwiązania.",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "ma dokładnie jedno rozwiązanie: $$(-1)$$.",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "ma dokładnie dwa rozwiązania: $$(-2)$$ oraz $$3$$.",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "ma dokładnie trzy rozwiązania: $$(-1), (-2)$$ oraz $$3$$.",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.8",
+        "description": "Oceń prawdziwość poniższych stwierdzeń. Wybierz P, jeśli stwierdzenie jest prawdziwe, albo F – jeśli jest fałszywe.\n\nDany jest wielomian $$W(x) = 3x^3 + 6x^2 + 9x$$.",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 3,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Wyrażenia algebraiczne",
+        "subsection": "Wielomiany",
+        "answers": [
+            {
+                "answer": "Wielomian $$W$$ jest iloczynem wielomianów $$F(x) = 3x$$ i $$G(x) = x^2 + 2x + 3$$.",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "Liczba $$(-1)$$ jest rozwiązaniem równania $$W(x) = 0$$.",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.9",
+        "description": "Rozwiąż równanie\n\n$$x^3 - 2x^2 - 3x + 6 = 0$$\n\nZapisz obliczenia.",
+        "difficult": 3,
+        "points": 3,
+        "solution_exactly": null,
+        "type": 9,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Równania i nierówności",
+        "subsection": "Równania wielomianowe",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.10",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nUkładem równań, którego poprawne rozwiązanie prowadzi do obliczenia liczby $$x$$ drzew posadzonych w pierwszym sadzie oraz liczby $$y$$ drzew posadzonych w drugim sadzie, jest",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Układy równań",
+        "answers": [
+            {
+                "answer": "$$\\begin{cases} x + y = 1960 \\\\ 0,6 \\cdot 0,95x = 0,9y \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\begin{cases} x + y = 1960 \\\\ 0,95x = 0,6 \\cdot 0,9y \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\begin{cases} x + y = 1960 \\\\ 0,05x = 0,6 \\cdot 0,1y \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\begin{cases} x + y = 1960 \\\\ 0,4 \\cdot 0,95x = 0,9y \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.11",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nUkładem równań, którego interpretację geometryczną przedstawiono na rysunku, jest",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Geometria analityczna na płaszczyźnie kartezjańskiej",
+        "subsection": "Proste",
+        "answers": [
+            {
+                "answer": "$$\\begin{cases} y = -\\frac{3}{2}x + 3 \\\\ y = -\\frac{3}{2}x - 1 \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\begin{cases} y = \\frac{3}{2}x + 3 \\\\ y = -\\frac{2}{3}x - 1 \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\begin{cases} y = \\frac{3}{2}x + 3 \\\\ y = \\frac{3}{2}x - 1 \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\begin{cases} y = -\\frac{3}{2}x - 3 \\\\ y = \\frac{3}{2}x + 1 \\end{cases}$$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.12",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nFunkcja liniowa $$f$$ jest określona wzorem $$f(x) = (-2k + 3)x + k - 1$$, gdzie $$k \\in \\mathbb{R}$$.\n\nFunkcja $$f$$ jest malejąca dla każdej liczby $$k$$ należącej do przedziału",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Funkcje",
+        "subsection": "Funkcja liniowa",
+        "answers": [
+            {
+                "answer": "$(-\\infty, 1)$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$(-\\infty, -\\frac{3}{2})$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$(1, +\\infty)$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$(\\frac{3}{2}, +\\infty)$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.13",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nFunkcje liniowe $$f$$ oraz $$g$$, określone wzorami $$f(x) = 3x + 6$$ oraz $$g(x) = ax + 7$$, mają to samo miejsce zerowe.\n\nWspółczynnik $$a$$ we wzorze funkcji $$g$$ jest równy",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Funkcje",
+        "subsection": "Funkcja liniowa",
+        "answers": [
+            {
+                "answer": "$-\\frac{7}{2}$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$-\\frac{2}{7}$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\frac{2}{7}$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\frac{7}{2}$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.14.1",
+        "description": "Uzupełnij poniższe zdanie. Wpisz odpowiedni przedział w wykropkowanym miejscu tak, aby zdanie było prawdziwe.\n\nZbiorem wszystkich rozwiązań nierówności $$f(x) \\geq 0$$ jest przedział ……………………… .",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Funkcje",
+        "subsection": "Funkcja kwadratowa",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.14.2",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nFunkcja kwadratowa $$f$$ jest określona wzorem",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Funkcje",
+        "subsection": "Funkcja kwadratowa",
+        "answers": [
+            {
+                "answer": "$$f(x) = -(x + 1)^2 - 9$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$f(x) = -(x - 1)^2 + 9$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$f(x) = -(x - 1)^2 - 9$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$f(x) = -(x + 1)^2 + 9$$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.14.3",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nDla funkcji $$f$$ prawdziwa jest równość",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Funkcje",
+        "subsection": "Funkcja kwadratowa",
+        "answers": [
+            {
+                "answer": "$f(-4) = f(6)$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$f(-4) = f(5)$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$f(-4) = f(4)$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$f(-4) = f(7)$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.14.4",
+        "description": "Uzupełnij tabelę. Każdej z funkcji $$g$$ oraz $$h$$ przyporządkuj fragment jej wykresu. Wpisz w każdą pustą komórkę tabeli właściwą odpowiedź, wybraną spośród oznaczonych literami A–F.",
+        "difficult": 2,
+        "points": 2,
+        "solution_exactly": null,
+        "type": 2,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Funkcje",
+        "subsection": "Przekształcenia wykresów funkcji",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.15",
+        "description": "Oceń prawdziwość poniższych stwierdzeń. Wybierz P, jeśli stwierdzenie jest prawdziwe, albo F – jeśli jest fałszywe.\n\nCiąg $$(a_n)$$ jest określony wzorem $$a_n = (-1)^n \\cdot (n - 5)$$ dla każdej liczby naturalnej $$n \\geq 1$$.",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 3,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Ciągi",
+        "subsection": "Podstawowe wiadomości o ciągach",
+        "answers": [
+            {
+                "answer": "Pierwszy wyraz ciągu $$(a_n)$$ jest dwa razy większy od trzeciego wyrazu tego ciągu.",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "Wszystkie wyrazy ciągu $$(a_n)$$ są dodatnie.",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.16",
+        "description": "Dokończ zdanie. Wybierz odpowiedź A albo B oraz odpowiedź 1., 2. albo 3.\n\nTrzywyrazowy ciąg $$(12, 6, 2m - 1)$$ jest geometryczny.",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 2,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Ciągi",
+        "subsection": "Ciąg geometryczny",
+        "answers": [
+            {
+                "answer": "rosnący",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "malejący",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$m = \\frac{1}{2}$",
+                "correct": false,
+                "second_set": true
+            },
+            {
+                "answer": "$m = 2$",
+                "correct": false,
+                "second_set": true
+            },
+            {
+                "answer": "$m = 3$",
+                "correct": false,
+                "second_set": true
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.17",
+        "description": "Ciąg arytmetyczny $$(a_n)$$ jest określony dla każdej liczby naturalnej $$n \\geq 1$$. Trzeci wyraz tego ciągu jest równy $$-1$$, a suma piętnastu początkowych kolejnych wyrazów tego ciągu jest równa $$-165$$.\n\nOblicz różnicę tego ciągu. Zapisz obliczenia.",
+        "difficult": 2,
+        "points": 2,
+        "solution_exactly": null,
+        "type": 9,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Ciągi",
+        "subsection": "Ciąg arytmetyczny",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.18",
+        "description": "Uzupełnij zdanie. Wybierz dwie właściwe odpowiedzi spośród oznaczonych literami A–F i wpisz te litery w wykropkowanych miejscach.\n\nW kartezjańskim układzie współrzędnych $$(x, y)$$ zaznaczono kąt o mierze $$\\alpha$$ taki, że $$\\tg \\alpha = -3$$ oraz $$90° < \\alpha < 180°$$.",
+        "difficult": 2,
+        "points": 2,
+        "solution_exactly": null,
+        "type": 2,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Trygonometria",
+        "answers": [
+            {
+                "answer": "$\\sin \\alpha < 0$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\sin \\alpha \\cdot \\cos \\alpha < 0$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\sin \\alpha \\cdot \\cos \\alpha > 0$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\cos \\alpha > 0$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\sin \\alpha = -\\frac{1}{3} \\cos \\alpha$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\sin \\alpha = -3 \\cos \\alpha$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.19",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nLiczba $$\\sin^3 20° + \\cos^2 20° \\cdot \\sin 20°$$ jest równa",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Trygonometria",
+        "answers": [
+            {
+                "answer": "$\\cos 20^\\circ$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\sin 20^\\circ$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\tg 20^\\circ$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$\\sin 20^\\circ \\cdot \\cos 20^\\circ$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.20",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nW trójkącie $$KLM$$, w którym $$|KM| = a$$, $$|LM| = b$$ oraz $$a \\neq b$$. Dwusieczna kąta $$KML$$ przecina bok $$KL$$ w punkcie $$N$$ takim, że $$|KN| = c$$, $$|NL| = d$$ oraz $$|MN| = e$$.",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Planimetria",
+        "subsection": "Trójkąty",
+        "answers": [
+            {
+                "answer": "$a \\cdot b = c \\cdot d$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$a \\cdot d = b \\cdot c$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$a \\cdot c = b \\cdot d$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$a \\cdot b = e \\cdot e$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.21",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nDany jest równoległobok o bokach długości $$3$$ i $$4$$ oraz o kącie między nimi o mierze $$120°$$.\n\nPole tego równoległoboku jest równe",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Planimetria",
+        "subsection": "Czworokąty",
+        "answers": [
+            {
+                "answer": "12",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$12\\sqrt{3}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "6",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$6\\sqrt{3}$$",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.22",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nW trójkącie $$ABC$$, wpisanym w okrąg o środku w punkcie $$S$$, kąt $$ACB$$ ma miarę $$42°$$ (zobacz rysunek).\n\nMiara kąta ostrego $$BAS$$ jest równa",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Planimetria",
+        "subsection": "Trójkąty",
+        "answers": [
+            {
+                "answer": "42°",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "45°",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "48°",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "69°",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.23",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nW kartezjańskim układzie współrzędnych $$(x, y)$$ proste $$k$$ oraz $$l$$ są określone równaniami\n\n$$k: y = (m + 1)x + 7$$ \n\n$$l: y = -2x + 7$$\n\nProste $$k$$ oraz $$l$$ są prostopadłe, gdy liczba $$m$$ jest równa",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Geometria analityczna na płaszczyźnie kartezjańskiej",
+        "subsection": "Proste",
+        "answers": [
+            {
+                "answer": "$$-\\frac{1}{2}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$\\frac{1}{2}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$-3$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "1",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.24",
+        "description": "Oblicz długość boku $$BC$$ tego równoległoboku. Zapisz obliczenia.\n\nW kartezjańskim układzie współrzędnych $$(x, y)$$ dany jest równoległobok $$ABCD$$, w którym $$A = (-2, 6)$$ oraz $$B = (10, 2)$$. Przekątne $$AC$$ oraz $$BD$$ tego równoległoboku przecinają się w punkcie $$P = (6, 7)$$.",
+        "difficult": 2,
+        "points": 2,
+        "solution_exactly": null,
+        "type": 9,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Geometria analityczna na płaszczyźnie kartezjańskiej",
+        "subsection": "Proste",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.25.1",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nPole jednej ściany bocznej tego graniastosłupa jest równe\n\nWysokość graniastosłupa prawidłowego sześciokątnego jest równa $$6$$ (zobacz rysunek). Pole podstawy tego graniastosłupa jest równe $$15\\sqrt{3}$$.",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Stereometria",
+        "subsection": "Graniastosłupy",
+        "subsubsection": "Ogólne",
+        "answers": [
+            {
+                "answer": "$$36\\sqrt{10}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "60",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "$$6\\sqrt{10}$$",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "360",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.25.2",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nKąt nachylenia najdłuższej przekątnej graniastosłupa prawidłowego sześciokątnego do płaszczyzny podstawy jest zaznaczony na rysunku",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Stereometria",
+        "subsection": "Graniastosłupy",
+        "subsubsection": "Ogólne",
+        "answers": [
+            {
+                "answer": "rysunek",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "rysunek",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "rysunek",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "rysunek",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.26",
+        "description": "Uzupełnij poniższe zdanie. Wpisz odpowiednią liczbę w wykropkowanym miejscu tak, aby zdanie było prawdziwe.\n\nOstrosłup $$F_1$$ jest podobny do ostrosłupa $$F_2$$. Objętość ostrosłupa $$F_1$$ jest równa $$64$$. Objętość ostrosłupa $$F_2$$ jest równa $$512$$.\n\nStosunek pola powierzchni całkowitej ostrosłupa $$F_2$$ do pola powierzchni całkowitej ostrosłupa $$F_1$$ jest równy ………. .",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 9,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Stereometria",
+        "subsection": "Ostrosłupy",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.27",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nRozważamy wszystkie kody czterocyfrowe utworzone tylko z cyfr $$1$$, $$3$$, $$6$$, $$8$$, przy czym w każdym kodzie każda z tych cyfr występuje dokładnie jeden raz.\n\nLiczba wszystkich takich kodów jest równa",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Kombinatoryka",
+        "answers": [
+            {
+                "answer": "4",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "10",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "24",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "16",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.28",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nŚrednia arytmetyczna trzech liczb: $$a$$, $$b$$, $$c$$, jest równa $$9$$.\n\nŚrednia arytmetyczna sześciu liczb: $$a$$, $$a$$, $$b$$, $$b$$, $$c$$, $$c$$, jest równa",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Rachunek prawdopodobieństwa i statystyka",
+        "subsection": "Statystyka",
+        "subsubsection": "Średnia",
+        "answers": [
+            {
+                "answer": "9",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "6",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "4,5",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "18",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.29",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nNa diagramie przedstawiono wyniki sprawdzianu z matematyki w pewnej klasie maturalnej. Na osi poziomej podano oceny, które uzyskali uczniowie tej klasy, a na osi pionowej podano liczbę uczniów, którzy otrzymali daną ocenę.\n\nMediana ocen uzyskanych z tego sprawdzianu przez uczniów tej klasy jest równa",
+        "difficult": 1,
+        "points": 1,
+        "solution_exactly": null,
+        "type": 1,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Rachunek prawdopodobieństwa i statystyka",
+        "subsection": "Statystyka",
+        "subsubsection": "Mediana",
+        "answers": [
+            {
+                "answer": "4,5",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "4",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "3,5",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "3",
+                "correct": false,
+                "second_set": false
+            }
+        ]
+    },
+    {
+        "title": "Zadanie M.P.05.24.30",
+        "description": "Oblicz prawdopodobieństwo zdarzenia $$A$$ polegającego na tym, że suma wylosowanych liczb jest liczbą parzystą. Zapisz obliczenia.\n\nDany jest pięcioelementowy zbiór $$K = \\{5, 6, 7, 8, 9\\}$$. Wylosowanie każdej liczby z tego zbioru jest jednakowo prawdopodobne. Ze zbioru $$K$$ losujemy ze zwracaniem kolejno dwa razy po jednej liczbie i zapisujemy je w kolejności losowania.",
+        "difficult": 2,
+        "points": 2,
+        "solution_exactly": null,
+        "type": 9,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Rachunek prawdopodobieństwa i statystyka",
+        "subsection": "Rachunek Prawdopodobieństwa",
+        "answers": []
+    },
+    {
+        "title": "Zadanie M.P.05.24.31",
+        "description": "Oblicz wymiary $$x$$ oraz $$y$$ jednego wybiegu, przy których suma pól podstaw tych trzech wybiegów będzie największa. W obliczeniach pomiń szerokość wejścia na każdy z wybiegów. Zapisz obliczenia.\n\nW schronisku dla zwierząt, na płaskiej powierzchni, należy zbudować ogrodzenie z siatki wydzielające trzy identyczne wybiegi o wspólnych ścianach wewnętrznych. Podstawą każdego z tych trzech wybiegów jest prostokąt (jak pokazano na rysunku). Do wykonania tego ogrodzenia należy zużyć $$36$$ metrów bieżących siatki.",
+        "difficult": 4,
+        "points": 4,
+        "solution_exactly": null,
+        "type": 9,
+        "advanced_level": false,
+        "exam": "2024-05-08",
+        "section": "Optymalizacja i rachunek różniczkowy",
+        "subsection": "Optymalizacja",
+        "answers": []
     }
 ]
