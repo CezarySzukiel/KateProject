@@ -1,3 +1,4 @@
+import './sList.css'
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
@@ -38,7 +39,7 @@ export function SectionsList(props) {
     }
 
     return (
-        <div>
+        <div className={'s-list'}>
             <h2>Działy:</h2>
             <ul>
                 {props.allSections && props.allSections.map(section => (
