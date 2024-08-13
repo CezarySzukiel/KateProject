@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { UserData } from './UserData'
 import { ExercisesList } from '../exercises/ExercisesList'
+import {setSolvedExercises} from "../../actions/exActions.jsx";
 
 export function HOC_UserData(props) {
     const [userData, setUserData] = useState(null);
@@ -36,11 +37,15 @@ export function HOC_UserData(props) {
             });
             if (response.status === 200) {
                 setUserData(response.data);
-                props.setSolvedExercises(response.data.exercises);
+                if (!response.data.exercises) {
+                    dispatch(setSolvedExercises([]))
+                } else {
+                    dispatch(setSolvedExercises(response.data.exercises))
+                }
                 return response.data
             } 
         } catch (error) {
-            if (error.response.status == 401) {
+            if (error.response.status === 401) {
                 const tokens = await props.getTokens(props.refreshToken)
                 props.setAccessToken(tokens.access);
                 props.setRefreshToken(tokens.refresh);

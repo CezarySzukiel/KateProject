@@ -52,7 +52,7 @@
             },
             {
                 "answer": "$2^{16}$",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             },
             {
@@ -104,7 +104,7 @@
             },
             {
                 "answer": "4",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             },
             {
@@ -133,7 +133,7 @@
             },
             {
                 "answer": "$8ab$",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             },
             {
@@ -177,7 +177,7 @@
             },
             {
                 "answer": "$(\\frac{2}{3}, +\\infty)$",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             }
         ]
@@ -201,7 +201,7 @@
             },
             {
                 "answer": "ma dokładnie jedno rozwiązanie: $$(-1)$$.",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             },
             {
@@ -230,7 +230,7 @@
         "answers": [
             {
                 "answer": "Wielomian $$W$$ jest iloczynem wielomianów $$F(x) = 3x$$ i $$G(x) = x^2 + 2x + 3$$.",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             },
             {
@@ -266,7 +266,7 @@
         "answers": [
             {
                 "answer": "$$\\begin{cases} x + y = 1960 \\\\ 0,6 \\cdot 0,95x = 0,9y \\end{cases}$$",
-                "correct": false,
+                "correct": true,
                 "second_set": false
             },
             {

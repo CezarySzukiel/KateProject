@@ -4,7 +4,7 @@ import Latex from 'react-latex-next';
 
 
 export function ExerciseDetailsBottom(props) {
-    const {correctAnswer} = props
+    const {correctAnswer, actualExercise} = props
 
     const [displayAnswer, setDisplayAnswer] = useState(false)
     const handleShowAnswer = () => {
@@ -18,22 +18,34 @@ export function ExerciseDetailsBottom(props) {
             <div>
                 {!displayAnswer &&
                     <button onClick={handleShowAnswer} className={'show-answer-btn'}>Pokaż odpowiedź.</button>}
-                {displayAnswer &&
-                    <button onClick={handleShowAnswer} className={'show-answer-btn'}>Ukryj odpowiedź.</button>}
                 {displayAnswer && (
-                    <div>
+                    <div className={'exercise-bottom-answers'}>
+                        <button onClick={handleShowAnswer} className={'show-answer-btn'}>Ukryj odpowiedź.</button>
                         {correctAnswer.length > 1 && <p>Poprawne odpowiedzi to:</p>}
                         {correctAnswer.length === 1 && <p>Poprawna odpowiedź to:</p>}
-                        {correctAnswer.map((answerObj, index) => (
+                        {actualExercise.type !== 6 && correctAnswer.map((answerObj, index) => (
                             <p key={index}>
-                                <strong><Latex>{answerObj.answer}</Latex></strong>
+                                <Latex>{answerObj.answer}</Latex>
                             </p>
                         ))}
+                        {actualExercise.type === 6 && (
+                            <>
+                                {correctAnswer.map((answerObj, index) => (
+                                    <div key={index} className={'answer-text'}>
+                                        <Latex>{answerObj.answer}</Latex> <strong>P</strong>
+                                    </div>
+                                ))}
+                                {actualExercise.answers.filter(answer => !answer.correct).map((answer, index) => (
+                                    <div key={index} className={'answer-text'}>
+                                        <Latex>{answer.answer}</Latex> <strong>F</strong>
+                                    </div>
+                                ))}
+                            </>
+                        )}
                     </div>
                 )}
             </div>
-            <button onClick={props.prevExercise}>Poprzednie zadanie</button>
-            <button onClick={props.nextExercise}>Następne zadanie</button>
+
 
         </div>
     )

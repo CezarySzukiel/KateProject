@@ -19,7 +19,7 @@ const initialState = {
   allSubsections: null,
   allExercises: null,
   selectedSubsectionIds: null,
-  solvedExercises: null,
+  solvedExercises: [],
   activeInputRef: null,
   userAnswer: [],
 }

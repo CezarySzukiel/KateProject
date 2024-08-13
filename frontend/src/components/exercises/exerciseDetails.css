@@ -29,8 +29,8 @@
 
 .exam {
     background-color: rgba(116, 123, 255, 0.44);
-    margin-bottom: 2px;
     padding: 3px;
+    margin: 0 1rem 2px 0;
 
 }
 
@@ -50,4 +50,8 @@
 
 .show-answer-btn {
     margin: 1rem 0 1rem 0;
+}
+
+.exercise-bottom-answers {
+    margin: 0 0 1rem 0;
 }

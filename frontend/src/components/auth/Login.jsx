@@ -88,7 +88,11 @@ export function Login(props) {
             if (response.status === 200) {
                 setUsername(response.data.username);
                 props.setUserData(response.data)
-                dispatch(setSolvedExercises(response.data.exercises))
+                if (!response.data.exercises) {
+                    dispatch(setSolvedExercises([]))
+                } else {
+                    dispatch(setSolvedExercises(response.data.exercises))
+                }
             } 
         } catch (error) {
             console.error(error)

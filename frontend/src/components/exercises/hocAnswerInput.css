@@ -9,3 +9,7 @@
     align-items: flex-start;
 	max-width: 100%;
 }
+
+.hoc-answer-input-button-div {
+	margin-left: 2rem;
+}

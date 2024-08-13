@@ -49,7 +49,7 @@ export function HOC_ExerciseDetails(props) {
 
     useEffect(() => {
         if (actualExercise.subsection) {
-            setActualSubsection(allSubsections.filter((subsec) => subsec.id == actualExercise.subsection))
+            setActualSubsection(allSubsections.filter((subsec) => subsec.id === actualExercise.subsection))
         }
     }, [actualExercise])
 
@@ -64,17 +64,22 @@ export function HOC_ExerciseDetails(props) {
             const response = await axios.get(`http://0.0.0.0:8000/api/v1/exercises/exercise/detail/${id}/`)
             setActualExercise(response.data);
             setCorrectAnswer(response.data.answers.filter(answer => answer.correct));
+            setUserAnswer(null)
         } catch (error) {
             console.error('Error fetching exercise data:', error);
         }
     };
 
     const handleNextExercise = () => {
+        setCorrectAnswerMessage(null)
+        setWrongAnswerMessage(null)
         const nextId = actualExercise.id + 1;
         fetchExerciseData(nextId)
     }
 
     const handlePrevExercise = () => {
+        setCorrectAnswerMessage(null)
+        setWrongAnswerMessage(null)
         const prevId = actualExercise.id - 1;
         fetchExerciseData(prevId)
     }
@@ -95,6 +100,8 @@ export function HOC_ExerciseDetails(props) {
                         exam={actualExercise.exam}
                         points={actualExercise.points}
                         difficult={actualExercise.difficult}
+                        nextExercise={handleNextExercise}
+                        prevExercise={handlePrevExercise}
                     />
                     <div className={'description'}>
                         <Latex>{actualExercise.description}</Latex>
@@ -116,8 +123,7 @@ export function HOC_ExerciseDetails(props) {
                     <ExerciseDetailsBottom
                         solution_exactly={actualExercise.solution_exactly}
                         correctAnswer={correctAnswer}
-                        nextExercise={handleNextExercise}
-                        prevExercise={handlePrevExercise}
+                        actualExercise={actualExercise}
                     />
                 </>
             )}
@@ -135,8 +141,6 @@ export function HOC_ExerciseDetails(props) {
                 activeInputRef={activeInputRef}
                 setUserAnswer={setUserAnswer}
             />}
-
-            {/*<MathProblemDisplay />*/}
         </div>
     );
 }

@@ -8,6 +8,7 @@ export function Type1(props) {
 
 
     const handleAnswerClick = (answer) => {
+        props.setAreSelectionsValidated(true)
         props.handleAnswer([answer]);
         setSelectedAnswer(answer);
     };
@@ -28,14 +29,14 @@ export function Type1(props) {
                             <Latex> {answer.answer}</Latex>
                         </div>
                     </li>
-                    ))}
+                ))}
             </ul>
         </div>
     )
 }
 
 export function Type2(props) {
-    const {answers, handleAnswer} = props
+    const {answers, handleAnswer, setAreSelectionsValidated} = props
     const [firstAnswer, setFirstAnswer] = useState("")
     const [secondAnswer, setSecondAnswer] = useState("")
 
@@ -47,6 +48,7 @@ export function Type2(props) {
     }, [firstAnswer, secondAnswer])
 
     const handleAnswerClick = (setAnswer, answer) => {
+        setAreSelectionsValidated(true)
         setAnswer(answer)
     }
 
@@ -68,7 +70,7 @@ export function Type2(props) {
                                 <Latex> {answer.answer}</Latex>
                             </div>
                         </li>
-                        ))}
+                    ))}
                 </ul>
             </div>
             <div>
@@ -87,7 +89,7 @@ export function Type2(props) {
                                 <Latex> {answer.answer}</Latex>
                             </div>
                         </li>
-                        ))}
+                    ))}
                 </ul>
             </div>
         </div>
@@ -95,7 +97,7 @@ export function Type2(props) {
 }
 
 export function Type3(props) {
-    const {answers, handleAnswer, setError} = props
+    const {answers, handleAnswer, setError, setAreSelectionsValidated} = props
     const [selectedAnswers, setSelectedAnswers] = useState(null)
 
     useEffect(() => {
@@ -114,6 +116,7 @@ export function Type3(props) {
             setError("Możesz zaznaczyć tylko dwie odpowiedzi!")
         } else {
             setError(null)
+            setAreSelectionsValidated(true)
             setSelectedAnswers([...selectedAnswers, answer]);
         }
     }
@@ -134,7 +137,7 @@ export function Type3(props) {
                             <Latex>{answer.answer}</Latex>
                         </div>
                     </li>
-                    ))}
+                ))}
             </ul>
         </div>
     )
@@ -142,7 +145,7 @@ export function Type3(props) {
 
 export function Type4(props) {
 
-    const {answers, handleAnswer, ask1, ask2} = props
+    const {answers, handleAnswer, ask1, ask2, setAreSelectionsValidated} = props
     const [firstAnswer, setFirstAnswer] = useState("")
     const [secondAnswer, setSecondAnswer] = useState("")
 
@@ -154,6 +157,7 @@ export function Type4(props) {
     }, [firstAnswer, secondAnswer])
 
     const handleAnswerClick = (setAnswer, answer) => {
+        setAreSelectionsValidated(true)
         setAnswer(answer)
     }
 
@@ -190,26 +194,23 @@ export function Type4(props) {
                                 {answer.answer && <Latex> {answer.answer}</Latex>}
                             </div>
                         </li>
-                        ))}
+                    ))}
                 </ul>
             </div>
         </div>
     )
 }
 
-export const reformatAnswer = (value) => {
-    let data = value.replace(/\$/g, '');
-    if (data.length < 1) {
-        return ''
-    }
-    return data;
-}
-
 export function Type6(props) {
-    const {answers, handleAnswer} = props
+    const {answers, handleAnswer, setAreSelectionsValidated, setError} = props
     const [selectedAnswers, setSelectedAnswers] = useState([])
+    const [rejectedAnswers, setRejectedAnswers] = useState([])
 
-    const handleAnswerClick = (answer) => {
+    const handleAnswerSelect = (answer) => {
+        if (rejectedAnswers.includes(answer)) {
+            setRejectedAnswers(rejectedAnswers.filter(rejectedAnswer => rejectedAnswer !== answer))
+            setSelectedAnswers([...selectedAnswers, answer])
+        }
         if (selectedAnswers.includes(answer)) {
             setSelectedAnswers(selectedAnswers.filter(selectedAnswer => selectedAnswer !== answer))
         } else {
@@ -217,9 +218,33 @@ export function Type6(props) {
         }
     }
 
+    const handleAnswerReject = (answer) => {
+        if (selectedAnswers.includes(answer)) {
+            setSelectedAnswers(selectedAnswers.filter(selectedAnswer => selectedAnswer !== answer))
+        }
+        if (rejectedAnswers.includes(answer)) {
+            setRejectedAnswers(rejectedAnswers.filter(rejectedAnswer => rejectedAnswer !== answer))
+        } else {
+            setRejectedAnswers([...rejectedAnswers, answer])
+        }
+    }
+
+    const validator = () => {
+        const selections = selectedAnswers.concat(rejectedAnswers)
+        if (selections.length === answers.length) {
+            return true
+        }
+        else {
+            setError('Nie zaznaczono wszystkich odpowiedzi')
+            return false
+        }
+    }
+
+
     useEffect(() => {
         handleAnswer(selectedAnswers)
-    }, [selectedAnswers])
+        setAreSelectionsValidated(validator())
+    }, [selectedAnswers, rejectedAnswers])
 
     return (
         <div className={'answer-input'}>
@@ -227,8 +252,7 @@ export function Type6(props) {
                 {answers.map((answer, index) => (
                     <li
                         key={index}
-                        className={`answer-div ${selectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
-                        onClick={() => handleAnswerClick(answer.answer)}
+                        className={`answer-div`}
                     >
                         <div className={'answer-index'}>
                             {String.fromCharCode(65 + index)}.
@@ -237,9 +261,15 @@ export function Type6(props) {
                             <Latex> {answer.answer}</Latex>
                         </div>
                         <div className={'answer-buttons'}>
-                            <button className={'answer-button'} onClick={() => handleAnswerClick(answer.answer)}>P
+                            <button
+                                className={`answer-button-true ${selectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
+                                onClick={() => handleAnswerSelect(answer.answer)}
+                            >P
                             </button>
-                            <button className={'answer-button'} onClick={() => handleAnswerClick(answer.answer)}>F
+                            <button
+                                className={`answer-button-false ${rejectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
+                                onClick={() => handleAnswerReject(answer.answer)}
+                            >F
                             </button>
                         </div>
                     </li>
@@ -247,6 +277,15 @@ export function Type6(props) {
             </ul>
         </div>
     )
+}
+
+export const reformatAnswer = (value) => {
+    // todo przenieść do helpers
+    let data = value.replace(/\$/g, '');
+    if (data.length < 1) {
+        return ''
+    }
+    return data;
 }
 
 export function Type9(props) {
@@ -278,7 +317,7 @@ export function Type9(props) {
                 >
 				</textarea>
                 {
-                    answer[0] && <div className={'user-answer-field'}>
+                    answer && <div className={'user-answer-field'}>
                         {answer[0].length > 0 && <p><Latex>${answer}$</Latex></p>}
                         {answer[0].length === 0 && <p><Latex>{answer}</Latex></p>}
                     </div>

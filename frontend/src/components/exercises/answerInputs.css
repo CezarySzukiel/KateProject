@@ -7,7 +7,7 @@
   display: flex;
 }
 
-.answer-div.selected {
+.selected {
   box-shadow: 0 0 6px 3px white;
   border-radius: 0.6rem;
 }
@@ -17,7 +17,7 @@
   border-radius: 0.6rem;
 }
 
-.answer-div.selected:hover {
+.selected:hover {
   box-shadow: 0 0 6px 3px white;
   border-radius: 0.6rem;
 }
@@ -45,8 +45,13 @@
     margin-right: 1rem;
 }
 
+.answer-text {
+  display: flex;
+}
+
 .answer-text > * {
 display: flex;
+  margin-right: 1rem;
 }
 
 .user-answer-field {
