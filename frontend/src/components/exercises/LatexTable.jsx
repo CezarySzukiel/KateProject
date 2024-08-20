@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Latex from 'react-latex-next';
 import DynamicModal from './DynamicModal';
 import latexSymbols from '../../latexSymbols';
-import { reformatAnswer } from './AnswerInputs';
+import { reformatAnswer } from './helpers';
 
 import { connect } from 'react-redux';
 import { setActiveInput } from '../../actions/exActions';

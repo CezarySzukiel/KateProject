@@ -2,6 +2,7 @@ import './answerInputs.css'
 import React, {useState, useEffect, useRef} from 'react';
 import Latex from 'react-latex-next';
 import {useSelector} from 'react-redux';
+import {reformatAnswer} from './helpers';
 
 export function Type1(props) {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -277,15 +278,6 @@ export function Type6(props) {
             </ul>
         </div>
     )
-}
-
-export const reformatAnswer = (value) => {
-    // todo przenieść do helpers
-    let data = value.replace(/\$/g, '');
-    if (data.length < 1) {
-        return ''
-    }
-    return data;
 }
 
 export function Type9(props) {
