@@ -11,7 +11,6 @@ import {ExerciseDetailsTop} from './ExerciseDetailsTop';
 import {ExerciseDetailsBottom} from './ExerciseDetailsBottom';
 import {Chart} from './Chart'
 import {LatexTable} from './LatexTable'
-import MathProblemDisplay from './latextry'
 
 export function HOC_ExerciseDetails(props) {
     const {
@@ -28,8 +27,8 @@ export function HOC_ExerciseDetails(props) {
     const [exercise, setExercise] = useState(null);
     const [solvedExercisesIds, setSolvedExercisesIds] = useState(null);
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-    const [correctAnswerMessage, setCorrectAnswerMessage] = useState(null);
-    const [wrongAnswerMessage, setWrongAnswerMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
     const [correctAnswer, setCorrectAnswer] = useState(null);
     const isInitialMount = useRef(false);
 
@@ -71,15 +70,15 @@ export function HOC_ExerciseDetails(props) {
     };
 
     const handleNextExercise = () => {
-        setCorrectAnswerMessage(null)
-        setWrongAnswerMessage(null)
+        setSuccessMessage(null)
+        setErrorMessage(null)
         const nextId = actualExercise.id + 1;
         fetchExerciseData(nextId)
     }
 
     const handlePrevExercise = () => {
-        setCorrectAnswerMessage(null)
-        setWrongAnswerMessage(null)
+        setSuccessMessage(null)
+        setErrorMessage(null)
         const prevId = actualExercise.id - 1;
         fetchExerciseData(prevId)
     }
@@ -116,8 +115,8 @@ export function HOC_ExerciseDetails(props) {
                     }
 
                     <ConAnswerInput
-                        setCorrectAnswerMessage={setCorrectAnswerMessage}
-                        setWrongAnswerMessage={setWrongAnswerMessage}
+                        setSuccessMessage={setSuccessMessage}
+                        setErrorMessage={setErrorMessage}
                     />
 
                     <ExerciseDetailsBottom
@@ -130,12 +129,12 @@ export function HOC_ExerciseDetails(props) {
 
             {isLoggedIn &&
                 <>
-                    {!correctAnswerMessage && solvedExercisesIds ? (solvedExercisesIds.includes(actualExercise.id) ?
+                    {!successMessage && solvedExercisesIds ? (solvedExercisesIds.includes(actualExercise.id) ?
                         <Info message={'To zadanie zostało już przez Ciebie rozwiązane.'}/> : null) : null}
                 </>
             }
-            {correctAnswerMessage && <Info message={correctAnswerMessage}/>}
-            {wrongAnswerMessage && <Error message={wrongAnswerMessage}/>}
+            {successMessage && <Info message={successMessage}/>}
+            {errorMessage && <Error message={errorMessage}/>}
             {actualExercise.type === 9 && <LatexTable
                 setActiveInput={setActiveInput}
                 activeInputRef={activeInputRef}

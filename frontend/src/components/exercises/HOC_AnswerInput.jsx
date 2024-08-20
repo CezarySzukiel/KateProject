@@ -1,17 +1,15 @@
 import './hocAnswerInput.css'
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
-import {Error, Info} from "../helpersComponents/Messages"
 import {Type1, Type2, Type3, Type4, Type6, Type9} from './AnswerInputs'
-import {pushSolvedExercise} from "../../actions/exActions.jsx";
 
 
 export const HOC_AnswerInput = (props) => {
     const {
-        setCorrectAnswerMessage, // todo zmienić na setSuccessMessage
-        setWrongAnswerMessage, // todo zmienić na setErrorMessage
+        setSuccessMessage,
+        setErrorMessage,
         actualExercise,
         setActiveInput,
         userAnswer,
@@ -28,10 +26,6 @@ export const HOC_AnswerInput = (props) => {
     const handleAnswer = (answer) => {
         setUserAnswer(answer);
     };
-
-    const pushExerciseToSolved = () => {
-        pushSolvedExercise(actualExercise)
-    }
 
     const nullValidator = (answer) => {
         if (
@@ -57,17 +51,17 @@ export const HOC_AnswerInput = (props) => {
                 }
             });
             if (response.status === 200) {
-                setWrongAnswerMessage(null)
-                setCorrectAnswerMessage("poprawna odpowiedź!")
+                setErrorMessage(null)
+                setSuccessMessage("poprawna odpowiedź!")
                 pushSolvedExercise(actualExercise)
             } else if (response.status === 208) {
-                setWrongAnswerMessage(null)
-                setCorrectAnswerMessage(
+                setErrorMessage(null)
+                setSuccessMessage(
                     "poprawna odpowiedź! Zadanie zostało już wcześniej przez Ciebie rozwiązane."
                 )
             } else if (response.status === 209) {
-                setCorrectAnswerMessage(null)
-                setWrongAnswerMessage("Spróbuj jeszcze raz!")
+                setSuccessMessage(null)
+                setErrorMessage("Spróbuj jeszcze raz!")
             }
         } catch (error) {
             console.error('Error fetching exercise data:', error);
@@ -77,12 +71,12 @@ export const HOC_AnswerInput = (props) => {
     const handleSubmit = (event) => {
         const nullValidatorResult = nullValidator(userAnswer)
         if (nullValidatorResult) {
-            setWrongAnswerMessage(nullValidatorResult)
+            setErrorMessage(nullValidatorResult)
         } else if (!areSelectionsValidated) {
-            setWrongAnswerMessage(error)
+            setErrorMessage(error)
         } else {
             event.preventDefault();
-            setWrongAnswerMessage(null)
+            setErrorMessage(null)
             compareAnswer(userAnswer)
 
         }
