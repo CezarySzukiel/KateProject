@@ -65,7 +65,8 @@ class Migration(migrations.Migration):
                 ('x_step', models.FloatField(default=1)),
                 ('x_offset', models.FloatField(default=0)),
                 ('y_offset', models.FloatField(default=0)),
-                ('exercises', models.ManyToManyField('Exercise', related_name='functions')),
+                ('exercises', models.ManyToManyField('Exercise', related_name='functions', related_query_name='function')),
+                ('description', models.TextField(blank=True, null=True)),
             ],
         ),
         migrations.AddField(

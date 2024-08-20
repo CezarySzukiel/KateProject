@@ -100,7 +100,7 @@ class ExerciseDetailView(generics.RetrieveAPIView):
         exercise_id = self.kwargs['exercise_id']
         exercise = get_object_or_404(Exercise, pk=exercise_id)
         answers = Answer.objects.filter(exercise=exercise)
-        function = Function.objects.filter(exercise=exercise)
+        function = Function.objects.filter(exercises__in=[exercise])
         exercise.correct_answers = answers
         return exercise
 

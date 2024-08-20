@@ -94,7 +94,8 @@ class Function(models.Model):
         ('step', 'Step'),
     ]
     function_type = models.CharField(max_length=20, choices=FUNCTION_CHOICES)
-    exercises = models.ManyToManyField('Exercise', related_name='functions')
+    exercises = models.ManyToManyField('Exercise', related_name='functions', related_query_name='function')
+    description = models.TextField(null=True, blank=True)
     a = models.FloatField()
     b = models.FloatField(null=True, blank=True)
     c = models.FloatField(null=True, blank=True)
@@ -103,10 +104,12 @@ class Function(models.Model):
     x_end = models.FloatField(default=10)
     x_step = models.FloatField(default=1)
     x_offset = models.FloatField(default=0)
+    # todo dodać y_start, y_end, y_step
     y_offset = models.FloatField(default=0)
 
     def __str__(self):
-        return self.exercise.title
+        exercise_ids = self.exercises.values_list('id', flat=True)
+        return f"Function type: {self.function_type}, Exercises: {', '.join(map(str, exercise_ids))}"
 
     def clean(self):
         required_fields = []
