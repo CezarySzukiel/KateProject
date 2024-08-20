@@ -78,6 +78,10 @@ class Section(models.Model):
 
 
 class Function(models.Model):
+    """Model representing a function for an exercise.
+    a, b, c are main coefficients used for every function.
+    coefficients is a list of optional, additional coefficients for polynomial function.
+    x_start, x_end, x_step are used for plotting the function."""
     FUNCTION_CHOICES = [
         ('linear', 'Linear'),
         ('quadratic', 'Quadratic'),
