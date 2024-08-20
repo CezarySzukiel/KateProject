@@ -35,7 +35,7 @@
     },
     {
         "title": "Zadanie M.P.05.24.2",
-        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nLiczba $$\\left(\\frac{1}{16}\\right)^8 \\cdot 8^16$$ jest równa",
+        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nLiczba $$\\left(\\frac{1}{16}\\right)^8 \\cdot 8^{16}$$ jest równa",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
@@ -218,7 +218,7 @@
     },
     {
         "title": "Zadanie M.P.05.24.8",
-        "description": "Oceń prawdziwość poniższych stwierdzeń. Wybierz P, jeśli stwierdzenie jest prawdziwe, albo F – jeśli jest fałszywe.\n\nDany jest wielomian $$W(x) = 3x^3 + 6x^2 + 9x$$.",
+        "description": "Dany jest wielomian $$W(x) = 3x^3 + 6x^2 + 9x$$. Oceń prawdziwość poniższych stwierdzeń. Wybierz P, jeśli stwierdzenie jest prawdziwe, albo F – jeśli jest fałszywe.",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
@@ -255,7 +255,14 @@
     },
     {
         "title": "Zadanie M.P.05.24.10",
-        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nUkładem równań, którego poprawne rozwiązanie prowadzi do obliczenia liczby $$x$$ drzew posadzonych w pierwszym sadzie oraz liczby $$y$$ drzew posadzonych w drugim sadzie, jest",
+        "description": "W październiku 2022 roku założono dwa sady, w których posadzono łącznie 1960 drzew.
+                        Po roku stwierdzono, że uschło 5% drzew w pierwszym sadzie i 10% drzew w drugim
+                        sadzie. Uschnięte drzewa usunięto, a nowych nie dosadzano.
+                        Liczba drzew, które pozostały w drugim sadzie, stanowiła 60% liczby drzew, które
+                        pozostały w pierwszym sadzie.
+                        Niech 𝑥 oraz 𝑦 oznaczają liczby drzew posadzonych – odpowiednio – w pierwszym
+                        i drugim sadzie.Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.
+                        Układem równań, którego poprawne rozwiązanie prowadzi do obliczenia liczby $$x$$ drzew posadzonych w pierwszym sadzie oraz liczby $$y$$ drzew posadzonych w drugim sadzie, jest",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
@@ -288,7 +295,10 @@
     },
     {
         "title": "Zadanie M.P.05.24.11",
-        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nUkładem równań, którego interpretację geometryczną przedstawiono na rysunku, jest",
+        "description": "Na rysunku, w kartezjańskim układzie współrzędnych $$(𝑥, 𝑦)$$, przedstawiono dwie proste
+                        równoległe, które są interpretacją geometryczną jednego z poniższych układów równań A–D.
+                        Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.
+                        Układem równań, którego interpretację geometryczną przedstawiono na rysunku, jest",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
@@ -322,7 +332,7 @@
     },
     {
         "title": "Zadanie M.P.05.24.12",
-        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nFunkcja liniowa $$f$$ jest określona wzorem $$f(x) = (-2k + 3)x + k - 1$$, gdzie $$k \\in \\mathbb{R}$$.\n\nFunkcja $$f$$ jest malejąca dla każdej liczby $$k$$ należącej do przedziału",
+        "description": "Funkcja liniowa $$f$$ jest określona wzorem $$f(x) = (-2k + 3)x + k - 1$$, gdzie $$k \\in \\mathbb{R}$$. Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych. Funkcja $$f$$ jest malejąca dla każdej liczby $$k$$ należącej do przedziału",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
@@ -356,7 +366,7 @@
     },
     {
         "title": "Zadanie M.P.05.24.13",
-        "description": "Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.\n\nFunkcje liniowe $$f$$ oraz $$g$$, określone wzorami $$f(x) = 3x + 6$$ oraz $$g(x) = ax + 7$$, mają to samo miejsce zerowe.\n\nWspółczynnik $$a$$ we wzorze funkcji $$g$$ jest równy",
+        "description": "Funkcje liniowe $$f$$ oraz $$g$$, określone wzorami $$f(x) = 3x + 6$$ oraz $$g(x) = ax + 7$$, mają to samo miejsce zerowe. Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych. Współczynnik $$a$$ we wzorze funkcji $$g$$ jest równy",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
