@@ -255,14 +255,7 @@
     },
     {
         "title": "Zadanie M.P.05.24.10",
-        "description": "W październiku 2022 roku założono dwa sady, w których posadzono łącznie 1960 drzew.
-                        Po roku stwierdzono, że uschło 5% drzew w pierwszym sadzie i 10% drzew w drugim
-                        sadzie. Uschnięte drzewa usunięto, a nowych nie dosadzano.
-                        Liczba drzew, które pozostały w drugim sadzie, stanowiła 60% liczby drzew, które
-                        pozostały w pierwszym sadzie.
-                        Niech 𝑥 oraz 𝑦 oznaczają liczby drzew posadzonych – odpowiednio – w pierwszym
-                        i drugim sadzie.Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.
-                        Układem równań, którego poprawne rozwiązanie prowadzi do obliczenia liczby $$x$$ drzew posadzonych w pierwszym sadzie oraz liczby $$y$$ drzew posadzonych w drugim sadzie, jest",
+        "description": "W październiku 2022 roku założono dwa sady, w których posadzono łącznie 1960 drzew. Po roku stwierdzono, że uschło 5% drzew w pierwszym sadzie i 10% drzew w drugim sadzie. Uschnięte drzewa usunięto, a nowych nie dosadzano. Liczba drzew, które pozostały w drugim sadzie, stanowiła 60% liczby drzew, które pozostały w pierwszym sadzie. Niech 𝑥 oraz 𝑦 oznaczają liczby drzew posadzonych – odpowiednio – w pierwszym i drugim sadzie.Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych. Układem równań, którego poprawne rozwiązanie prowadzi do obliczenia liczby $$x$$ drzew posadzonych w pierwszym sadzie oraz liczby $$y$$ drzew posadzonych w drugim sadzie, jest",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,
@@ -295,10 +288,7 @@
     },
     {
         "title": "Zadanie M.P.05.24.11",
-        "description": "Na rysunku, w kartezjańskim układzie współrzędnych $$(𝑥, 𝑦)$$, przedstawiono dwie proste
-                        równoległe, które są interpretacją geometryczną jednego z poniższych układów równań A–D.
-                        Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych.
-                        Układem równań, którego interpretację geometryczną przedstawiono na rysunku, jest",
+        "description": "Na rysunku, w kartezjańskim układzie współrzędnych $$(𝑥, 𝑦)$$, przedstawiono dwie proste równoległe, które są interpretacją geometryczną jednego z poniższych układów równań A–D. Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych. Układem równań, którego interpretację geometryczną przedstawiono na rysunku, jest",
         "difficult": 1,
         "points": 1,
         "solution_exactly": null,

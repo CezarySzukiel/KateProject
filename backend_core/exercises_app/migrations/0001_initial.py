@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
                 ('x_step', models.FloatField(default=1)),
                 ('x_offset', models.FloatField(default=0)),
                 ('y_offset', models.FloatField(default=0)),
-                ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='functions', to='exercises_app.exercise')),
+                ('exercises', models.ManyToManyField('Exercise', related_name='functions')),
             ],
         ),
         migrations.AddField(

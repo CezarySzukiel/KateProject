@@ -68,7 +68,6 @@ class ExerciseDataLoader:
             if 'subsubsection' in exercise:
                 self.subsubsection = self.Subsubsection.objects.get(name=exercise['subsubsection'])
             if 'subsection' in exercise:
-                print(exercise['subsection'])
                 self.subsection = self.Subsection.objects.get(name=exercise['subsection'])
 
             self.Exercise.objects.create(

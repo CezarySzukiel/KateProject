@@ -94,7 +94,7 @@ class Function(models.Model):
         ('step', 'Step'),
     ]
     function_type = models.CharField(max_length=20, choices=FUNCTION_CHOICES)
-    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='functions')
+    exercises = models.ManyToManyField('Exercise', related_name='functions')
     a = models.FloatField()
     b = models.FloatField(null=True, blank=True)
     c = models.FloatField(null=True, blank=True)
