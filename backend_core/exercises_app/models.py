@@ -104,7 +104,9 @@ class Function(models.Model):
     x_end = models.FloatField(default=10)
     x_step = models.FloatField(default=1)
     x_offset = models.FloatField(default=0)
-    # todo dodać y_start, y_end, y_step
+    y_start = models.FloatField(default=-10)
+    y_end = models.FloatField(default=10)
+    y_step = models.FloatField(default=1)
     y_offset = models.FloatField(default=0)
 
     def __str__(self):
