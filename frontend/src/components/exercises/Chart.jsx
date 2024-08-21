@@ -125,6 +125,7 @@ export const Chart = (props) => {
         y_end,
         y_step,
         y_offset,
+        legend,
     } = props.data
     const [data, setData] = useState(null)
     const [lineType, setLineType] = useState('natural')
@@ -193,7 +194,7 @@ export const Chart = (props) => {
     }, [])
 
     const CustomLegend = () => {
-        return <div></div>;
+        return <div>{legend}</div>;
     };
 
     return (
@@ -219,8 +220,8 @@ export const Chart = (props) => {
                 <Legend
                     content={<CustomLegend/>}
                     layout="vertical"
-                    verticalAlign="middle"
-                    wrapperStyle={{ top: 330, left: 80, lineHeight: '24px' }}
+                    verticalAlign="bottom"
+                    wrapperStyle={{ bottom: 60, left: 80, lineHeight: '24px' }}
                 />
                 <Line type={lineType} dataKey="y" stroke="black" dot={false}/>
             </LineChart>

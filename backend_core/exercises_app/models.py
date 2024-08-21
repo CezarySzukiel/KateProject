@@ -96,6 +96,7 @@ class Function(models.Model):
     function_type = models.CharField(max_length=20, choices=FUNCTION_CHOICES)
     exercises = models.ManyToManyField('Exercise', related_name='functions', related_query_name='function')
     description = models.TextField(null=True, blank=True)
+    legend = models.CharField(max_length=128, null=True, blank=True)
     a = models.FloatField()
     b = models.FloatField(null=True, blank=True)
     c = models.FloatField(null=True, blank=True)

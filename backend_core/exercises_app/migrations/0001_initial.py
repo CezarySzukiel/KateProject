@@ -70,6 +70,7 @@ class Migration(migrations.Migration):
                 ('y_offset', models.FloatField(default=0)),
                 ('exercises', models.ManyToManyField('Exercise', related_name='functions', related_query_name='function')),
                 ('description', models.TextField(blank=True, null=True)),
+                ('legend', models.CharField(max_length=128, blank=True, null=True)),
             ],
         ),
         migrations.AddField(
