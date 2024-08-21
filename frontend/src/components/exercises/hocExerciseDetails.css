@@ -8,12 +8,15 @@
 
 .description {
 	display: inline;
+	text-wrap: wrap;
 }
+
 .description > * {
-	/*white-space: nowrap;*/
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	text-wrap: wrap;
+	text-align: left;
 }
 
 .katex-display {
