@@ -22,9 +22,9 @@ const generateLinearData = (m, b, xStart, xEnd, xStep, xOffset, yOffset) => {
     return data;
 };
 
-const generateQuadraticData = (a, b, c, xStart, xEnd, xStep, xOffset, yOffset) => {
+const generateQuadraticData = (a, b, c, xStart, xEnd, xStep, xOffset, yStep, yOffset) => {
     const data = [];
-    console.log('step', xStep)
+    console.log('step', xStep, yStep)
     xStep = xStep - 1
     for (let x = xStart - 1; x <= xEnd - 1; x += xStep) {
         const y = a * x * x + b * x + c + yOffset;
@@ -101,8 +101,31 @@ const generateStepData = (a, xStart, xEnd, xStep, xOffset, yOffset) => {
     return data;
 };
 
+const generateYPoints = (yStart, yEnd, yStep, yOffset) => {
+    const yPoints = [];
+    for (let y = yStart - yStep; y <= yEnd + yStep; y += yStep) {
+        yPoints.push(y);
+    }
+    return yPoints;
+}
+
 export const Chart = (props) => {
-    const {a, b, c, coefficients, function_type, x_end, x_offset, x_start, x_step, y_offset, description} = props.data
+    const {
+        description,
+        a,
+        b,
+        c,
+        coefficients,
+        function_type,
+        x_end,
+        x_start,
+        x_step,
+        x_offset,
+        y_start,
+        y_end,
+        y_step,
+        y_offset,
+    } = props.data
     const [data, setData] = useState(null)
     const [lineType, setLineType] = useState('natural')
     const [xStart, setXStart] = useState(x_start)
@@ -119,7 +142,9 @@ export const Chart = (props) => {
             xTicks_.push(xEnd + x_step)
             xTicks_.sort((a, b) => a - b)
             setXTicks(xTicks_)
+            setYTicks(generateYPoints(y_start, y_end, y_step, y_offset))
             console.log('xticks', xTicks_)
+            console.log('yticks', generateYPoints(y_start, y_end, y_step, y_offset))
         }
     }, [data]);
 
@@ -131,7 +156,7 @@ export const Chart = (props) => {
                 setLineType('natural')
                 break;
             case 'quadratic':
-                setData(generateQuadraticData(a, b, c, x_start, x_end, x_step, x_offset, y_offset));
+                setData(generateQuadraticData(a, b, c, x_start, x_end, x_step, x_offset, y_step, y_offset));
                 setLineType('natural')
                 break;
             case 'inverse':
@@ -166,22 +191,39 @@ export const Chart = (props) => {
                 break;
         }
     }, [])
+
+    const CustomLegend = () => {
+        return <div></div>;
+    };
+
     return (
-        <>
+        <div className={'chart'}>
             {description && <p>{description}</p>}
             <LineChart
-                width={600}
+                width={400}
                 height={400}
                 data={data}
-                margin={{top: 5, right: 30, left: 20, bottom: 5}}
+                margin={{top: 10, right: 0, left: 10, bottom: 0}}
             >
-                <CartesianGrid strokeDasharray="1 6"/>
-                <XAxis dataKey="x" type={"number"} minTickGap={1} ticks={xTicks}/>
-                <YAxis interval={0}/>
-                <Tooltip/>
-                <ReferenceLine/>
-                <Line type={lineType} dataKey="y" stroke="red" dot={false}/>
+                <CartesianGrid strokeDasharray="1 1"/>
+                <XAxis dataKey="x" type={"number"} ticks={xTicks} stroke={'#f0f0f0'} axisLine={true}/>
+                <YAxis interval={0} ticks={yTicks} stroke={'#f0f0f0'} orientation={'left'}/>
+                <Tooltip
+                    formatter={(value, name, props) => [`${value}`, `y`]}
+                    labelFormatter={(label) => `x: ${label}`}
+                    contentStyle={{backgroundColor: '#868794', border: 'none', color: '#f0f0f0'}}
+                    itemStyle={{color: '#f0f0f0'}}
+                />
+                <ReferenceLine x={0} stroke="#f0f0f0" strokeDasharray="1 0"/>
+                <ReferenceLine y={0} stroke="#f0f0f0" strokeDasharray="1 0"/>
+                <Legend
+                    content={<CustomLegend/>}
+                    layout="vertical"
+                    verticalAlign="middle"
+                    wrapperStyle={{ top: 330, left: 80, lineHeight: '24px' }}
+                />
+                <Line type={lineType} dataKey="y" stroke="black" dot={false}/>
             </LineChart>
-        </>
+        </div>
     );
 }
