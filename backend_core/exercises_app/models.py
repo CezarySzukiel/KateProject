@@ -11,7 +11,8 @@ class Exercise(models.Model):
     solution_exactly means solution exactly for this exercise,
     solution_similar means solution for a similar task
     type means the type of task: 1 - open task, 2 - multiple choice, etc.
-    advanced_level means whether the task is advanced or basic"""
+    advanced_level means whether the task is advanced or basic.
+    ask1 and 2 are used in type4 exercises. In the future can be changed to one list field."""
     title = models.CharField(max_length=128, unique=True)
     description = models.TextField()
     ask1 = models.TextField(null=True, blank=True)
@@ -26,6 +27,7 @@ class Exercise(models.Model):
     type = models.IntegerField()
     advanced_level = models.BooleanField(default=False)
     exam = models.DateField(null=True, blank=True)
+    asks = models.JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -146,3 +148,13 @@ class Function(models.Model):
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+
+
+class AdditionalText(models.Model):
+    """Model representing additional text for an exercise."""
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='additional_texts')
+    text = models.TextField()
+    true_answer = models.ForeignKey('Answer', on_delete=models.PROTECT, related_name='additional_texts', null=True, blank=True)
+
+    def __str__(self):
+        return self.text
