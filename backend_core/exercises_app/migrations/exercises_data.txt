@@ -475,7 +475,7 @@
         "difficult": 2,
         "points": 2,
         "solution_exactly": null,
-        "type": 2,
+        "type": 7,
         "advanced_level": false,
         "exam": "2024-05-08",
         "section": "Funkcje",

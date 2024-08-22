@@ -102,9 +102,6 @@ export function HOC_ExerciseDetails(props) {
                         nextExercise={handleNextExercise}
                         prevExercise={handlePrevExercise}
                     />
-                    <div className={'description'}>
-                        <Latex>{actualExercise.description}</Latex>
-                    </div>
                     {actualExercise.functions.length > 0 &&
                         actualExercise.functions.map((func) => (
                             <Chart
@@ -113,6 +110,9 @@ export function HOC_ExerciseDetails(props) {
                             />
                         ))
                     }
+                    <div className={'description'}>
+                        <Latex>{actualExercise.description}</Latex>
+                    </div>
 
                     <ConAnswerInput
                         setSuccessMessage={setSuccessMessage}

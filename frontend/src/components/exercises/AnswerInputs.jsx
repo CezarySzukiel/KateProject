@@ -139,7 +139,7 @@ export function Type3(props) {
                         </div>
                     </li>
                 ))}
-            </ul>
+            </ul>.0
         </div>
     )
 }
@@ -276,6 +276,15 @@ export function Type6(props) {
                     </li>
                 ))}
             </ul>
+        </div>
+    )
+}
+
+export function Type7(props) {
+
+    return (
+        <div className={'answer-input'}>
+
         </div>
     )
 }
