@@ -511,6 +511,18 @@
                 "correct": true,
                 "second_set": false
             }
+        ],
+        "additional_texts": [
+            {
+                "place": "AnswerTable",
+                "text": "Fragment wykresu funkcji $y = g(x)$ przedstawiono na rysunku",
+                "correct_answer": "0"
+            },
+            {
+                "place": "AnswerTable",
+                "text": "Fragment wykresu funkcji $y= ℎ(x)$ przedstawiono na rysunku",
+                "correct_answer": "4"
+            }
         ]
     },
     {

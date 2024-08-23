@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Exercise, Section, Subsection, Answer, Function
+from .models import Exercise, Section, Subsection, Answer, Function, AdditionalText
 
 
 class ExercisesListSerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class FunctionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Function
         fields = ('id', 'function_type', 'a', 'b', 'c', 'coefficients', 'x_start', 'x_end', 'x_step', 'x_offset',
-                  'y_start', 'y_end', 'y_step', 'y_offset', 'description', 'legend')
+                  'y_start', 'y_end', 'y_step', 'y_offset', 'description', 'legend',)
         read_only_fields = ('id',)
 
 
@@ -46,7 +46,7 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
 
     def get_correct_answer(self, obj):
         if hasattr(obj, 'correct_answer'):
-            return obj.correct_answer.answer
+            return obj.correct_answer.answers
         return None
 
 
@@ -75,3 +75,11 @@ class CompareExerciseSerializer(serializers.Serializer):
     answers = serializers.ListField(
         child=serializers.CharField()
     )
+
+
+class AdditionalTextSerializer(serializers.ModelSerializer):
+    """Serializer for AdditionalText model."""
+    class Meta:
+        model = AdditionalText
+        fields = ('id', 'text', 'exercise', 'place', 'true_answer')
+        read_only_fields = ('id',)

@@ -182,8 +182,38 @@ class ChartsDataLoader(ExerciseDataLoader):
             if self.exercises:
                 function.exercises.add(*self.exercises)
             if self.answer:
-                self.answer.answer = f"{self.answer.pk}: {function.pk}"
+                self.answer.answer = f"{self.answer.pk}: {function.pk}"  # todo działa, tylko w zadaniu 14.4 nie trzeba answer.pk porównywać z wykresem (function.pk) a z AdditionalText.pk
                 self.answer.save()
+
+
+class AdditionalTextDataLoader(ExerciseDataLoader):
+    def __init__(self, file_path=None):
+        super().__init__(file_path)
+        self.text = None
+        self.place = None
+        self.exercise = None
+        self.answer = None
+        self.true_answer = None
+        self.Exercise = None
+        self.Answer = None
+        self.AdditionalText = None
+
+    def add_additional_text_data(self, apps, schema_editor):
+        self.AdditionalText = apps.get_model('exercises_app', 'AdditionalText')
+        self.Exercise = apps.get_model('exercises_app', 'Exercise')
+        self.Answer = apps.get_model('exercises_app', 'Answer')
+        #  todo additional text dodawać w pliku exercises_data.json, tam będzie najwygodniej dodawać teksty do zadań
+        for ex in self.data:
+            self.exercise = self.Exercise.objects.get(title=ex['title'])
+            answers = self.Answer.objects.filter(exercise=self.exercise)
+            if 'additional_texts' in ex:
+                for text in ex['additional_texts']:
+                    self.AdditionalText.objects.create(
+                        exercise=self.exercise,
+                        text=text['text'],
+                        place=text['place'],
+                        true_answer=answers[int(text['correct_answer'])] if 'correct_answer' in text else None
+                    )
 
 
 def add_exercise_data(apps, schema_editor):
@@ -193,6 +223,8 @@ def add_exercise_data(apps, schema_editor):
     answer_loader.add_answer_data(apps, schema_editor)
     charts_loader = ChartsDataLoader(file_path=os.path.join(current_directory, 'charts_data.json'))
     charts_loader.add_charts_data(apps, schema_editor)
+    additional_text_loader = AdditionalTextDataLoader(file_path=os.path.join(current_directory, 'exercises_data.json'))
+    additional_text_loader.add_additional_text_data(apps, schema_editor)
 
 
 class Migration(migrations.Migration):

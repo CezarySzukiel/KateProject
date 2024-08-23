@@ -1,6 +1,4 @@
 from django.db import models
-from django.urls import reverse
-from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
 from blog.models import Post
@@ -152,6 +150,11 @@ class Function(models.Model):
 
 class AdditionalText(models.Model):
     """Model representing additional text for an exercise."""
+    PLACE_CHOICES = [
+        ('description', 'Description'),
+        ('answerTable', 'AnswerTable'),
+    ]
+    place = models.CharField(max_length=128, choices=PLACE_CHOICES)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='additional_texts')
     text = models.TextField()
     true_answer = models.ForeignKey('Answer', on_delete=models.PROTECT, related_name='additional_texts', null=True, blank=True)
