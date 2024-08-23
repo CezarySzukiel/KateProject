@@ -480,7 +480,38 @@
         "exam": "2024-05-08",
         "section": "Funkcje",
         "subsection": "Przekształcenia wykresów funkcji",
-        "answers": []
+        "answers": [
+            {
+                "answer": null,
+                "correct": true,
+                "second_set": false
+            },
+            {
+                "answer": null,
+                "correct": true,
+                "second_set": false
+            },
+            {
+                "answer": null,
+                "correct": true,
+                "second_set": false
+            },
+            {
+                "answer": null,
+                "correct": true,
+                "second_set": false
+            },
+            {
+                "answer": null,
+                "correct": true,
+                "second_set": false
+            },
+            {
+                "answer": null,
+                "correct": true,
+                "second_set": false
+            }
+        ]
     },
     {
         "title": "Zadanie M.P.05.24.15",

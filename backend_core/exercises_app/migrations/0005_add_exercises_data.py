@@ -4,7 +4,7 @@ import os
 from django.db import migrations
 
 current_directory = os.path.dirname(__file__)
-file_path = os.path.join(current_directory, 'exercises_data.txt')
+file_path = os.path.join(current_directory, 'exercises_data.json')
 
 
 class ExerciseDataLoader:
@@ -112,11 +112,87 @@ class AnswerDataLoader(ExerciseDataLoader):
                     )
 
 
+class ChartsDataLoader(ExerciseDataLoader):
+    def __init__(self, file_path=None):
+        super().__init__(file_path)
+        self.function_type = None
+        self.coefficients = None
+        self.description = None
+        self.legend = None
+        self.Function = None
+        self.Exercise = None
+        self.Answer = None
+        self.answer = None
+        self.answers = None
+        self.exercises = []
+
+    def add_charts_data(self, apps, schema_editor):
+        self.Function = apps.get_model('exercises_app', 'Function')
+        self.Exercise = apps.get_model('exercises_app', 'Exercise')
+        self.Answer = apps.get_model('exercises_app', 'Answer')
+
+        for chart in self.data:
+            self.function_type = chart['function_type']
+            try:
+                if chart['exercises_id']:
+                    self.exercises = [self.Exercise.objects.get(pk=id) for id in chart['exercises_id']]
+            except self.Exercise.DoesNotExist:
+                self.exercises = []
+                print("*-" * 50)
+                print(f'Exercise with ID {chart["exercises_id"]} does not exist.')
+                print("*-" * 50)
+                continue
+            if chart['answer_no_in_exercise']:
+                self.answers = self.Answer.objects.filter(exercise_id=self.exercises[0])
+                self.answer = self.answers[int(chart['answer_no_in_exercise'])]
+            else:
+                self.answers = []
+                self.answer = None
+            if chart['description']:
+                self.description = chart['description']
+            else:
+                self.description = None
+            if chart['legend']:
+                self.legend = chart['legend']
+            else:
+                self.legend = None
+            if chart['coefficients']:
+                self.coefficients = chart['coefficients']
+            else:
+                self.coefficients = None
+            function = self.Function.objects.create(
+                function_type=self.function_type,
+                answer=self.answer,
+                description=self.description,
+                legend=self.legend,
+                a=chart['a'],
+                b=chart['b'],
+                c=chart['c'],
+                coefficients=self.coefficients,
+                x_start=chart['x_start'],
+                x_end=chart['x_end'],
+                x_step=chart['x_step'],
+                x_offset=chart['x_offset'],
+                y_start=chart['y_start'],
+                y_end=chart['y_end'],
+                y_step=chart['y_step'],
+                y_offset=chart['y_offset'],
+
+            )
+            if self.exercises:
+                function.exercises.add(*self.exercises)
+            if self.answer:
+                self.answer.answer = f"{self.answer.pk}: {function.pk}"
+                self.answer.save()
+
+
 def add_exercise_data(apps, schema_editor):
-    exercise_loader = ExerciseDataLoader(file_path=os.path.join(current_directory, 'exercises_data.txt'))
+    exercise_loader = ExerciseDataLoader(file_path=os.path.join(current_directory, 'exercises_data.json'))
     exercise_loader.add_exercise_data(apps, schema_editor)
-    answer_loader = AnswerDataLoader(file_path=os.path.join(current_directory, 'exercises_data.txt'))
+    answer_loader = AnswerDataLoader(file_path=os.path.join(current_directory, 'exercises_data.json'))
     answer_loader.add_answer_data(apps, schema_editor)
+    charts_loader = ChartsDataLoader(file_path=os.path.join(current_directory, 'charts_data.json'))
+    charts_loader.add_charts_data(apps, schema_editor)
 
 
 class Migration(migrations.Migration):

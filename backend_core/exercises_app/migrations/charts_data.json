@@ -1,0 +1,40 @@
+[
+  {
+    "function_type": "quadratic",
+    "exercises_id": [14, 15, 16, 17],
+    "answer_no_in_exercise": null,
+    "description": "W kartezjańskim układzie współrzędnych $(𝑥, 𝑦)$ przedstawiono fragment paraboli, która jest wykresem funkcji kwadratowej 𝑓 (zobacz rysunek). Wierzchołek tej paraboli oraz punkty przecięcia paraboli z osiami układu współrzędnych mają obie współrzędne całkowite.",
+    "legend": "$y=f(x)$",
+    "a": -1,
+    "b": 0,
+    "c": 0,
+    "coefficients": null,
+    "x_start": -3,
+    "x_end": 5,
+    "x_step": 1,
+    "x_offset": 1,
+    "y_start": -7,
+    "y_end": 10,
+    "y_step": 1,
+    "y_offset": 9
+  },
+  {
+    "function_type": "quadratic",
+    "exercises_id": [17],
+    "answer_no_in_exercise": "0",
+    "description": null,
+    "legend": null,
+    "a": -1,
+    "b": 0,
+    "c": 0,
+    "coefficients": null,
+    "x_start": -6,
+    "x_end": 2,
+    "x_step": 1,
+    "x_offset": -2,
+    "y_start": -8,
+    "y_end": 10,
+    "y_step": 1,
+    "y_offset": 9
+  }
+]
