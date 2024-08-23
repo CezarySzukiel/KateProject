@@ -122,7 +122,7 @@ class CompareExerciseView(APIView):
 
             try:
                 correct_answer = Answer.objects.filter(exercise=exercise, correct=True)
-                correct_answer_texts = {answer.answers for answer in correct_answer}
+                correct_answer_texts = {answer.answer for answer in correct_answer}
                 submitted_answers = set(form_data['answers'])
             except Answer.DoesNotExist:
                 return Response({"detail": "Exercise does not have a right answer."}, status=status.HTTP_404_NOT_FOUND)
