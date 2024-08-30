@@ -24,11 +24,9 @@ const generateLinearData = (m, b, xStart, xEnd, xStep, xOffset, yOffset) => {
 
 const generateQuadraticData = (a, b, c, xStart, xEnd, xStep, xOffset, yStep, yOffset) => {
     const data = [];
-    console.log('step', xStep, yStep)
-    xStep = xStep - 1
-    for (let x = xStart - 1; x <= xEnd - 1; x += xStep) {
-        const y = a * x * x + b * x + c + yOffset;
-        x = x + xOffset
+    for (let x_ = xStart; x_ <= xEnd; x_ += xStep) {
+        const y = a * x_ * x_ + b * x_ + c + yOffset;
+        const x = x_ + xOffset
         data.push({x, y});
     }
     return data;

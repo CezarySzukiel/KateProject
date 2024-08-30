@@ -104,10 +104,11 @@ export function HOC_ExerciseDetails(props) {
                     />
                     {actualExercise.functions.length > 0 &&
                         actualExercise.functions.map((func) => (
-                            <Chart
-                                key={func.id}
-                                data={func}
-                            />
+                            !func.answer && (
+                                <Chart
+                                    key={func.id}
+                                    data={func}
+                                />)
                         ))
                     }
                     <div className={'description'}>

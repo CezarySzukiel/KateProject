@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.settings import api_settings
 
-from exercises_app.models import Exercise, Answer, Section, Subsection, Function
+from exercises_app.models import Exercise, Answer, Section, Subsection, Function, AdditionalText
 from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
     CompareExerciseSerializer, ExerciseDetailSerializer
 from users.models import UserSettings
@@ -57,7 +57,6 @@ class SubsectionListView(generics.ListAPIView):
     permission_classes = (permissions.AllowAny, )
     pagination_class = None
 
-
     def get_queryset(self):
         section_id = self.kwargs['section_id']
         section = get_object_or_404(Section, pk=section_id)
@@ -99,9 +98,13 @@ class ExerciseDetailView(generics.RetrieveAPIView):
     def get_object(self):
         exercise_id = self.kwargs['exercise_id']
         exercise = get_object_or_404(Exercise, pk=exercise_id)
-        answers = Answer.objects.filter(exercise=exercise)
-        function = Function.objects.filter(exercises__in=[exercise])
-        exercise.correct_answers = answers
+        # answers = Answer.objects.filter(exercise=exercise)
+        # function = Function.objects.filter(exercises=exercise)
+        # additional_text = AdditionalText.objects.filter(exercise=exercise)
+        # for answer in answers:
+        #     answer.functions.set(function.filter(answer=answer))
+        # exercise.answers.set(answers)
+        # exercise.additional_text = additional_text
         return exercise
 
 

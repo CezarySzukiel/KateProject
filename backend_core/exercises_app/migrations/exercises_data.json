@@ -483,32 +483,32 @@
         "answers": [
             {
                 "answer": null,
-                "correct": true,
+                "correct": false,
                 "second_set": false
             },
             {
                 "answer": null,
-                "correct": true,
+                "correct": false,
                 "second_set": false
             },
             {
                 "answer": null,
-                "correct": true,
+                "correct": false,
                 "second_set": false
             },
             {
                 "answer": null,
-                "correct": true,
+                "correct": false,
                 "second_set": false
             },
             {
                 "answer": null,
-                "correct": true,
+                "correct": false,
                 "second_set": false
             },
             {
                 "answer": null,
-                "correct": true,
+                "correct": false,
                 "second_set": false
             }
         ],

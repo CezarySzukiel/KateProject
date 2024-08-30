@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
 
-import {Type1, Type2, Type3, Type4, Type6, Type9} from './AnswerInputs'
+import {Type1, Type2, Type3, Type4, Type6, Type7, Type9} from './AnswerInputs'
 
 
 export const HOC_AnswerInput = (props) => {
@@ -116,6 +116,14 @@ export const HOC_AnswerInput = (props) => {
 
             {exerciseType === 6 && <Type6
                 answers={actualExercise.answers}
+                handleAnswer={handleAnswer}
+                setError={setError}
+                setAreSelectionsValidated={setAreSelectionsValidated}
+            />}
+
+            {exerciseType === 7 && <Type7
+                answers={actualExercise.answers}
+                additional_texts={actualExercise.additional_texts}
                 handleAnswer={handleAnswer}
                 setError={setError}
                 setAreSelectionsValidated={setAreSelectionsValidated}

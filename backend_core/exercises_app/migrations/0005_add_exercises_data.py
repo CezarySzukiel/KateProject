@@ -205,13 +205,16 @@ class AdditionalTextDataLoader(ExerciseDataLoader):
             if 'additional_texts' in ex:
                 for text in ex['additional_texts']:
                     correct_answer = answers[int(text['correct_answer'])] if 'correct_answer' in text else None
+                    correct_answer_index = next((index for index, answer in enumerate(answers) if answer == correct_answer), None)
+                    letter = chr(65 + correct_answer_index)
                     additional_text = self.AdditionalText.objects.create(
                         exercise=self.exercise,
                         text=text['text'],
                         place=text['place'],
                         true_answer=correct_answer
                     )
-                    correct_answer.answer = f'{correct_answer.pk}: {additional_text.id}'
+                    correct_answer.answer = f'{additional_text.text}: {letter}'
+                    correct_answer.correct = True
                     correct_answer.save()
 
 

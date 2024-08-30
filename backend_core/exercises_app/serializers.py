@@ -12,19 +12,33 @@ class ExercisesListSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-class AnswerSerializer(serializers.ModelSerializer):
-    """Serializer for Answer model."""
-    class Meta:
-        model = Answer
-        fields = ('answer', 'correct', 'second_set')
-
-
 class FunctionSerializer(serializers.ModelSerializer):
     """Serializer for Function model."""
+
+    answer = serializers.PrimaryKeyRelatedField(queryset=Answer.objects.all(), required=False)
+
     class Meta:
         model = Function
         fields = ('id', 'function_type', 'a', 'b', 'c', 'coefficients', 'x_start', 'x_end', 'x_step', 'x_offset',
-                  'y_start', 'y_end', 'y_step', 'y_offset', 'description', 'legend',)
+                  'y_start', 'y_end', 'y_step', 'y_offset', 'description', 'legend', 'answer')
+        read_only_fields = ('id',)
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+    """Serializer for Answer model."""
+    functions = FunctionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Answer
+        fields = ('answer', 'correct', 'second_set', 'functions',)
+
+
+class AdditionalTextSerializer(serializers.ModelSerializer):
+    """Serializer for AdditionalText model."""
+
+    class Meta:
+        model = AdditionalText
+        fields = ('id', 'text', 'exercise', 'place', 'true_answer')
         read_only_fields = ('id',)
 
 
@@ -35,19 +49,28 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
     solution_similar = serializers.PrimaryKeyRelatedField(many=True, queryset=Exercise.objects.all())
     answers = AnswerSerializer(many=True)
     functions = FunctionSerializer(many=True)
-    exam = serializers.DateField(format='%Y-%m', input_formats=('%Y-%m', ), required=False)
+    exam = serializers.DateField(format='%Y-%m', input_formats=('%Y-%m',), required=False)
+    additional_texts = AdditionalTextSerializer(many=True, read_only=True)
 
     class Meta:
         model = Exercise
         fields = (
-            'id', 'title', 'description', 'ask1', 'ask2', 'subsection', 'difficult', 'points', 'solution_exactly', 'solution_similar',
-            'type', 'advanced_level', 'answers', 'functions', 'exam', )
+            'id', 'title', 'description', 'ask1', 'ask2', 'subsection', 'difficult', 'points', 'solution_exactly',
+            'solution_similar',
+            'type', 'advanced_level', 'answers', 'functions', 'exam', 'additional_texts',)
         read_only_fields = ('id',)
 
     def get_correct_answer(self, obj):
         if hasattr(obj, 'correct_answer'):
             return obj.correct_answer.answers
         return None
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['functions'] = FunctionSerializer(
+            instance.functions.filter(answer__isnull=True), many=True
+        ).data
+        return representation
 
 
 class SubsectionSerializer(serializers.ModelSerializer):
@@ -75,11 +98,3 @@ class CompareExerciseSerializer(serializers.Serializer):
     answers = serializers.ListField(
         child=serializers.CharField()
     )
-
-
-class AdditionalTextSerializer(serializers.ModelSerializer):
-    """Serializer for AdditionalText model."""
-    class Meta:
-        model = AdditionalText
-        fields = ('id', 'text', 'exercise', 'place', 'true_answer')
-        read_only_fields = ('id',)

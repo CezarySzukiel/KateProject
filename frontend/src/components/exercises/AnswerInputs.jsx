@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import Latex from 'react-latex-next';
 import {useSelector} from 'react-redux';
 import {reformatAnswer} from './helpers';
+import {Chart} from './Chart'
 
 export function Type1(props) {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -139,7 +140,8 @@ export function Type3(props) {
                         </div>
                     </li>
                 ))}
-            </ul>.0
+            </ul>
+            .0
         </div>
     )
 }
@@ -234,8 +236,7 @@ export function Type6(props) {
         const selections = selectedAnswers.concat(rejectedAnswers)
         if (selections.length === answers.length) {
             return true
-        }
-        else {
+        } else {
             setError('Nie zaznaczono wszystkich odpowiedzi')
             return false
         }
@@ -281,10 +282,81 @@ export function Type6(props) {
 }
 
 export function Type7(props) {
+    const {answers, handleAnswer, additional_texts, setAreSelectionsValidated} = props
+    const [answerObjects, setAnswerObjects] = useState([]);
+    const [selectedAnswers, setSelectedAnswers] = useState([]);
+    const createObjects = (answers) => {
+        const objs = []
+        for (let i = 0; i < answers.length; i++) {
+            objs.push({answerPoint: String.fromCharCode(65 + i), answer: answers[i]})
+        }
+        return objs
+    }
 
+    const handleChoice = (event, txt) => {
+        console.log(txt)
+        const newAnswer = event.target.value;
+        setSelectedAnswers(prevSelectedAnswers =>
+            prevSelectedAnswers.map(answer =>
+                answer[txt.text] ? {[txt.text]: newAnswer} : answer
+            )
+        );
+    }
+
+    useEffect(() => {
+        console.log('wywołuję to useeffect')
+        setAnswerObjects(createObjects(answers))
+        // setSelectedAnswers(additional_texts.map(txt => `${String(txt.text)}: A`));
+        setSelectedAnswers(additional_texts.map(txt => ({[txt.text]: "A"})));
+        setAreSelectionsValidated(true)
+    }, []);
+
+    useEffect(() => {
+        const cleanedAnswers = selectedAnswers.map(ans => {
+            const key = Object.keys(ans)[0];
+            return `${key}: ${ans[key]}`;
+        });
+        handleAnswer(cleanedAnswers);
+    }, [selectedAnswers]);
     return (
         <div className={'answer-input'}>
-
+            <table className={'answer-table'}>
+                {additional_texts && additional_texts.map((txt, index) => (
+                    <tr key={txt.id}>
+                        <td>
+                            {txt.text}
+                        </td>
+                        <td>
+                            <select onChange={(event) => handleChoice(event, txt)}>
+                                {answerObjects.map((ans, idx) => (
+                                    <option key={idx} value={ans.answerPoint}>
+                                        {ans.answerPoint}
+                                    </option>
+                                ))}
+                            </select>
+                        </td>
+                    </tr>
+                ))}
+            </table>
+            {answerObjects.map((ans, index) => (
+                ans.answer && (
+                    ans.answer.functions.length === 0 && ans.answer.answer ? (
+                        <div key={index} className={'answer-div'}>
+                            <ul>
+                                <li>
+                                    {ans.answerPoint}.
+                                    <Latex>{ans.answer.answer}</Latex>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : ans.answer.functions.length > 0 && (
+                        <div key={index} className={'answer-div'}>
+                            {ans.answerPoint}.
+                            <Chart data={ans.answer.functions[0]}/>
+                        </div>
+                    )
+                )
+            ))}
         </div>
     )
 }

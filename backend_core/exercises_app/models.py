@@ -41,7 +41,7 @@ class Answer(models.Model):
     second_set = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.answer
+        return self.answer if self.answer else 'null'
 
 
 class Subsubsection(models.Model):
@@ -160,4 +160,4 @@ class AdditionalText(models.Model):
     true_answer = models.ForeignKey('Answer', on_delete=models.PROTECT, related_name='additional_texts', null=True, blank=True)
 
     def __str__(self):
-        return self.text
+        return self.text if self.text else ''
