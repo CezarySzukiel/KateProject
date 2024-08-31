@@ -1,3 +1,4 @@
+import './chart.css'
 import React, {useState, useEffect, useRef} from 'react';
 import {
     LineChart,
@@ -23,12 +24,14 @@ const generateLinearData = (m, b, xStart, xEnd, xStep, xOffset, yOffset) => {
 };
 
 const generateQuadraticData = (a, b, c, xStart, xEnd, xStep, xOffset, yStep, yOffset) => {
+    console.log("a: ", a, "b: ", b, "c: ", c, "xStart: ", xStart, "xEnd: ", xEnd, "xStep: ", xStep, "xOffset: ", xOffset, "yStep: ", yStep, "yOffset: ", yOffset)
     const data = [];
     for (let x_ = xStart; x_ <= xEnd; x_ += xStep) {
         const y = a * x_ * x_ + b * x_ + c + yOffset;
         const x = x_ + xOffset
         data.push({x, y});
     }
+    console.log("data w funkcji kwadratowej", data)
     return data;
 };
 

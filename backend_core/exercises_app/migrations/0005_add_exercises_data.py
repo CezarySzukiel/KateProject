@@ -145,6 +145,8 @@ class ChartsDataLoader(ExerciseDataLoader):
             if chart['answer_no_in_exercise']:
                 self.answers = self.Answer.objects.filter(exercise_id=self.exercises[0])
                 self.answer = self.answers[int(chart['answer_no_in_exercise'])]
+                self.answer.answer = chr(65 + int(chart['answer_no_in_exercise']))
+                self.answer.save()
             else:
                 self.answers = []
                 self.answer = None
@@ -204,7 +206,8 @@ class AdditionalTextDataLoader(ExerciseDataLoader):
             answers = self.Answer.objects.filter(exercise=self.exercise)
             if 'additional_texts' in ex:
                 for text in ex['additional_texts']:
-                    correct_answer = answers[int(text['correct_answer'])] if 'correct_answer' in text else None
+                    if 'correct_answer' in text:
+                        correct_answer = answers[int(text['correct_answer'])]
                     correct_answer_index = next((index for index, answer in enumerate(answers) if answer == correct_answer), None)
                     letter = chr(65 + correct_answer_index)
                     additional_text = self.AdditionalText.objects.create(

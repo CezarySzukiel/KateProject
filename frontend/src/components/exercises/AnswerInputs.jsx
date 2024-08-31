@@ -285,11 +285,13 @@ export function Type7(props) {
     const {answers, handleAnswer, additional_texts, setAreSelectionsValidated} = props
     const [answerObjects, setAnswerObjects] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState([]);
+
     const createObjects = (answers) => {
         const objs = []
-        for (let i = 0; i < answers.length; i++) {
-            objs.push({answerPoint: String.fromCharCode(65 + i), answer: answers[i]})
+        for (const answer of answers) {
+            objs.push({answerPoint: answer.answer[answer.answer.length - 1], answer: answer})
         }
+        objs.sort((a, b) => a.answerPoint.localeCompare(b.answerPoint));
         return objs
     }
 
@@ -304,7 +306,6 @@ export function Type7(props) {
     }
 
     useEffect(() => {
-        console.log('wywołuję to useeffect')
         setAnswerObjects(createObjects(answers))
         // setSelectedAnswers(additional_texts.map(txt => `${String(txt.text)}: A`));
         setSelectedAnswers(additional_texts.map(txt => ({[txt.text]: "A"})));
@@ -338,27 +339,29 @@ export function Type7(props) {
                     </tr>
                 ))}
             </table>
-            {answerObjects.map((ans, index) => (
-                ans.answer && (
-                    ans.answer.functions.length === 0 && ans.answer.answer ? (
-                        <div key={index} className={'answer-div'}>
-                            <ul>
-                                <li>
-                                    {ans.answerPoint}.
-                                    <Latex>{ans.answer.answer}</Latex>
-                                </li>
-                            </ul>
-                        </div>
-                    ) : ans.answer.functions.length > 0 && (
-                        <div key={index} className={'answer-div'}>
-                            {ans.answerPoint}.
-                            <Chart data={ans.answer.functions[0]}/>
-                        </div>
+            <div className={'answers-type7'}>
+                {answerObjects.map((ans, index) => (
+                    ans.answer && (
+                        ans.answer.functions.length === 0 && ans.answer.answer ? (
+                            <div key={index} className={'answer-div'}>
+                                <ul>
+                                    <li>
+                                        {ans.answerPoint}.
+                                        <Latex>{ans.answer.answer}</Latex>
+                                    </li>
+                                </ul>
+                            </div>
+                        ) : ans.answer.functions.length > 0 && (
+                            <div key={index} className={'answer-div'}>
+                                {ans.answerPoint}.
+                                <Chart data={ans.answer.functions[0]}/>
+                            </div>
+                        )
                     )
-                )
-            ))}
+                ))}
+            </div>
         </div>
-    )
+    );
 }
 
 export function Type9(props) {
