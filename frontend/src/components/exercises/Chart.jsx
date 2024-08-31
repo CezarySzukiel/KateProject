@@ -102,13 +102,18 @@ const generateStepData = (a, xStart, xEnd, xStep, xOffset, yOffset) => {
 
 const generateTicks = (data, step, axis) => {
     const ticks = [];
-    const start = data.reduce((acc, item) => { return item[axis] < acc ? item[axis] : acc }, data[0][axis])
-    const end = data.reduce((acc, item) => { return item[axis] > acc ? item[axis] : acc }, data[0][axis])
+    const start = data.reduce((acc, item) => {
+        return item[axis] < acc ? item[axis] : acc
+    }, data[0][axis])
+    const end = data.reduce((acc, item) => {
+        return item[axis] > acc ? item[axis] : acc
+    }, data[0][axis])
     for (let i = start - step; i <= end + step; i += step) {
         ticks.push(i);
     }
     return ticks;
 }
+
 
 export const Chart = (props) => {
     const {
@@ -130,7 +135,8 @@ export const Chart = (props) => {
     const [lineType, setLineType] = useState('natural')
     const [xTicks, setXTicks] = useState([])
     const [yTicks, setYTicks] = useState([])
-
+    const chartWidth = xTicks.length * 30
+    const chartHeight = yTicks.length * 30
 
     useEffect(() => {
         if (data) {
@@ -192,14 +198,28 @@ export const Chart = (props) => {
         <div className={'chart'}>
             {description && <p>{description}</p>}
             <LineChart
-                width={400}
-                height={400}
+                width={chartWidth}
+                height={chartHeight}
                 data={data}
-                margin={{top: 10, right: 0, left: 10, bottom: 0}}
+                margin={{top: 10, right: 0, left: 0, bottom: 0}}
             >
                 <CartesianGrid strokeDasharray="1 1"/>
-                <XAxis dataKey="x" type={"number"} ticks={xTicks} stroke={'#f0f0f0'} axisLine={true}/>
-                <YAxis interval={0} ticks={yTicks} stroke={'#f0f0f0'} orientation={'left'}/>
+                <XAxis
+                    dataKey="x"
+                    type={"number"}
+                    ticks={xTicks}
+                    stroke={'#f0f0f0'}
+                    axisLine={true}
+                    tickCount={Math.ceil((xTicks[xTicks.length - 1] - xTicks[0]) / 2)}
+                />
+                <YAxis
+                    type={"number"}
+                    interval={0}
+                    ticks={yTicks}
+                    stroke={'#f0f0f0'}
+                    orientation={'left'}
+                    tickCount={Math.ceil((yTicks[yTicks.length - 1] - yTicks[0]) / 2)}
+                />
                 <Tooltip
                     formatter={(value, name, props) => [`${value}`, `y`]}
                     labelFormatter={(label) => `x: ${label}`}
@@ -212,9 +232,9 @@ export const Chart = (props) => {
                     content={<CustomLegend/>}
                     layout="vertical"
                     verticalAlign="bottom"
-                    wrapperStyle={{ bottom: 60, left: 80, lineHeight: '24px' }}
+                    wrapperStyle={{bottom: 60, left: 80, lineHeight: '24px'}}
                 />
-                <Line type={lineType} dataKey="y" stroke="black" dot={false}/>
+                <Line type={lineType} dataKey="y" stroke="black" dot={false} strokeWidth={2}/>
             </LineChart>
         </div>
     );
