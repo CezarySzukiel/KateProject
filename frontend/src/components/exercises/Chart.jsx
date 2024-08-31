@@ -102,12 +102,14 @@ const generateStepData = (a, xStart, xEnd, xStep, xOffset, yOffset) => {
     return data;
 };
 
-const generateYPoints = (yStart, yEnd, yStep, yOffset) => {
-    const yPoints = [];
-    for (let y = yStart - yStep; y <= yEnd + yStep; y += yStep) {
-        yPoints.push(y);
+const generateTicks = (data, step, axis) => {
+    const ticks = [];
+    const start = data.reduce((acc, item) => { return item[axis] < acc ? item[axis] : acc }, data[0][axis])
+    const end = data.reduce((acc, item) => { return item[axis] > acc ? item[axis] : acc }, data[0][axis])
+    for (let i = start - step; i <= end + step; i += step) {
+        ticks.push(i);
     }
-    return yPoints;
+    return ticks;
 }
 
 export const Chart = (props) => {
@@ -138,15 +140,9 @@ export const Chart = (props) => {
 
     useEffect(() => {
         if (data) {
-            console.log('data', data)
-            const xTicks_ = data.map((item) => item.x)
-            xTicks_.push(xStart - x_step)
-            xTicks_.push(xEnd + x_step)
-            xTicks_.sort((a, b) => a - b)
-            setXTicks(xTicks_)
-            setYTicks(generateYPoints(y_start, y_end, y_step, y_offset))
-            console.log('xticks', xTicks_)
-            console.log('yticks', generateYPoints(y_start, y_end, y_step, y_offset))
+            setYTicks(generateTicks(data, y_step, 'y'))
+            setXTicks(generateTicks(data, x_step, 'x'))
+
         }
     }, [data]);
 
