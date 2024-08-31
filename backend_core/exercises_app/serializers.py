@@ -20,7 +20,7 @@ class FunctionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Function
         fields = ('id', 'function_type', 'a', 'b', 'c', 'coefficients', 'x_start', 'x_end', 'x_step', 'x_offset',
-                  'y_start', 'y_end', 'y_step', 'y_offset', 'description', 'legend', 'answer')
+                  'y_step', 'y_offset', 'description', 'legend', 'answer')
         read_only_fields = ('id',)
 
 

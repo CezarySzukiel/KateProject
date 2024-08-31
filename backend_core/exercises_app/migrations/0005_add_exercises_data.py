@@ -175,8 +175,6 @@ class ChartsDataLoader(ExerciseDataLoader):
                 x_end=chart['x_end'],
                 x_step=chart['x_step'],
                 x_offset=chart['x_offset'],
-                y_start=chart['y_start'],
-                y_end=chart['y_end'],
                 y_step=chart['y_step'],
                 y_offset=chart['y_offset'],
 

@@ -102,8 +102,6 @@ class Migration(migrations.Migration):
                 ('x_end', models.FloatField(default=10)),
                 ('x_step', models.FloatField(default=1)),
                 ('x_offset', models.FloatField(default=0)),
-                ('y_start', models.FloatField(default=-10)),
-                ('y_end', models.FloatField(default=10)),
                 ('y_step', models.FloatField(default=1)),
                 ('y_offset', models.FloatField(default=0)),
                 ('exercises', models.ManyToManyField(related_name='functions', related_query_name='function',

@@ -24,14 +24,12 @@ const generateLinearData = (m, b, xStart, xEnd, xStep, xOffset, yOffset) => {
 };
 
 const generateQuadraticData = (a, b, c, xStart, xEnd, xStep, xOffset, yStep, yOffset) => {
-    console.log("a: ", a, "b: ", b, "c: ", c, "xStart: ", xStart, "xEnd: ", xEnd, "xStep: ", xStep, "xOffset: ", xOffset, "yStep: ", yStep, "yOffset: ", yOffset)
     const data = [];
     for (let x_ = xStart; x_ <= xEnd; x_ += xStep) {
         const y = a * x_ * x_ + b * x_ + c + yOffset;
         const x = x_ + xOffset
         data.push({x, y});
     }
-    console.log("data w funkcji kwadratowej", data)
     return data;
 };
 
@@ -124,16 +122,12 @@ export const Chart = (props) => {
         x_start,
         x_step,
         x_offset,
-        y_start,
-        y_end,
         y_step,
         y_offset,
         legend,
     } = props.data
     const [data, setData] = useState(null)
     const [lineType, setLineType] = useState('natural')
-    const [xStart, setXStart] = useState(x_start)
-    const [xEnd, setXEnd] = useState(x_end)
     const [xTicks, setXTicks] = useState([])
     const [yTicks, setYTicks] = useState([])
 

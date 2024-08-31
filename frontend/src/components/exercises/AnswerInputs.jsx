@@ -296,7 +296,6 @@ export function Type7(props) {
     }
 
     const handleChoice = (event, txt) => {
-        console.log(txt)
         const newAnswer = event.target.value;
         setSelectedAnswers(prevSelectedAnswers =>
             prevSelectedAnswers.map(answer =>

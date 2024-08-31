@@ -13,8 +13,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": 1,
-    "y_start": -7,
-    "y_end": 10,
     "y_step": 1,
     "y_offset": 9
   },
@@ -32,8 +30,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": -2,
-    "y_start": -8,
-    "y_end": 10,
     "y_step": 1,
     "y_offset": 9
   },
@@ -51,8 +47,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": 3,
-    "y_start": -8,
-    "y_end": 10,
     "y_step": 1,
     "y_offset": 9
   },
@@ -70,8 +64,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": 1,
-    "y_start": -10,
-    "y_end": 7,
     "y_step": 1,
     "y_offset": 6
   },
@@ -89,8 +81,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": 1,
-    "y_start": -10,
-    "y_end": 8,
     "y_step": 1,
     "y_offset": -9
   },
@@ -108,8 +98,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": -1,
-    "y_start": -8,
-    "y_end": 10,
     "y_step": 1,
     "y_offset": 9
   },
@@ -127,8 +115,6 @@
     "x_end": 4,
     "x_step": 1,
     "x_offset": -1,
-    "y_start": -10,
-    "y_end": 8,
     "y_step": 1,
     "y_offset": -9
   }
