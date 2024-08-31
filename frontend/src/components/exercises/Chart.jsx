@@ -135,8 +135,8 @@ export const Chart = (props) => {
     const [lineType, setLineType] = useState('natural')
     const [xTicks, setXTicks] = useState([])
     const [yTicks, setYTicks] = useState([])
-    const chartWidth = xTicks.length * 30
-    const chartHeight = yTicks.length * 30
+    const chartWidth = xTicks.length * 25
+    const chartHeight = yTicks.length * 25
 
     useEffect(() => {
         if (data) {
@@ -203,8 +203,11 @@ export const Chart = (props) => {
                 data={data}
                 margin={{top: 10, right: 0, left: 0, bottom: 0}}
             >
-                <CartesianGrid strokeDasharray="1 1"/>
+                <CartesianGrid
+                    strokeDasharray="1 1"
+                />
                 <XAxis
+                    domain={[0, 0]}
                     dataKey="x"
                     type={"number"}
                     ticks={xTicks}
@@ -213,6 +216,8 @@ export const Chart = (props) => {
                     tickCount={Math.ceil((xTicks[xTicks.length - 1] - xTicks[0]) / 2)}
                 />
                 <YAxis
+                    domain={[0, 0]}
+                    dataKey="y"
                     type={"number"}
                     interval={0}
                     ticks={yTicks}
