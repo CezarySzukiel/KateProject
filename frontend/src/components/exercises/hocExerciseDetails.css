@@ -23,7 +23,7 @@
 	margin: 0 0.5rem;
 }
 
-img {
-	max-width: 500px;
-	background-color: rgba(170, 198, 204, 0);
+.HOC-E-D-image img {
+   	max-width: 30rem;
+	max-height: 30rem;
 }

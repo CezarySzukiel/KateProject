@@ -114,6 +114,15 @@ export function HOC_ExerciseDetails(props) {
                     <div className={'description'}>
                         <Latex>{actualExercise.description}</Latex>
                     </div>
+                    {actualExercise.images.length > 0 &&
+                        <div className={'HOC-E-D-image'}>
+                            <img
+                                src={actualExercise.images[0].image}
+                                alt={actualExercise.images[0].description}
+                            >
+                            </img>
+                        </div>
+                    }
 
                     <ConAnswerInput
                         setSuccessMessage={setSuccessMessage}

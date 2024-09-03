@@ -46,7 +46,10 @@ export function Type1(props) {
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
                                     <p>{ans.answer.images[0].description}</p>
-                                    <img src={ans.answer.images[0].image}></img>
+                                    <img
+                                        src={ans.answer.images[0].image}
+                                        alt={ans.answer.answer}
+                                    ></img>
                                 </div>
                             </div>
                         )}
@@ -54,7 +57,7 @@ export function Type1(props) {
                         <div
                             className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
                         >
-                            {ans.answerPoint}.
+                            {String.fromCharCode(65 + index)}.
                             <Latex> {ans.answer.answer}</Latex>
                         </div>
                             )}

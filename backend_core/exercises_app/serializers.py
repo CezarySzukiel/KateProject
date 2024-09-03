@@ -35,12 +35,17 @@ class AdditionalTextSerializer(serializers.ModelSerializer):
 
 class ImageSerializer(serializers.ModelSerializer):
     """Serializer for Image model."""
-    # exercise = serializers.PrimaryKeyRelatedField(queryset=Exercise.objects.all())
-    # answer = serializers.PrimaryKeyRelatedField(queryset=Answer.objects.all(), required=False)
+
 
     class Meta:
         model = Image
         fields = ('image', 'description', 'exercise', 'answer')
+
+        # def get_image(self, obj):
+        #     request = self.context.get('request')
+        #     if request is not None:
+        #         return request.build_absolute_uri(obj.image.url)
+        #     return obj.image.url
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -82,7 +87,7 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
             instance.functions.filter(answer__isnull=True), many=True
         ).data
         representation['images'] = ImageSerializer(
-            instance.images.filter(answer__isnull=True), many=True
+            instance.images.filter(answer__isnull=True), many=True, context=self.context
         ).data
         return representation
 

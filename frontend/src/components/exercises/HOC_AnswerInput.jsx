@@ -85,6 +85,7 @@ export const HOC_AnswerInput = (props) => {
     return (
         <div className={"hoc-answer-input"}>
             {exerciseType === 1 && <Type1
+                key={actualExercise.id}
                 answers={actualExercise.answers}
                 handleAnswer={handleAnswer}
                 setAreSelectionsValidated={setAreSelectionsValidated}
@@ -92,6 +93,7 @@ export const HOC_AnswerInput = (props) => {
             />}
 
             {exerciseType === 2 && <Type2
+                key={actualExercise.id}
                 answers={actualExercise.answers}
                 handleAnswer={handleAnswer}
                 setAreSelectionsValidated={setAreSelectionsValidated}
@@ -99,6 +101,7 @@ export const HOC_AnswerInput = (props) => {
             />}
 
             {exerciseType === 3 && <Type3
+                key={actualExercise.id}
                 answers={actualExercise.answers}
                 handleAnswer={handleAnswer}
                 setError={setError}
@@ -106,6 +109,7 @@ export const HOC_AnswerInput = (props) => {
             />}
 
             {exerciseType === 4 && <Type4
+                key={actualExercise.id}
                 answers={actualExercise.answers}
                 handleAnswer={handleAnswer}
                 ask1={actualExercise.ask1}
@@ -115,6 +119,7 @@ export const HOC_AnswerInput = (props) => {
             />}
 
             {exerciseType === 6 && <Type6
+                key={actualExercise.id}
                 answers={actualExercise.answers}
                 handleAnswer={handleAnswer}
                 setError={setError}
@@ -122,6 +127,7 @@ export const HOC_AnswerInput = (props) => {
             />}
 
             {exerciseType === 7 && <Type7
+                key={actualExercise.id}
                 answers={actualExercise.answers}
                 additional_texts={actualExercise.additional_texts}
                 handleAnswer={handleAnswer}
@@ -132,6 +138,7 @@ export const HOC_AnswerInput = (props) => {
             {exerciseType === 9 &&
                 <div className={"hoc-type9"}>
                     <Type9
+                        key={actualExercise.id}
                         handleSubmit={handleSubmit}
                         handleChange={handleAnswer}
                         isLoggedIn={isLoggedIn}
