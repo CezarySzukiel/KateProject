@@ -22,3 +22,8 @@
 .katex-display {
 	margin: 0 0.5rem;
 }
+
+img {
+	max-width: 500px;
+	background-color: rgba(170, 198, 204, 0);
+}

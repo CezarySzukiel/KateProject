@@ -6,30 +6,58 @@ import {reformatAnswer} from './helpers';
 import {Chart} from './Chart'
 
 export function Type1(props) {
+    const {answers, handleAnswer, setAreSelectionsValidated, setError} = props
     const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [answerObjects, setAnswerObjects] = useState([]);
 
+
+    useEffect(() => {
+        setAnswerObjects(createObjects(answers))
+    }, []);
 
     const handleAnswerClick = (answer) => {
-        props.setAreSelectionsValidated(true)
-        props.handleAnswer([answer]);
+        setAreSelectionsValidated(true)
+        handleAnswer([answer]);
         setSelectedAnswer(answer);
     };
 
     return (
         <div className={'answer-input'}>
             <ul className={'answers-list'}>
-                {props.answers.map((answer, index) => (
+                {answerObjects.map((ans, index) => (
                     <li
-                        key={index}
-                        className={`answer-div ${selectedAnswer === answer.answer ? 'selected' : ''}`}
-                        onClick={() => handleAnswerClick(answer.answer)}
+                        key={ans.answer.id}
+                        onClick={() => handleAnswerClick(ans.answer.answer)}
                     >
-                        <div className={'answer-index'}>
-                            {String.fromCharCode(65 + index)}.
+                        {ans.answer.functions.length > 0 && (
+                            <div
+                                key={index}
+                                className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
+                            >
+                                {ans.answerPoint}.
+                                <Chart data={ans.answer.functions[0]}/>
+                            </div>
+                        )}
+                        {ans.answer.images.length > 0 && (
+                            <div
+                                key={index}
+                                className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
+                            >
+                                {ans.answerPoint}.
+                                <div className={'image-div'}>
+                                    <p>{ans.answer.images[0].description}</p>
+                                    <img src={ans.answer.images[0].image}></img>
+                                </div>
+                            </div>
+                        )}
+                        {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                        <div
+                            className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
+                        >
+                            {ans.answerPoint}.
+                            <Latex> {ans.answer.answer}</Latex>
                         </div>
-                        <div className={'answer-text'}>
-                            <Latex> {answer.answer}</Latex>
-                        </div>
+                            )}
                     </li>
                 ))}
             </ul>
@@ -281,19 +309,19 @@ export function Type6(props) {
     )
 }
 
+const createObjects = (answers) => {
+    const objs = []
+    for (const answer of answers) {
+        objs.push({answerPoint: answer.answer[answer.answer.length - 1], answer: answer})
+    }
+    objs.sort((a, b) => a.answerPoint.localeCompare(b.answerPoint));
+    return objs
+}
 export function Type7(props) {
     const {answers, handleAnswer, additional_texts, setAreSelectionsValidated} = props
     const [answerObjects, setAnswerObjects] = useState([]);
-    const [selectedAnswers, setSelectedAnswers] = useState([]);
 
-    const createObjects = (answers) => {
-        const objs = []
-        for (const answer of answers) {
-            objs.push({answerPoint: answer.answer[answer.answer.length - 1], answer: answer})
-        }
-        objs.sort((a, b) => a.answerPoint.localeCompare(b.answerPoint));
-        return objs
-    }
+    const [selectedAnswers, setSelectedAnswers] = useState([]);
 
     const handleChoice = (event, txt) => {
         const newAnswer = event.target.value;
