@@ -81,8 +81,8 @@ class ExerciseDetailSerializer(serializers.ModelSerializer):
         representation['functions'] = FunctionSerializer(
             instance.functions.filter(answer__isnull=True), many=True
         ).data
-        representation['images'] = AnswerSerializer(
-            instance.answers.filter(answer__isnull=True), many=True
+        representation['images'] = ImageSerializer(
+            instance.images.filter(answer__isnull=True), many=True
         ).data
         return representation
 
