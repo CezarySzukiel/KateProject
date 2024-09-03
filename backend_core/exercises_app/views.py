@@ -5,12 +5,14 @@ from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.settings import api_settings
 
-from exercises_app.models import Exercise, Answer, Section, Subsection, Function, AdditionalText
-from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, SubsectionSerializer, \
-    CompareExerciseSerializer, ExerciseDetailSerializer
+from exercises_app.models import Exercise, Answer, Section, Subsection, Function, AdditionalText, Image
+from exercises_app.serializers import ExercisesListSerializer, AnswerSerializer, SectionSerializer, \
+    SubsectionSerializer, \
+    CompareExerciseSerializer, ExerciseDetailSerializer, ImageSerializer
 from users.models import UserSettings
 
 HTTP_209_WRONG_ANSWER = 209
+
 
 class ExerciseViewSet(viewsets.ModelViewSet):
     """ViewSet for the Exercise class"""
@@ -18,7 +20,7 @@ class ExerciseViewSet(viewsets.ModelViewSet):
 
     queryset = Exercise.objects.all()
     serializer_class = ExercisesListSerializer
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
@@ -27,7 +29,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -36,7 +38,7 @@ class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
     pagination_class = None
 
 
@@ -54,7 +56,7 @@ class SubsectionListView(generics.ListAPIView):
     """View to list all subsections for a specific section"""
 
     serializer_class = SubsectionSerializer
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
     pagination_class = None
 
     def get_queryset(self):
@@ -64,7 +66,7 @@ class SubsectionListView(generics.ListAPIView):
 
 
 class SectionsAndSubsectionsView(APIView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request):
         sections = Section.objects.prefetch_related('subsections').all()
@@ -73,7 +75,7 @@ class SectionsAndSubsectionsView(APIView):
 
 
 class ExercisesFilterBySubsectionsView(APIView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
     serializer_class = ExercisesListSerializer
     pagination_class = PageNumberPagination
 
@@ -93,7 +95,7 @@ class ExerciseDetailView(generics.RetrieveAPIView):
     # todo optimalization: check database logs how many querries is, in that view
     serializer_class = ExerciseDetailSerializer
     queryset = Exercise.objects.all()
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
     def get_object(self):
         exercise_id = self.kwargs['exercise_id']
@@ -105,6 +107,8 @@ class ExerciseDetailView(generics.RetrieveAPIView):
         #     answer.functions.set(function.filter(answer=answer))
         # exercise.answers.set(answers)
         # exercise.additional_text = additional_text
+        images = Image.objects.filter(exercise=exercise)
+        exercise.images.set(images)
         return exercise
 
 
@@ -112,6 +116,7 @@ class CompareExerciseView(APIView):
     """
     View to compare exercise data from the frontend form with the database.
     """
+
     # todo optimalization: 2 asks to the database. Maybe frontend should send the exercise data or use lookup?
 
     def post(self, request, format=None):

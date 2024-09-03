@@ -1,3 +1,5 @@
+from tokenize import blank_re
+
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -42,6 +44,9 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answer if self.answer else 'null'
+
+    class Meta:
+        ordering = ['id']
 
 
 class Subsubsection(models.Model):
@@ -149,13 +154,21 @@ class Function(models.Model):
 class AdditionalText(models.Model):
     """Model representing additional text for an exercise."""
     PLACE_CHOICES = [
+        ('intro', 'Intro'),
         ('description', 'Description'),
         ('answerTable', 'AnswerTable'),
     ]
-    place = models.CharField(max_length=128, choices=PLACE_CHOICES)
+    place = models.CharField(max_length=20, choices=PLACE_CHOICES)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='additional_texts')
     text = models.TextField()
     true_answer = models.ForeignKey('Answer', on_delete=models.PROTECT, related_name='additional_texts', null=True, blank=True)
 
     def __str__(self):
         return self.text if self.text else ''
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='images/')
+    description = models.TextField(null=True, blank=True)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='images')
+    answer = models.ForeignKey('Answer', on_delete=models.CASCADE, related_name='images', null=True, blank=True)

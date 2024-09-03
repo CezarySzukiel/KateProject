@@ -1,8 +1,8 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
+from config import settings
 from . import views
-
 
 app_name = 'exercises_app'
 
@@ -19,7 +19,8 @@ urlpatterns += [
     path('s-subsections/<int:section_id>/', views.SubsectionListView.as_view(), name='subsection-list'),
     # path('s-exercises/<int:subsection_id>/', views.ExerciseListView.as_view(), name='exercises-list'),
     path('exercise/detail/<int:exercise_id>/', views.ExerciseDetailView.as_view(), name='exercises-detail'),
-    path('all-sections-and-subsections/', views.SectionsAndSubsectionsView.as_view(), name='all-sections-and-subsections'),
-    path('search-by-subsections/', views.ExercisesFilterBySubsectionsView.as_view(), name='exercises-filtered-by-subsections'),
-
+    path('all-sections-and-subsections/', views.SectionsAndSubsectionsView.as_view(),
+         name='all-sections-and-subsections'),
+    path('search-by-subsections/', views.ExercisesFilterBySubsectionsView.as_view(),
+         name='exercises-filtered-by-subsections'),
 ]

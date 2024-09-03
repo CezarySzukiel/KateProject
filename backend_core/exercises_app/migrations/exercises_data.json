@@ -12,22 +12,22 @@
         "subsection": "Wartość bezwzględna",
         "answers": [
             {
-                "answer": "rysunek",
+                "answer": "A",
+                "correct": false,
+                "second_set": false
+            },
+            {
+                "answer": "B",
                 "correct": true,
                 "second_set": false
             },
             {
-                "answer": "rysunek",
+                "answer": "C",
                 "correct": false,
                 "second_set": false
             },
             {
-                "answer": "rysunek",
-                "correct": false,
-                "second_set": false
-            },
-            {
-                "answer": "rysunek",
+                "answer": "D",
                 "correct": false,
                 "second_set": false
             }
