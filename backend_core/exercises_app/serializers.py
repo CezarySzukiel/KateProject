@@ -39,13 +39,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('image', 'description', 'exercise', 'answer')
-
-        # def get_image(self, obj):
-        #     request = self.context.get('request')
-        #     if request is not None:
-        #         return request.build_absolute_uri(obj.image.url)
-        #     return obj.image.url
+        fields = ('id', 'image', 'description', 'exercise', 'answer')
 
 
 class AnswerSerializer(serializers.ModelSerializer):

@@ -5,6 +5,16 @@ import {useSelector} from 'react-redux';
 import {reformatAnswer} from './helpers';
 import {Chart} from './Chart'
 
+const createObjects = (answers) => {
+    const objs = []
+    for (const answer of answers) {
+        objs.push({answerPoint: answer.answer[answer.answer.length - 1], answer: answer})
+    }
+    objs.sort((a, b) => a.answerPoint.localeCompare(b.answerPoint));
+    return objs
+}
+
+
 export function Type1(props) {
     const {answers, handleAnswer, setAreSelectionsValidated, setError} = props
     const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -31,7 +41,7 @@ export function Type1(props) {
                     >
                         {ans.answer.functions.length > 0 && (
                             <div
-                                key={index}
+                                key={ans.answer.functions.id}
                                 className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
                             >
                                 {ans.answerPoint}.
@@ -40,7 +50,7 @@ export function Type1(props) {
                         )}
                         {ans.answer.images.length > 0 && (
                             <div
-                                key={index}
+                                key={ans.answer.images.id}
                                 className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
                             >
                                 {ans.answerPoint}.
@@ -54,13 +64,13 @@ export function Type1(props) {
                             </div>
                         )}
                         {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
-                        <div
-                            className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
-                        >
-                            {String.fromCharCode(65 + index)}.
-                            <Latex> {ans.answer.answer}</Latex>
-                        </div>
-                            )}
+                            <div
+                                className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
+                            >
+                                {String.fromCharCode(65 + index)}.
+                                <Latex> {ans.answer.answer}</Latex>
+                            </div>
+                        )}
                     </li>
                 ))}
             </ul>
@@ -72,10 +82,16 @@ export function Type2(props) {
     const {answers, handleAnswer, setAreSelectionsValidated} = props
     const [firstAnswer, setFirstAnswer] = useState("")
     const [secondAnswer, setSecondAnswer] = useState("")
-
     const firstSet = answers.filter(answer => !answer.second_set);
-    const secondSet = answers.filter(answer => answer.second_set);
 
+    const secondSet = answers.filter(answer => answer.second_set);
+    const [firstSetAnswerObjects, setFirstSetAnswerObjects] = useState(createObjects(firstSet))
+    const [secondSetAnswerObjects, setSecondSetAnswerObjects] = useState(createObjects(secondSet))
+
+    useEffect(() => {
+        setFirstSetAnswerObjects(createObjects(firstSet))
+        setSecondSetAnswerObjects(createObjects(secondSet))
+    }, []);
     useEffect(() => {
         handleAnswer([firstAnswer, secondAnswer])
     }, [firstAnswer, secondAnswer])
@@ -90,37 +106,95 @@ export function Type2(props) {
             <div>
                 <h3>Odpowiedzi:</h3>
                 <ul className={'answers-list'}>
-                    {firstSet.map((answer, index) => (
+                    {firstSetAnswerObjects.length > 0 && firstSetAnswerObjects.map((ans, index) => (
                         <li
-                            key={index}
-                            onClick={() => handleAnswerClick(setFirstAnswer, answer.answer)}
-                            className={`answer-div ${firstAnswer === answer.answer ? 'selected' : ''}`}
+                            key={ans.answer.id}
+                            onClick={() => handleAnswerClick(setFirstAnswer, ans.answer.answer)}
+                            className={`answer-div ${firstAnswer === ans.answer.answer ? 'selected' : ''}`}
                         >
-                            <div className={'answer-index'}>
-                                {String.fromCharCode(65 + index)}.
-                            </div>
-                            <div className={'answer-text'}>
-                                <Latex> {answer.answer}</Latex>
-                            </div>
+                            {ans.answer.functions.length > 0 && (
+                                <div
+                                    key={ans.answer.functions.id}
+                                    className={`answer-div ${firstAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <Chart data={ans.answer.functions[0]}/>
+                                </div>
+                            )}
+                            {ans.answer.images.length > 0 && (
+                                <div
+                                    key={ans.answer.images.id}
+                                    className={`answer-div ${firstAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <div className={'image-div'}>
+                                        <p>{ans.answer.images[0].description}</p>
+                                        <img
+                                            src={ans.answer.images[0].image}
+                                            alt={ans.answer.answer}
+                                        ></img>
+                                    </div>
+                                </div>
+                            )}
+                            {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                                <>
+                                    <div className={'answer-index'}>
+                                        {String.fromCharCode(65 + index)}.
+                                    </div>
+                                    <div className={'answer-text'}>
+                                        <Latex> {ans.answer.answer}</Latex>
+                                    </div>
+                                </>
+                            )}
+
                         </li>
+
                     ))}
                 </ul>
             </div>
             <div>
                 <h3>Uzasadnienia:</h3>
                 <ul className={'answers-list'}>
-                    {secondSet.map((answer, index) => (
+                    {secondSetAnswerObjects.length > 0 && secondSetAnswerObjects.map((ans, index) => (
                         <li
-                            key={index}
-                            onClick={() => handleAnswerClick(setSecondAnswer, answer.answer)}
-                            className={`answer-div ${secondAnswer === answer.answer ? 'selected' : ''}`}
+                            // key={ans.asnwer.id}
+                            onClick={() => handleAnswerClick(setSecondAnswer, ans.answer.answer)}
+                            className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
                         >
-                            <div className={'answer-index'}>
-                                {index + 1}.
-                            </div>
-                            <div className={'answer-text'}>
-                                <Latex> {answer.answer}</Latex>
-                            </div>
+                            {ans.answer.functions.length > 0 && (
+                                <div
+                                    key={ans.answer.functions.id}
+                                    className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <Chart data={ans.answer.functions[0]}/>
+                                </div>
+                            )}
+                            {ans.answer.images.length > 0 && (
+                                <div
+                                    key={ans.answer.images.id}
+                                    className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <div className={'image-div'}>
+                                        <p>{ans.answer.images[0].description}</p>
+                                        <img
+                                            src={ans.answer.images[0].image}
+                                            alt={ans.answer.answer}
+                                        ></img>
+                                    </div>
+                                </div>
+                            )}
+                            {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                                <>
+                                    <div className={'answer-index'}>
+                                        {index + 1}.
+                                    </div>
+                                    <div className={'answer-text'}>
+                                        <Latex> {ans.answer.answer}</Latex>
+                                    </div>
+                                </>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -132,6 +206,11 @@ export function Type2(props) {
 export function Type3(props) {
     const {answers, handleAnswer, setError, setAreSelectionsValidated} = props
     const [selectedAnswers, setSelectedAnswers] = useState(null)
+    const [answerObjects, setAnswerObjects] = useState([])
+
+    useEffect(() => {
+        setAnswerObjects(createObjects(answers))
+    }, []);
 
     useEffect(() => {
         if (selectedAnswers) {
@@ -157,22 +236,50 @@ export function Type3(props) {
     return (
         <div className={'answer-input'}>
             <ul className={'answers-list'}>
-                {answers.map((answer, index) => (
+                {answerObjects.map((ans, index) => (
                     <li
-                        key={index}
-                        className={`answer-div ${selectedAnswers && selectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
-                        onClick={() => handleAnswerClick(answer.answer)}
+                        key={ans.answer.id}
+                        className={`answer-div ${selectedAnswers && selectedAnswers.includes(ans.answer.answer) ? 'selected' : ''}`}
+                        onClick={() => handleAnswerClick(ans.answer.answer)}
                     >
-                        <div className={'answer-index'}>
-                            {String.fromCharCode(65 + index)}.
-                        </div>
-                        <div className={'answer-text'}>
-                            <Latex>{answer.answer}</Latex>
-                        </div>
+                        {ans.answer.functions.length > 0 && (
+                            <div
+                                key={ans.answer.functions.id}
+                                className={`answer-div ${selectedAnswers && selectedAnswers.includes(ans.answer.answer) ? 'selected' : ''}`}
+                            >
+                                {ans.answerPoint}.
+                                <Chart data={ans.answer.functions[0]}/>
+                            </div>
+                        )}
+                        {ans.answer.images.length > 0 && (
+                            <div
+                                key={ans.answer.images.id}
+                                className={`answer-div ${selectedAnswers && selectedAnswers.includes(ans.answer.answer) ? 'selected' : ''}`}
+                            >
+                                {ans.answerPoint}.
+                                <div className={'image-div'}>
+                                    <p>{ans.answer.images[0].description}</p>
+                                    <img
+                                        src={ans.answer.images[0].image}
+                                        alt={ans.answer.answer}
+                                    ></img>
+                                </div>
+                            </div>
+                        )}
+                        {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                            <>
+                                <div className={'answer-index'}>
+                                    {String.fromCharCode(65 + index)}.
+                                </div>
+                                <div className={'answer-text'}>
+                                    <Latex>{ans.answer.answer}</Latex>
+                                </div>
+                            </>
+                        )}
+
                     </li>
                 ))}
             </ul>
-            .0
         </div>
     )
 }
@@ -182,9 +289,15 @@ export function Type4(props) {
     const {answers, handleAnswer, ask1, ask2, setAreSelectionsValidated} = props
     const [firstAnswer, setFirstAnswer] = useState("")
     const [secondAnswer, setSecondAnswer] = useState("")
-
+    const [firstSetAnswerObjects, setFirstSetAnswerObjects] = useState([])
+    const [secondSetAnswerObjects, setSecondSetAnswerObjects] = useState([]);
     const firstSet = answers.filter(answer => !answer.second_set);
     const secondSet = answers.filter(answer => answer.second_set);
+
+    useEffect(() => {
+        setFirstSetAnswerObjects(createObjects(firstSet))
+        setSecondSetAnswerObjects(createObjects(secondSet))
+    }, []);
 
     useEffect(() => {
         handleAnswer([firstAnswer, secondAnswer])
@@ -200,14 +313,42 @@ export function Type4(props) {
             <div>
                 {ask1 && <p><Latex>{ask1}</Latex></p>}
                 <ul className={'answers-list'}>
-                    {firstSet.map((answer, index) => (
+                    {firstSetAnswerObjects.map((ans, index) => (
                         <li
-                            key={index}
-                            onClick={() => handleAnswerClick(setFirstAnswer, answer.answer)}
-                            className={`answer-div ${firstAnswer === answer.answer ? 'selected' : ''}`}
+                            key={ans.answer.id}
+                            onClick={() => handleAnswerClick(setFirstAnswer, ans.answer.answer)}
+                            className={`answer-div ${firstAnswer === ans.answer.answer ? 'selected' : ''}`}
                         >
-                            {String.fromCharCode(65 + index)}.
-                            <Latex> {answer.answer}</Latex>
+                            {ans.answer.functions.length > 0 && (
+                                <div
+                                    key={ans.answer.functions.id}
+                                    className={`answer-div ${firstAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <Chart data={ans.answer.functions[0]}/>
+                                </div>
+                            )}
+                            {ans.answer.images.length > 0 && (
+                                <div
+                                    key={ans.answer.images.id}
+                                    className={`answer-div ${firstAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <div className={'image-div'}>
+                                        <p>{ans.answer.images[0].description}</p>
+                                        <img
+                                            src={ans.answer.images[0].image}
+                                            alt={ans.answer.answer}
+                                        ></img>
+                                    </div>
+                                </div>
+                            )}
+                            {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                                <>
+                                    {String.fromCharCode(65 + index)}.
+                                    <Latex> {ans.answer.answer}</Latex>
+                                </>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -215,18 +356,46 @@ export function Type4(props) {
             <div>
                 {ask2 && <p><Latex>{ask2}</Latex></p>}
                 <ul className={'answers-list'}>
-                    {secondSet.map((answer, index) => (
+                    {secondSetAnswerObjects.map((ans, index) => (
                         <li
-                            key={index}
-                            onClick={() => handleAnswerClick(setSecondAnswer, answer.answer)}
-                            className={`answer-div ${secondAnswer === answer.answer ? 'selected' : ''}`}
+                            key={ans.answer.id}
+                            onClick={() => handleAnswerClick(setSecondAnswer, ans.answer.answer)}
+                            className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
                         >
-                            <div className={'answer-index'}>
-                                {String.fromCharCode(65 + firstSet.length + index)}.
-                            </div>
-                            <div className={'answer-text'}>
-                                {answer.answer && <Latex> {answer.answer}</Latex>}
-                            </div>
+                            {ans.answer.functions.length > 0 && (
+                                <div
+                                    key={ans.answer.functions.id}
+                                    className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <Chart data={ans.answer.functions[0]}/>
+                                </div>
+                            )}
+                            {ans.answer.images.length > 0 && (
+                                <div
+                                    key={ans.answer.images.id}
+                                    className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
+                                >
+                                    {ans.answerPoint}.
+                                    <div className={'image-div'}>
+                                        <p>{ans.answer.images[0].description}</p>
+                                        <img
+                                            src={ans.answer.images[0].image}
+                                            alt={ans.answer.answer}
+                                        ></img>
+                                    </div>
+                                </div>
+                            )}
+                            {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                                <>
+                                    <div className={'answer-index'}>
+                                        {String.fromCharCode(65 + firstSet.length + index)}.
+                                    </div>
+                                    <div className={'answer-text'}>
+                                        {ans.answer.answer && <Latex> {ans.answer.answer}</Latex>}
+                                    </div>
+                                </>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -239,6 +408,7 @@ export function Type6(props) {
     const {answers, handleAnswer, setAreSelectionsValidated, setError} = props
     const [selectedAnswers, setSelectedAnswers] = useState([])
     const [rejectedAnswers, setRejectedAnswers] = useState([])
+    const [answerObjects, setAnswerObjects] = useState([])
 
     const handleAnswerSelect = (answer) => {
         if (rejectedAnswers.includes(answer)) {
@@ -273,6 +443,9 @@ export function Type6(props) {
         }
     }
 
+    useEffect(() => {
+        setAnswerObjects(createObjects(answers))
+    }, []);
 
     useEffect(() => {
         handleAnswer(selectedAnswers)
@@ -282,26 +455,54 @@ export function Type6(props) {
     return (
         <div className={'answer-input'}>
             <ul className={'answers-list'}>
-                {answers.map((answer, index) => (
+                {answerObjects.map((ans, index) => (
                     <li
-                        key={index}
+                        key={ans.answer.id}
                         className={`answer-div`}
                     >
-                        <div className={'answer-index'}>
-                            {String.fromCharCode(65 + index)}.
-                        </div>
-                        <div className={'answer-text'}>
-                            <Latex> {answer.answer}</Latex>
-                        </div>
+                        {ans.answer.functions.length > 0 && (
+                            <div
+                                key={ans.answer.functions.id}
+                                className={`answer-div`}
+                            >
+                                {ans.answerPoint}.
+                                <Chart data={ans.answer.functions[0]}/>
+                            </div>
+                        )}
+                        {ans.answer.images.length > 0 && (
+                            <div
+                                key={ans.answer.images.id}
+                                className={`answer-div`}
+                            >
+                                {ans.answerPoint}.
+                                <div className={'image-div'}>
+                                    <p>{ans.answer.images[0].description}</p>
+                                    <img
+                                        src={ans.answer.images[0].image}
+                                        alt={ans.answer.answer}
+                                    ></img>
+                                </div>
+                            </div>
+                        )}
+                        {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
+                            <>
+                                <div className={'answer-index'}>
+                                    {String.fromCharCode(65 + index)}.
+                                </div>
+                                <div className={'answer-text'}>
+                                    <Latex> {ans.answer.answer}</Latex>
+                                </div>
+                            </>
+                        )}
                         <div className={'answer-buttons'}>
                             <button
-                                className={`answer-button-true ${selectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
-                                onClick={() => handleAnswerSelect(answer.answer)}
+                                className={`answer-button-true ${selectedAnswers.includes(ans.answer.answer) ? 'selected' : ''}`}
+                                onClick={() => handleAnswerSelect(ans.answer.answer)}
                             >P
                             </button>
                             <button
-                                className={`answer-button-false ${rejectedAnswers.includes(answer.answer) ? 'selected' : ''}`}
-                                onClick={() => handleAnswerReject(answer.answer)}
+                                className={`answer-button-false ${rejectedAnswers.includes(ans.answer.answer) ? 'selected' : ''}`}
+                                onClick={() => handleAnswerReject(ans.answer.answer)}
                             >F
                             </button>
                         </div>
@@ -312,14 +513,6 @@ export function Type6(props) {
     )
 }
 
-const createObjects = (answers) => {
-    const objs = []
-    for (const answer of answers) {
-        objs.push({answerPoint: answer.answer[answer.answer.length - 1], answer: answer})
-    }
-    objs.sort((a, b) => a.answerPoint.localeCompare(b.answerPoint));
-    return objs
-}
 export function Type7(props) {
     const {answers, handleAnswer, additional_texts, setAreSelectionsValidated} = props
     const [answerObjects, setAnswerObjects] = useState([]);
