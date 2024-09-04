@@ -1,5 +1,5 @@
 import './latexTable.css';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import DynamicModal from './DynamicModal';
 import '../../latexSymbols.json';
 import {Latex} from './Latex'
@@ -55,7 +55,6 @@ const getSymbolsObject = (data, type) => {
 export function LatexTable(props) {
     const {activeInputRef} = props
     const columns = 10;
-    // const inputRef = useRef(null);
     const [modals, setModals] = useState([]);
     const [formulaSymbols, setFormulaSymbols] = useState([]);
     const [systemOfEquationsSymbols, setSystemOfEquationsSymbols] = useState([]);
@@ -207,7 +206,9 @@ export function LatexTable(props) {
             const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
             updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
                 if (values[p1] !== undefined) {
-                    return `{${values[p1]}}`;
+                    console.log('match', match.slice(1, -1))
+                    console.log('values[p1]', values[p1])
+                    return match.replace(match.slice(1, -1), values[p1])
                 }
                 return match;
             });
@@ -239,7 +240,10 @@ export function LatexTable(props) {
         <div className={'latex-table'}>
             <div className={"labels"}>
                 {stateLabels && stateLabels.map((obj, labelIndex) => (
-                    <p key={labelIndex} onClick={() => handleLabelClick(obj.state)}>
+                    <p
+                        className={selectedLabel === obj.state ? "selected-label" : ""}
+                        key={labelIndex} onClick={() => handleLabelClick(obj.state)}
+                    >
                         {obj.label}
                     </p>
                 ))}
