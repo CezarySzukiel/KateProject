@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { setNavbarDisplay } from '../../actions/layoutActions'
+import { setSidebarDisplay } from '../../actions/layoutActions'
 
 
 function Privacy() {
 	const dispatch = useDispatch()
-	dispatch(setNavbarDisplay(false))
+	dispatch(setSidebarDisplay(false))
 
 	return (
 		<>

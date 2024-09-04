@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './navbar.css';
+import './Sidebar.css';
 import { ConSearchBar } from '../../containers/Ex'
 
-export const Navbar = () => {
+export const Sidebar = () => {
     const [isMenuClicked, setIsMenuClicked] = useState(true);
 
     const toggleMenu = () => {
@@ -10,14 +10,14 @@ export const Navbar = () => {
     };
     
     return (
-        <div className={`navbar ${isMenuClicked ? 'closed' : 'open'}`}>
-            <div className="navbar-content">
+        <div className={`sidebar ${isMenuClicked ? 'closed' : 'open'}`}>
+            <div className="sidebar-content">
                 <div>
                 {!isMenuClicked && <ConSearchBar />}
                 </div>
             </div>
             <button
-                className={'navbar-visibility-btn'}
+                className={'sidebar-visibility-btn'}
                 onClick={toggleMenu}
             >
                 {isMenuClicked ? '>' : '<'}

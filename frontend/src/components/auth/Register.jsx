@@ -2,7 +2,7 @@ import './login.css'
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Error, Info } from './../helpersComponents/Messages'
-import {setNavbarDisplay} from "../../actions/layoutActions.jsx";
+import {setSidebarDisplay} from "../../actions/layoutActions.jsx";
 
 export function Register() {
     const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ export function Register() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setNavbarDisplay(false))
+        dispatch(setSidebarDisplay(false))
     }, [])
 
     const handleChange = (event) => {

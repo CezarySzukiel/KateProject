@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
-import { Navbar } from "./components/layout/Navbar";
+import { Sidebar } from "./components/layout/Sidebar.jsx";
 
 function App() {
   const isNavbar = useSelector(state => state.layout.isNavbar)
@@ -18,7 +18,7 @@ function App() {
               <Outlet />
             </div>
             {isNavbar &&
-              <Navbar />
+              <Sidebar />
             }
           </div>
           <Footer />

@@ -3,14 +3,14 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { ConMenu } from "../../containers/Auth"
-import { setNavbarDisplay } from '../../actions/layoutActions'
+import { setSidebarDisplay } from '../../actions/layoutActions'
 
 
 export function Header() {
     const dispatch = useDispatch()
 
     const handleExercisesClick = () => {
-        dispatch(setNavbarDisplay(true))
+        dispatch(setSidebarDisplay(true))
     }
 
     return (
