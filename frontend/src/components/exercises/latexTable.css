@@ -1,6 +1,10 @@
 .latex-table {
     margin-top: 1rem;
     display: flex;
+    max-width: 80vh;
+    overflow-x:  auto;
+    scrollbar-width: thin;
+    scrollbar-color: #9196a2 #7b869300;
 }
 
 .modal {
@@ -25,7 +29,7 @@
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: auto;
     height: auto;
     max-height: 3rem;
 }
@@ -50,4 +54,18 @@ td {
 
 .selected-label {
     background-color: #9e9e9e;
+}
+
+.latex-table::-webkit-scrollbar {
+  width: 12px;
+}
+
+.latex-table::-webkit-scrollbar-track {
+  background: #7b869300;
+}
+
+.latex-table::-webkit-scrollbar-thumb {
+  background-color: #9196a2;
+  border-radius: 10px;
+  border: 3px solid #7b869300;
 }

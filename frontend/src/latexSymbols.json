@@ -2,29 +2,23 @@
   {
     "type": "formula",
     "symbols": [
-      "$a_{n} $",
-      "$x^{n} $",
+      "${a}_{n} $",
+      "${x}^{n} $",
       "$\\frac{a}{b} $",
       "$\\sqrt{a} $",
       "$\\sqrt[n]{a} $",
       "$\\vec{v} $",
       "$\\sum_{a}^{b} $",
       "$\\int_{a}^{b} $",
-      "$\\lim_{x \\to a} $",
-      "${a \\choose b} $"
+      "$\\lim_{{x} \\to {a}} $",
+      "${{a} \\choose {b}} $"
     ]
   },
   {
     "type": "systemOfEquations",
     "symbols": [
-      "$\\left\\{ \\begin{matrix} a+b=c \\\\ a-b=c \\end{matrix} \\right\\}$"
+      "$\\left\\{ \\begin{matrix} {a} \\\\ {b} \\end{matrix} \\right\\}$"
     ]
-  },
-  {
-    "type": "matrices",
-    "symbols": [
-        "$\\begin{bmatrix} a & b \\\\ c & d \\\\ d & e \\end{bmatrix}$"
-      ]
   },
   {
     "type": "greekSmall",
@@ -34,24 +28,30 @@
       "$\\gamma $",
       "$\\delta $",
       "$\\epsilon $",
+      "$\\varepsilon $",
       "$\\zeta $",
       "$\\eta $",
       "$\\theta $",
+      "$\\vartheta $",
       "$\\iota $",
       "$\\kappa $",
       "$\\lambda $",
       "$\\mu $",
       "$\\nu $",
       "$\\xi $",
-      "$\\omicron $",
       "$\\pi $",
+      "$\\varpi $",
       "$\\rho $",
+      "$\\varrho $",
       "$\\sigma $",
+      "$\\varsigma $",
       "$\\tau $",
       "$\\upsilon $",
       "$\\phi $",
+      "$\\varphi $",
       "$\\chi $",
       "$\\psi $",
+      "$\\omicron $",
       "$\\omega $"
     ]
   },
@@ -296,8 +296,6 @@
       "$\\liminf $",
       "$\\lim $",
       "$\\Pr $",
-      "$\\Re $",
-      "$\\Im $",
       "$\\deg $"
       ]
   },
