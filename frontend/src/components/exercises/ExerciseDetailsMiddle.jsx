@@ -1,6 +1,5 @@
 import './exerciseDetails.css'
 import 'katex/dist/katex.min.css';
-import TeX from '@matejmazur/react-katex';
 import { Latex } from './Latex'
 
 export function ExerciseDetailsMiddle(props) {

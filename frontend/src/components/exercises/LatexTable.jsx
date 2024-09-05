@@ -11,6 +11,7 @@ const chunkArray = (array, chunkSize) => {
      * Chunk an array into array of smaller arrays of a specified size.
      * @param {Array} array - The array to chunk.
      * @param {number} chunkSize - The size of each chunk.
+     * @returns {Array} - The chunked array.
      */
     const chunks = [];
     try {
@@ -42,6 +43,7 @@ const getSymbolsObject = (data, type) => {
      * Get the symbols object with specified type from the data.
      * @param {Array} data - The data to search.
      * @param {string} type - The type of symbols to search for.
+     * @returns {Array} - The symbols object.`
      */
     try {
         const symbolsObject = data.find(obj => obj.type === type);
@@ -52,9 +54,31 @@ const getSymbolsObject = (data, type) => {
     }
 }
 
+const updateInputValue = (symbol, activeInputRef) => {
+    /**
+     * checks the position of the cursor or text selection and inserts a symbol in its place.
+     * @param {string} symbol - The symbol to insert.
+     * @param {Object} activeInputRef - The reference to the active input element.
+     * @returns {Array} - The updated text.
+     */
+        if (activeInputRef) {
+            const start = activeInputRef.selectionStart;
+            const end = activeInputRef.selectionEnd;
+            let text = activeInputRef.value;
+            text = text.slice(0, start) + symbol + text.slice(end);
+            activeInputRef.value = text;
+            setTimeout(() => {
+                activeInputRef.setSelectionRange(start + symbol.length, start + symbol.length);
+                activeInputRef.focus();
+            }, 0);
+            return [text]
+        }
+    };
+
 export function LatexTable(props) {
-    const {activeInputRef} = props
-    const columns = 10;
+    const {activeInputRef, setUserAnswer, setActiveInput} = props
+    const columns = 8;
+    const lastUsedSymbolsLimit = columns * 8;
     const [modals, setModals] = useState([]);
     const [formulaSymbols, setFormulaSymbols] = useState([]);
     const [systemOfEquationsSymbols, setSystemOfEquationsSymbols] = useState([]);
@@ -72,10 +96,10 @@ export function LatexTable(props) {
     const [tempLastUsedSymbols, setTempLastUsedSymbols] = useState([]);
 
     useEffect(() => {
+        /**
+         * Get the symbols object from the data and set the state symbols.
+         */
         fetchLatexSymbols().then((data) => {
-            /**
-             * Get the symbols object from the data and set the state symbols.
-             */
             const formula = getSymbolsObject(data, 'formula');
             const systemOfEquations = getSymbolsObject(data, 'systemOfEquations');
             const greekSmall = getSymbolsObject(data, 'greekSmall');
@@ -97,7 +121,6 @@ export function LatexTable(props) {
             setFunctionSymbols(chunkArray(function_, columns));
             setSymbolSymbols(chunkArray(symbol, columns));
         });
-        setSelectedLabel(greekSmallSymbols);
     }, []);
 
     useEffect(() => {
@@ -132,7 +155,7 @@ export function LatexTable(props) {
 
     useEffect(() => {
         /**
-        * set selected label to formula symbols if no label is selected (first render)
+         * set selected label to formula symbols if no label is selected (first render)
          */
         if (selectedLabel.length === 0 && formulaSymbols.length > 0) {
             console.log("ustawiam selected label na formuły matematyczne")
@@ -164,7 +187,7 @@ export function LatexTable(props) {
     const handleSymbolClick = (symbol) => {
         setTempLastUsedSymbols((prevLastUsedSymbols) => {
             const updatedSymbols = [symbol, ...prevLastUsedSymbols];
-            return Array.from(new Set(updatedSymbols));
+            return Array.from(new Set(updatedSymbols)).slice(0, lastUsedSymbolsLimit);
         });
         const variables = symbol.match(/\{[a-zA-Z0-9]\}|\[[a-zA-Z0-9]\]/g) || [];
         const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
@@ -174,7 +197,7 @@ export function LatexTable(props) {
                 {symbol, variables: cleanedVariables, isOpen: true},
             ]);
         } else {
-            props.setUserAnswer(updateInputValue(symbol, activeInputRef))
+            setUserAnswer(updateInputValue(symbol, activeInputRef))
         }
     };
 
@@ -211,24 +234,10 @@ export function LatexTable(props) {
         return updatedSymbol;
     };
 
-    const updateInputValue = (symbol, activeInputRef) => {
-        if (activeInputRef) {
-            const start = activeInputRef.selectionStart;
-            const end = activeInputRef.selectionEnd;
-            let text = activeInputRef.value;
-            text = text.slice(0, start) + symbol + text.slice(end);
-            activeInputRef.value = text;
-            setTimeout(() => {
-                activeInputRef.setSelectionRange(start + symbol.length, start + symbol.length);
-                activeInputRef.focus();
-            }, 0);
-            return [text]
-        }
-    };
 
     const handleModalSubmit = (index, values) => {
-        const symbol = formatSymbol(modals[index], values)
-        props.setUserAnswer(updateInputValue(symbol, activeInputRef))
+        const symbol = formatSymbol(modals[index], values);
+        setUserAnswer(updateInputValue(symbol, activeInputRef))
     };
 
     return (
@@ -261,7 +270,7 @@ export function LatexTable(props) {
                     onClose={() => handleModalClose(index)}
                     onSubmit={(values) => handleModalSubmit(index, values)}
                     variables={modal.variables}
-                    setActiveInput={props.setActiveInput}
+                    setActiveInput={setActiveInput}
                 />
             ))}
 
