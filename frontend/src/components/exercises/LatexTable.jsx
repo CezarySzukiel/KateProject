@@ -58,7 +58,6 @@ export function LatexTable(props) {
     const [modals, setModals] = useState([]);
     const [formulaSymbols, setFormulaSymbols] = useState([]);
     const [systemOfEquationsSymbols, setSystemOfEquationsSymbols] = useState([]);
-    const [matricesSymbols, setMatricesSymbols] = useState([]);
     const [greekSmallSymbols, setGreekSmallSymbols] = useState([]);
     const [greekCapitalSymbols, setGreekCapitalSymbols] = useState([]);
     const [relationSymbols, setRelationSymbols] = useState([]);
@@ -79,7 +78,6 @@ export function LatexTable(props) {
              */
             const formula = getSymbolsObject(data, 'formula');
             const systemOfEquations = getSymbolsObject(data, 'systemOfEquations');
-            const matrices = getSymbolsObject(data, 'matrices');
             const greekSmall = getSymbolsObject(data, 'greekSmall');
             const greekCapital = getSymbolsObject(data, 'greekCapital');
             const relation = getSymbolsObject(data, 'relation');
@@ -90,7 +88,6 @@ export function LatexTable(props) {
             const symbol = getSymbolsObject(data, 'symbol');
             setFormulaSymbols(chunkArray(formula, columns));
             setSystemOfEquationsSymbols(chunkArray(systemOfEquations, columns));
-            setMatricesSymbols(chunkArray(matrices, columns));
             setGreekSmallSymbols(chunkArray(greekSmall, columns));
             setGreekCapitalSymbols(chunkArray(greekCapital, columns));
             setRelationSymbols(chunkArray(relation, columns));
@@ -111,7 +108,6 @@ export function LatexTable(props) {
             {"state": lastUsedSymbols, "label": "Ostatnio używane"},
             {"state": formulaSymbols, "label": "Formuły matematyczne"},
             {"state": systemOfEquationsSymbols, "label": "Układy równań"},
-            {"state": matricesSymbols, "label": "Tablice, macierze"},
             {"state": greekSmallSymbols, "label": "Małe litery greckie"},
             {"state": greekCapitalSymbols, "label": "Duże litery greckie"},
             {"state": relationSymbols, "label": "Relacje"},
@@ -124,7 +120,6 @@ export function LatexTable(props) {
     }, [
         formulaSymbols,
         systemOfEquationsSymbols,
-        matricesSymbols,
         greekSmallSymbols,
         greekCapitalSymbols,
         relationSymbols,
@@ -171,7 +166,7 @@ export function LatexTable(props) {
             const updatedSymbols = [symbol, ...prevLastUsedSymbols];
             return Array.from(new Set(updatedSymbols));
         });
-        const variables = symbol.match(/[{[][^}\]]+[}\]]/g) || [];
+        const variables = symbol.match(/\{[a-zA-Z0-9]\}|\[[a-zA-Z0-9]\]/g) || [];
         const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
         if (cleanedVariables.length > 0) {
             setModals((prevModals) => [
@@ -203,7 +198,7 @@ export function LatexTable(props) {
     const formatSymbol = (symbol, values) => {
         let updatedSymbol = symbol.symbol;
         Object.keys(values).forEach(() => {
-            const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
+            const re = /[{[]([a-zA-Z0-9])[}\]]/g;
             updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
                 if (values[p1] !== undefined) {
                     console.log('match', match.slice(1, -1))
