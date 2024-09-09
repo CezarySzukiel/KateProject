@@ -144,9 +144,7 @@ class ChartsDataLoader(ExerciseDataLoader):
                 continue
             if chart['answer_no_in_exercise']:
                 self.answers = self.Answer.objects.filter(exercise_id=self.exercises[0])
-                self.answer = self.answers[int(chart['answer_no_in_exercise'])]
-                self.answer.answer = chr(65 + int(chart['answer_no_in_exercise']))
-                self.answer.save()
+                self.answer = self.answers.get(answer=chart['answer_no_in_exercise'])
             else:
                 self.answers = []
                 self.answer = None
@@ -194,8 +192,11 @@ class AdditionalTextDataLoader(ExerciseDataLoader):
         self.Exercise = None
         self.Answer = None
         self.AdditionalText = None
+        self.correct_answer_index = None
+        self.correct_answer = None
 
     def add_additional_text_data(self, apps, schema_editor):
+        """if exercise type = 7 set correct_answer in additional_text as a index of correct answer in answers"""
         self.AdditionalText = apps.get_model('exercises_app', 'AdditionalText')
         self.Exercise = apps.get_model('exercises_app', 'Exercise')
         self.Answer = apps.get_model('exercises_app', 'Answer')
@@ -204,19 +205,80 @@ class AdditionalTextDataLoader(ExerciseDataLoader):
             answers = self.Answer.objects.filter(exercise=self.exercise)
             if 'additional_texts' in ex:
                 for text in ex['additional_texts']:
+                    additional_text = self.AdditionalText.objects.filter(text=text['text']).first()
+                    print("*-" * 50)
+                    print(f'Additional text: {additional_text}')
+                    print("*-" * 50)
+                    if additional_text:
+                        additional_text.exercise.add(self.exercise)
+                    else:
+                        additional_text = self.AdditionalText.objects.create(
+                            text=text['text'],
+                            place=text['place'],
+                            true_answer=self.correct_answer
+                        )
+                        additional_text.exercise.add(self.exercise)
                     if 'correct_answer' in text:
-                        correct_answer = answers[int(text['correct_answer'])]
-                    correct_answer_index = next((index for index, answer in enumerate(answers) if answer == correct_answer), None)
-                    letter = chr(65 + correct_answer_index)
-                    additional_text = self.AdditionalText.objects.create(
-                        exercise=self.exercise,
-                        text=text['text'],
-                        place=text['place'],
-                        true_answer=correct_answer
-                    )
-                    correct_answer.answer = f'{additional_text.text}: {letter}'
-                    correct_answer.correct = True
-                    correct_answer.save()
+                        # set correct answer in additional_text as a index of correct answer in answers
+                        self.correct_answer = answers.get(answer=text['correct_answer'])
+                        self.correct_answer_index = next(
+                            (index for index, answer in enumerate(answers) if answer == self.correct_answer), None)
+                        print("*-" * 50)
+                        print(f'Correct answer: {self.correct_answer.answer} index: {self.correct_answer_index}')
+                        print("*-" * 50)
+                        # letter = chr(65 + self.correct_answer_index) if self.correct_answer_index else None
+                        letter = self.correct_answer.answer
+                        print("*-" * 50)
+                        print(f'Letter: {letter}')
+                        print("*-" * 50)
+                        self.correct_answer.answer = f'{additional_text.text}: {letter}'
+                        self.correct_answer.correct = True
+                        self.correct_answer.save()
+                    else:
+                        self.correct_answer = None
+                        self.correct_answer_index = None
+
+
+class ImagesDataLoader(ExerciseDataLoader):
+    def __init__(self, file_path=None):
+        super().__init__(file_path)
+        self.images = None
+        self.exercise = None
+        self.Exercise = None
+        self.Image = None
+        self.Answer = None
+        self.images_path = 'images/'
+
+    def add_image_data(self, apps, schema_editor):
+        self.Image = apps.get_model('exercises_app', 'Image')
+        self.Exercise = apps.get_model('exercises_app', 'Exercise')
+        self.Answer = apps.get_model('exercises_app', 'Answer')
+        for ex in self.data:
+            self.exercise = self.Exercise.objects.get(title=ex['title'])
+            self.images = self.Image.objects.filter(exercise=self.exercise)
+            answers = self.Answer.objects.filter(exercise=self.exercise)
+            if 'images' in ex:
+                for img in ex['images']:
+                    image = self.Image.objects.filter(image=img['image'])
+                    if image:
+                        image.exercise.add(self.exercise)
+                    else:
+                        image_path = self.images_path + img['image']
+                        image = self.Image.objects.create(
+                            image=image_path,
+                            description=img['description']
+                        )
+                        image.exercise.add(self.exercise)
+            for ans in ex['answers']:
+                if 'images' in ans:
+                    answer = answers.get(answer=ans['answer'])
+                    for img in ans['images']:
+                        image_path = self.images_path + img['image']
+                        self.Image.objects.create(
+                            image=image_path,
+                            description=img['description'],
+                            answer=answer
+                        )
 
 
 def add_exercise_data(apps, schema_editor):
@@ -228,6 +290,8 @@ def add_exercise_data(apps, schema_editor):
     charts_loader.add_charts_data(apps, schema_editor)
     additional_text_loader = AdditionalTextDataLoader(file_path=os.path.join(current_directory, 'exercises_data.json'))
     additional_text_loader.add_additional_text_data(apps, schema_editor)
+    images_loader = ImagesDataLoader(file_path=os.path.join(current_directory, 'exercises_data.json'))
+    images_loader.add_image_data(apps, schema_editor)
 
 
 class Migration(migrations.Migration):

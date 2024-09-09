@@ -19,7 +19,7 @@
   {
     "function_type": "quadratic",
     "exercises_id": [17],
-    "answer_no_in_exercise": "0",
+    "answer_no_in_exercise": "A",
     "description": null,
     "legend": null,
     "a": -1,
@@ -36,7 +36,7 @@
   {
     "function_type": "quadratic",
     "exercises_id": [17],
-    "answer_no_in_exercise": "1",
+    "answer_no_in_exercise": "B",
     "description": null,
     "legend": null,
     "a": -1,
@@ -53,7 +53,7 @@
   {
     "function_type": "quadratic",
     "exercises_id": [17],
-    "answer_no_in_exercise": "2",
+    "answer_no_in_exercise": "C",
     "description": null,
     "legend": null,
     "a": -1,
@@ -70,7 +70,7 @@
   {
     "function_type": "quadratic",
     "exercises_id": [17],
-    "answer_no_in_exercise": "3",
+    "answer_no_in_exercise": "D",
     "description": null,
     "legend": null,
     "a": 1,
@@ -87,7 +87,7 @@
   {
     "function_type": "quadratic",
     "exercises_id": [17],
-    "answer_no_in_exercise": "4",
+    "answer_no_in_exercise": "E",
     "description": null,
     "legend": null,
     "a": -1,
@@ -104,7 +104,7 @@
   {
     "function_type": "quadratic",
     "exercises_id": [17],
-    "answer_no_in_exercise": "5",
+    "answer_no_in_exercise": "F",
     "description": null,
     "legend": null,
     "a": 1,

@@ -11,6 +11,7 @@ import {ExerciseDetailsTop} from './ExerciseDetailsTop';
 import {ExerciseDetailsBottom} from './ExerciseDetailsBottom';
 import {Chart} from './Chart'
 import {LatexTable} from './LatexTable'
+import {ExerciseDetailsMiddle} from './ExerciseDetailsMiddle'
 
 export function HOC_ExerciseDetails(props) {
     const {
@@ -111,18 +112,11 @@ export function HOC_ExerciseDetails(props) {
                                 />)
                         ))
                     }
-                    <div className={'description'}>
-                        <Latex>{actualExercise.description}</Latex>
-                    </div>
-                    {actualExercise.images.length > 0 &&
-                        <div className={'HOC-E-D-image'}>
-                            <img
-                                src={actualExercise.images[0].image}
-                                alt={actualExercise.images[0].description}
-                            >
-                            </img>
-                        </div>
-                    }
+                    <ExerciseDetailsMiddle
+                        actualExercise={actualExercise}>
+
+                    </ExerciseDetailsMiddle>
+
 
                     <ConAnswerInput
                         setSuccessMessage={setSuccessMessage}

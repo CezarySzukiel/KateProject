@@ -1,3 +1,4 @@
+from enum import unique
 from tokenize import blank_re
 
 from django.db import models
@@ -157,10 +158,12 @@ class AdditionalText(models.Model):
         ('intro', 'Intro'),
         ('description', 'Description'),
         ('answerTable', 'AnswerTable'),
+        ('between_sets', 'BetweenSets'),
+        ('under_draw', 'UnderDraw'),
     ]
     place = models.CharField(max_length=20, choices=PLACE_CHOICES)
-    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='additional_texts')
-    text = models.TextField()
+    exercise = models.ManyToManyField('Exercise', related_name='additional_texts', related_query_name='additional_text')
+    text = models.TextField(unique=True)
     true_answer = models.ForeignKey('Answer', on_delete=models.PROTECT, related_name='additional_texts', null=True, blank=True)
 
     def __str__(self):
@@ -170,5 +173,5 @@ class AdditionalText(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to='images/')
     description = models.TextField(null=True, blank=True)
-    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='images')
+    exercise = models.ManyToManyField('Exercise', related_name='images', related_query_name='image')
     answer = models.ForeignKey('Answer', on_delete=models.CASCADE, related_name='images', null=True, blank=True)

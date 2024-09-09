@@ -79,12 +79,15 @@ export function Type1(props) {
 }
 
 export function Type2(props) {
-    const {answers, handleAnswer, setAreSelectionsValidated} = props
+    const {
+        handleAnswer,
+        setAreSelectionsValidated,
+        actualExercise,
+    } = props
     const [firstAnswer, setFirstAnswer] = useState("")
     const [secondAnswer, setSecondAnswer] = useState("")
-    const firstSet = answers.filter(answer => !answer.second_set);
-
-    const secondSet = answers.filter(answer => answer.second_set);
+    const firstSet = actualExercise.answers.filter(answer => !answer.second_set);
+    const secondSet = actualExercise.answers.filter(answer => answer.second_set);
     const [firstSetAnswerObjects, setFirstSetAnswerObjects] = useState(createObjects(firstSet))
     const [secondSetAnswerObjects, setSecondSetAnswerObjects] = useState(createObjects(secondSet))
 
@@ -104,7 +107,6 @@ export function Type2(props) {
     return (
         <div className={'answer-input'}>
             <div>
-                <h3>Odpowiedzi:</h3>
                 <ul className={'answers-list'}>
                     {firstSetAnswerObjects.length > 0 && firstSetAnswerObjects.map((ans, index) => (
                         <li
@@ -153,7 +155,11 @@ export function Type2(props) {
                 </ul>
             </div>
             <div>
-                <h3>Uzasadnienia:</h3>
+                {
+                    actualExercise.additional_texts.length > 0 &&
+                    actualExercise.additional_texts[0].place === "between_sets" &&
+                    <h3>{actualExercise.additional_texts[0].text}</h3>
+                }
                 <ul className={'answers-list'}>
                     {secondSetAnswerObjects.length > 0 && secondSetAnswerObjects.map((ans, index) => (
                         <li
@@ -286,13 +292,13 @@ export function Type3(props) {
 
 export function Type4(props) {
 
-    const {answers, handleAnswer, ask1, ask2, setAreSelectionsValidated} = props
+    const {actualExercise, handleAnswer, ask1, ask2, setAreSelectionsValidated} = props
     const [firstAnswer, setFirstAnswer] = useState("")
     const [secondAnswer, setSecondAnswer] = useState("")
     const [firstSetAnswerObjects, setFirstSetAnswerObjects] = useState([])
     const [secondSetAnswerObjects, setSecondSetAnswerObjects] = useState([]);
-    const firstSet = answers.filter(answer => !answer.second_set);
-    const secondSet = answers.filter(answer => answer.second_set);
+    const firstSet = actualExercise.answers.filter(answer => !answer.second_set);
+    const secondSet = actualExercise.answers.filter(answer => answer.second_set);
 
     useEffect(() => {
         setFirstSetAnswerObjects(createObjects(firstSet))
@@ -353,6 +359,11 @@ export function Type4(props) {
                     ))}
                 </ul>
             </div>
+            {
+                actualExercise.additional_texts.length > 0 &&
+                actualExercise.additional_texts[0].place === "between_sets" &&
+                <h3>{actualExercise.additional_texts[0].text}</h3>
+            }
             <div>
                 {ask2 && <p><Latex>{ask2}</Latex></p>}
                 <ul className={'answers-list'}>
@@ -530,7 +541,6 @@ export function Type7(props) {
 
     useEffect(() => {
         setAnswerObjects(createObjects(answers))
-        // setSelectedAnswers(additional_texts.map(txt => `${String(txt.text)}: A`));
         setSelectedAnswers(additional_texts.map(txt => ({[txt.text]: "A"})));
         setAreSelectionsValidated(true)
     }, []);
