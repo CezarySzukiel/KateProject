@@ -118,10 +118,10 @@ class Migration(migrations.Migration):
             name='AdditionalText',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField()),
-                ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='additional_texts', to='exercises_app.exercise')),
+                ('text', models.TextField(unique=True)),
+                ('exercise', models.ManyToManyField(related_name='additional_texts', related_query_name='additional_text', to='exercises_app.exercise')),
                 ('true_answer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='additional_texts', to='exercises_app.answer')),
-                ('place', models.CharField(max_length=20, choices=[('intro', 'Intro'), ('description', 'Description'), ('answerTable', 'AnswerTable'),]))
+                ('place', models.CharField(max_length=20, choices=[('intro', 'Intro'), ('description', 'Description'), ('answerTable', 'AnswerTable'), ('between_sets', 'BetweenSets'), ('under_draw', 'UnderDraw')]))
             ]
         ),
         migrations.CreateModel(
@@ -130,7 +130,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='images/')),
                 ('description', models.TextField(blank=True, null=True)),
-                ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='exercises_app.exercise')),
+                ('exercise', models.ManyToManyField(related_name='images', related_query_name='image', to='exercises_app.exercise')),
                 ('answer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='images', to='exercises_app.answer')),
             ]
         )

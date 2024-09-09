@@ -94,7 +94,7 @@ export const HOC_AnswerInput = (props) => {
 
             {exerciseType === 2 && <Type2
                 key={actualExercise.id}
-                answers={actualExercise.answers}
+                actualExercise={actualExercise}
                 handleAnswer={handleAnswer}
                 setAreSelectionsValidated={setAreSelectionsValidated}
                 setError={setError}
@@ -110,7 +110,7 @@ export const HOC_AnswerInput = (props) => {
 
             {exerciseType === 4 && <Type4
                 key={actualExercise.id}
-                answers={actualExercise.answers}
+                actualExercise={actualExercise}
                 handleAnswer={handleAnswer}
                 ask1={actualExercise.ask1}
                 ask2={actualExercise.ask2}
@@ -121,6 +121,7 @@ export const HOC_AnswerInput = (props) => {
             {exerciseType === 6 && <Type6
                 key={actualExercise.id}
                 answers={actualExercise.answers}
+                actualExercise={actualExercise}
                 handleAnswer={handleAnswer}
                 setError={setError}
                 setAreSelectionsValidated={setAreSelectionsValidated}

@@ -12,6 +12,7 @@ import {
     ReferenceDot,
     ReferenceLine
 } from "recharts"
+import Latex from "react-latex-next";
 
 
 const generateLinearData = (m, b, xStart, xEnd, xStep, xOffset, yOffset) => {
@@ -196,7 +197,7 @@ export const Chart = (props) => {
 
     return (
         <div className={'chart'}>
-            {description && <p>{description}</p>}
+            {description && <p><Latex>{description}</Latex></p>}
             <LineChart
                 width={chartWidth}
                 height={chartHeight}
