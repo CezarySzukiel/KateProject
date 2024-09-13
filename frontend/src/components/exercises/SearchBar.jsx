@@ -1,7 +1,6 @@
 import './searchBar.css'
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import {Link, useNavigate} from "react-router-dom";
+import {useState, useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 
 
 import {getSectionsAndSubsections, extractSections, extractSubsections} from "../../helpers"

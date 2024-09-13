@@ -6,23 +6,6 @@
 	width: auto;
 }
 
-.description {
-	display: inline;
-	text-wrap: wrap;
-}
-
-.description > * {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	text-wrap: wrap;
-	text-align: left;
-}
-
-.katex-display {
-	margin: 0 0.5rem;
-}
-
 .HOC-E-D-image img {
    	max-width: 30rem;
 	max-height: 30rem;

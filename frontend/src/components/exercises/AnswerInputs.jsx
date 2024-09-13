@@ -1,9 +1,9 @@
 import './answerInputs.css'
-import React, {useState, useEffect, useRef} from 'react';
-import Latex from 'react-latex-next';
+import {useState, useEffect, useRef} from 'react';
 import {useSelector} from 'react-redux';
 import {reformatAnswer} from './helpers';
 import {Chart} from './Chart'
+import { Latex } from './Latex'
 
 const createObjects = (answers) => {
     const objs = []
@@ -55,7 +55,7 @@ export function Type1(props) {
                             >
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
-                                    <p>{ans.answer.images[0].description}</p>
+                                    <Latex text={ans.answer.images[0].description} />
                                     <img
                                         src={ans.answer.images[0].image}
                                         alt={ans.answer.answer}
@@ -68,7 +68,7 @@ export function Type1(props) {
                                 className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
                             >
                                 {String.fromCharCode(65 + index)}.
-                                <Latex> {ans.answer.answer}</Latex>
+                                <Latex text={ans.answer.answer} />
                             </div>
                         )}
                     </li>
@@ -130,7 +130,7 @@ export function Type2(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <p>{ans.answer.images[0].description}</p>
+                                        <Latex text={ans.answer.images[0].description} />
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -144,7 +144,7 @@ export function Type2(props) {
                                         {String.fromCharCode(65 + index)}.
                                     </div>
                                     <div className={'answer-text'}>
-                                        <Latex> {ans.answer.answer}</Latex>
+                                        <Latex text={ans.answer.answer} />
                                     </div>
                                 </>
                             )}
@@ -163,7 +163,6 @@ export function Type2(props) {
                 <ul className={'answers-list'}>
                     {secondSetAnswerObjects.length > 0 && secondSetAnswerObjects.map((ans, index) => (
                         <li
-                            // key={ans.asnwer.id}
                             onClick={() => handleAnswerClick(setSecondAnswer, ans.answer.answer)}
                             className={`answer-div ${secondAnswer === ans.answer.answer ? 'selected' : ''}`}
                         >
@@ -183,7 +182,7 @@ export function Type2(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <p>{ans.answer.images[0].description}</p>
+                                        <Latex text={ans.answer.images[0].description} />
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -197,7 +196,7 @@ export function Type2(props) {
                                         {index + 1}.
                                     </div>
                                     <div className={'answer-text'}>
-                                        <Latex> {ans.answer.answer}</Latex>
+                                        <Latex text={ans.answer.answer} />
                                     </div>
                                 </>
                             )}
@@ -264,7 +263,7 @@ export function Type3(props) {
                             >
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
-                                    <p>{ans.answer.images[0].description}</p>
+                                    <Latex text={ans.answer.images[0].description} />
                                     <img
                                         src={ans.answer.images[0].image}
                                         alt={ans.answer.answer}
@@ -278,7 +277,7 @@ export function Type3(props) {
                                     {String.fromCharCode(65 + index)}.
                                 </div>
                                 <div className={'answer-text'}>
-                                    <Latex>{ans.answer.answer}</Latex>
+                                    <Latex text={ans.answer.answer} />
                                 </div>
                             </>
                         )}
@@ -341,7 +340,7 @@ export function Type4(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <p>{ans.answer.images[0].description}</p>
+                                        <Latex text={ans.answer.images[0].description} />
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -352,7 +351,7 @@ export function Type4(props) {
                             {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
                                 <>
                                     {String.fromCharCode(65 + index)}.
-                                    <Latex> {ans.answer.answer}</Latex>
+                                    <Latex text={ans.answer.answer} />
                                 </>
                             )}
                         </li>
@@ -362,7 +361,7 @@ export function Type4(props) {
             {
                 actualExercise.additional_texts.length > 0 &&
                 actualExercise.additional_texts[0].place === "between_sets" &&
-                <h3>{actualExercise.additional_texts[0].text}</h3>
+                <p>{actualExercise.additional_texts[0].text}</p>
             }
             <div>
                 {ask2 && <p><Latex>{ask2}</Latex></p>}
@@ -389,7 +388,7 @@ export function Type4(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <p>{ans.answer.images[0].description}</p>
+                                        <Latex text={ans.answer.images[0].description} />
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -403,7 +402,7 @@ export function Type4(props) {
                                         {String.fromCharCode(65 + firstSet.length + index)}.
                                     </div>
                                     <div className={'answer-text'}>
-                                        {ans.answer.answer && <Latex> {ans.answer.answer}</Latex>}
+                                        {ans.answer.answer && <Latex text={ans.answer.answer} />}
                                     </div>
                                 </>
                             )}
@@ -487,7 +486,7 @@ export function Type6(props) {
                             >
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
-                                    <p>{ans.answer.images[0].description}</p>
+                                    <Latex text={ans.answer.images[0].description} />
                                     <img
                                         src={ans.answer.images[0].image}
                                         alt={ans.answer.answer}
@@ -501,7 +500,7 @@ export function Type6(props) {
                                     {String.fromCharCode(65 + index)}.
                                 </div>
                                 <div className={'answer-text'}>
-                                    <Latex> {ans.answer.answer}</Latex>
+                                    <Latex text={ans.answer.answer} />
                                 </div>
                             </>
                         )}
@@ -580,7 +579,7 @@ export function Type7(props) {
                                 <ul>
                                     <li>
                                         {ans.answerPoint}.
-                                        <Latex>{ans.answer.answer}</Latex>
+                                        <Latex text={ans.answer.answer} />
                                     </li>
                                 </ul>
                             </div>
@@ -627,8 +626,8 @@ export function Type9(props) {
 				</textarea>
                 {
                     answer && <div className={'user-answer-field'}>
-                        {answer[0].length > 0 && <p><Latex>${answer}$</Latex></p>}
-                        {answer[0].length === 0 && <p><Latex>{answer}</Latex></p>}
+                        {answer[0].length > 0 && <p><Latex text={answer}  /></p>}
+                        {answer[0].length === 0 && <p><Latex text={answer} /></p>}
                     </div>
                 }
 
