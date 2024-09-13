@@ -1,7 +1,6 @@
 import './exerciseDetails.css'
 import React, {useState} from 'react';
-import Latex from 'react-latex-next';
-
+import { Latex } from './Latex'
 
 export function ExerciseDetailsBottom(props) {
     const {correctAnswer, actualExercise} = props
@@ -25,19 +24,19 @@ export function ExerciseDetailsBottom(props) {
                         {correctAnswer.length === 1 && <p>Poprawna odpowiedź to:</p>}
                         {actualExercise.type !== 6 && correctAnswer.map((answerObj, index) => (
                             <p key={index}>
-                                <Latex>{answerObj.answer}</Latex>
+                                <Latex text={answerObj.answer} />
                             </p>
                         ))}
                         {actualExercise.type === 6 && (
                             <>
                                 {correctAnswer.map((answerObj, index) => (
                                     <div key={index} className={'answer-text'}>
-                                        <Latex>{answerObj.answer}</Latex> <strong>P</strong>
+                                        <Latex text={answerObj.answer} /> <strong>P</strong>
                                     </div>
                                 ))}
                                 {actualExercise.answers.filter(answer => !answer.correct).map((answer, index) => (
                                     <div key={index} className={'answer-text'}>
-                                        <Latex>{answer.answer}</Latex> <strong>F</strong>
+                                        <Latex text={answer.answer} /> <strong>F</strong>
                                     </div>
                                 ))}
                             </>

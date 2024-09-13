@@ -1,13 +1,11 @@
 import './sList.css'
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios';
 
 import { getSectionsAndSubsections, extractSections, extractSubsections } from "../../helpers"
 
 
 export function SectionsList(props) {
-    const SECTIONS_URL = 'http://0.0.0.0:8000/api/v1/exercises/sections/'
     const [sections, setSections] = useState([]);
     const [subsections, setSubsections] = useState([]);
     const isInitialMount = useRef(true)

@@ -1,9 +1,7 @@
 import './hocExerciseDetails.css'
-import React, {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
-import Latex from 'react-latex-next';
-import 'katex/dist/katex.min.css';
 
 import {ConAnswerInput} from '../../containers/Ex'
 import {Info, Error} from '../helpersComponents/Messages';
@@ -25,7 +23,6 @@ export function HOC_ExerciseDetails(props) {
         setUserAnswer,
     } = props
 
-    const [exercise, setExercise] = useState(null);
     const [solvedExercisesIds, setSolvedExercisesIds] = useState(null);
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const [successMessage, setSuccessMessage] = useState(null);
