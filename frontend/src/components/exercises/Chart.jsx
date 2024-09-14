@@ -1,5 +1,5 @@
 import './chart.css'
-import React, {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 import {
     LineChart,
     CartesianGrid,
@@ -8,11 +8,9 @@ import {
     Tooltip,
     Legend,
     Line,
-    Brush,
-    ReferenceDot,
     ReferenceLine
 } from "recharts"
-import Latex from "react-latex-next";
+import { Latex } from './Latex'
 
 
 const generateLinearData = (m, b, xStart, xEnd, xStep, xOffset, yOffset) => {
@@ -197,7 +195,7 @@ export const Chart = (props) => {
 
     return (
         <div className={'chart'}>
-            {description && <p><Latex>{description}</Latex></p>}
+            {description && <p><Latex text={description} /></p>}
             <LineChart
                 width={chartWidth}
                 height={chartHeight}

@@ -1,5 +1,5 @@
 import './hocAnswerInput.css'
-import React, {useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
 
@@ -22,9 +22,8 @@ export const HOC_AnswerInput = (props) => {
     const exerciseType = actualExercise.type
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
-
     const handleAnswer = (answer) => {
-        setUserAnswer(answer);
+        setUserAnswer([answer]);
     };
 
     const nullValidator = (answer) => {

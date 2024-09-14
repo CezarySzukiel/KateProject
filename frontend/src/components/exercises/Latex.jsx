@@ -3,7 +3,10 @@ import TeX from '@matejmazur/react-katex';
 import 'katex/dist/katex.min.css';
 
 export function Latex(props) {
-    const {text} = props
+    let {text} = props
+    if (typeof text === "object") {
+        text = text[0]
+    }
     const parseText = (text) => {
         const regex = /(\$\$.*?\$\$|\$.*?\$)/g;
         const parts = text.split(regex);
@@ -18,7 +21,6 @@ export function Latex(props) {
             }
         });
     };
-    console.log('parseText: ', parseText)
     return (
         <div className={'latex'}>
             {text && parseText(text)}

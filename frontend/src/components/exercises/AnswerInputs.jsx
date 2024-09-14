@@ -3,7 +3,8 @@ import {useState, useEffect, useRef} from 'react';
 import {useSelector} from 'react-redux';
 import {reformatAnswer} from './helpers';
 import {Chart} from './Chart'
-import { Latex } from './Latex'
+import {Latex} from './Latex'
+import { reformatTextByDollars } from "./helpers";
 
 const createObjects = (answers) => {
     const objs = []
@@ -55,7 +56,7 @@ export function Type1(props) {
                             >
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
-                                    <Latex text={ans.answer.images[0].description} />
+                                    <Latex text={ans.answer.images[0].description}/>
                                     <img
                                         src={ans.answer.images[0].image}
                                         alt={ans.answer.answer}
@@ -68,7 +69,7 @@ export function Type1(props) {
                                 className={`answer-div ${selectedAnswer === ans.answer.answer ? 'selected' : ''}`}
                             >
                                 {String.fromCharCode(65 + index)}.
-                                <Latex text={ans.answer.answer} />
+                                <Latex text={ans.answer.answer}/>
                             </div>
                         )}
                     </li>
@@ -130,7 +131,7 @@ export function Type2(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <Latex text={ans.answer.images[0].description} />
+                                        <Latex text={ans.answer.images[0].description}/>
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -144,7 +145,7 @@ export function Type2(props) {
                                         {String.fromCharCode(65 + index)}.
                                     </div>
                                     <div className={'answer-text'}>
-                                        <Latex text={ans.answer.answer} />
+                                        <Latex text={ans.answer.answer}/>
                                     </div>
                                 </>
                             )}
@@ -182,7 +183,7 @@ export function Type2(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <Latex text={ans.answer.images[0].description} />
+                                        <Latex text={ans.answer.images[0].description}/>
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -196,7 +197,7 @@ export function Type2(props) {
                                         {index + 1}.
                                     </div>
                                     <div className={'answer-text'}>
-                                        <Latex text={ans.answer.answer} />
+                                        <Latex text={ans.answer.answer}/>
                                     </div>
                                 </>
                             )}
@@ -263,7 +264,7 @@ export function Type3(props) {
                             >
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
-                                    <Latex text={ans.answer.images[0].description} />
+                                    <Latex text={ans.answer.images[0].description}/>
                                     <img
                                         src={ans.answer.images[0].image}
                                         alt={ans.answer.answer}
@@ -277,7 +278,7 @@ export function Type3(props) {
                                     {String.fromCharCode(65 + index)}.
                                 </div>
                                 <div className={'answer-text'}>
-                                    <Latex text={ans.answer.answer} />
+                                    <Latex text={ans.answer.answer}/>
                                 </div>
                             </>
                         )}
@@ -340,7 +341,7 @@ export function Type4(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <Latex text={ans.answer.images[0].description} />
+                                        <Latex text={ans.answer.images[0].description}/>
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -351,7 +352,7 @@ export function Type4(props) {
                             {ans.answer.functions.length === 0 && ans.answer.images.length === 0 && (
                                 <>
                                     {String.fromCharCode(65 + index)}.
-                                    <Latex text={ans.answer.answer} />
+                                    <Latex text={ans.answer.answer}/>
                                 </>
                             )}
                         </li>
@@ -388,7 +389,7 @@ export function Type4(props) {
                                 >
                                     {ans.answerPoint}.
                                     <div className={'image-div'}>
-                                        <Latex text={ans.answer.images[0].description} />
+                                        <Latex text={ans.answer.images[0].description}/>
                                         <img
                                             src={ans.answer.images[0].image}
                                             alt={ans.answer.answer}
@@ -402,7 +403,7 @@ export function Type4(props) {
                                         {String.fromCharCode(65 + firstSet.length + index)}.
                                     </div>
                                     <div className={'answer-text'}>
-                                        {ans.answer.answer && <Latex text={ans.answer.answer} />}
+                                        {ans.answer.answer && <Latex text={ans.answer.answer}/>}
                                     </div>
                                 </>
                             )}
@@ -486,7 +487,7 @@ export function Type6(props) {
                             >
                                 {ans.answerPoint}.
                                 <div className={'image-div'}>
-                                    <Latex text={ans.answer.images[0].description} />
+                                    <Latex text={ans.answer.images[0].description}/>
                                     <img
                                         src={ans.answer.images[0].image}
                                         alt={ans.answer.answer}
@@ -500,7 +501,7 @@ export function Type6(props) {
                                     {String.fromCharCode(65 + index)}.
                                 </div>
                                 <div className={'answer-text'}>
-                                    <Latex text={ans.answer.answer} />
+                                    <Latex text={ans.answer.answer}/>
                                 </div>
                             </>
                         )}
@@ -579,7 +580,7 @@ export function Type7(props) {
                                 <ul>
                                     <li>
                                         {ans.answerPoint}.
-                                        <Latex text={ans.answer.answer} />
+                                        <Latex text={ans.answer.answer}/>
                                     </li>
                                 </ul>
                             </div>
@@ -606,9 +607,11 @@ export function Type9(props) {
 
     const handleChange = () => {
         let value = event.target.value;
-        value = reformatAnswer(value)
+        value = reformatTextByDollars(value)
         props.handleChange([value])
     }
+
+
 
     return (
         <div className={"answer-input"}>
@@ -620,14 +623,13 @@ export function Type9(props) {
                     id={'type9-textarea'}
                     ref={inputRef}
                     onFocus={handleFocus}
-                    value={props.answer}
+                    value={answer}
                     onChange={handleChange}
                 >
 				</textarea>
                 {
                     answer && <div className={'user-answer-field'}>
-                        {answer[0].length > 0 && <p><Latex text={answer}  /></p>}
-                        {answer[0].length === 0 && <p><Latex text={answer} /></p>}
+                        {answer[0].length > 0 && <p><Latex text={answer[0]}/></p>}
                     </div>
                 }
 
