@@ -136,11 +136,12 @@ export function HOC_ExerciseDetails(props) {
             }
             {successMessage && <Info message={successMessage}/>}
             {errorMessage && <Error message={errorMessage}/>}
-            {actualExercise.type === 9 && <LatexTable
-                setActiveInput={setActiveInput}
-                activeInputRef={activeInputRef}
-                setUserAnswer={setUserAnswer}
-            />}
+            {actualExercise.type === 9 &&
+                <LatexTable
+                    setActiveInput={setActiveInput}
+                    activeInputRef={activeInputRef}
+                    setUserAnswer={setUserAnswer}
+                />}
         </div>
     );
 }

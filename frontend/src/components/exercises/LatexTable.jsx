@@ -2,7 +2,6 @@ import './latexTable.css';
 import {useState, useRef} from 'react';
 import DynamicModal from './DynamicModal';
 import latexSymbols from '../../latexSymbols';
-import {reformatAnswer} from './helpers';
 import { Latex } from './Latex'
 
 const chunkArray = (array, chunkSize) => {
@@ -17,11 +16,8 @@ export function LatexTable(props) {
     const {activeInputRef} = props
     const columns = 10;
     const symbolChunks = chunkArray(latexSymbols, columns);
-
     const inputRef = useRef(null);
-
     const [modals, setModals] = useState([]);
-
     const handleSymbolClick = (symbol) => {
         const variables = symbol.match(/[{[][^}\]]+[}\]]/g) || [];
         const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
@@ -50,7 +46,7 @@ export function LatexTable(props) {
             const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
             updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
                 if (values[p1] !== undefined) {
-                    return `{${values[p1]}$}`;
+                    return `{${values[p1]}}`;
                 }
                 return match;
             });
@@ -64,7 +60,6 @@ export function LatexTable(props) {
             const end = activeInputRef.selectionEnd;
             let text = activeInputRef.value;
             text = text.slice(0, start) + symbol + text.slice(end);
-            text = reformatAnswer(text);
             activeInputRef.value = text;
             setTimeout(() => {
                 activeInputRef.setSelectionRange(start + symbol.length, start + symbol.length);
@@ -75,13 +70,11 @@ export function LatexTable(props) {
     };
 
     const handleModalSubmit = (index, values) => {
+        console.log('values: ', values)
         const symbol = formatSymbol(modals[index], values)
+        console.log('symbol: ', symbol)
         props.setUserAnswer(updateInputValue(symbol, activeInputRef))
     };
-
-    const handleFocus = () => {
-        props.setActiveInput(inputRef.current);
-    }
 
     return (
         <div className={'latex-table'}>
