@@ -222,7 +222,6 @@
       "$\\nwarrow $",
       "$\\swarrow $",
       "$\\leadsto $",
-      "$\\rightsquigarrow $",
       "$\\leftrightsquigarrow $",
       "$\\curvearrowleft $",
       "$\\curvearrowright $",
@@ -239,22 +238,9 @@
       "$\\rightarrowtail $",
       "$\\Lleftarrow $",
       "$\\Rrightarrow $",
-      "$\\rightsquigarrow $",
       "$\\nleftarrow $",
       "$\\nrightarrow $",
-      "$\\nLeftarrow $",
-      "$\\nRightarrow $",
-      "$\\nleftrightarrow $",
-      "$\\nLeftrightarrow $",
-      "$\\nleftarrow $",
-      "$\\nrightarrow $",
-      "$\\nLeftarrow $",
-      "$\\nRightarrow $",
-      "$\\nleftrightarrow $",
-      "$\\nLeftrightarrow $",
-      "$\\nleftarrow $",
-      "$\\nrightarrow $",
-      "$\\nLeftarrow $"
+      "$\\nLeftrightarrow $"
       ]
   },
   {
