@@ -1,5 +1,5 @@
 import './latexTable.css';
-import {useState, useRef, useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import DynamicModal from './DynamicModal';
 import '../../latexSymbols.json';
 import {Latex} from './Latex'
@@ -55,7 +55,7 @@ const getSymbolsObject = (data, type) => {
 export function LatexTable(props) {
     const {activeInputRef} = props
     const columns = 10;
-    const inputRef = useRef(null);
+    // const inputRef = useRef(null);
     const [modals, setModals] = useState([]);
     const [formulaSymbols, setFormulaSymbols] = useState([]);
     const [systemOfEquationsSymbols, setSystemOfEquationsSymbols] = useState([]);
@@ -69,57 +69,45 @@ export function LatexTable(props) {
     const [functionSymbols, setFunctionSymbols] = useState([]);
     const [symbolSymbols, setSymbolSymbols] = useState([]);
     const [lastUsedSymbols, setLastUsedSymbols] = useState([]);
-    const [selectedLabel, setSelectedLabel] = useState(() => greekSmallSymbols);
+    const [selectedLabel, setSelectedLabel] = useState([]);
     const [stateLabels, setStateLabels] = useState(null);
+    const [tempLastUsedSymbols, setTempLastUsedSymbols] = useState([]);
 
     useEffect(() => {
         fetchLatexSymbols().then((data) => {
-            // const formula = getSymbolsObject(data, 'formula');
-            // const systemOfEquations = getSymbolsObject(data, 'systemOfEquations');
-            // const matrices = getSymbolsObject(data, 'matrices');
-            // const greekSmall = getSymbolsObject(data, 'greekSmall');
-            // const greekCapital = getSymbolsObject(data, 'greekCapital');
-            // const relation = getSymbolsObject(data, 'relation');
-            // const operator = getSymbolsObject(data, 'operator');
-            // const operatorBig = getSymbolsObject(data, 'operatorBig');
-            // const arrow = getSymbolsObject(data, 'arrow');
-            // const function_ = getSymbolsObject(data, 'function');
-            // const symbol = getSymbolsObject(data, 'symbol');
-            // setFormulaSymbols(chunkArray(formula, columns));
-            // setSystemOfEquationsSymbols(chunkArray(systemOfEquations, columns));
-            // setMatricesSymbols(chunkArray(matrices, columns));
-            // setGreekSmallSymbols(chunkArray(greekSmall, columns));
-            // setGreekCapitalSymbols(chunkArray(greekCapital, columns));
-            // setRelationSymbols(chunkArray(relation, columns));
-            // setOperatorSymbols(chunkArray(operator, columns));
-            // setOperatorBigSymbols(chunkArray(operatorBig, columns));
-            // setArrowSymbols(chunkArray(arrow, columns));
-            // setFunctionSymbols(chunkArray(function_, columns));
-            // setSymbolSymbols(chunkArray(symbol, columns));
-            setFormulaSymbols(getSymbolsObject(data, 'formula'));
-            setSystemOfEquationsSymbols(getSymbolsObject(data, 'systemOfEquations'));
-            setMatricesSymbols(getSymbolsObject(data, 'matrices'));
-            setGreekSmallSymbols(getSymbolsObject(data, 'greekSmall'));
-            setGreekCapitalSymbols(getSymbolsObject(data, 'greekCapital'));
-            setRelationSymbols(getSymbolsObject(data, 'relation'));
-            setOperatorSymbols(getSymbolsObject(data, 'operator'));
-            setOperatorBigSymbols(getSymbolsObject(data, 'operatorBig'));
-            setArrowSymbols(getSymbolsObject(data, 'arrow'));
-            setFunctionSymbols(getSymbolsObject(data, 'function'));
-            setSymbolSymbols(getSymbolsObject(data, 'symbol'));
+            /**
+             * Get the symbols object from the data and set the state symbols.
+             */
+            const formula = getSymbolsObject(data, 'formula');
+            const systemOfEquations = getSymbolsObject(data, 'systemOfEquations');
+            const matrices = getSymbolsObject(data, 'matrices');
+            const greekSmall = getSymbolsObject(data, 'greekSmall');
+            const greekCapital = getSymbolsObject(data, 'greekCapital');
+            const relation = getSymbolsObject(data, 'relation');
+            const operator = getSymbolsObject(data, 'operator');
+            const operatorBig = getSymbolsObject(data, 'operatorBig');
+            const arrow = getSymbolsObject(data, 'arrow');
+            const function_ = getSymbolsObject(data, 'function');
+            const symbol = getSymbolsObject(data, 'symbol');
+            setFormulaSymbols(chunkArray(formula, columns));
+            setSystemOfEquationsSymbols(chunkArray(systemOfEquations, columns));
+            setMatricesSymbols(chunkArray(matrices, columns));
+            setGreekSmallSymbols(chunkArray(greekSmall, columns));
+            setGreekCapitalSymbols(chunkArray(greekCapital, columns));
+            setRelationSymbols(chunkArray(relation, columns));
+            setOperatorSymbols(chunkArray(operator, columns));
+            setOperatorBigSymbols(chunkArray(operatorBig, columns));
+            setArrowSymbols(chunkArray(arrow, columns));
+            setFunctionSymbols(chunkArray(function_, columns));
+            setSymbolSymbols(chunkArray(symbol, columns));
         });
-
+        setSelectedLabel(greekSmallSymbols);
     }, []);
 
     useEffect(() => {
-        if (stateLabels) {
-            console.log("selectedLabel", selectedLabel)
-            setSelectedLabel(greekSmallSymbols);
-            console.log("stateLabel[4]", stateLabels[4].state)
-        }
-    }, [stateLabels]);
-
-    useEffect(() => {
+        /**
+         * Set the state labels for the table.
+         */
         setStateLabels([
             {"state": lastUsedSymbols, "label": "Ostatnio używane"},
             {"state": formulaSymbols, "label": "Formuły matematyczne"},
@@ -135,7 +123,6 @@ export function LatexTable(props) {
             {"state": symbolSymbols, "label": "Symbole"},
         ]);
     }, [
-        lastUsedSymbols,
         formulaSymbols,
         systemOfEquationsSymbols,
         matricesSymbols,
@@ -149,7 +136,42 @@ export function LatexTable(props) {
         symbolSymbols
     ]);
 
+    useEffect(() => {
+        /**
+        * set selected label to formula symbols if no label is selected (first render)
+         */
+        if (selectedLabel.length === 0 && formulaSymbols.length > 0) {
+            console.log("ustawiam selected label na formuły matematyczne")
+            setSelectedLabel(formulaSymbols);
+        }
+    }, [formulaSymbols]);
+
+    useEffect(() => {
+        /**
+         * Set the chunked array of last used symbols.
+         */
+        setLastUsedSymbols(chunkArray(tempLastUsedSymbols, columns));
+    }, [tempLastUsedSymbols]);
+
+    useEffect(() => {
+        /**
+         * Update the last used symbols state label. it is needed to properly display the last used symbols in the table.
+         */
+        setStateLabels((prevLabels) => {
+            return prevLabels.map(label =>
+                label.label === "Ostatnio używane"
+                    ? {...label, state: lastUsedSymbols}
+                    : label
+            );
+
+        });
+    }, [lastUsedSymbols]);
+
     const handleSymbolClick = (symbol) => {
+        setTempLastUsedSymbols((prevLastUsedSymbols) => {
+            const updatedSymbols = [symbol, ...prevLastUsedSymbols];
+            return Array.from(new Set(updatedSymbols));
+        });
         const variables = symbol.match(/[{[][^}\]]+[}\]]/g) || [];
         const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
         if (cleanedVariables.length > 0) {
@@ -160,10 +182,14 @@ export function LatexTable(props) {
         } else {
             props.setUserAnswer(updateInputValue(symbol, activeInputRef))
         }
-
     };
 
     const handleLabelClick = (state) => {
+        /**
+         * Set the selected label to the state of the clicked label.
+         * The selected label is mapped to the table with symbols.
+         * @param {Array} state - The state of the clicked label.
+         */
         setSelectedLabel(state);
     }
 
@@ -177,7 +203,7 @@ export function LatexTable(props) {
 
     const formatSymbol = (symbol, values) => {
         let updatedSymbol = symbol.symbol;
-        Object.keys(values).forEach((variable) => {
+        Object.keys(values).forEach(() => {
             const re = /[{[]([a-zA-Z0-9]+)[}\]]/g;
             updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
                 if (values[p1] !== undefined) {
@@ -211,19 +237,23 @@ export function LatexTable(props) {
 
     return (
         <div className={'latex-table'}>
-            <table>
-                <tbody>
+            <div className={"labels"}>
                 {stateLabels && stateLabels.map((obj, labelIndex) => (
-                    <tr key={labelIndex}>
-                        <th onClick={() => handleLabelClick(obj.state)}>{obj.label}</th>
-                        {Array.from({length: columns}).map((_, colIndex) => (
-                            <td key={labelIndex * columns + colIndex}>
-                                {selectedLabel && <Latex text={selectedLabel[labelIndex * columns + colIndex]}></Latex>}
+                    <p key={labelIndex} onClick={() => handleLabelClick(obj.state)}>
+                        {obj.label}
+                    </p>
+                ))}
+            </div>
+            <table>
+                {selectedLabel && selectedLabel.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                        {row.map((symbol, colIndex) => (
+                            <td key={colIndex} onClick={() => handleSymbolClick(symbol)}>
+                                <Latex text={symbol}></Latex>
                             </td>
                         ))}
                     </tr>
                 ))}
-                </tbody>
             </table>
             {modals.map((modal, index) => (
                 <DynamicModal
@@ -237,6 +267,6 @@ export function LatexTable(props) {
             ))}
 
         </div>
-    )
-        ;
-};
+    );
+
+}
