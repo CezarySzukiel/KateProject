@@ -54,27 +54,6 @@ const getSymbolsObject = (data, type) => {
     }
 }
 
-const updateInputValue = (symbol, activeInputRef) => {
-    /**
-     * checks the position of the cursor or text selection and inserts a symbol in its place.
-     * @param {string} symbol - The symbol to insert.
-     * @param {Object} activeInputRef - The reference to the active input element.
-     * @returns {Array} - The updated text.
-     */
-        if (activeInputRef) {
-            const start = activeInputRef.selectionStart;
-            const end = activeInputRef.selectionEnd;
-            let text = activeInputRef.value;
-            text = text.slice(0, start) + symbol + text.slice(end);
-            activeInputRef.value = text;
-            setTimeout(() => {
-                activeInputRef.setSelectionRange(start + symbol.length, start + symbol.length);
-                activeInputRef.focus();
-            }, 0);
-            return [text]
-        }
-    };
-
 export function LatexTable(props) {
     const {activeInputRef, setUserAnswer, setActiveInput} = props
     const columns = 8;
@@ -158,7 +137,6 @@ export function LatexTable(props) {
          * set selected label to formula symbols if no label is selected (first render)
          */
         if (selectedLabel.length === 0 && formulaSymbols.length > 0) {
-            console.log("ustawiam selected label na formuły matematyczne")
             setSelectedLabel(formulaSymbols);
         }
     }, [formulaSymbols]);
@@ -184,19 +162,65 @@ export function LatexTable(props) {
         });
     }, [lastUsedSymbols]);
 
+    useEffect(() => {
+        /**
+         * sets the appropriate active input.
+         * Active input is the input in which the symbol can be currently inserted
+         */
+        const penultimateModalinputRef = modals[modals.length - 2]?.inputRef;
+        console.log("wchodzę w useeffect gdzie jest sprawdzenie i ewentualnie aktualizacja stanu modali")
+        if (penultimateModalinputRef && penultimateModalinputRef !== activeInputRef) {
+            console.log('sprawdziłem i ustawiam penultimateModalinputRef na: ', penultimateModalinputRef);
+            setActiveInput(penultimateModalinputRef);
+        } // else { setActiveInput(activeInputRef) } // todo to miała być dalsza część kodu która ustawia active input na textarea
+    //     todo po zaktualizowaniu activeInputRef o nową wartość stan modali jest aktualizowany ponownie, chyba o starą wartość i to może być powodem nie przekazywania wartości.
+    //     todo dodaj warunek jeśłi penultimateModalinputRef to textarea to ustaw activeInputRef na textarea. to nie będzie poprawne w przypadku większej ilości zagnieżdżonych okienek, ale pozwoli sprawdzić czy to jest przyczyną, czy jeszcze nie.
+    //     todo do tego przenieś cl do wewnątrz ifa aby mieć pewność czy warunek się spełnia, czy tylko sprawdza.
+    }, [modals.length])
+
+    const updateInputValue = (symbol, activeInputRef) => {
+    /**
+     * checks the position of the cursor or text selection and inserts a symbol in its place.
+     * @param {string} symbol - The symbol to insert.
+     * @param {Object} activeInputRef - The reference to the active input element.
+     * @returns {Object} - The reference to the active input element with updated value.
+     */
+    if (activeInputRef) {
+        const start = activeInputRef.selectionStart;
+        const end = activeInputRef.selectionEnd;
+        let text = activeInputRef.value;
+        text = text.slice(0, start) + symbol + text.slice(end);
+        console.log('text w update input value', text)
+        activeInputRef.value = text; // activeInputRef.value to jest cały symbol ze wpisaną wartością
+        console.log('activeInputRef.value', activeInputRef.value) // value to ${alamakota}^{} $ z drugiego modala
+        setTimeout(() => {
+            activeInputRef.setSelectionRange(start + symbol.length, start + symbol.length);
+            activeInputRef.focus();
+        }, 0);
+        return activeInputRef // zwracam activeInputRef pierwszego modala z nową wartością value przypisaną z drugiego modala (potwierdzone debugowaniem)
+    }
+};
+
     const handleSymbolClick = (symbol) => {
+        /**
+         * adds the symbol to the most recently used and:
+         * if there are variables, sets a modal window
+         * or immediately passes the symbol to the active input if there are no variables
+         */
         setTempLastUsedSymbols((prevLastUsedSymbols) => {
             const updatedSymbols = [symbol, ...prevLastUsedSymbols];
             return Array.from(new Set(updatedSymbols)).slice(0, lastUsedSymbolsLimit);
         });
         const variables = symbol.match(/\{[a-zA-Z0-9]\}|\[[a-zA-Z0-9]\]/g) || [];
         const cleanedVariables = variables.map((variable) => variable.slice(1, -1));
+        // todo dodaj warunek jeśli !cleanedVariables && modals.length > 0 to znak dodaj do aktywnego inputa w ostatnim modalu
         if (cleanedVariables.length > 0) {
             setModals((prevModals) => [
                 ...prevModals,
-                {symbol, variables: cleanedVariables, isOpen: true},
+                {id: modals.length + 1, symbol: symbol, variables: cleanedVariables, isOpen: true, inputRef: null},
             ]);
         } else {
+            console.log('activeInputRef', activeInputRef)
             setUserAnswer(updateInputValue(symbol, activeInputRef))
         }
     };
@@ -219,7 +243,15 @@ export function LatexTable(props) {
     };
 
     const formatSymbol = (symbol, values) => {
+        /**
+         * changes the values of variables in the symbol to those given by the user
+         * @param {string} symbol - The symbol to format.
+         * @param {array} values - The values to insert.
+         * @returns {string} - The formatted symbol.
+         */
         let updatedSymbol = symbol.symbol;
+        console.log('values', values)
+        console.log('symbol', symbol)
         Object.keys(values).forEach(() => {
             const re = /[{[]([a-zA-Z0-9])[}\]]/g;
             updatedSymbol = updatedSymbol.replace(re, (match, p1) => {
@@ -237,7 +269,14 @@ export function LatexTable(props) {
 
     const handleModalSubmit = (index, values) => {
         const symbol = formatSymbol(modals[index], values);
-        setUserAnswer(updateInputValue(symbol, activeInputRef))
+        // setUserAnswer(updateInputValue(symbol, activeInputRef))
+        const updatedInput = updateInputValue(symbol, activeInputRef)
+        // todo błąd bo ustawia userAnswer wiec ta wartość będzie zawsze trafiała do textarea w type9, nawet jeśłi będzie miała trafić do inputa
+    //     todo drugi input ref przekazuje poprawnie znak, ale do textarea a nie do inputa,
+    //     todo poza tym po zamknięciu modala zmienia się penultimateModalinputRef na undefined, ale active input ref nie zmienia się automatycznie na textarea
+    //     jak więc zaktualizować wartość aktywnego inputa w przedostatnim modalu?  penultimateModalinputRef ustawia się poprawnie
+    //     użyj setActiveInput do zaktualizowania activeInput o nową wartość pola value
+        setActiveInput(updatedInput)
     };
 
     return (
@@ -253,6 +292,7 @@ export function LatexTable(props) {
                 ))}
             </div>
             <table>
+                <tbody>
                 {selectedLabel && selectedLabel.map((row, rowIndex) => (
                     <tr key={rowIndex}>
                         {row.map((symbol, colIndex) => (
@@ -262,14 +302,16 @@ export function LatexTable(props) {
                         ))}
                     </tr>
                 ))}
+                </tbody>
             </table>
             {modals.map((modal, index) => (
                 <DynamicModal
                     key={index}
-                    isOpen={modal.isOpen}
+                    modals={modals}
+                    setModals={setModals}
+                    modal={modal}
                     onClose={() => handleModalClose(index)}
                     onSubmit={(values) => handleModalSubmit(index, values)}
-                    variables={modal.variables}
                     setActiveInput={setActiveInput}
                 />
             ))}

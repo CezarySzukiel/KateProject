@@ -72,6 +72,7 @@ const exReducer = (state = initialState, action) => {
         solvedExercises: [...state.solvedExercises, action.exercise]
       }
     case SET_ACTIVE_INPUT:
+      console.log('SET_ACTIVE_INPUT', action.payload);
       return {
         ...state,
         activeInputRef: action.payload

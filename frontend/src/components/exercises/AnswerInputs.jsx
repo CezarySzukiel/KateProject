@@ -598,11 +598,12 @@ export function Type7(props) {
 }
 
 export function Type9(props) {
-    const inputRef = useRef(null);
+    const textareaRef = useRef(null);
     const answer = useSelector(state => state.ex.userAnswer)
+    const activeInputRef = useSelector(state => state.ex.activeInputRef)
 
     const handleFocus = () => {
-        props.setActiveInput(inputRef.current)
+        props.setActiveInput(textareaRef.current)
     }
 
     const handleChange = () => {
@@ -611,7 +612,11 @@ export function Type9(props) {
         props.handleChange([value])
     }
 
-
+    useEffect(() => {
+        if (!activeInputRef) {
+            handleFocus()
+        }
+    }, [])
 
     return (
         <div className={"answer-input"}>
@@ -621,7 +626,7 @@ export function Type9(props) {
                 </label>
                 <textarea
                     id={'type9-textarea'}
-                    ref={inputRef}
+                    ref={textareaRef}
                     onFocus={handleFocus}
                     value={answer}
                     onChange={handleChange}
@@ -629,7 +634,7 @@ export function Type9(props) {
 				</textarea>
                 {
                     answer && <div className={'user-answer-field'}>
-                        {answer[0].length > 0 && <p><Latex text={answer[0]}/></p>}
+                        {answer[0]?.length > 0 && <p><Latex text={answer[0]}/></p>}
                     </div>
                 }
 
