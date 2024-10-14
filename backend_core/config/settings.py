@@ -20,7 +20,6 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 environ.Env.read_env(os.path.join(BASE_DIR, 'env', '.env'))
 # os.path.join - łączy ścieżki za pomocą separatora ścieżek systemu operacyjnego.
 # environ nie zczytuje pliku i nie tworzy lokalnie zmiennych, tylko wczytuje je do sesji
@@ -42,12 +41,11 @@ EMAIL_USE_SSL = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DJ_DEBUG', False))
-print("-"*50)
+print("-" * 50)
 print(f"DEBUG: {DEBUG}")
-print("-"*50)
+print("-" * 50)
 
 ALLOWED_HOSTS = os.environ.get('DJ_ALLOWED_HOSTS', '').split()
-
 
 # Application definition
 
@@ -101,7 +99,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug', # niebezpieczne na produkcji
+                'django.template.context_processors.debug',  # niebezpieczne na produkcji
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -111,7 +109,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -151,7 +148,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -162,7 +158,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -193,10 +188,10 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.AllowAny',
     ],
-    
+
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.TokenAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
@@ -204,24 +199,60 @@ REST_FRAMEWORK = {
 }
 
 SITE_ID = 1
-
 REST_AUTH = {
+    'LOGIN_SERIALIZER': 'dj_rest_auth.serializers.LoginSerializer',
+    'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+    'JWT_SERIALIZER': 'dj_rest_auth.serializers.JWTSerializer',
+    'JWT_SERIALIZER_WITH_EXPIRATION': 'dj_rest_auth.serializers.JWTSerializerWithExpiration',
+    'JWT_TOKEN_CLAIMS_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenObtainPairSerializer',
+    # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetSerializer',
+    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetConfirmSerializer',
+    'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer',
+
+    'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
+
+    'REGISTER_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+
+    'TOKEN_MODEL': 'rest_framework.authtoken.models.Token',
+    'TOKEN_CREATOR': 'dj_rest_auth.utils.default_create_token',
+
+    'PASSWORD_RESET_USE_SITES_DOMAIN': False,
+    'OLD_PASSWORD_FIELD_ENABLED': True,  # zmieniłem, na true sprawdzić czy działa (weryfikacja starego hasła podczas zmiany hasła)
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
+    'SESSION_LOGIN': True,
     'USE_JWT': True,
+
     'JWT_AUTH_COOKIE': 'my-app-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
-    'LOGOUT_ON_PASSWORD_CHANGE': True,
-    'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer', # todo it sucks, change validator for some better
-    # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer', 
-    'USER_DETAILS_SERIALIZER': 'users.serializers.CustomUserDetailsSerializer', 
-
+    'JWT_AUTH_REFRESH_COOKIE_PATH': '/',
+    'JWT_AUTH_SECURE': False,
+    'JWT_AUTH_HTTPONLY': True,
+    'JWT_AUTH_SAMESITE': 'Lax',
+    'JWT_AUTH_RETURN_EXPIRATION': False,
+    'JWT_AUTH_COOKIE_USE_CSRF': False,
+    'JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED': False,
+}
+REST_AUTH = {
+    # 'USE_JWT': True,
+    # 'JWT_AUTH_COOKIE': 'my-app-auth',
+    # 'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+    'ROTATE_REFRESH_TOKENS': True,
+    # 'LOGOUT_ON_PASSWORD_CHANGE': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    # 'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer',
+    # todo it sucks, change validator for some better
+    # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer', #  było zakomentowane i działało
+    'USER_DETAILS_SERIALIZER': 'users.serializers.CustomUserDetailsSerializer',
+#  todo dokończyć sprawdzanie ustawień z dokumentacją MOŻĘ 'rotate' i 'blacklist' są w złym miejscu? możę powinny być w SIMPLE_JWT?
 }
 # 'users.serializers.UserSettingsSerializer'
- 
+
 SIMPLE_JWT = {
-     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
-     'ROTATE_REFRESH_TOKENS': True,
-     'BLACKLIST_AFTER_ROTATION': True
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True
 }
 
 AUTHENTICATION_BACKENDS = [
@@ -240,4 +271,3 @@ PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = 'http://localhost:8080/password-reset
 
 # CORS_ALLOWED_ORIGINS =
 CORS_ALLOW_ALL_ORIGINS = True
-
